@@ -1,8 +1,10 @@
 package br.edu.ifsp.domain.entities.ativo;
 
+import br.edu.ifsp.domain.usecases.utils.Subject;
+
 import java.time.LocalDate;
 
-public class Ativo {
+public class Ativo extends Subject {
     private int id;
     private float valor;
     private LocalDate data;

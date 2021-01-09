@@ -28,11 +28,5 @@ public class Relatorio {
         return categoria;
     }
 
-    @Override
-    public String toString() {
-        return "Relatorio{" +
-                "dataImpressao=" + dataImpressao +
-                ", categoria=" + categoria +
-                '}';
-    }
+
 }

@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities.relatorio;
 
 import java.time.LocalDate;
 
-public class RelatorioPeriodo extends Relatorio {
+public class RelatorioPeriodo extends Relatorio{
     private LocalDate dataInicial;
     private LocalDate dataFinal;
 
@@ -35,11 +35,5 @@ public class RelatorioPeriodo extends Relatorio {
         return dataFinal;
     }
 
-    @Override
-    public String toString() {
-        return "RelatorioPeriodo{" +
-                "dataInicial=" + dataInicial +
-                ", dataFinal=" + dataFinal +
-                "} " + super.toString();
-    }
+
 }

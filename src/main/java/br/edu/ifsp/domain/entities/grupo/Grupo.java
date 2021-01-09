@@ -2,12 +2,13 @@ package br.edu.ifsp.domain.entities.grupo;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
-import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.usecases.utils.Observer;
+import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class Grupo {
+public class Grupo extends Subject implements Observer {
     private String nome;
     private float total;
 
@@ -52,5 +53,10 @@ public class Grupo {
 
     public Iterator<Ativo> getIteratorAtivos() {
         return this.listaAtivos.iterator();
+    }
+
+    @Override
+    public void update(Subject o) {
+
     }
 }

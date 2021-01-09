@@ -1,7 +1,8 @@
 package br.edu.ifsp;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
+
+import java.io.IOException;
 
 public class PrimaryController {
 

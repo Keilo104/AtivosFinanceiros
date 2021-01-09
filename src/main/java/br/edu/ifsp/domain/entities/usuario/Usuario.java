@@ -1,11 +1,13 @@
 package br.edu.ifsp.domain.entities.usuario;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.usecases.utils.Observer;
+import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Observer {
     private String email;
     private String senha;
     private float lucro;
@@ -85,5 +87,10 @@ public class Usuario {
                 ", lucro=" + lucro +
                 ", investido=" + investido +
                 '}';
+    }
+
+    @Override
+    public void update(Subject o) {
+
     }
 }

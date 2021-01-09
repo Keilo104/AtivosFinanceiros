@@ -1,7 +1,6 @@
 package br.edu.ifsp.domain.entities.log;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.grupo.Grupo;
 
 import java.time.LocalDate;
 
