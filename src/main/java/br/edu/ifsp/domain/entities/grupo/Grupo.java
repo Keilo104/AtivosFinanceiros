@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.entities.grupo;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 
 import java.util.Iterator;
@@ -11,6 +12,7 @@ public class Grupo {
     private float total;
 
     private List<Ativo> listaAtivos;
+    private List<LogTransacaoAtivo> historico;
 
     public Grupo() {
     }

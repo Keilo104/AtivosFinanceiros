@@ -1,10 +1,7 @@
 package br.edu.ifsp.domain.entities.log;
 
-public enum LogEnum {
+public enum LogTransacaoAtivoEnum {
     COMPRA,
-    VENDA,
-    EXCLUISAO,
-
-
+    VENDA
 
 }
