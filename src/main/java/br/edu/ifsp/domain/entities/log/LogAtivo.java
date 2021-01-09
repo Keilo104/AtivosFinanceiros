@@ -21,4 +21,20 @@ public class LogAtivo extends Log{
         this.ativo = ativo;
         this.tipo = tipo;
     }
+
+    public Ativo getAtivo() {
+        return ativo;
+    }
+
+    public LogAtivoEnum getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "LogAtivo{" +
+                "ativo=" + ativo +
+                ", tipo=" + tipo +
+                "} " + super.toString();
+    }
 }
