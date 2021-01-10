@@ -19,6 +19,11 @@ public class Grupo extends Subject implements Observer {
     public Grupo() {
     }
 
+    public Grupo(String nome, float total) {
+        this.nome = nome;
+        this.total = total;
+    }
+
     public Grupo(int id, String nome, float total) {
         this.id = id;
         this.nome = nome;
