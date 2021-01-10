@@ -18,13 +18,17 @@ public class GrupoInputValidator extends Validator<Grupo> {
             notification.addError("Nome cannot be null");
         }
 
+        if(grupo.getId()<=0) {
+            notification.addError("Id cannot be <=0>");
+        }
+
         return notification;
     }
 
-    public Notification validateNome(String nome) {
+    public Notification validateId(Integer id) {
         Notification notification = new Notification();
-        if(nullOrEmpty(nome)) {
-            notification.addError("Nome cannot be null");
+        if(id<=0) {
+            notification.addError("Id cannot be <=0>");
         }
         return notification;
     }

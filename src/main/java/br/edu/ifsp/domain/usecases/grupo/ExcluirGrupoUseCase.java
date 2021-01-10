@@ -23,14 +23,14 @@ public class ExcluirGrupoUseCase {
         return flag;
     }
 
-    public boolean deleteByKey(String nome){
+    public boolean deleteByKey(Integer id){
         Validator<Grupo> validator = new GrupoInputValidator();
-        Notification notif = ((GrupoInputValidator) validator).validateNome(nome);
+        Notification notif = ((GrupoInputValidator) validator).validateId(id);
 
         if(notif.hasErrors()) {
             throw new IllegalArgumentException(notif.errorMessage());
         }
-        boolean flag = this.grupoDAO.deleteByKey(nome);
+        boolean flag = this.grupoDAO.deleteByKey(id);
         return flag;
     }
 

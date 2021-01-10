@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Grupo extends Subject implements Observer {
+    private int id;
     private String nome;
     private float total;
 
@@ -18,9 +19,18 @@ public class Grupo extends Subject implements Observer {
     public Grupo() {
     }
 
-    public Grupo(String nome, float total) {
+    public Grupo(int id, String nome, float total) {
+        this.id = id;
         this.nome = nome;
         this.total = total;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
