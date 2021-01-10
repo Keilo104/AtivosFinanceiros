@@ -14,9 +14,9 @@ public class LogTransacaoAtivo extends Log {
     public LogTransacaoAtivo() {
     }
 
-    public LogTransacaoAtivo(LogTransacaoAtivoEnum tipo, Ativo ativo, float valor, int quantidade) {
-        this.tipo = tipo;
+    public LogTransacaoAtivo(Ativo ativo, LogTransacaoAtivoEnum tipo, float valor, int quantidade) {
         this.ativo = ativo;
+        this.tipo = tipo;
         this.valor = valor;
         this.quantidade = quantidade;
     }

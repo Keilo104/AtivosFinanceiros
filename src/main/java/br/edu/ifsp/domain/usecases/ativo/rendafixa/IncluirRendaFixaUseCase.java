@@ -24,6 +24,7 @@ public class IncluirRendaFixaUseCase {
         if(notif.hasErrors()) {
             throw new IllegalArgumentException(notif.errorMessage());
         }
+
         int id = this.rendaFixaDAO.create(rendaFixa);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);

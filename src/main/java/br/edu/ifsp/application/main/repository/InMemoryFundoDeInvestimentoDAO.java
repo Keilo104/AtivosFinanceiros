@@ -48,6 +48,7 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
         Integer id = fundoDeInvestimento.getId();
         if(db.containsKey(id)) {
             db.replace(id, fundoDeInvestimento);
+
             return true;
         }
         return false;

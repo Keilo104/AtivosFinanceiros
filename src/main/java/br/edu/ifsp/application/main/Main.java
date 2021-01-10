@@ -93,8 +93,8 @@ public class Main {
         UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
 
         //ativo
-        compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO);
-        vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO);
+        compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO);
+        vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO);
 
         //acao
         alterarAcaoUseCase = new AlterarAcaoUseCase(acaoDAO, logAtivoDAO);
@@ -103,12 +103,12 @@ public class Main {
 
         //fundo de investimento
         alterarFundoDeInvestimentoUseCase = new AlterarFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
-        excluirFundoDeInvestimentoUseCase = new ExcluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
+        excluirFundoDeInvestimentoUseCase = new ExcluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO, grupoDAO);
         incluirFundoDeInvestimentoUseCase = new IncluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
 
         //renda fixa
         alterarRendaFixaUserCase = new AlterarRendaFixaUserCase(rendaFixaDAO, logAtivoDAO);
-        excluirRendaFixaUseCase = new ExcluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
+        excluirRendaFixaUseCase = new ExcluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO, grupoDAO);
         incluirRendaFixaUseCase = new IncluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
 
         //grupo
@@ -177,9 +177,9 @@ public class Main {
 
             excluirAcaoUseCase.delete((Acao) ativoLegal);
 
-            System.out.println(ativoDB);
+            //System.out.println(ativoDB);
 
-            printCarteira(logado.getIteratorCarteira());
+            //printCarteira(logado.getIteratorCarteira());
         } else {
             System.out.println("Login falhou :(");
         }
