@@ -29,6 +29,10 @@ public class Ativo extends Subject {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public float getValor() {
         return valor;
     }
