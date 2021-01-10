@@ -4,6 +4,7 @@ import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Usuario implements Observer {
     private float valorAtual;
     private float investimentoAtual;
 
-    private List<Grupo> carteira;
+    private List<Grupo> carteira = new ArrayList<>();
 
     public Usuario() {
     }
@@ -30,8 +31,8 @@ public class Usuario implements Observer {
         this.senha = senha;
     }
 
-    public Usuario(String senha, String email) {
-        this("", senha, email, 0, 0);
+    public Usuario(String email, String senha) {
+        this("", email, senha, 0, 0);
     }
 
     public Usuario(String cpf, String email, String senha, float totalLucrado, float totalInvestido) {
@@ -83,6 +84,7 @@ public class Usuario implements Observer {
     }
 
     public void addGrupo(Grupo grupo) {
+        grupo.addObserver(this);
         this.carteira.add(grupo);
     }
 
@@ -132,6 +134,20 @@ public class Usuario implements Observer {
         for (Grupo g : carteira) {
             this.investimentoAtual += g.getInvestimentoAtual();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", totalLucrado=" + totalLucrado +
+                ", totalInvestido=" + totalInvestido +
+                ", lucroPotencial=" + lucroPotencial +
+                ", valorAtual=" + valorAtual +
+                ", investimentoAtual=" + investimentoAtual +
+                '}';
     }
 
     @Override

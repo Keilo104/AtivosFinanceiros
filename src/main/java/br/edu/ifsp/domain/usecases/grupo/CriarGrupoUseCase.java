@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.usecases.grupo;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
@@ -11,7 +12,7 @@ public class CriarGrupoUseCase {
         this.grupoDAO = grupoDAO;
     }
 
-    public String include(Grupo grupo){
+    public int include(Usuario usuario, Grupo grupo){
         Validator<Grupo> validator = new GrupoInputValidator();
         Notification notif = validator.validate(grupo);
 
@@ -19,7 +20,13 @@ public class CriarGrupoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        String nome = this.grupoDAO.create(grupo);
-        return nome;
+        int id = this.grupoDAO.create(grupo);
+
+        if(id != 0) {
+            usuario.addGrupo(grupo);
+
+            return id;
+        }
+        throw new IllegalArgumentException("Grupo wasnt able to be assigned");
     }
 }

@@ -24,6 +24,7 @@ public class AtivosValidator extends Validator<Ativo> {
         if (ativo.getValorAtual() <= 0) {
             notification.addError("Valor Atual cannot be 0 or negative");
         }
+
         return notification;
     }
 }

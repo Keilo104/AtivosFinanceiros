@@ -5,6 +5,7 @@ import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class Grupo extends Subject implements Observer {
     private float valorAtual;
     private float investimentoAtual;
 
-    private List<Ativo> listaAtivos;
-    private List<LogTransacaoAtivo> historico;
+    private List<Ativo> listaAtivos = new ArrayList<>();
+    private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
     public Grupo() {
     }
@@ -74,6 +75,7 @@ public class Grupo extends Subject implements Observer {
 
     public void addAtivo(Ativo ativo) {
         addInvestimento(ativo.getValorTotalAtual());
+        ativo.addObserver(this);
 
         this.listaAtivos.add(ativo);
         this.updateValorAtual();
@@ -84,7 +86,7 @@ public class Grupo extends Subject implements Observer {
     }
 
     public void removeAtivo(Ativo ativo) {
-        addLucroTotalHistorico(ativo.getValorAtual() - ativo.getValorComprado());
+        addLucroTotalHistorico(ativo.getValorTotalAtual() - ativo.getValorTotalComprado());
         removeInvestimentoAtual(ativo.getValorTotalComprado());
 
         this.listaAtivos.remove(ativo);
@@ -103,7 +105,7 @@ public class Grupo extends Subject implements Observer {
         this.valorAtual = 0;
 
         for (Ativo a : listaAtivos) {
-            this.valorAtual += a.getValorAtual();
+            this.valorAtual += a.getValorTotalAtual();
         }
 
         updateLucroPotencial();

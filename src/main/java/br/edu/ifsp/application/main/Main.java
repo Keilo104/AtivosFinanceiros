@@ -1,6 +1,10 @@
 package br.edu.ifsp.application.main;
 
 import br.edu.ifsp.application.main.repository.*;
+import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
@@ -28,6 +32,8 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
+
+import java.util.Iterator;
 
 public class Main {
     //ativo
@@ -121,7 +127,53 @@ public class Main {
         loginUseCase = new LoginUseCase(usuarioDAO);
         recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO, tokenDAO);
     }
+
+    private static void printCarteira(Iterator<Grupo> carteira) {
+        while (carteira.hasNext()) {
+            System.out.println(carteira.next());
+        }
+    }
+
     public static void main(String[] args) {
         configureInjection();
+
+        Usuario user = new Usuario("154.796.276-35", "email.muitolegal@gmail.com", "12345");
+
+        String cpf = cadastroUseCase.cadastrar(user);
+        System.out.printf("Usuário de cpf %s cadastrado com sucesso!\n\n", cpf);
+
+        System.out.println("Testando login...");
+        Usuario logado = loginUseCase.login("email.muitolegal@gmail.com", "12345");
+
+        if(logado != null) {
+            System.out.println(logado);
+            System.out.println("Logado!");
+
+            Grupo grupo = new Grupo("grupo muito legal");
+            //Grupo grupo2 = new Grupo("grupo ainda mais legal");
+            criarGrupoUseCase.include(logado, grupo);
+            //criarGrupoUseCase.include(logado, grupo2);
+            //System.out.println(criarGrupoUseCase.include(logado, grupo));
+
+            Ativo ativoLegal = new Acao(10, 5, "USA", "tecnologia");
+            incluirAcaoUseCase.include((Acao) ativoLegal);
+
+            Ativo ativoLegal2 = new Acao(20, 10, "JPY", "tecnologia2");
+            incluirAcaoUseCase.include((Acao) ativoLegal2);
+
+            Ativo ativoLegal3 = new Acao(4, 2, "BRL", "tecnologia3");
+            incluirAcaoUseCase.include((Acao) ativoLegal3);
+
+            compraAtivosUseCase.compraAtivo(grupo, ativoLegal);
+
+            ativoLegal.setValorAtual(20);
+            alterarAcaoUseCase.update((Acao) ativoLegal);
+
+            vendaAtivosUseCase.vendaAtivo(grupo, ativoLegal);
+
+            printCarteira(logado.getIteratorCarteira());
+        } else {
+            System.out.println("Login falhou :(");
+        }
     }
 }

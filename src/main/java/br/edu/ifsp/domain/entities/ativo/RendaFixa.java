@@ -15,8 +15,8 @@ public class RendaFixa extends Ativo{
         this.garantia = garantia;
     }
 
-    public RendaFixa(int id, float valor, LocalDate data, int quantidade, String tributacao, String garantia) {
-        super(id, valor, data, quantidade);
+    public RendaFixa(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade, String tributacao, String garantia) {
+        super(id, valorAtual, valorComprado, data, quantidade);
         this.tributacao = tributacao;
         this.garantia = garantia;
     }

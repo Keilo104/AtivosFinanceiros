@@ -15,8 +15,8 @@ public class Acao extends Ativo {
         this.categoria = categoria;
     }
 
-    public Acao(int id, float valor, LocalDate data, int quantidade, String pais, String categoria) {
-        super(id, valor, data, quantidade);
+    public Acao(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade, String pais, String categoria) {
+        super(id, valorAtual, valorComprado, data, quantidade);
         this.pais = pais;
         this.categoria = categoria;
     }
