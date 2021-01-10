@@ -4,6 +4,8 @@ import br.edu.ifsp.application.main.repository.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.relatorio.CategoriaEnum;
+import br.edu.ifsp.domain.entities.relatorio.Relatorio;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
@@ -173,21 +175,27 @@ public class Main {
             ativoLegal.setValorAtual(20);
             alterarAcaoUseCase.update((Acao) ativoLegal);
 
-            printCarteira(logado.getIteratorCarteira());
+            //printCarteira(logado.getIteratorCarteira());
 
             // System.out.println(excluirGrupoUseCase.delete(grupo));
 
-            printCarteira(logado.getIteratorCarteira());
+            //printCarteira(logado.getIteratorCarteira());
 
             vendaAtivosUseCase.vendaAtivo(grupo, ativoLegal);
 
-            printCarteira(logado.getIteratorCarteira());
+            //printCarteira(logado.getIteratorCarteira());
 
             excluirAcaoUseCase.delete((Acao) ativoLegal);
 
+            Relatorio relatorio = new Relatorio(CategoriaEnum.ACAO);
+
+            gerarRelatorioCategoriaUseCase.gerar(relatorio);
+
+            System.out.println(relatorio);
+
             //System.out.println(ativoDB);
 
-            printCarteira(logado.getIteratorCarteira());
+            //printCarteira(logado.getIteratorCarteira());
         } else {
             System.out.println("Login falhou :(");
         }
