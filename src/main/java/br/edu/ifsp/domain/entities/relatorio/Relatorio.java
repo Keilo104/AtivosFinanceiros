@@ -1,11 +1,17 @@
 package br.edu.ifsp.domain.entities.relatorio;
 
+import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Relatorio {
     private int id;
     private LocalDate dataImpressao;
     private CategoriaEnum categoria;
+
+    private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
     public Relatorio() {
         this.dataImpressao = LocalDate.now();
@@ -38,5 +44,12 @@ public class Relatorio {
         return categoria;
     }
 
-
+    @Override
+    public String toString() {
+        return "Relatorio{" +
+                "id=" + id +
+                ", dataImpressao=" + dataImpressao +
+                ", categoria=" + categoria +
+                '}';
+    }
 }

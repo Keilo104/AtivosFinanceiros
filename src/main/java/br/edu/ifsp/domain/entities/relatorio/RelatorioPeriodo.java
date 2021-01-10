@@ -35,5 +35,11 @@ public class RelatorioPeriodo extends Relatorio{
         return dataFinal;
     }
 
-
+    @Override
+    public String toString() {
+        return "RelatorioPeriodo{" +
+                "dataInicial=" + dataInicial +
+                ", dataFinal=" + dataFinal +
+                "} " + super.toString();
+    }
 }
