@@ -30,8 +30,11 @@ public class CompraAtivosUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        grupo.addAtivo(ativo);
+        if(ativosDAO.update(ativo)) {
+            grupo.addAtivo(ativo);
+            return grupoDAO.update(grupo);
+        }
 
-        return true;
+        return false;
     }
 }

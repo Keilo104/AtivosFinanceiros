@@ -86,10 +86,13 @@ public class Grupo extends Subject implements Observer {
     }
 
     public void removeAtivo(Ativo ativo) {
-        addLucroTotalHistorico(ativo.getValorTotalAtual() - ativo.getValorTotalComprado());
-        removeInvestimentoAtual(ativo.getValorTotalComprado());
+        if(!this.listaAtivos.remove(ativo)) {
+            throw new IllegalArgumentException("Cannot sell ativo thats not added");
+        }
 
-        this.listaAtivos.remove(ativo);
+        removeInvestimentoAtual(ativo.getValorTotalComprado());
+        addLucroTotalHistorico(ativo.getValorTotalAtual() - ativo.getValorTotalComprado());
+
         this.updateValorAtual();
     }
 

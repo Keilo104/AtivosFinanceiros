@@ -73,6 +73,19 @@ public class Ativo extends Subject {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ativo ativo = (Ativo) o;
+        return id == ativo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
         return "Ativo{" +
                 "id=" + id +

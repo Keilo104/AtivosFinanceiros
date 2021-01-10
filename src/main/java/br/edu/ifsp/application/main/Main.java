@@ -33,7 +33,7 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class Main {
     //ativo
@@ -75,16 +75,20 @@ public class Main {
     private static LoginUseCase loginUseCase;
     private static RecuperarSenhaUseCase recuperarSenhaUseCase;
 
+    private static Map<Integer, Ativo> ativoDB;
+
     private static void configureInjection(){
         //DAOs
-        AtivosDAO ativosDAO = new InMemoryAtivosDAO();
-        AcaoDAO acaoDAO = new InMemoryAcaoDAO();
-        FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new InMemoryFundoDeInvestimentoDAO();
+        ativoDB = new LinkedHashMap<>();
+
+        AtivosDAO ativosDAO = new InMemoryAtivosDAO(ativoDB);
+        AcaoDAO acaoDAO = new InMemoryAcaoDAO(ativoDB);
+        FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new InMemoryFundoDeInvestimentoDAO(ativoDB);
+        RendaFixaDAO rendaFixaDAO = new InMemoryRendaFixaDAO(ativoDB);
         GrupoDAO grupoDAO = new InMemoryGrupoDAO();
         LogAtivoDAO logAtivoDAO = new InMemoryLogAtivoDAO();
         LogTransacaoDAO logTransacaoDAO = new InMemoryLogTransacaoDAO();
         RelatorioDAO relatorioDAO = new InMemoryRelatorioDAO();
-        RendaFixaDAO rendaFixaDAO = new InMemoryRendaFixaDAO();
         TokenDAO tokenDAO = new InMemoryTokenDAO();
         UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
 
@@ -94,7 +98,7 @@ public class Main {
 
         //acao
         alterarAcaoUseCase = new AlterarAcaoUseCase(acaoDAO, logAtivoDAO);
-        excluirAcaoUseCase = new ExcluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        excluirAcaoUseCase = new ExcluirAcaoUseCase(acaoDAO, logAtivoDAO, grupoDAO);
         incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
 
         //fundo de investimento
@@ -146,7 +150,7 @@ public class Main {
         Usuario logado = loginUseCase.login("email.muitolegal@gmail.com", "12345");
 
         if(logado != null) {
-            System.out.println(logado);
+            //System.out.println(logado);
             System.out.println("Logado!");
 
             Grupo grupo = new Grupo("grupo muito legal");
@@ -170,6 +174,10 @@ public class Main {
             alterarAcaoUseCase.update((Acao) ativoLegal);
 
             vendaAtivosUseCase.vendaAtivo(grupo, ativoLegal);
+
+            excluirAcaoUseCase.delete((Acao) ativoLegal);
+
+            System.out.println(ativoDB);
 
             printCarteira(logado.getIteratorCarteira());
         } else {

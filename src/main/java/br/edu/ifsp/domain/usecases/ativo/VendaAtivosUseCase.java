@@ -30,8 +30,11 @@ public class VendaAtivosUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        grupo.removeAtivo( ativo );
+        if(ativosDAO.update(ativo)) {
+            grupo.removeAtivo(ativo);
+            return grupoDAO.update(grupo);
+        }
 
-        return true;
+        return false;
     }
 }
