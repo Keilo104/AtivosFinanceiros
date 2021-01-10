@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.entities.grupo;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
@@ -73,6 +74,23 @@ public class Grupo extends Subject implements Observer {
         return investimentoAtual;
     }
 
+    public void deleteFromObservers() {
+        Iterator<Observer> iterator = this.getObserverIterator();
+        while(iterator.hasNext()) {
+            Observer u = iterator.next();
+            if( u instanceof Usuario)
+                ((Usuario) u).removeGrupo(this);
+        }
+    }
+
+    public void addLog(LogTransacaoAtivo logTransacaoAtivo) {
+        this.historico.add(logTransacaoAtivo);
+    }
+
+    public Iterator<LogTransacaoAtivo> getHistoricIterator() {
+        return this.historico.iterator();
+    }
+
     public void addAtivo(Ativo ativo) {
         addInvestimento(ativo.getValorTotalAtual());
         ativo.addObserver(this);
@@ -126,6 +144,10 @@ public class Grupo extends Subject implements Observer {
 
     private void removeInvestimentoAtual(float investimento) {
         this.investimentoAtual -= investimento;
+    }
+
+    public boolean isEmpty() {
+        return this.listaAtivos.isEmpty();
     }
 
     @Override

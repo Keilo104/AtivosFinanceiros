@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.usecases.log.logtransacao;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
@@ -15,7 +16,7 @@ public class SalvarHistoricoTransacaoUseCase {
         this.logTransacaoDAO = logTransacaoDAO;
     }
 
-    public Pair<LocalDate, Ativo> salvarHistorico(LogTransacaoAtivo logTransacaoAtivo) {
+    public Pair<LocalDate, Ativo> salvarHistorico(Grupo grupo, LogTransacaoAtivo logTransacaoAtivo) {
         Validator<LogTransacaoAtivo> validator = new LogTransacaoInputValidator();
         Notification notif = validator.validate(logTransacaoAtivo);
 
@@ -23,6 +24,10 @@ public class SalvarHistoricoTransacaoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        return this.logTransacaoDAO.create(logTransacaoAtivo);
+        Pair<LocalDate, Ativo> pair = this.logTransacaoDAO.create(logTransacaoAtivo);
+
+        grupo.addLog(logTransacaoAtivo);
+
+        return pair;
     }
 }

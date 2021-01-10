@@ -42,7 +42,7 @@ public class VendaAtivosUseCase {
 
             SalvarHistoricoTransacaoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
             LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.VENDA, ativo.getValorAtual(), ativo.getQuantidade());
-            salvarHistoricoAtivoUseCase.salvarHistorico(logTransacaoAtivo);
+            salvarHistoricoAtivoUseCase.salvarHistorico(grupo, logTransacaoAtivo);
 
             return flag;
         }

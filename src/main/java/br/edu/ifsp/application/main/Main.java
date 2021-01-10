@@ -16,7 +16,7 @@ import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInves
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.ExcluirFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.FundoDeInvestimentoDAO;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.IncluirFundoDeInvestimentoUseCase;
-import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUserCase;
+import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.ExcluirRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.IncluirRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
@@ -51,7 +51,7 @@ public class Main {
     private static IncluirFundoDeInvestimentoUseCase incluirFundoDeInvestimentoUseCase;
 
     //renda fixa
-    private static AlterarRendaFixaUserCase alterarRendaFixaUserCase;
+    private static AlterarRendaFixaUseCase alterarRendaFixaUseCase;
     private static ExcluirRendaFixaUseCase excluirRendaFixaUseCase;
     private static IncluirRendaFixaUseCase incluirRendaFixaUseCase;
 
@@ -61,10 +61,10 @@ public class Main {
     private static ExcluirGrupoUseCase excluirGrupoUseCase;
 
     //log ativo
-    private static SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase;
+    //private static SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase;
 
     //log transacao
-    private static SalvarHistoricoTransacaoUseCase salvarHistoricoTransacaoUseCase;
+    //private static SalvarHistoricoTransacaoUseCase salvarHistoricoTransacaoUseCase;
 
     //relatorio
     private static GerarRelatorioCategoriaUseCase gerarRelatorioCategoriaUseCase;
@@ -107,7 +107,7 @@ public class Main {
         incluirFundoDeInvestimentoUseCase = new IncluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
 
         //renda fixa
-        alterarRendaFixaUserCase = new AlterarRendaFixaUserCase(rendaFixaDAO, logAtivoDAO);
+        alterarRendaFixaUseCase = new AlterarRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
         excluirRendaFixaUseCase = new ExcluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO, grupoDAO);
         incluirRendaFixaUseCase = new IncluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
 
@@ -117,10 +117,10 @@ public class Main {
         excluirGrupoUseCase = new ExcluirGrupoUseCase(grupoDAO);
 
         //log ativo
-        salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
+        //salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
 
         //log transacao
-        salvarHistoricoTransacaoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
+        //salvarHistoricoTransacaoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
 
         //relatorio
         gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase(relatorioDAO);
@@ -173,13 +173,21 @@ public class Main {
             ativoLegal.setValorAtual(20);
             alterarAcaoUseCase.update((Acao) ativoLegal);
 
+            printCarteira(logado.getIteratorCarteira());
+
+            // System.out.println(excluirGrupoUseCase.delete(grupo));
+
+            printCarteira(logado.getIteratorCarteira());
+
             vendaAtivosUseCase.vendaAtivo(grupo, ativoLegal);
+
+            printCarteira(logado.getIteratorCarteira());
 
             excluirAcaoUseCase.delete((Acao) ativoLegal);
 
             //System.out.println(ativoDB);
 
-            //printCarteira(logado.getIteratorCarteira());
+            printCarteira(logado.getIteratorCarteira());
         } else {
             System.out.println("Login falhou :(");
         }

@@ -15,8 +15,6 @@ public class InMemoryLogTransacaoDAO implements LogTransacaoDAO {
     @Override
     public Pair<LocalDate, Ativo> create(LogTransacaoAtivo logTransacaoAtivo) {
         db.put(logTransacaoAtivo.generateKey(), logTransacaoAtivo);
-
-        System.out.println(db);
         return logTransacaoAtivo.generateKey();
     }
 
