@@ -21,8 +21,8 @@ public class RelatorioPeriodo extends Relatorio{
         this.dataFinal = dataFinal;
     }
 
-    public RelatorioPeriodo(LocalDate dataImpressao, CategoriaEnum categoria, LocalDate dataInicial, LocalDate dataFinal) {
-        super(dataImpressao, categoria);
+    public RelatorioPeriodo(int id, LocalDate dataImpressao, CategoriaEnum categoria, LocalDate dataInicial, LocalDate dataFinal) {
+        super(id, dataImpressao, categoria);
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
     }
