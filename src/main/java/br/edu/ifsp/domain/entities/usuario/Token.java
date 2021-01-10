@@ -3,6 +3,7 @@ package br.edu.ifsp.domain.entities.usuario;
 import java.time.LocalDate;
 
 public class Token {
+    private int id;
     private Usuario usuario;
     private String token;
     private LocalDate dateTime;
@@ -10,6 +11,14 @@ public class Token {
     public Token( String token, LocalDate dateTime ) {
         this.token = token;
         this.dateTime = dateTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId( int id ) {
+        this.id = id;
     }
 
     public Usuario getUsuario() {
