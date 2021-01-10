@@ -3,10 +3,14 @@ package br.edu.ifsp.domain.entities.ativo;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Ativo extends Subject {
     private int id;
-    private float valor;
+
+    private float valorAtual;
+    private float valorComprado;
+
     private LocalDate data;
     private int quantidade;
 
@@ -15,12 +19,13 @@ public class Ativo extends Subject {
     }
 
     public Ativo(float valor, int quantidade) {
-        this(0, valor, LocalDate.now(), quantidade);
+        this(0, valor, valor, LocalDate.now(), quantidade);
     }
 
-    public Ativo(int id, float valor, LocalDate data, int quantidade) {
+    public Ativo(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade) {
         this.id = id;
-        this.valor = valor;
+        this.valorAtual = valorAtual;
+        this.valorComprado = valorComprado;
         this.data = data;
         this.quantidade = quantidade;
     }
@@ -33,12 +38,25 @@ public class Ativo extends Subject {
         this.id = id;
     }
 
-    public float getValor() {
-        return valor;
+    public float getValorTotalAtual() {
+        return this.valorAtual * this.quantidade;
     }
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public float getValorTotalComprado() {
+        return this.valorComprado * this.quantidade;
+    }
+
+    public float getValorAtual() {
+        return valorAtual;
+    }
+
+    public void setValorAtual(float valorAtual) {
+        this.valorAtual = valorAtual;
+        notifyObservers();
+    }
+
+    public float getValorComprado() {
+        return valorComprado;
     }
 
     public LocalDate getData() {
@@ -51,15 +69,17 @@ public class Ativo extends Subject {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+        notifyObservers();
     }
 
     @Override
     public String toString() {
         return "Ativo{" +
                 "id=" + id +
-                ", valor=" + valor +
+                ", valorAtual=" + valorAtual +
+                ", valorComprado=" + valorComprado +
                 ", data=" + data +
                 ", quantidade=" + quantidade +
-                '}';
+                "} " + super.toString();
     }
 }

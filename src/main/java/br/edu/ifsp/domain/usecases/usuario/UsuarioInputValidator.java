@@ -15,11 +15,27 @@ public class UsuarioInputValidator extends Validator<Usuario> {
             return notification;
         }
 
-        if ( usuario.getEmail() == null ) {
-            notification.addError( "Email cannot be null" );
+        if ( nullOrEmpty(usuario.getCpf()) ) {
+            notification.addError( "CPF cannot be null or empty" );
         }
-        if ( usuario.getSenha() == null ) {
-            notification.addError( "Senha cannot be null" );
+        if ( nullOrEmpty(usuario.getEmail()) ) {
+            notification.addError( "Email cannot be null or empty" );
+        }
+        if ( nullOrEmpty(usuario.getSenha()) ) {
+            notification.addError( "Senha cannot be null or empty" );
+        }
+
+        return notification;
+    }
+
+    public Notification validateLogin( String email, String senha ) {
+        Notification notification = new Notification();
+
+        if ( nullOrEmpty(email) ) {
+            notification.addError( "Email cannot be null or empty" );
+        }
+        if ( nullOrEmpty(senha) ) {
+            notification.addError( "Senha cannot be null or empty" );
         }
 
         return notification;

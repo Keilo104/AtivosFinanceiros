@@ -10,12 +10,12 @@ public class InMemoryUsuarioDAO implements UsuarioDAO{
     private static final Map<String, Usuario> db = new LinkedHashMap<>();
 
     @Override
-    public boolean checkLogin(Usuario usuario) {
-        Usuario u = findOneByEmail(usuario.getEmail()).orElse(null);
-        if(u != null){
-            return (u.getSenha().equals(usuario.getSenha()));
+    public Usuario checkLogin(String email, String senha) {
+        Usuario u = findOneByEmail(email).orElse(null);
+        if(u != null && u.getSenha().equals(senha)){
+            return u;
         }
-        return false;
+        return null;
     }
 
     @Override

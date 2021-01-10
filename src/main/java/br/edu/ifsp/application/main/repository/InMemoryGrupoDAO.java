@@ -11,10 +11,25 @@ public class InMemoryGrupoDAO implements GrupoDAO {
 
     @Override
     public Integer create(Grupo grupo) {
-        idCounter++;
-        grupo.setId(idCounter);
-        db.put(idCounter, grupo);
-        return idCounter;
+        if(findOneByNome(grupo.getNome()).isEmpty()) {
+            idCounter++;
+            grupo.setId(idCounter);
+            db.put(idCounter, grupo);
+            return idCounter;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public Optional<Grupo> findOneByNome(String nome) {
+        for (Grupo g : db.values()) {
+            if(g.getNome().equals(nome)) {
+                return Optional.of(g);
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override

@@ -16,6 +16,10 @@ public class Notification {
         errors.add(new Error(message, e));
     }
 
+    public void addErrors(Notification notification) {
+        this.errors.addAll(notification.errors);
+    }
+
     public boolean isCorrect() {
         return errors.isEmpty();
     }
@@ -37,6 +41,6 @@ public class Notification {
     public String errorMessage() {
         return errors.stream()
                 .map(e -> e.message)
-                .collect(Collectors.joining(" ,"));
+                .collect(Collectors.joining(", "));
     }
 }

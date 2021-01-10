@@ -17,8 +17,11 @@ public class FundoDeInvestimentoInputValidator extends Validator<FundoDeInvestim
         if (fundoDeInvestimento.getData() == null) {
             notification.addError("Data cannot be null");
         }
-        if (fundoDeInvestimento.getValor() <= 0) {
-            notification.addError("Valor cannot be 0 or negative");
+        if (fundoDeInvestimento.getValorComprado() <= 0) {
+            notification.addError("Valor Comprado cannot be 0 or negative");
+        }
+        if (fundoDeInvestimento.getValorAtual() <= 0) {
+            notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (fundoDeInvestimento.getQuantidade() <= 0) {
             notification.addError("Quantidade cannot be 0 or negative");

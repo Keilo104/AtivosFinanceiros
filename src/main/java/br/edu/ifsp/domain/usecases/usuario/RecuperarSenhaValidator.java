@@ -15,7 +15,7 @@ public class RecuperarSenhaValidator extends Validator<Token> {
             return notification;
         }
 
-        if ( token.getToken() == null || token.getToken().isEmpty() || token.getToken().isBlank() ) {
+        if ( nullOrEmpty(token.getToken()) ) {
             notification.addError( "Invalid Token" );
         }
 
