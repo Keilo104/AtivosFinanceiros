@@ -1,6 +1,7 @@
 package br.edu.ifsp.application.main;
 
 import br.edu.ifsp.application.main.repository.*;
+import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
@@ -25,6 +26,7 @@ import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
 import br.edu.ifsp.domain.usecases.log.logtransacao.SalvarHistoricoTransacaoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
+import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
 public class Main {
@@ -69,17 +71,20 @@ public class Main {
 
     private static void configureInjection(){
         //DAOs
-       // AtivosDAO //TODO
+        AtivosDAO ativosDAO = new InMemoryAtivosDAO();
         AcaoDAO acaoDAO = new InMemoryAcaoDAO();
         FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new InMemoryFundoDeInvestimentoDAO();
         GrupoDAO grupoDAO = new InMemoryGrupoDAO();
         LogAtivoDAO logAtivoDAO = new InMemoryLogAtivoDAO();
         LogTransacaoDAO logTransacaoDAO = new InMemoryLogTransacaoDAO();
+        RelatorioDAO relatorioDAO = new InMemoryRelatorioDAO();
         RendaFixaDAO rendaFixaDAO = new InMemoryRendaFixaDAO();
         TokenDAO tokenDAO = new InMemoryTokenDAO();
         UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
 
         //ativo
+        compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO);
+        vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO);
 
         //acao
         alterarAcaoUseCase = new AlterarAcaoUseCase(acaoDAO, logAtivoDAO);
@@ -108,13 +113,13 @@ public class Main {
         salvarHistoricoTransacaoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
 
         //relatorio
-        //gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase();//TODO
-        //gerarRelatorioPeriodoUseCase = new GerarRelatorioPeriodoUseCase();//TODO
+        gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase(relatorioDAO);
+        gerarRelatorioPeriodoUseCase = new GerarRelatorioPeriodoUseCase(relatorioDAO);
 
         //usuario
         cadastroUseCase = new CadastroUseCase(usuarioDAO);
         loginUseCase = new LoginUseCase(usuarioDAO);
-        recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO);
+        recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO, tokenDAO);
     }
     public static void main(String[] args) {
         configureInjection();
