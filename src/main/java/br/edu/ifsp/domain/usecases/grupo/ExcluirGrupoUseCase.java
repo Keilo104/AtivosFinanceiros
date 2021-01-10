@@ -19,8 +19,13 @@ public class ExcluirGrupoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        boolean flag = this.grupoDAO.delete(grupo);
-        return flag;
+        if(grupo.isEmpty()) {
+            grupo.deleteFromObservers();
+            return this.grupoDAO.delete(grupo);
+        } else {
+            throw new IllegalArgumentException("Grupo is not empty");
+        }
+
     }
 
     public boolean deleteByKey(Integer id){
@@ -30,8 +35,8 @@ public class ExcluirGrupoUseCase {
         if(notif.hasErrors()) {
             throw new IllegalArgumentException(notif.errorMessage());
         }
-        boolean flag = this.grupoDAO.deleteByKey(id);
-        return flag;
+
+        return this.grupoDAO.deleteByKey(id);
     }
 
 }

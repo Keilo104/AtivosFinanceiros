@@ -16,7 +16,7 @@ import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInves
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.ExcluirFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.FundoDeInvestimentoDAO;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.IncluirFundoDeInvestimentoUseCase;
-import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUserCase;
+import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.ExcluirRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.IncluirRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
@@ -33,7 +33,7 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class Main {
     //ativo
@@ -51,7 +51,7 @@ public class Main {
     private static IncluirFundoDeInvestimentoUseCase incluirFundoDeInvestimentoUseCase;
 
     //renda fixa
-    private static AlterarRendaFixaUserCase alterarRendaFixaUserCase;
+    private static AlterarRendaFixaUseCase alterarRendaFixaUseCase;
     private static ExcluirRendaFixaUseCase excluirRendaFixaUseCase;
     private static IncluirRendaFixaUseCase incluirRendaFixaUseCase;
 
@@ -61,10 +61,10 @@ public class Main {
     private static ExcluirGrupoUseCase excluirGrupoUseCase;
 
     //log ativo
-    private static SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase;
+    //private static SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase;
 
     //log transacao
-    private static SalvarHistoricoTransacaoUseCase salvarHistoricoTransacaoUseCase;
+    //private static SalvarHistoricoTransacaoUseCase salvarHistoricoTransacaoUseCase;
 
     //relatorio
     private static GerarRelatorioCategoriaUseCase gerarRelatorioCategoriaUseCase;
@@ -75,36 +75,40 @@ public class Main {
     private static LoginUseCase loginUseCase;
     private static RecuperarSenhaUseCase recuperarSenhaUseCase;
 
+    private static Map<Integer, Ativo> ativoDB;
+
     private static void configureInjection(){
         //DAOs
-        AtivosDAO ativosDAO = new InMemoryAtivosDAO();
-        AcaoDAO acaoDAO = new InMemoryAcaoDAO();
-        FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new InMemoryFundoDeInvestimentoDAO();
+        ativoDB = new LinkedHashMap<>();
+
+        AtivosDAO ativosDAO = new InMemoryAtivosDAO(ativoDB);
+        AcaoDAO acaoDAO = new InMemoryAcaoDAO(ativoDB);
+        FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new InMemoryFundoDeInvestimentoDAO(ativoDB);
+        RendaFixaDAO rendaFixaDAO = new InMemoryRendaFixaDAO(ativoDB);
         GrupoDAO grupoDAO = new InMemoryGrupoDAO();
         LogAtivoDAO logAtivoDAO = new InMemoryLogAtivoDAO();
         LogTransacaoDAO logTransacaoDAO = new InMemoryLogTransacaoDAO();
         RelatorioDAO relatorioDAO = new InMemoryRelatorioDAO();
-        RendaFixaDAO rendaFixaDAO = new InMemoryRendaFixaDAO();
         TokenDAO tokenDAO = new InMemoryTokenDAO();
         UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
 
         //ativo
-        compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO);
-        vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO);
+        compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO);
+        vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO);
 
         //acao
         alterarAcaoUseCase = new AlterarAcaoUseCase(acaoDAO, logAtivoDAO);
-        excluirAcaoUseCase = new ExcluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        excluirAcaoUseCase = new ExcluirAcaoUseCase(acaoDAO, logAtivoDAO, grupoDAO);
         incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
 
         //fundo de investimento
         alterarFundoDeInvestimentoUseCase = new AlterarFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
-        excluirFundoDeInvestimentoUseCase = new ExcluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
+        excluirFundoDeInvestimentoUseCase = new ExcluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO, grupoDAO);
         incluirFundoDeInvestimentoUseCase = new IncluirFundoDeInvestimentoUseCase(fundoDeInvestimentoDAO, logAtivoDAO);
 
         //renda fixa
-        alterarRendaFixaUserCase = new AlterarRendaFixaUserCase(rendaFixaDAO, logAtivoDAO);
-        excluirRendaFixaUseCase = new ExcluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
+        alterarRendaFixaUseCase = new AlterarRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
+        excluirRendaFixaUseCase = new ExcluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO, grupoDAO);
         incluirRendaFixaUseCase = new IncluirRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
 
         //grupo
@@ -113,10 +117,10 @@ public class Main {
         excluirGrupoUseCase = new ExcluirGrupoUseCase(grupoDAO);
 
         //log ativo
-        salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
+        //salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
 
         //log transacao
-        salvarHistoricoTransacaoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
+        //salvarHistoricoTransacaoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
 
         //relatorio
         gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase(relatorioDAO);
@@ -146,7 +150,7 @@ public class Main {
         Usuario logado = loginUseCase.login("email.muitolegal@gmail.com", "12345");
 
         if(logado != null) {
-            System.out.println(logado);
+            //System.out.println(logado);
             System.out.println("Logado!");
 
             Grupo grupo = new Grupo("grupo muito legal");
@@ -169,7 +173,19 @@ public class Main {
             ativoLegal.setValorAtual(20);
             alterarAcaoUseCase.update((Acao) ativoLegal);
 
+            printCarteira(logado.getIteratorCarteira());
+
+            // System.out.println(excluirGrupoUseCase.delete(grupo));
+
+            printCarteira(logado.getIteratorCarteira());
+
             vendaAtivosUseCase.vendaAtivo(grupo, ativoLegal);
+
+            printCarteira(logado.getIteratorCarteira());
+
+            excluirAcaoUseCase.delete((Acao) ativoLegal);
+
+            //System.out.println(ativoDB);
 
             printCarteira(logado.getIteratorCarteira());
         } else {

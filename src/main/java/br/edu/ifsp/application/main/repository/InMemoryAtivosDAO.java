@@ -7,8 +7,12 @@ import java.util.*;
 
 public class InMemoryAtivosDAO implements AtivosDAO {
 
-    private static final Map<Integer, Ativo> db = new LinkedHashMap<>();
+    private static Map<Integer, Ativo> db;
     private static int idCounter;
+
+    public InMemoryAtivosDAO(Map<Integer, Ativo> db) {
+        InMemoryAtivosDAO.db = db;
+    }
 
     @Override
     public Integer create(Ativo ativo) {

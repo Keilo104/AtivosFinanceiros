@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.main.repository;
 
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 
@@ -26,6 +27,20 @@ public class InMemoryGrupoDAO implements GrupoDAO {
         for (Grupo g : db.values()) {
             if(g.getNome().equals(nome)) {
                 return Optional.of(g);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Grupo> findOneByAtivo(Ativo ativo) {
+        for (Grupo g : db.values()) {
+            Iterator<Ativo> ativoIterator = g.getIteratorAtivos();
+            while(ativoIterator.hasNext()) {
+                if(ativoIterator.next().equals(ativo)) {
+                    return Optional.of(g);
+                }
             }
         }
 

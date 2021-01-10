@@ -16,6 +16,7 @@ public class InMemoryLogAtivoDAO implements LogAtivoDAO {
     @Override
     public Pair<LocalDate, Ativo> create(LogAtivo logAtivo) {
         db.put(logAtivo.generateKey(), logAtivo);
+
         return logAtivo.generateKey();
     }
 
