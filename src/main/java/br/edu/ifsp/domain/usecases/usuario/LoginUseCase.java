@@ -11,7 +11,7 @@ public class LoginUseCase {
         this.usuarioDAO = usuarioDAO;
     }
 
-    public int login( Usuario usuario ) {
+    public boolean login( Usuario usuario ) {
         Validator<Usuario> validator = new UsuarioInputValidator();
         Notification notif = validator.validate( usuario );
 
@@ -19,6 +19,6 @@ public class LoginUseCase {
             throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        return this.usuarioDAO.create( usuario );
+        return this.usuarioDAO.checkLogin( usuario );
     }
 }

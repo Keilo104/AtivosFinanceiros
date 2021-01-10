@@ -17,8 +17,11 @@ public class RendaFixaInputValidator extends Validator<RendaFixa> {
         if (rendaFixa.getData() == null) {
             notification.addError("Data cannot be null");
         }
-        if (rendaFixa.getValor() <= 0) {
-            notification.addError("Valor cannot be 0 or negative");
+        if (rendaFixa.getValorComprado() <= 0) {
+            notification.addError("Valor Comprado cannot be 0 or negative");
+        }
+        if (rendaFixa.getValorAtual() <= 0) {
+            notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (rendaFixa.getQuantidade() <= 0) {
             notification.addError("Quantidade cannot be 0 or negative");

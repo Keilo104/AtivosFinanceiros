@@ -11,13 +11,17 @@ public class Usuario implements Observer {
     private String cpf;
     private String email;
     private String senha;
-    private float lucro;
-    private float investido;
+
+    private float totalLucrado;
+    private float totalInvestido;
+
+    private float lucroPotencial;
+    private float valorAtual;
+    private float investimentoAtual;
 
     private List<Grupo> carteira;
 
     public Usuario() {
-
     }
 
     public Usuario(String cpf, String email, String senha) {
@@ -27,22 +31,19 @@ public class Usuario implements Observer {
     }
 
     public Usuario(String senha, String email) {
-        this(senha, email, 0, 0);
+        this("", senha, email, 0, 0);
     }
 
-    public Usuario(String senha, String email, float lucro, float investido) {
-        this.senha = senha;
+    public Usuario(String cpf, String email, String senha, float totalLucrado, float totalInvestido) {
+        this.cpf = cpf;
         this.email = email;
-        this.lucro = lucro;
-        this.investido = investido;
+        this.senha = senha;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
     }
 
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getEmail() {
@@ -61,20 +62,24 @@ public class Usuario implements Observer {
         this.senha = senha;
     }
 
-    public float getLucro() {
-        return lucro;
+    public float getTotalLucrado() {
+        return totalLucrado;
     }
 
-    public void setLucro(float lucro) {
-        this.lucro = lucro;
+    public float getTotalInvestido() {
+        return totalInvestido;
     }
 
-    public float getInvestido() {
-        return investido;
+    public float getLucroPotencial() {
+        return lucroPotencial;
     }
 
-    public void setInvestido(float investido) {
-        this.investido = investido;
+    public float getValorAtual() {
+        return valorAtual;
+    }
+
+    public float getInvestimentoAtual() {
+        return investimentoAtual;
     }
 
     public void addGrupo(Grupo grupo) {
@@ -93,19 +98,49 @@ public class Usuario implements Observer {
         return this.carteira.iterator();
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "senha='" + senha + '\'' +
-                ", email='" + email + '\'' +
-                ", carteira=" + carteira +
-                ", lucro=" + lucro +
-                ", investido=" + investido +
-                '}';
+    private void updateLucroTotalHistorico() {
+        this.totalLucrado = 0;
+
+        for (Grupo g : carteira) {
+            this.totalLucrado += g.getTotalLucrado();
+        }
+    }
+
+    private void updateInvestimentoTotalHistorico() {
+        this.totalInvestido = 0;
+
+        for (Grupo g : carteira) {
+            this.totalInvestido += g.getTotalInvestido();
+        }
+    }
+
+    private void updateLucroPotencial() {
+        this.lucroPotencial = this.valorAtual - this.investimentoAtual;
+    }
+
+    private void updateValorAtual() {
+        this.valorAtual = 0;
+
+        for (Grupo g : carteira) {
+            this.valorAtual += g.getValorAtual();
+        }
+    }
+
+    private void updateInvestimentoAtual() {
+        this.investimentoAtual = 0;
+
+        for (Grupo g : carteira) {
+            this.investimentoAtual += g.getInvestimentoAtual();
+        }
     }
 
     @Override
     public void update(Subject o) {
+        this.updateInvestimentoAtual();
+        this.updateValorAtual();
+        this.updateLucroPotencial();
 
+        this.updateInvestimentoTotalHistorico();
+        this.updateLucroTotalHistorico();
     }
 }

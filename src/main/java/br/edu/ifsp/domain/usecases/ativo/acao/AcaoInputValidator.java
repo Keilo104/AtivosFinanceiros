@@ -17,8 +17,11 @@ public class AcaoInputValidator extends Validator<Acao> {
         if (acao.getData() == null) {
             notification.addError("Data cannot be null");
         }
-        if (acao.getValor() <= 0) {
-            notification.addError("Valor cannot be 0 or negative");
+        if (acao.getValorComprado() <= 0) {
+            notification.addError("Valor Comprado cannot be 0 or negative");
+        }
+        if (acao.getValorAtual() <= 0) {
+            notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (acao.getQuantidade() <= 0) {
             notification.addError("Quantidade cannot be 0 or negative");
