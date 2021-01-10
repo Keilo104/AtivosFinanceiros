@@ -6,10 +6,8 @@ import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 import java.util.*;
 
 public class InMemoryGrupoDAO implements GrupoDAO {
-
     private static final Map<Integer, Grupo> db = new LinkedHashMap<>();
     private static int idCounter;
-
 
     @Override
     public Integer create(Grupo grupo) {
@@ -54,7 +52,6 @@ public class InMemoryGrupoDAO implements GrupoDAO {
 
     @Override
     public boolean delete(Grupo grupo) {
-
         return deleteByKey(grupo.getId());
     }
 }

@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.entities.log;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import javafx.util.Pair;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,10 @@ public class LogTransacaoAtivo extends Log {
         this.ativo = ativo;
         this.valor = valor;
         this.quantidade = quantidade;
+    }
+
+    public Pair<LocalDate, Ativo> generateKey() {
+        return new Pair<>(this.getData(), this.getAtivo());
     }
 
     public LogTransacaoAtivoEnum getTipo() {
