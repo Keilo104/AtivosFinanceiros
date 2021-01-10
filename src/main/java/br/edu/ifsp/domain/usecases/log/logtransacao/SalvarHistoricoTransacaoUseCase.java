@@ -1,8 +1,12 @@
 package br.edu.ifsp.domain.usecases.log.logtransacao;
 
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
+import javafx.util.Pair;
+
+import java.time.LocalDate;
 
 public class SalvarHistoricoTransacaoUseCase {
     private LogTransacaoDAO logTransacaoDAO;
@@ -11,7 +15,7 @@ public class SalvarHistoricoTransacaoUseCase {
         this.logTransacaoDAO = logTransacaoDAO;
     }
 
-    public int salvarHistorico(LogTransacaoAtivo logTransacaoAtivo) {
+    public Pair<LocalDate, Ativo> salvarHistorico(LogTransacaoAtivo logTransacaoAtivo) {
         Validator<LogTransacaoAtivo> validator = new LogTransacaoInputValidator();
         Notification notif = validator.validate(logTransacaoAtivo);
 

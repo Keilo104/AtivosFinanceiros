@@ -11,14 +11,14 @@ public class LoginUseCase {
         this.usuarioDAO = usuarioDAO;
     }
 
-    public boolean login( Usuario usuario ) {
+    public Usuario login( String email, String senha ) {
         Validator<Usuario> validator = new UsuarioInputValidator();
-        Notification notif = validator.validate( usuario );
+        Notification notif = ((UsuarioInputValidator) validator).validateLogin( email, senha );
 
         if ( notif.hasErrors() ) {
             throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        return this.usuarioDAO.checkLogin( usuario );
+        return this.usuarioDAO.checkLogin( email, senha );
     }
 }

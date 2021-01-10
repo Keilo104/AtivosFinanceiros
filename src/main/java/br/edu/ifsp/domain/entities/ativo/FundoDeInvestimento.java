@@ -15,8 +15,8 @@ public class FundoDeInvestimento extends Ativo{
         this.liquidez = liquidez;
     }
 
-    public FundoDeInvestimento(int id, float valor, LocalDate data, int quantidade, String rentabilidade, String liquidez) {
-        super(id, valor, data, quantidade);
+    public FundoDeInvestimento(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade, String rentabilidade, String liquidez) {
+        super(id, valorAtual, valorComprado, data, quantidade);
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
     }

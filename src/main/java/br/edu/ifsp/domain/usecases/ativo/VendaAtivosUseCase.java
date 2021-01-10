@@ -3,20 +3,35 @@ package br.edu.ifsp.domain.usecases.ativo;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
+import br.edu.ifsp.domain.usecases.grupo.GrupoInputValidator;
+import br.edu.ifsp.domain.usecases.utils.Notification;
+import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class VendaAtivosUseCase {
-    private Ativo ativo;
-    private Grupo grupo;
+    private AtivosDAO ativosDAO;
+    private GrupoDAO grupoDAO;
 
-    public VendaAtivosUseCase( Ativo ativo, Grupo grupo ) {
-        this.ativo = ativo;
-        this.grupo = grupo;
+    public VendaAtivosUseCase( AtivosDAO ativoDAO, GrupoDAO grupoDAO ) {
+        this.ativosDAO = ativoDAO;
+        this.grupoDAO = grupoDAO;
     }
 
-    public VendaAtivosUseCase(AtivosDAO ativosDAO, GrupoDAO grupoDAO) {
+    public VendaAtivosUseCase() {
     }
 
-    public void vendaAtivo() {
+    public boolean vendaAtivo(Grupo grupo, Ativo ativo) {
+        Validator<Ativo> validatorAtivo = new AtivosValidator();
+        Validator<Grupo> validatorGrupo = new GrupoInputValidator();
+
+        Notification notif = validatorAtivo.validate(ativo);
+        notif.addErrors(validatorGrupo.validate(grupo));
+
+        if(notif.hasErrors()) {
+            throw new IllegalArgumentException(notif.errorMessage());
+        }
+
         grupo.removeAtivo( ativo );
+
+        return true;
     }
 }
