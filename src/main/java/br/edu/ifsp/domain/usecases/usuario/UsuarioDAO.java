@@ -1,5 +1,8 @@
 package br.edu.ifsp.domain.usecases.usuario;
 
-public class UsuarioDAO {
-    
+import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.usecases.utils.DAO;
+
+public interface UsuarioDAO extends DAO<Usuario, Integer> {
+    int checkLogin( Usuario usuario );
 }
