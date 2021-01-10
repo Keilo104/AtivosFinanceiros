@@ -1,6 +1,6 @@
-package br.edu.ifsp.domain.usecases.ativo.acao;
+package br.edu.ifsp.domain.usecases.ativo.rendafixa;
 
-import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.entities.log.LogAtivoEnum;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
@@ -8,27 +8,27 @@ import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
-public class ExcluirAcaoUseCase {
-    private AcaoDAO acaoDAO;
+public class AlterarRendaFixaUserCase {
+    private RendaFixaDAO rendaFixaDAO;
     private LogAtivoDAO logAtivoDAO;
 
-    public ExcluirAcaoUseCase(AcaoDAO acaoDAO, LogAtivoDAO logAtivoDAO) {
-        this.acaoDAO = acaoDAO;
+    public AlterarRendaFixaUserCase(RendaFixaDAO rendaFixaDAO, LogAtivoDAO logAtivoDAO) {
+        this.rendaFixaDAO = rendaFixaDAO;
         this.logAtivoDAO = logAtivoDAO;
     }
 
-    public boolean delete(Acao acao) {
-        Validator<Acao> validator = new AcaoInputValidator();
-        Notification notif = validator.validate(acao);
+    public boolean include(RendaFixa rendaFixa) {
+        Validator<RendaFixa> validator = new RendaFixaInputValidator();
+        Notification notif = validator.validate(rendaFixa);
 
         if(notif.hasErrors()) {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        boolean flag = this.acaoDAO.delete(acao);
+        boolean flag = this.rendaFixaDAO.update(rendaFixa);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
-        LogAtivo logAtivo = new LogAtivo(acao, LogAtivoEnum.REMOCAO);
+        LogAtivo logAtivo = new LogAtivo(rendaFixa, LogAtivoEnum.ALTERACAO);
         salvarHistoricoAtivoUseCase.salvarHistorico(logAtivo);
 
         return flag;

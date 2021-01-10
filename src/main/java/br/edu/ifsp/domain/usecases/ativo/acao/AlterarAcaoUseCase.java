@@ -8,16 +8,16 @@ import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
-public class ExcluirAcaoUseCase {
+public class AlterarAcaoUseCase {
     private AcaoDAO acaoDAO;
     private LogAtivoDAO logAtivoDAO;
 
-    public ExcluirAcaoUseCase(AcaoDAO acaoDAO, LogAtivoDAO logAtivoDAO) {
+    public AlterarAcaoUseCase(AcaoDAO acaoDAO, LogAtivoDAO logAtivoDAO) {
         this.acaoDAO = acaoDAO;
         this.logAtivoDAO = logAtivoDAO;
     }
 
-    public boolean delete(Acao acao) {
+    public boolean update(Acao acao) {
         Validator<Acao> validator = new AcaoInputValidator();
         Notification notif = validator.validate(acao);
 
@@ -25,12 +25,13 @@ public class ExcluirAcaoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        boolean flag = this.acaoDAO.delete(acao);
+        boolean flag = this.acaoDAO.update(acao);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
-        LogAtivo logAtivo = new LogAtivo(acao, LogAtivoEnum.REMOCAO);
+        LogAtivo logAtivo = new LogAtivo(acao, LogAtivoEnum.ALTERACAO);
         salvarHistoricoAtivoUseCase.salvarHistorico(logAtivo);
 
         return flag;
     }
+
 }
