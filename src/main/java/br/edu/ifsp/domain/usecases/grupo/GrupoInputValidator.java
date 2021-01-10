@@ -19,7 +19,7 @@ public class GrupoInputValidator extends Validator<Grupo> {
         }
 
         if(grupo.getId()<=0) {
-            notification.addError("Id cannot be <=0>");
+            notification.addError("Id cannot be <=0");
         }
 
         return notification;

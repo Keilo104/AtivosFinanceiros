@@ -54,7 +54,6 @@ public class InMemoryGrupoDAO implements GrupoDAO {
 
     @Override
     public boolean delete(Grupo grupo) {
-
         return deleteByKey(grupo.getId());
     }
 }

@@ -11,7 +11,7 @@ public class CadastroUseCase {
         this.usuarioDAO = usuarioDAO;
     }
 
-    public int cadastrar( Usuario usuario ) {
+    public boolean cadastrar( Usuario usuario ) {
         Validator<Usuario> validator = new UsuarioInputValidator();
         Notification notif = validator.validate( usuario );
 

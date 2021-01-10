@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Usuario implements Observer {
+    private String cpf;
     private String email;
     private String senha;
     private float lucro;
@@ -19,6 +20,12 @@ public class Usuario implements Observer {
 
     }
 
+    public Usuario(String cpf, String email, String senha) {
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public Usuario(String senha, String email) {
         this(senha, email, 0, 0);
     }
@@ -28,6 +35,14 @@ public class Usuario implements Observer {
         this.email = email;
         this.lucro = lucro;
         this.investido = investido;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
