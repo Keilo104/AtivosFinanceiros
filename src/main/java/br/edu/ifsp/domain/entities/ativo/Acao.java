@@ -21,6 +21,11 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
+    public void updateAPI() {
+
+        notifyObservers();
+    }
+
     public String getPais() {
         return pais;
     }

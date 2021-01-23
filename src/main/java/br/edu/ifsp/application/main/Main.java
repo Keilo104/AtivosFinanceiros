@@ -35,6 +35,13 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 public class Main {
@@ -143,7 +150,6 @@ public class Main {
     public static void main(String[] args) {
         configureInjection();
 
-
         Usuario user = new Usuario("154.796.276-35", "email.muitolegal@gmail.com", "12345");
 
         String cpf = cadastroUseCase.cadastrar(user);
@@ -162,6 +168,15 @@ public class Main {
             //criarGrupoUseCase.include(logado, grupo2);
             //System.out.println(criarGrupoUseCase.include(logado, grupo));
 
+            try {
+                URLConnection connection = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=VPG6K3O2QHXZEWPG").openConnection();
+                //Get Response
+                InputStream is = connection.getInputStream();
+                System.out.println();
+
+            } catch (IOException exception) {
+                System.out.println("coé");
+            }
             Ativo ativoLegal = new Acao(10, 5, "USA", "tecnologia");
             incluirAcaoUseCase.include((Acao) ativoLegal);
 
