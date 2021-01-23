@@ -8,11 +8,11 @@ import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
-public class AlterarRendaFixaUserCase {
+public class AlterarRendaFixaUseCase {
     private RendaFixaDAO rendaFixaDAO;
     private LogAtivoDAO logAtivoDAO;
 
-    public AlterarRendaFixaUserCase(RendaFixaDAO rendaFixaDAO, LogAtivoDAO logAtivoDAO) {
+    public AlterarRendaFixaUseCase(RendaFixaDAO rendaFixaDAO, LogAtivoDAO logAtivoDAO) {
         this.rendaFixaDAO = rendaFixaDAO;
         this.logAtivoDAO = logAtivoDAO;
     }

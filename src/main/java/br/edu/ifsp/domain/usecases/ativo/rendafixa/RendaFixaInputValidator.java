@@ -14,21 +14,24 @@ public class RendaFixaInputValidator extends Validator<RendaFixa> {
             return notification;
         }
 
-        if (rendaFixa.getData() == null) {
+        if (rendaFixa.getDataComprado() == null) {
             notification.addError("Data cannot be null");
         }
-        if (rendaFixa.getValor() <= 0) {
-            notification.addError("Valor cannot be 0 or negative");
+        if (rendaFixa.getValorTotalComprado() <= 0) {
+            notification.addError("Valor Comprado cannot be 0 or negative");
+        }
+        if (rendaFixa.getValorUnitarioAtual() <= 0) {
+            notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (rendaFixa.getQuantidade() <= 0) {
             notification.addError("Quantidade cannot be 0 or negative");
         }
-        if (nullOrEmpty(rendaFixa.getGarantia())) {
-            notification.addError("Garantia cannot be empty");
-        }
-        if (nullOrEmpty(rendaFixa.getTributacao())) {
-            notification.addError("Tributacao cannot be empty");
-        }
+        //if (nullOrEmpty(rendaFixa.getGarantia())) {
+        //    notification.addError("Garantia cannot be empty");
+        //}
+        //if (nullOrEmpty(rendaFixa.getTributacao())) {
+        //    notification.addError("Tributacao cannot be empty");
+        //}
 
         return notification;
     }

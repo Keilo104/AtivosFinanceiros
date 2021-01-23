@@ -11,7 +11,7 @@ public class CadastroUseCase {
         this.usuarioDAO = usuarioDAO;
     }
 
-    public int cadastrar( Usuario usuario ) {
+    public String cadastrar( Usuario usuario ) {
         Validator<Usuario> validator = new UsuarioInputValidator();
         Notification notif = validator.validate( usuario );
 
@@ -19,6 +19,6 @@ public class CadastroUseCase {
             throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        return this.usuarioDAO.checkLogin( usuario );
+        return this.usuarioDAO.create( usuario );
     }
 }

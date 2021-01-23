@@ -3,45 +3,42 @@ package br.edu.ifsp.domain.entities.ativo;
 import java.time.LocalDate;
 
 public class RendaFixa extends Ativo{
-    private String tributacao;
-    private String garantia;
+    private String rendimento;
+    private LocalDate dataVencimento;
 
     public RendaFixa() {
     }
 
-    public RendaFixa(float valor, int quantidade, String tributacao, String garantia) {
+    public RendaFixa(float valor, int quantidade, String rendimento) {
         super(valor, quantidade);
-        this.tributacao = tributacao;
-        this.garantia = garantia;
+        this.rendimento = rendimento;
     }
 
-    public RendaFixa(int id, float valor, LocalDate data, int quantidade, String tributacao, String garantia) {
-        super(id, valor, data, quantidade);
-        this.tributacao = tributacao;
-        this.garantia = garantia;
+    public RendaFixa(float valor, int quantidade, String rendimento, LocalDate dataVencimento) {
+        super(valor, quantidade);
+        this.rendimento = rendimento;
+        this.dataVencimento = dataVencimento;
     }
 
-    public String getTributacao() {
-        return tributacao;
+    public RendaFixa(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String rendimento, LocalDate dataVencimento) {
+        super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
+        this.rendimento = rendimento;
+        this.dataVencimento = dataVencimento;
     }
 
-    public void setTributacao(String tributacao) {
-        this.tributacao = tributacao;
+    public String getRendimento() {
+        return rendimento;
     }
 
-    public String getGarantia() {
-        return garantia;
-    }
-
-    public void setGarantia(String garantia) {
-        this.garantia = garantia;
+    public LocalDate getDataVencimento() {
+        return dataVencimento;
     }
 
     @Override
     public String toString() {
         return "RendaFixa{" +
-                "tributacao='" + tributacao + '\'' +
-                ", garantia='" + garantia + '\'' +
+                "rendimento='" + rendimento + '\'' +
+                ", dataVencimento=" + dataVencimento +
                 "} " + super.toString();
     }
 }

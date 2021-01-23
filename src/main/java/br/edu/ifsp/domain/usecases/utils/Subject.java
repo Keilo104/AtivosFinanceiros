@@ -1,6 +1,9 @@
 package br.edu.ifsp.domain.usecases.utils;
 
+import br.edu.ifsp.domain.entities.usuario.Usuario;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Subject {
@@ -26,5 +29,9 @@ public class Subject {
 
     public void clearObservers() {
         this.observerList.clear();
+    }
+
+    public Iterator<Observer> getObserverIterator() {
+        return this.observerList.iterator();
     }
 }

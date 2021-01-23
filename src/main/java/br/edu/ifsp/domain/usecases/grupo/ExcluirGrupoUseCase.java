@@ -19,19 +19,24 @@ public class ExcluirGrupoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        boolean flag = this.grupoDAO.delete(grupo);
-        return flag;
+        if(grupo.isEmpty()) {
+            grupo.deleteFromObservers();
+            return this.grupoDAO.delete(grupo);
+        } else {
+            throw new IllegalArgumentException("Grupo is not empty");
+        }
+
     }
 
-    public boolean deleteByKey(String nome){
+    public boolean deleteByKey(Integer id){
         Validator<Grupo> validator = new GrupoInputValidator();
-        Notification notif = ((GrupoInputValidator) validator).validateNome(nome);
+        Notification notif = ((GrupoInputValidator) validator).validateId(id);
 
         if(notif.hasErrors()) {
             throw new IllegalArgumentException(notif.errorMessage());
         }
-        boolean flag = this.grupoDAO.deleteByKey(nome);
-        return flag;
+
+        return this.grupoDAO.deleteByKey(id);
     }
 
 }
