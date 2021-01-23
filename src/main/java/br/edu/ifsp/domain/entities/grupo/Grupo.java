@@ -2,32 +2,47 @@ package br.edu.ifsp.domain.entities.grupo;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Grupo extends Subject implements Observer {
     private int id;
     private String nome;
-    private float total;
 
-    private List<Ativo> listaAtivos;
-    private List<LogTransacaoAtivo> historico;
+    private float totalLucrado;
+    private float totalInvestido;
+
+    private float lucroPotencial;
+    private float valorAtual;
+    private float investimentoAtual;
+
+    private GrupoEnum tipoGrupo;
+
+    private List<Ativo> listaAtivos = new ArrayList<>();
+    private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
     public Grupo() {
     }
 
-    public Grupo(String nome, float total) {
+    public Grupo(String nome, GrupoEnum tipoGrupo) {
         this.nome = nome;
-        this.total = total;
+        this.tipoGrupo = tipoGrupo;
     }
 
-    public Grupo(int id, String nome, float total) {
+    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, GrupoEnum tipoGrupo) {
         this.id = id;
         this.nome = nome;
-        this.total = total;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+        this.tipoGrupo = tipoGrupo;
     }
 
     public int getId() {
@@ -46,32 +61,121 @@ public class Grupo extends Subject implements Observer {
         this.nome = nome;
     }
 
-    public float getTotal() {
-        return total;
+    public float getTotalLucrado() {
+        return totalLucrado;
     }
 
-    public void setTotal(float total) {
-        this.total = total;
+    public float getTotalInvestido() {
+        return totalInvestido;
+    }
+
+    public float getLucroPotencial() {
+        return lucroPotencial;
+    }
+
+    public float getValorAtual() {
+        return valorAtual;
+    }
+
+    public float getInvestimentoAtual() {
+        return investimentoAtual;
+    }
+
+    public void deleteFromObservers() {
+        Iterator<Observer> iterator = this.getObserverIterator();
+        while(iterator.hasNext()) {
+            Observer u = iterator.next();
+            if( u instanceof Usuario)
+                ((Usuario) u).removeGrupo(this);
+        }
+    }
+
+    public void addLog(LogTransacaoAtivo logTransacaoAtivo) {
+        this.historico.add(logTransacaoAtivo);
+    }
+
+    public Iterator<LogTransacaoAtivo> getHistoricIterator() {
+        return this.historico.iterator();
     }
 
     public void addAtivo(Ativo ativo) {
-        this.listaAtivos.add(ativo);
+        if(ativo.getClass().getName().equals(this.tipoGrupo.getNomeClasse())) {
+            addInvestimento(ativo.getValorTotalAtual());
+            ativo.addObserver(this);
+
+            this.listaAtivos.add(ativo);
+            this.updateValorAtual();
+        } else {
+            throw new InvalidTipoAtivoException("Cannot add ativo from different type of grupo.");
+        }
+    }
+
+    public void removeAtivo(int idx) {
+        this.removeAtivo(listaAtivos.get(idx));
     }
 
     public void removeAtivo(Ativo ativo) {
-        this.listaAtivos.remove(ativo);
-    }
+        if(!this.listaAtivos.remove(ativo)) {
+            throw new IllegalArgumentException("Cannot sell ativo thats not added");
+        }
 
-    public void removeGrupo(int idx) {
-        this.listaAtivos.remove(idx);
+        removeInvestimentoAtual(ativo.getValorTotalComprado());
+        addLucroTotalHistorico(ativo.getValorTotalAtual() - ativo.getValorTotalComprado());
+
+        this.updateValorAtual();
     }
 
     public Iterator<Ativo> getIteratorAtivos() {
         return this.listaAtivos.iterator();
     }
 
+    private void updateLucroPotencial() {
+        this.lucroPotencial = this.valorAtual - this.investimentoAtual;
+    }
+
+    private void updateValorAtual() {
+        this.valorAtual = 0;
+
+        for (Ativo a : listaAtivos) {
+            this.valorAtual += a.getValorTotalAtual();
+        }
+
+        updateLucroPotencial();
+        notifyObservers();
+    }
+
+    private void addLucroTotalHistorico(float lucro) {
+        this.totalLucrado += lucro;
+    }
+
+    private void addInvestimento(float investimento) {
+        this.investimentoAtual += investimento;
+        this.totalInvestido += investimento;
+    }
+
+    private void removeInvestimentoAtual(float investimento) {
+        this.investimentoAtual -= investimento;
+    }
+
+    public boolean isEmpty() {
+        return this.listaAtivos.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", totalLucrado=" + totalLucrado +
+                ", totalInvestido=" + totalInvestido +
+                ", lucroPotencial=" + lucroPotencial +
+                ", valorAtual=" + valorAtual +
+                ", investimentoAtual=" + investimentoAtual +
+                "} " + super.toString();
+    }
+
     @Override
     public void update(Subject o) {
-
+        this.updateValorAtual();
     }
 }

@@ -6,7 +6,7 @@ public abstract class Validator<T> {
     public abstract Notification validate(T type);
 
     public static boolean nullOrEmpty(String string) {
-        return string == null || string.isEmpty();
+        return string == null || string.isEmpty() || string.isBlank();
     }
 
     public static boolean nullOrEmpty(Collection collection) {

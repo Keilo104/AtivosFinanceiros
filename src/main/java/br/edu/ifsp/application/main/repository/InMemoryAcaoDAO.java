@@ -6,10 +6,16 @@ import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class InMemoryAcaoDAO implements AcaoDAO {
-    private static final Map<Integer, Acao> db = new LinkedHashMap<>();
+    private static Map<Integer, Ativo> db;
     private static int idCounter;
+
+    public InMemoryAcaoDAO(Map<Integer, Ativo> db) {
+        InMemoryAcaoDAO.db = db;
+    }
 
     @Override
     public Integer create(Acao acao) {
@@ -22,14 +28,21 @@ public class InMemoryAcaoDAO implements AcaoDAO {
     @Override
     public Optional<Acao> findOne(Integer key) {
         if(db.containsKey(key)){
-            return Optional.of(db.get(key));
+            return Optional.of((Acao) db.get(key));
         }
         return Optional.empty();
     }
 
     @Override
     public List<Acao> findAll() {
-        return new ArrayList<>(db.values());
+        ArrayList<Acao> acaoList = new ArrayList<>();
+
+        for (Ativo a : db.values()) {
+            if(a instanceof Acao)
+                acaoList.add((Acao) a);
+        }
+
+        return acaoList;
     }
 
     @Override
@@ -37,6 +50,7 @@ public class InMemoryAcaoDAO implements AcaoDAO {
         Integer id = acao.getId();
         if(db.containsKey(id)) {
             db.replace(id, acao);
+
             return true;
         }
         return false;

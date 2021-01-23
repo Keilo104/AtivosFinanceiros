@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.main.repository;
 
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
@@ -7,8 +8,12 @@ import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
 import java.util.*;
 
 public class InMemoryRendaFixaDAO implements RendaFixaDAO {
-    private static final Map<Integer, RendaFixa> db = new LinkedHashMap<>();
+    private static Map<Integer, Ativo> db;
     private static int idCounter;
+
+    public InMemoryRendaFixaDAO(Map<Integer, Ativo> db) {
+        InMemoryRendaFixaDAO.db = db;
+    }
 
     @Override
     public Integer create(RendaFixa rendaFixa) {
@@ -21,14 +26,21 @@ public class InMemoryRendaFixaDAO implements RendaFixaDAO {
     @Override
     public Optional<RendaFixa> findOne(Integer key) {
         if(db.containsKey(key)){
-            return Optional.of(db.get(key));
+            return Optional.of((RendaFixa) db.get(key));
         }
         return Optional.empty();
     }
 
     @Override
     public List<RendaFixa> findAll() {
-        return new ArrayList<>(db.values());
+        ArrayList<RendaFixa> rendaFixaList = new ArrayList<>();
+
+        for (Ativo a : db.values()) {
+            if(a instanceof RendaFixa)
+                rendaFixaList.add((RendaFixa) a);
+        }
+
+        return rendaFixaList;
     }
 
     @Override

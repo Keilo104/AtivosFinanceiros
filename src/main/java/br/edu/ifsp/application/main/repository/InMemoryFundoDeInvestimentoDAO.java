@@ -1,14 +1,19 @@
 package br.edu.ifsp.application.main.repository;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.FundoDeInvestimentoDAO;
 
 import java.util.*;
 
 public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
-    private static final Map<Integer, FundoDeInvestimento> db = new LinkedHashMap<>();
+    private static Map<Integer, Ativo> db;
     private static int idCounter;
+
+    public InMemoryFundoDeInvestimentoDAO(Map<Integer, Ativo> db) {
+        InMemoryFundoDeInvestimentoDAO.db = db;
+    }
 
     @Override
     public Integer create(FundoDeInvestimento fundoDeInvestimento) {
@@ -21,14 +26,21 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     @Override
     public Optional<FundoDeInvestimento> findOne(Integer key) {
         if(db.containsKey(key)){
-            return Optional.of(db.get(key));
+            return Optional.of((FundoDeInvestimento) db.get(key));
         }
         return Optional.empty();
     }
 
     @Override
     public List<FundoDeInvestimento> findAll() {
-        return new ArrayList<>(db.values());
+        ArrayList<FundoDeInvestimento> fundoDeInvestimentoList = new ArrayList<>();
+
+        for (Ativo a : db.values()) {
+            if(a instanceof FundoDeInvestimento)
+                fundoDeInvestimentoList.add((FundoDeInvestimento) a);
+        }
+
+        return fundoDeInvestimentoList;
     }
 
     @Override
@@ -36,6 +48,7 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
         Integer id = fundoDeInvestimento.getId();
         if(db.containsKey(id)) {
             db.replace(id, fundoDeInvestimento);
+
             return true;
         }
         return false;
