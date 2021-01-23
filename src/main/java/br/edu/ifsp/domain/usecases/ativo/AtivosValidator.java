@@ -18,10 +18,10 @@ public class AtivosValidator extends Validator<Ativo> {
         if ( ativo.getQuantidade() <= 0  ) {
             notification.addError( "Quantidade cannot be 0 or negative" );
         }
-        if (ativo.getValorComprado() <= 0) {
+        if (ativo.getValorTotalComprado() <= 0) {
             notification.addError("Valor Comprado cannot be 0 or negative");
         }
-        if (ativo.getValorAtual() <= 0) {
+        if (ativo.getValorUnitarioAtual() <= 0) {
             notification.addError("Valor Atual cannot be 0 or negative");
         }
 

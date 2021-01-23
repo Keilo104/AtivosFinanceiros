@@ -14,13 +14,13 @@ public class FundoDeInvestimentoInputValidator extends Validator<FundoDeInvestim
             return notification;
         }
 
-        if (fundoDeInvestimento.getData() == null) {
+        if (fundoDeInvestimento.getDataComprado() == null) {
             notification.addError("Data cannot be null");
         }
-        if (fundoDeInvestimento.getValorComprado() <= 0) {
+        if (fundoDeInvestimento.getValorTotalComprado() <= 0) {
             notification.addError("Valor Comprado cannot be 0 or negative");
         }
-        if (fundoDeInvestimento.getValorAtual() <= 0) {
+        if (fundoDeInvestimento.getValorUnitarioAtual() <= 0) {
             notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (fundoDeInvestimento.getQuantidade() <= 0) {

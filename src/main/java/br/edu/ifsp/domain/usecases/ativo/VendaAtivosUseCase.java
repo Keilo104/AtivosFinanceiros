@@ -41,7 +41,7 @@ public class VendaAtivosUseCase {
             boolean flag = grupoDAO.update(grupo);
 
             SalvarHistoricoTransacaoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
-            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.VENDA, ativo.getValorAtual(), ativo.getQuantidade());
+            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.VENDA, ativo.getValorUnitarioAtual(), ativo.getQuantidade());
             salvarHistoricoAtivoUseCase.salvarHistorico(grupo, logTransacaoAtivo);
 
             return flag;

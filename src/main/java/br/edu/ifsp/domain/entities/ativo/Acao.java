@@ -3,22 +3,22 @@ package br.edu.ifsp.domain.entities.ativo;
 import java.time.LocalDate;
 
 public class Acao extends Ativo {
+    private String codigo;
     private String pais;
-    private String categoria;
 
     public Acao() {
     }
 
-    public Acao(float valor, int quantidade, String pais, String categoria) {
+    public Acao(float valor, int quantidade, String codigo, String pais) {
         super(valor, quantidade);
+        this.codigo = codigo;
         this.pais = pais;
-        this.categoria = categoria;
     }
 
-    public Acao(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade, String pais, String categoria) {
-        super(id, valorAtual, valorComprado, data, quantidade);
+    public Acao(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String codigo, String pais) {
+        super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
+        this.codigo = codigo;
         this.pais = pais;
-        this.categoria = categoria;
     }
 
     public String getPais() {
@@ -29,19 +29,19 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     @Override
     public String toString() {
         return "Acao{" +
                 "pais='" + pais + '\'' +
-                ", categoria='" + categoria + '\'' +
+                ", categoria='" + codigo + '\'' +
                 "} " + super.toString();
     }
 }

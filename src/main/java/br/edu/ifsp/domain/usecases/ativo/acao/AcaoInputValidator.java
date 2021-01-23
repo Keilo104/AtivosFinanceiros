@@ -14,19 +14,19 @@ public class AcaoInputValidator extends Validator<Acao> {
             return notification;
         }
 
-        if (acao.getData() == null) {
+        if (acao.getDataComprado() == null) {
             notification.addError("Data cannot be null");
         }
-        if (acao.getValorComprado() <= 0) {
+        if (acao.getValorTotalComprado() <= 0) {
             notification.addError("Valor Comprado cannot be 0 or negative");
         }
-        if (acao.getValorAtual() <= 0) {
+        if (acao.getValorUnitarioAtual() <= 0) {
             notification.addError("Valor Atual cannot be 0 or negative");
         }
         if (acao.getQuantidade() <= 0) {
             notification.addError("Quantidade cannot be 0 or negative");
         }
-        if (nullOrEmpty(acao.getCategoria())) {
+        if (nullOrEmpty(acao.getCodigo())) {
             notification.addError("Categoria cannot be empty");
         }
         if (nullOrEmpty(acao.getPais())) {

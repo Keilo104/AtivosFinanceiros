@@ -3,7 +3,9 @@ package br.edu.ifsp.application.main;
 import br.edu.ifsp.application.main.repository.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.grupo.GrupoEnum;
 import br.edu.ifsp.domain.entities.relatorio.CategoriaEnum;
 import br.edu.ifsp.domain.entities.relatorio.Relatorio;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
@@ -27,9 +29,7 @@ import br.edu.ifsp.domain.usecases.grupo.CriarGrupoUseCase;
 import br.edu.ifsp.domain.usecases.grupo.ExcluirGrupoUseCase;
 import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
-import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
-import br.edu.ifsp.domain.usecases.log.logtransacao.SalvarHistoricoTransacaoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
@@ -78,6 +78,12 @@ public class Main {
     private static RecuperarSenhaUseCase recuperarSenhaUseCase;
 
     private static Map<Integer, Ativo> ativoDB;
+
+    private static void printCarteira(Iterator<Grupo> carteira) {
+        while (carteira.hasNext()) {
+            System.out.println(carteira.next());
+        }
+    }
 
     private static void configureInjection(){
         //DAOs
@@ -134,14 +140,9 @@ public class Main {
         recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO, tokenDAO);
     }
 
-    private static void printCarteira(Iterator<Grupo> carteira) {
-        while (carteira.hasNext()) {
-            System.out.println(carteira.next());
-        }
-    }
-
     public static void main(String[] args) {
         configureInjection();
+
 
         Usuario user = new Usuario("154.796.276-35", "email.muitolegal@gmail.com", "12345");
 
@@ -155,7 +156,7 @@ public class Main {
             //System.out.println(logado);
             System.out.println("Logado!");
 
-            Grupo grupo = new Grupo("grupo muito legal");
+            Grupo grupo = new Grupo("grupo muito legal", GrupoEnum.ACAO);
             //Grupo grupo2 = new Grupo("grupo ainda mais legal");
             criarGrupoUseCase.include(logado, grupo);
             //criarGrupoUseCase.include(logado, grupo2);
@@ -164,6 +165,9 @@ public class Main {
             Ativo ativoLegal = new Acao(10, 5, "USA", "tecnologia");
             incluirAcaoUseCase.include((Acao) ativoLegal);
 
+            Ativo ativoIlegal = new RendaFixa(50, 7, "20%");
+            incluirRendaFixaUseCase.include((RendaFixa) ativoIlegal);
+
             Ativo ativoLegal2 = new Acao(20, 10, "JPY", "tecnologia2");
             incluirAcaoUseCase.include((Acao) ativoLegal2);
 
@@ -171,8 +175,9 @@ public class Main {
             incluirAcaoUseCase.include((Acao) ativoLegal3);
 
             compraAtivosUseCase.compraAtivo(grupo, ativoLegal);
+            compraAtivosUseCase.compraAtivo(grupo, ativoIlegal);
 
-            ativoLegal.setValorAtual(20);
+            ativoLegal.setValorUnitarioAtual(20);
             alterarAcaoUseCase.update((Acao) ativoLegal);
 
             //printCarteira(logado.getIteratorCarteira());

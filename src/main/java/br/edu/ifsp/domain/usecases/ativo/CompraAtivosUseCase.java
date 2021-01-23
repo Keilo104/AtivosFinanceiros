@@ -2,13 +2,10 @@ package br.edu.ifsp.domain.usecases.ativo;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.entities.log.LogAtivo;
-import br.edu.ifsp.domain.entities.log.LogAtivoEnum;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivoEnum;
 import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 import br.edu.ifsp.domain.usecases.grupo.GrupoInputValidator;
-import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
 import br.edu.ifsp.domain.usecases.log.logtransacao.SalvarHistoricoTransacaoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
@@ -44,7 +41,7 @@ public class CompraAtivosUseCase {
             boolean flag = grupoDAO.update(grupo);
 
             SalvarHistoricoTransacaoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
-            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.COMPRA, ativo.getValorAtual(), ativo.getQuantidade());
+            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.COMPRA, ativo.getValorUnitarioAtual(), ativo.getQuantidade());
             salvarHistoricoAtivoUseCase.salvarHistorico(grupo, logTransacaoAtivo);
 
             return flag;

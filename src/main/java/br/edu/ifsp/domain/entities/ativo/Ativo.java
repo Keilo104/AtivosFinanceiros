@@ -5,28 +5,30 @@ import br.edu.ifsp.domain.usecases.utils.Subject;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Ativo extends Subject {
+public abstract class Ativo extends Subject {
     private int id;
 
-    private float valorAtual;
-    private float valorComprado;
+    private float valorUnitarioAtual;
+    private float valorUnitarioComprado;
+    private float valorTotalVendido;
 
-    private LocalDate data;
+    private LocalDate dataComprado;
     private int quantidade;
 
     public Ativo() {
-        this.data = LocalDate.now();
+        this.dataComprado = LocalDate.now();
     }
 
     public Ativo(float valor, int quantidade) {
-        this(0, valor, valor, LocalDate.now(), quantidade);
+        this(0, valor, valor, 0, LocalDate.now(), quantidade);
     }
 
-    public Ativo(int id, float valorAtual, float valorComprado, LocalDate data, int quantidade) {
+    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade) {
         this.id = id;
-        this.valorAtual = valorAtual;
-        this.valorComprado = valorComprado;
-        this.data = data;
+        this.valorUnitarioAtual = valorUnitarioAtual;
+        this.valorUnitarioComprado = valorUnitarioComprado;
+        this.valorTotalVendido = valorTotalVendido;
+        this.dataComprado = dataComprado;
         this.quantidade = quantidade;
     }
 
@@ -39,28 +41,32 @@ public class Ativo extends Subject {
     }
 
     public float getValorTotalAtual() {
-        return this.valorAtual * this.quantidade;
+        return this.valorUnitarioAtual * this.quantidade;
     }
 
     public float getValorTotalComprado() {
-        return this.valorComprado * this.quantidade;
+        return this.valorUnitarioComprado * this.quantidade;
     }
 
-    public float getValorAtual() {
-        return valorAtual;
+    public float getValorUnitarioComprado() {
+        return this.valorUnitarioComprado;
     }
 
-    public void setValorAtual(float valorAtual) {
-        this.valorAtual = valorAtual;
+    public float getValorTotalVendido() {
+        return this.valorTotalVendido;
+    }
+
+    public float getValorUnitarioAtual() {
+        return valorUnitarioAtual;
+    }
+
+    public void setValorUnitarioAtual(float valorUnitarioAtual) {
+        this.valorUnitarioAtual = valorUnitarioAtual;
         notifyObservers();
     }
 
-    public float getValorComprado() {
-        return valorComprado;
-    }
-
-    public LocalDate getData() {
-        return data;
+    public LocalDate getDataComprado() {
+        return dataComprado;
     }
 
     public int getQuantidade() {
@@ -89,9 +95,10 @@ public class Ativo extends Subject {
     public String toString() {
         return "Ativo{" +
                 "id=" + id +
-                ", valorAtual=" + valorAtual +
-                ", valorComprado=" + valorComprado +
-                ", data=" + data +
+                ", valorUnitarioAtual=" + valorUnitarioAtual +
+                ", valorUnitarioComprado=" + valorUnitarioComprado +
+                ", valorTotalVendido=" + valorTotalVendido +
+                ", dataComprado=" + dataComprado +
                 ", quantidade=" + quantidade +
                 "} " + super.toString();
     }

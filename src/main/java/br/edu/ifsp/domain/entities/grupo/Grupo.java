@@ -21,21 +21,28 @@ public class Grupo extends Subject implements Observer {
     private float valorAtual;
     private float investimentoAtual;
 
+    private GrupoEnum tipoGrupo;
+
     private List<Ativo> listaAtivos = new ArrayList<>();
     private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
     public Grupo() {
     }
 
-    public Grupo(String nome) {
+    public Grupo(String nome, GrupoEnum tipoGrupo) {
         this.nome = nome;
+        this.tipoGrupo = tipoGrupo;
     }
 
-    public Grupo(int id, String nome, float totalLucrado, float totalInvestido) {
+    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, GrupoEnum tipoGrupo) {
         this.id = id;
         this.nome = nome;
         this.totalLucrado = totalLucrado;
         this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+        this.tipoGrupo = tipoGrupo;
     }
 
     public int getId() {
@@ -92,11 +99,15 @@ public class Grupo extends Subject implements Observer {
     }
 
     public void addAtivo(Ativo ativo) {
-        addInvestimento(ativo.getValorTotalAtual());
-        ativo.addObserver(this);
+        if(ativo.getClass().getName().equals(this.tipoGrupo.getNomeClasse())) {
+            addInvestimento(ativo.getValorTotalAtual());
+            ativo.addObserver(this);
 
-        this.listaAtivos.add(ativo);
-        this.updateValorAtual();
+            this.listaAtivos.add(ativo);
+            this.updateValorAtual();
+        } else {
+            throw new InvalidTipoAtivoException("Cannot add ativo from different type of grupo.");
+        }
     }
 
     public void removeAtivo(int idx) {
