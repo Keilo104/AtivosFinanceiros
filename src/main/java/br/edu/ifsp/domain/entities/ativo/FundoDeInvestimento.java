@@ -6,26 +6,26 @@ public class FundoDeInvestimento extends Ativo{
     private String nome;
     private String rentabilidade;
     private String liquidez;
-    private float taxa_administrativa;
+    private float taxaAdministrativa;
 
     public FundoDeInvestimento() {
         super();
     }
 
-    public FundoDeInvestimento(float valor, int quantidade, String nome, String rentabilidade, String liquidez, float taxa_administrativa) {
+    public FundoDeInvestimento(float valor, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
         super(valor, quantidade);
         this.nome = nome;
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
-        this.taxa_administrativa = taxa_administrativa;
+        this.taxaAdministrativa = taxaAdministrativa;
     }
 
-    public FundoDeInvestimento(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxa_administrativa) {
+    public FundoDeInvestimento(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
         super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
         this.nome = nome;
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
-        this.taxa_administrativa = taxa_administrativa;
+        this.taxaAdministrativa = taxaAdministrativa;
     }
 
     public String getRentabilidade() {
@@ -52,12 +52,12 @@ public class FundoDeInvestimento extends Ativo{
         this.nome = nome;
     }
 
-    public float getTaxa_administrativa() {
-        return taxa_administrativa;
+    public float getTaxaAdministrativa() {
+        return taxaAdministrativa;
     }
 
-    public void setTaxa_administrativa(float taxa_administrativa) {
-        this.taxa_administrativa = taxa_administrativa;
+    public void setTaxaAdministrativa(float taxaAdministrativa) {
+        this.taxaAdministrativa = taxaAdministrativa;
         notifyObservers();
     }
 
@@ -67,7 +67,7 @@ public class FundoDeInvestimento extends Ativo{
                 "nome='" + nome + '\'' +
                 ", rentabilidade='" + rentabilidade + '\'' +
                 ", liquidez='" + liquidez + '\'' +
-                ", taxa_administrativa=" + taxa_administrativa +
+                ", taxa_administrativa=" + taxaAdministrativa +
                 "} " + super.toString();
     }
 }

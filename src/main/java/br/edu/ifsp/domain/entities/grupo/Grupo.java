@@ -81,6 +81,10 @@ public class Grupo extends Subject implements Observer {
         return investimentoAtual;
     }
 
+    public GrupoEnum getTipoGrupo() {
+        return tipoGrupo;
+    }
+
     public void deleteFromObservers() {
         Iterator<Observer> iterator = this.getObserverIterator();
         while(iterator.hasNext()) {

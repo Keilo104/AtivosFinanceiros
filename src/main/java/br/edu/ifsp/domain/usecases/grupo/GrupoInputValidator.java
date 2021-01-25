@@ -14,8 +14,11 @@ public class GrupoInputValidator extends Validator<Grupo> {
             return notification;
         }
 
-        if(nullOrEmpty(grupo.getNome())) {
+        if(nullOrEmptyOrBlank(grupo.getNome())) {
             notification.addError("Nome cannot be null");
+        }
+        if(grupo.getTipoGrupo() == null) {
+            notification.addError("Grupo needs a tipo");
         }
 
         return notification;
