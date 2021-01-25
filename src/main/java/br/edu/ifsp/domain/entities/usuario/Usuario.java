@@ -1,6 +1,8 @@
 package br.edu.ifsp.domain.entities.usuario;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.log.Log;
+import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
@@ -21,6 +23,7 @@ public class Usuario implements Observer {
     private float investimentoAtual;
 
     private List<Grupo> carteira = new ArrayList<>();
+    private List<LogGrupo> historico = new ArrayList<>();
 
     public Usuario() {
     }
@@ -98,6 +101,14 @@ public class Usuario implements Observer {
 
     public Iterator<Grupo> getIteratorCarteira() {
         return this.carteira.iterator();
+    }
+
+    public void addLog(LogGrupo logGrupo) {
+        this.historico.add(logGrupo);
+    }
+
+    public Iterator<LogGrupo> getIteratorHistorico() {
+        return this.historico.iterator();
     }
 
     private void updateLucroTotalHistorico() {

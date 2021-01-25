@@ -1,15 +1,23 @@
 package br.edu.ifsp.domain.usecases.grupo;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
+import br.edu.ifsp.domain.usecases.log.loggrupo.SalvarHistoricoGrupoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class CriarGrupoUseCase {
     private GrupoDAO grupoDAO;
+    private LogGrupoDAO logGrupoDAO;
 
-    public CriarGrupoUseCase(GrupoDAO grupoDAO) {
+    public CriarGrupoUseCase(GrupoDAO grupoDAO, LogGrupoDAO logGrupoDAO) {
         this.grupoDAO = grupoDAO;
+        this.logGrupoDAO = logGrupoDAO;
+    }
+
+    public CriarGrupoUseCase() {
     }
 
     public int include(Usuario usuario, Grupo grupo){
@@ -24,6 +32,10 @@ public class CriarGrupoUseCase {
 
         if(id != 0) {
             usuario.addGrupo(grupo);
+
+            SalvarHistoricoGrupoUseCase salvarHistoricoGrupoUseCase = new SalvarHistoricoGrupoUseCase(logGrupoDAO);
+            LogGrupo logGrupo = new LogGrupo(grupo, 0, 0);
+            salvarHistoricoGrupoUseCase.salvarHistorico(usuario, logGrupo);
 
             return id;
         }
