@@ -1,4 +1,4 @@
-package br.edu.ifsp.domain.ui.login;
+package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
