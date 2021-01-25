@@ -31,7 +31,7 @@ public class VendaAtivosUseCase {
     public VendaAtivosUseCase() {
     }
 
-    public boolean vendaAtivo(Usuario usuario, Grupo grupo, Ativo ativo) {
+    public boolean vendaAtivo(Usuario usuario, Grupo grupo, Ativo ativo, int quantidade) {
         Validator<Ativo> validatorAtivo = new AtivosValidator();
         Validator<Grupo> validatorGrupo = new GrupoInputValidator();
 
@@ -44,7 +44,7 @@ public class VendaAtivosUseCase {
 
         if(ativosDAO.update(ativo)) {
             float lucroAnterior = grupo.getTotalLucrado();
-            grupo.removeAtivo(ativo);
+            ativo.vender(quantidade);
             boolean flag = grupoDAO.update(grupo);
             float lucroAtual = grupo.getTotalLucrado();
 
