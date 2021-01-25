@@ -35,6 +35,12 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -202,6 +208,32 @@ public class Main {
             //System.out.println(ativoDB);
 
             //printCarteira(logado.getIteratorCarteira());
+
+            try {
+                URL url = new URL( "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=VPG6K3O2QHXZEWPG" );
+                HttpURLConnection con = ( HttpURLConnection ) url.openConnection();
+                con.setRequestMethod( "GET" );
+                con.setRequestProperty( "Content-Type", "application/json; utf-8" );
+                con.setRequestProperty( "Accept", "application/json" );
+
+                try ( BufferedReader br = new BufferedReader(
+                        new InputStreamReader( con.getInputStream(), "utf-8" ) ) ) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine = null;
+                    List<String> lista = new ArrayList();
+
+                    while ( ( responseLine = br.readLine() ) != null ) {
+                        response.append( responseLine.trim() );
+                    }
+                    JSONObject jsonObj = new JSONObject( response.toString() );
+                    System.out.println( jsonObj );
+                    System.out.println( response.toString() );
+                    float price = Float.parseFloat( jsonObj.getJSONObject( "Global Quote" ).getString( "05. price" ) );
+                    System.out.println( "args = " + ( price + price ) );
+                }
+            } catch ( IOException | MalformedURLException | ProtocolException e ) {
+                System.out.println( e );
+            }
 
         } else {
             System.out.println( "Login falhou :(" );
