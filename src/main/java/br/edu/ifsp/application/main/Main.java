@@ -168,15 +168,6 @@ public class Main {
             //criarGrupoUseCase.include(logado, grupo2);
             //System.out.println(criarGrupoUseCase.include(logado, grupo));
 
-            try {
-                URLConnection connection = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=VPG6K3O2QHXZEWPG").openConnection();
-                //Get Response
-                InputStream is = connection.getInputStream();
-                System.out.println();
-
-            } catch (IOException exception) {
-                System.out.println("coé");
-            }
             Ativo ativoLegal = new Acao(10, 5, "USA", "tecnologia");
             incluirAcaoUseCase.include((Acao) ativoLegal);
 
