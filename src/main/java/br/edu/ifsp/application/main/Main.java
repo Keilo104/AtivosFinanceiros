@@ -181,8 +181,8 @@ public class Main {
             Ativo ativoLegal3 = new Acao( 4, 2, "BRL", "tecnologia3" );
             incluirAcaoUseCase.include( ( Acao ) ativoLegal3 );
 
-            compraAtivosUseCase.compraAtivo( grupo, ativoLegal );
-            compraAtivosUseCase.compraAtivo( grupo, ativoIlegal );
+            compraAtivosUseCase.compraAtivo(user, grupo, ativoLegal);
+            compraAtivosUseCase.compraAtivo(user, grupo, ativoIlegal);
 
             ativoLegal.setValorUnitarioAtual( 20 );
             alterarAcaoUseCase.update( ( Acao ) ativoLegal );
@@ -193,7 +193,7 @@ public class Main {
 
             //printCarteira(logado.getIteratorCarteira());
 
-            vendaAtivosUseCase.vendaAtivo( grupo, ativoLegal );
+            vendaAtivosUseCase.vendaAtivo(user, grupo, ativoLegal);
 
             //printCarteira(logado.getIteratorCarteira());
 

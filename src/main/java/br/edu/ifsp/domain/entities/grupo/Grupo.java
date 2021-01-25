@@ -181,5 +181,9 @@ public class Grupo extends Subject implements Observer {
     @Override
     public void update(Subject o) {
         this.updateValorAtual();
+
+        if(((Ativo) o).getQuantidade() == 0) {
+            this.removeAtivo((Ativo) o);
+        }
     }
 }
