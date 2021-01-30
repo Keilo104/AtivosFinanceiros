@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteLogTransacaoDAO implements LogTransacaoDAO {
+public class sqliteLogTransacaoDAO implements LogTransacaoDAO {//TODO
     @Override
     public Pair<LocalDate, Ativo> create(LogTransacaoAtivo type) {
         return null;

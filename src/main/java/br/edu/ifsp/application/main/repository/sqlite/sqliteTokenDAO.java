@@ -6,7 +6,7 @@ import br.edu.ifsp.domain.usecases.usuario.TokenDAO;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteTokenDAO implements TokenDAO {
+public class sqliteTokenDAO implements TokenDAO {//TODO
     @Override
     public Integer create(Token type) {
         return null;

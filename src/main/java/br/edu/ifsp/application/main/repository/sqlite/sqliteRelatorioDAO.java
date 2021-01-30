@@ -6,7 +6,7 @@ import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteRelatorioDAO implements RelatorioDAO {
+public class sqliteRelatorioDAO implements RelatorioDAO {//TODO
     @Override
     public Integer create(Relatorio type) {
         return null;

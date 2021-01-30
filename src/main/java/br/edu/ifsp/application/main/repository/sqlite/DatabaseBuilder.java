@@ -71,6 +71,7 @@ public class DatabaseBuilder {
         builder.append("idAtivo INTEGER PRIMARY KEY,\n");
         builder.append("nome TEXT,\n");
         builder.append("rentabilidade TEXT,\n");
+        builder.append("liquidez TEXT,\n");
         builder.append("taxaAdministrativa REAL,\n");
         builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id)");
         builder.append("); \n");
@@ -193,7 +194,7 @@ public class DatabaseBuilder {
 
     private String createRelatorioPeriodoTable(){
         StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE RELATORIO(");
+        builder.append("CREATE TABLE RELATORIO_PERIODO(");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
         builder.append("categoria TEXT,\n");
         builder.append("dataImpressao TEXT,\n");
