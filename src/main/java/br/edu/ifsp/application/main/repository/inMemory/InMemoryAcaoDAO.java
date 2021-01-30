@@ -1,13 +1,10 @@
-package br.edu.ifsp.application.main.repository;
+package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class InMemoryAcaoDAO implements AcaoDAO {
     private static Map<Integer, Ativo> db;

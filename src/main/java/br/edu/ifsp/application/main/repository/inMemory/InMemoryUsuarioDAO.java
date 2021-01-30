@@ -1,4 +1,4 @@
-package br.edu.ifsp.application.main.repository;
+package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
@@ -20,8 +20,12 @@ public class InMemoryUsuarioDAO implements UsuarioDAO{
 
     @Override
     public String create(Usuario usuario){
-        db.put(usuario.getCpf(), usuario);
-        return usuario.getCpf();
+        if(db.get(usuario.getCpf()) == null) {
+            db.put(usuario.getCpf(), usuario);
+            return usuario.getCpf();
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Grupo extends Subject implements Observer {
+    private String cpfUsuario;
     private int id;
     private String nome;
 
@@ -43,6 +44,29 @@ public class Grupo extends Subject implements Observer {
         this.valorAtual = valorAtual;
         this.investimentoAtual = investimentoAtual;
         this.tipoGrupo = tipoGrupo;
+    }
+
+    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, String tipoGrupo) {
+        this.id = id;
+        this.nome = nome;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+        this.tipoGrupo = GrupoEnum.getValueByString(tipoGrupo);
+    }
+
+    public Grupo(int id, String nome, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual, String tipoGrupo, String cpfUsuario) {
+        this.id = id;
+        this.nome = nome;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+        this.tipoGrupo = GrupoEnum.getValueByString(tipoGrupo);
+        this.cpfUsuario = cpfUsuario;
     }
 
     public int getId() {
@@ -83,6 +107,10 @@ public class Grupo extends Subject implements Observer {
 
     public GrupoEnum getTipoGrupo() {
         return tipoGrupo;
+    }
+
+    public String getTipoString() {
+        return tipoGrupo.getString();
     }
 
     public void deleteFromObservers() {
@@ -185,5 +213,9 @@ public class Grupo extends Subject implements Observer {
         if(((Ativo) o).getQuantidade() == 0) {
             this.removeAtivo((Ativo) o);
         }
+    }
+
+    public String getCpfUsuario() {
+        return cpfUsuario;
     }
 }

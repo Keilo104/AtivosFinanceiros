@@ -1,4 +1,4 @@
-package br.edu.ifsp.application.main.repository;
+package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
@@ -33,7 +33,6 @@ public class InMemoryGrupoDAO implements GrupoDAO {
         return Optional.empty();
     }
 
-    @Override
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
         for (Grupo g : db.values()) {
             Iterator<Ativo> ativoIterator = g.getIteratorAtivos();

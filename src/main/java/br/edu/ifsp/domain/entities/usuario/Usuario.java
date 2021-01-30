@@ -7,6 +7,7 @@ import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,6 +44,18 @@ public class Usuario implements Observer {
         this.senha = senha;
         this.totalLucrado = totalLucrado;
         this.totalInvestido = totalInvestido;
+    }
+
+    public Usuario(String cpf, String nome, String email, String senha, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
     }
 
     public String getCpf() {
@@ -96,6 +109,15 @@ public class Usuario implements Observer {
     public void addGrupo(Grupo grupo) {
         grupo.addObserver(this);
         this.carteira.add(grupo);
+        update();
+    }
+
+    public void addAllGrupo(Grupo ...grupos) {
+        for (Grupo g : grupos) {
+            g.addObserver(this);
+            this.carteira.add(g);
+            update();
+        }
     }
 
     public void removeGrupo(Grupo grupo) {
@@ -112,6 +134,10 @@ public class Usuario implements Observer {
 
     public void addLog(LogGrupo logGrupo) {
         this.historico.add(logGrupo);
+    }
+
+    public void addAllLog(LogGrupo ...logGrupos) {
+        this.historico.addAll(Arrays.asList(logGrupos));
     }
 
     public Iterator<LogGrupo> getIteratorHistorico() {
@@ -171,13 +197,17 @@ public class Usuario implements Observer {
                 '}';
     }
 
-    @Override
-    public void update(Subject o) {
+    public void update() {
         this.updateInvestimentoAtual();
         this.updateValorAtual();
         this.updateLucroPotencial();
 
         this.updateInvestimentoTotalHistorico();
         this.updateLucroTotalHistorico();
+    }
+
+    @Override
+    public void update(Subject o) {
+        update();
     }
 }
