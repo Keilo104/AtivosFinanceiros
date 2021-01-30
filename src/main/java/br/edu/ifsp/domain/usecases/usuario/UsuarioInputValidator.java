@@ -18,6 +18,11 @@ public class UsuarioInputValidator extends Validator<Usuario> {
         if ( nullOrEmptyOrBlank(usuario.getCpf()) ) {
             notification.addError( "CPF cannot be null or empty" );
         }
+
+        if ( nullOrEmptyOrBlank(usuario.getNome()) ) {
+            notification.addError( "Nome cannot be null or empty" );
+        }
+
         if ( nullOrEmptyOrBlank(usuario.getEmail()) ) {
             notification.addError( "Email cannot be null or empty" );
         }
