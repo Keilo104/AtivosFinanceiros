@@ -1,5 +1,7 @@
 package br.edu.ifsp.domain.entities.ativo;
 
+import br.edu.ifsp.application.main.APIDAO;
+
 import java.time.LocalDate;
 
 public class Acao extends Ativo {
@@ -21,8 +23,19 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public void updateAPI() {
+    public Acao(String codigo, String pais) {
+        this.codigo = codigo;
+        this.pais = pais;
+    }
 
+    public void updateFromAPI() {
+        APIDAO apidao = new APIDAO();
+        float newPrice = apidao.getNewPrice(codigo);
+        if (newPrice > -1) {
+            this.setValorUnitarioAtual(newPrice);
+        } else {
+            throw new InvalidPriceToUpdateException("Cannot update price");
+        }
         notifyObservers();
     }
 

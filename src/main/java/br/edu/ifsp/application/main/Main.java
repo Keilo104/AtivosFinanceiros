@@ -43,6 +43,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -109,8 +110,8 @@ public class Main {
         UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
 
         //ativo
-        compraAtivosUseCase = new CompraAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
-        vendaAtivosUseCase = new VendaAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
+       // compraAtivosUseCase = new CompraAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
+        //vendaAtivosUseCase = new VendaAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
 
         //acao
         alterarAcaoUseCase = new AlterarAcaoUseCase( acaoDAO, logAtivoDAO );
@@ -129,7 +130,7 @@ public class Main {
 
         //grupo
         atualizarGrupoUseCase = new AtualizarGrupoUseCase( grupoDAO );
-        criarGrupoUseCase = new CriarGrupoUseCase( grupoDAO );
+     //   criarGrupoUseCase = new CriarGrupoUseCase( grupoDAO );
         excluirGrupoUseCase = new ExcluirGrupoUseCase( grupoDAO );
 
         //log ativo
@@ -151,7 +152,11 @@ public class Main {
     public static void main( String[] args ) {
         configureInjection();
 
-        Usuario user = new Usuario( "154.796.276-35", "email.muitolegal@gmail.com", "12345" );
+        APIDAO apidao = new APIDAO();
+        List<Acao> lista = apidao.search("tesco");
+        System.out.println(lista);
+
+        /*Usuario user = new Usuario( "154.796.276-35", "email.muitolegal@gmail.com", "12345" );
 
         String cpf = cadastroUseCase.cadastrar( user );
         System.out.printf( "Usuário de cpf %s cadastrado com sucesso!\n\n", cpf );
@@ -237,6 +242,6 @@ public class Main {
 
         } else {
             System.out.println( "Login falhou :(" );
-        }
+        }*/
     }
 }
