@@ -11,4 +11,7 @@ public interface GrupoDAO extends DAO<Grupo, Integer> {
     Optional<Grupo> findOneByNome(String nome);
 
     Optional<Grupo> findOneByAtivo(Ativo ativo);
+
+    Integer createComCPF(Grupo grupo, String cpf);
+
 }

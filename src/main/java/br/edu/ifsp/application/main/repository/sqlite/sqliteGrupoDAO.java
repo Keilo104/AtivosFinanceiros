@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class sqliteGrupoDAO implements GrupoDAO {
 
-
+    @Override
     public Integer createComCPF(Grupo grupo, String cpf) {
         String sql = "INSERT INTO GRUPO(nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario)"+
                 "VALUES(?,?,?,?,?,?,?,?);";
@@ -42,6 +42,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
     public Integer create(Grupo type) {
         return null;
     }
+
     private Grupo resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
