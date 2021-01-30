@@ -1,11 +1,10 @@
 package br.edu.ifsp.domain.entities.grupo;
 
-import java.util.Arrays;
-
 public enum GrupoEnum {
     ACAO ("br.edu.ifsp.domain.entities.ativo.Acao", "Ação"),
     FUNDO_DE_INVESTIMENTO("br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento", "Fundo de Investimento"),
     RENDA_FIXA("br.edu.ifsp.domain.entities.ativo.RendaFixa", "Renda Fixa");
+
     private String nomeClasse;
     private String string;
 
@@ -13,12 +12,15 @@ public enum GrupoEnum {
         this.nomeClasse = nomeClasse;
         this.string = string;
     }
+
     public String getNomeClasse() {
         return this.nomeClasse;
     }
+
     public String getString() {
         return this.string;
     }
+
     public static GrupoEnum getValueByString(String string) {
         switch(string) {
             case "Ação":
@@ -28,9 +30,5 @@ public enum GrupoEnum {
             default:
                 return RENDA_FIXA;
         }
-    }
-
-    public static GrupoEnum toEnum(String value){
-        return  getValueByString(value);
     }
 }

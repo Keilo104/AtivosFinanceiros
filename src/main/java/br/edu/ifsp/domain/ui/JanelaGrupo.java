@@ -3,6 +3,7 @@ package br.edu.ifsp.domain.ui;
 import br.edu.ifsp.App;
 import br.edu.ifsp.domain.controller.GrupoController;
 import br.edu.ifsp.domain.controller.PainelController;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class JanelaGrupo {
-    public void showAndWait(Usuario user) {
+    public void showAndWait(Grupo grupo) {
         ScrollPane sceneGraph = null;
 
         try {
@@ -30,7 +31,7 @@ public class JanelaGrupo {
             stage.setMinHeight(400);
 
             GrupoController grupoController = (GrupoController) loader.getController();
-            grupoController.init(user);
+            grupoController.init(grupo);
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
