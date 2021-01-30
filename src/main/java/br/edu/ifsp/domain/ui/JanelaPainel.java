@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.ui;
 
+import br.edu.ifsp.App;
 import br.edu.ifsp.domain.controller.PainelController;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +15,8 @@ public class JanelaPainel {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader();
-            sceneGraph = loader.load(getClass().getResource("fxml/FXMLPainel.fxml").openStream());
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLPainel.fxml"));
+            sceneGraph = loader.load();
 
             Stage stage = new Stage();
             stage.setTitle("Painel Dashboard");
@@ -23,7 +24,7 @@ public class JanelaPainel {
             stage.setMinWidth(800);
             stage.setMinHeight(400);
 
-            PainelController painelController = new PainelController();
+            PainelController painelController = (PainelController) loader.getController();
             painelController.init(user);
 
             stage.show();
