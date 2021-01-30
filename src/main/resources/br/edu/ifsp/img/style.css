@@ -1,0 +1,8 @@
+#btnEntrar {
+    -fx-background-color: #5cc7b2;
+    -fx-font-weight: bold;
+}
+
+#sideBarPainel {
+    -fx-background-image: "..\img\img.jpg";
+}

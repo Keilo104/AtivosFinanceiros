@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlCriarGrupo">
+    <children>
+        <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="200.0" layoutY="125.0" opacity="0.5" pickOnBounds="true"
+                   preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../img/img.jpg"/>
+            </image>
+        </ImageView>
+        <Pane layoutX="25.0" layoutY="100.0" prefHeight="200.0" prefWidth="550.0"
+              style="-fx-background-color: white; -fx-opacity: 0.9;" AnchorPane.bottomAnchor="100.0"
+              AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="100.0">
+            <children>
+                <TextField fx:id="txtFieldGrupo" layoutX="23.0" layoutY="75.0" prefHeight="25.0" prefWidth="470.0"
+                           promptText="NOME DO GRUPO"/>
+                <Label alignment="BOTTOM_LEFT" layoutX="23.0" layoutY="50.0" prefHeight="25.0" prefWidth="115.0"
+                       text="Nome do grupo">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </Label>
+                <Label alignment="BOTTOM_LEFT" layoutX="23.0" layoutY="125.0" prefHeight="25.0" prefWidth="144.0"
+                       text="Categoria do grupo">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </Label>
+                <ChoiceBox layoutX="23.0" layoutY="150.0" prefHeight="25.0" prefWidth="250.0"/>
+            </children>
+        </Pane>
+        <Button layoutX="364.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnCriar" prefHeight="25.0"
+                prefWidth="85.0" text="Criar" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="364.0"/>
+        <Button layoutX="135.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnCancelar" prefHeight="25.0"
+                prefWidth="85.0" text="Cancelar" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="135.0"/>
+        <Label alignment="CENTER" layoutX="188.0" layoutY="32.0" text="Crie um grupo" AnchorPane.leftAnchor="188.0"
+               AnchorPane.rightAnchor="188.0" AnchorPane.topAnchor="32.0">
+            <font>
+                <Font name="Times New Roman" size="35.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
