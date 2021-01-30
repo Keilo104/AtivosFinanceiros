@@ -106,6 +106,10 @@ public class Ativo extends Subject {
         }
     }
 
+    public String getNome() {
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

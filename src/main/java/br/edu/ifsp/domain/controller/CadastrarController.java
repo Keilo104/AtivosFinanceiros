@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
@@ -30,7 +31,7 @@ public class CadastrarController {
         String login = textFieldLogin.getText();
         String senha = passwordFieldSenha.getText();
 
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
+        UsuarioDAO usuarioDAO = new sqliteUsuarioDAO();
         CadastroUseCase cadastroUseCase = new CadastroUseCase(usuarioDAO);
 
         Usuario user = new Usuario(cpf, nome, login, senha);

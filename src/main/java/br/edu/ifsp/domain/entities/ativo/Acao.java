@@ -56,6 +56,11 @@ public class Acao extends Ativo {
     }
 
     @Override
+    public String getNome() {
+        return this.codigo;
+    }
+
+    @Override
     public String toString() {
         return "Acao{" +
                 "codigo='" + codigo + '\'' +
