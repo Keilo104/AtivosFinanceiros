@@ -24,7 +24,6 @@ public class DatabaseBuilder {
             statement.addBatch(createAcaoTable());
             statement.addBatch(createFundoDeInvestimentoTable());
             statement.addBatch(createRendaFixaTable());
-            statement.addBatch(createLogTable());
             statement.addBatch(createLogAtivoTable());
             statement.addBatch(createLogTransacaoAtivoTable());
             statement.addBatch(createLogGrupoTable());
@@ -121,16 +120,15 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createLogTable(){
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE LOG(");
-
-        return builder.toString();
-    }
-
     private String createLogAtivoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_ATIVO(");
+        builder.append("idAtivo INTEGER, \n");
+        builder.append("data TEXT,\n");
+        builder.append("tipo TEXT,\n");
+        builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id),");
+        builder.append("PRIMARY KEY(idAtivo, data)\n");
+        builder.append("); \n");
 
         return builder.toString();
     }
@@ -138,6 +136,13 @@ public class DatabaseBuilder {
     private String createLogGrupoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_GRUPO(");
+        builder.append("idGrupo INTEGER, \n");
+        builder.append("data TEXT,\n");
+        builder.append("valorTotal REAL,\n");
+        builder.append("mudanca REAL,\n");
+        builder.append("FOREIGN KEY (idGrupo) REFERENCES GRUPO(id),");
+        builder.append("PRIMARY KEY(idGrupo, data)\n");
+        builder.append("); \n");
 
         return builder.toString();
     }
@@ -145,9 +150,15 @@ public class DatabaseBuilder {
     private String createLogTransacaoAtivoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_TRANSACAO_ATIVO(");
+        builder.append("idAtivo INTEGER, \n");
+        builder.append("data TEXT,\n");
+        builder.append("tipo TEXT,\n");
+        builder.append("valor REAL,\n");
+        builder.append("quantidade REAL,\n");
+        builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id),");
+        builder.append("PRIMARY KEY(idAtivo, data)\n");
+        builder.append("); \n");
 
         return builder.toString();
     }
-
-
 }
