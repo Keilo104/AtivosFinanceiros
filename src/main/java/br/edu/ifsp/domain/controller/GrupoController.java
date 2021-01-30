@@ -16,14 +16,21 @@ import javafx.scene.layout.VBox;
 import java.util.Iterator;
 
 public class GrupoController {
-    @FXML public ScrollBar scroll;
     @FXML public VBox vBox;
+    @FXML public Label labelNome;
+    @FXML public Label labelTipo;
 
     private Grupo grupo;
 
     public void init(Grupo group) {
         this.grupo = group;
         updateAtivos();
+        updateLabels();
+    }
+
+    private void updateLabels() {
+        labelNome.setText(grupo.getNome());
+        labelTipo.setText(grupo.getTipoString());
     }
 
     private void updateAtivos() {

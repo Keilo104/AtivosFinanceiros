@@ -59,6 +59,11 @@ public class InMemoryGrupoDAO implements GrupoDAO {
     }
 
     @Override
+    public List<Grupo> findAllByCpf(String cpf) {
+        return null;
+    }
+
+    @Override
     public Optional<Grupo> findOne(Integer key) {
         if(db.containsKey(key)){
             return Optional.of(db.get(key));

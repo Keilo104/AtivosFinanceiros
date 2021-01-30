@@ -51,6 +51,8 @@ public class CriarGrupoController {
 
         CriarGrupoUseCase criarGrupoUseCase = new CriarGrupoUseCase(grupoDAO, logGrupoDAO);
         criarGrupoUseCase.include(user, grupo);
+
+        janelaCriarGrupo.close();
     }
 
     public void btnCancelar( ActionEvent actionEvent ) {

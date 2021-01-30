@@ -38,12 +38,18 @@ public class PainelController {
         updateLabels();
 
         grupos = FXCollections.observableArrayList();
+
+        updateTable();
+        bindTable();
+    }
+
+    private void updateTable() {
+        grupos.clear();
+
         Iterator<Grupo> iterator = usuario.getIteratorCarteira();
         while(iterator.hasNext()) {
             grupos.add(iterator.next());
         }
-
-        bindTable();
     }
 
     private void bindTable() {
@@ -83,5 +89,7 @@ public class PainelController {
     public void criarGrupo() {
         JanelaCriarGrupo janelaCriarGrupo = new JanelaCriarGrupo();
         janelaCriarGrupo.showAndWait(usuario);
+
+        updateTable();
     }
 }
