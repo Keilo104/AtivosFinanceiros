@@ -28,6 +28,12 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
+    public Acao(int idAtivo, String codigo, String pais) {
+        super(idAtivo);
+        this.codigo = codigo;
+        this.pais = pais;
+    }
+
     public void updateFromAPI() {
         APIDAO apidao = new APIDAO();
         float newPrice = apidao.getNewPrice(codigo);

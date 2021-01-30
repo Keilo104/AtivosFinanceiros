@@ -87,8 +87,7 @@ public class sqliteAtivosDAO implements AtivosDAO {
 
     @Override
     public boolean update(Ativo ativo) {
-        String sql = "UPDATE ATIVO SET valorUnitarioAtual=?, valorUnitarioComprado=?, valorTotalVendido=?, dataComprado=?, quantidade=?, grupoId=? WHERE id=?" +
-                "VALUES(?,?,?,?,?,?);";
+        String sql = "UPDATE ATIVO SET valorUnitarioAtual=?, valorUnitarioComprado=?, valorTotalVendido=?, dataComprado=?, quantidade=?, grupoId=? WHERE id=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setFloat(1, ativo.getValorUnitarioAtual());
             stat.setFloat(2, ativo.getValorUnitarioComprado());

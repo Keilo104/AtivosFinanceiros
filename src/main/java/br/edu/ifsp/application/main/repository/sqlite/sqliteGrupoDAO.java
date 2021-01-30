@@ -93,6 +93,24 @@ public class sqliteGrupoDAO implements GrupoDAO {
         return Optional.ofNullable(grupo);
     }
 
+    public List<Grupo> findAllByCPF(String cpf) {
+        String sql = "SELECT * FROM GRUPO WHERE cpfUsuario=?;";
+        List<Grupo> grupos = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setString(1, cpf);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                Grupo grupo = resultSetToEntity(rs);
+                grupos.add(grupo);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return grupos;
+    }
+
+
     @Override //TODO
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
         return Optional.empty();

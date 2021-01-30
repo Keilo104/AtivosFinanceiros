@@ -6,7 +6,7 @@ import br.edu.ifsp.domain.usecases.relatorio.RelatorioPeriodoDAO;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteRelatorioPeriodoDAO implements RelatorioPeriodoDAO {
+public class sqliteRelatorioPeriodoDAO implements RelatorioPeriodoDAO {//TODO
     @Override
     public Integer create(Relatorio type) {
         return null;

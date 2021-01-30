@@ -44,6 +44,10 @@ public class Ativo extends Subject {
         this.IDGrupo = grupoId;
     }
 
+    public Ativo(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
