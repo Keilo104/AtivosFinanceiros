@@ -1,6 +1,6 @@
 package br.edu.ifsp.domain.entities.ativo;
 
-import br.edu.ifsp.application.main.APIDAO;
+import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
 
 import java.time.LocalDate;
 

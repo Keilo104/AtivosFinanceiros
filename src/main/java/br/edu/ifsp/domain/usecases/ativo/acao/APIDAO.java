@@ -1,4 +1,4 @@
-package br.edu.ifsp.application.main;
+package br.edu.ifsp.domain.usecases.ativo.acao;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.usecases.utils.DAO;
