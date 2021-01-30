@@ -22,9 +22,9 @@ public class JanelaLogin {
             sceneGraph = loader.load();
 
             stage.setTitle("Login");
-            stage.setScene(new Scene(sceneGraph, 640, 480));
-            stage.setMinWidth(640);
-            stage.setMinHeight(480);
+            stage.setScene(new Scene(sceneGraph, 830, 550));
+            stage.setMaxWidth(1080);
+            stage.setMaxHeight(720);
 
             LoginController loginController = (LoginController) loader.getController();
             loginController.init(this);

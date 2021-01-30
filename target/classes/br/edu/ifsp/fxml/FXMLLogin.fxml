@@ -5,27 +5,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="970.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.LoginController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="830.0" stylesheets="@../img/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.LoginController">
     <left>
         <AnchorPane prefHeight="551.0" prefWidth="476.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="550.0" fitWidth="500.0" layoutX="-2.0" layoutY="-2.0" opacity="0.0" pickOnBounds="true" smooth="false" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <image>
-                        <Image url="@../img/background-stock.jpg" />
-                    </image>
-                </ImageView>
-                <Label layoutX="13.0" layoutY="209.0" text="BEM VINDO A TELA DE ENTRAR" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="209.0">
+            <Pane layoutX="119.0" layoutY="142.0" opacity="0.7" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fitHeight="550.0" fitWidth="477.0" layoutX="-1.0" layoutY="11.0" opacity="0.7" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../img/background-stock.jpg" />
+               </image>
+            </ImageView>
+                <Label layoutX="13.0" layoutY="209.0" text="BEM VINDO A TELA DE ENTRAR" textFill="#fcfcfc" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="209.0">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </Label>
-                <Label layoutX="13.0" layoutY="266.0" prefHeight="30.0" prefWidth="481.0" text="Insira seus dados cadastrais, ou crie uma conta para começar" AnchorPane.bottomAnchor="254.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
+                <Label layoutX="13.0" layoutY="266.0" prefHeight="30.0" prefWidth="481.0" text="Insira seus dados cadastrais, ou crie uma conta para começar" textFill="WHITE" AnchorPane.bottomAnchor="254.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
 
-                <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#criarConta" prefHeight="44.0" prefWidth="198.0" text="Cadastrar" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="14.0">
+                <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#criarConta" prefHeight="44.0" prefWidth="198.0" text="Cadastrar" textFill="#141414" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="14.0">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -56,7 +57,7 @@
                         </Label>
 
                         <PasswordField id="txtFieldSenha" fx:id="inputSenha" layoutX="25.0" layoutY="297.0" prefHeight="40.0" prefWidth="247.0" promptText="Senha" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="28.0" />
-                        <Button layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="199.0" text="Entrar" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="54.0">
+                        <Button fx:id="btnEntrar" layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="199.0" text="Entrar" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="54.0">
                             <font>
                                 <Font size="20.0" />
                             </font>

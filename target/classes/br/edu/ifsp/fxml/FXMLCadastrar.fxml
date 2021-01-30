@@ -4,52 +4,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #2a3542;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CadastrarController">
+<AnchorPane prefHeight="475.0" prefWidth="750.0" style="-fx-background-color: #2a3542;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CadastrarController">
    <children>
+      <Button layoutX="483.0" layoutY="281.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="180.0" text="Criar">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
       <Label alignment="CENTER" layoutX="226.0" layoutY="48.0" prefHeight="35.0" prefWidth="300.0" text="Cadastre-se" textFill="#f8f8f8">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Pane layoutX="87.0" layoutY="120.0" prefHeight="279.0" prefWidth="576.0" style="-fx-background-color: white; -fx-border-radius: 15px;">
+      <Pane layoutX="87.0" layoutY="120.0" prefHeight="137.0" prefWidth="576.0" style="-fx-background-color: white; -fx-border-radius: 15px;">
          <children>
-            <Label layoutX="83.0" layoutY="37.0" prefHeight="35.0" prefWidth="70.0" text="CPF">
+            <Label layoutX="82.0" layoutY="34.0" prefHeight="35.0" prefWidth="70.0" text="Login">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldCPF" layoutX="153.0" layoutY="37.0" prefHeight="35.0" prefWidth="320.0" promptText="cpf" />
-
-            <Label layoutX="83.0" layoutY="83.0" prefHeight="35.0" prefWidth="70.0" text="Nome">
+            <TextField layoutX="152.0" layoutY="34.0" prefHeight="35.0" prefWidth="320.0" promptText="email" />
+            <Label layoutX="82.0" layoutY="84.0" prefHeight="35.0" prefWidth="70.0" text="Senha">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldNome" layoutX="153.0" layoutY="83.0" prefHeight="35.0" prefWidth="320.0" promptText="nome" />
-
-            <Label layoutX="83.0" layoutY="129.0" prefHeight="35.0" prefWidth="70.0" text="Login">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField fx:id="textFieldLogin" layoutX="153.0" layoutY="129.0" prefHeight="35.0" prefWidth="320.0" promptText="email" />
-
-            <Label layoutX="83.0" layoutY="176.0" prefHeight="35.0" prefWidth="70.0" text="Senha">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="passwordFieldSenha" layoutX="153.0" layoutY="176.0" prefHeight="35.0" prefWidth="320.0" promptText="senha" />
+            <PasswordField layoutX="152.0" layoutY="84.0" prefHeight="35.0" prefWidth="320.0" promptText="senha" />
          </children>
       </Pane>
-      <Separator layoutX="144.0" layoutY="496.0" prefHeight="5.0" prefWidth="462.0" />
-      <Button layoutX="483.0" layoutY="409.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="44.0" prefWidth="180.0" text="Criar">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button layoutX="270.0" layoutY="547.0" mnemonicParsing="false" onAction="#rickroll" prefHeight="24.0" prefWidth="212.0" text="Conheça nosso trabalho" />
-      <Label alignment="CENTER" layoutX="215.0" layoutY="514.0" prefHeight="17.0" prefWidth="320.0" text="Nenhum direito reservado. " textFill="#eeeeee">
+      <Separator layoutX="144.0" layoutY="368.0" prefHeight="5.0" prefWidth="462.0" />
+      <Button layoutX="270.0" layoutY="419.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="212.0" text="Conheça nosso trabalho" />
+      <Label alignment="CENTER" layoutX="215.0" layoutY="386.0" prefHeight="17.0" prefWidth="320.0" text="Nenhum direito reservado. " textFill="#eeeeee">
          <font>
             <Font size="15.0" />
          </font>

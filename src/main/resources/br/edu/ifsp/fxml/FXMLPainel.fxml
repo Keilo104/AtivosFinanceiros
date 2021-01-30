@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.PainelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="915.0" style="-fx-background-image: ...\img\img.jpg;" stylesheets="@../img/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.PainelController">
     <children>
-        <BorderPane prefHeight="708.0" prefWidth="916.0" />
-        <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL" prefHeight="708.0" prefWidth="916.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+        <BorderPane prefHeight="708.0" prefWidth="916.0" style="-fx-background-image: ..\img\img.jpg;" />
+        <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL" prefHeight="708.0" prefWidth="916.0" style="-fx-background-image: ../;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                     <children>
@@ -27,7 +26,7 @@
                                     </font>
                                 </Label>
 
-                                <Label fx:id="spanNome" alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                <Label alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
@@ -40,29 +39,24 @@
                     <children>
                         <SplitPane dividerPositions="0.25164113785557984" layoutX="-2.0" prefHeight="648.0" prefWidth="916.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0" style="-fx-background-color: #E5E5FF;">
+                                <AnchorPane fx:id="sideBarPainel" minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0" style="-fx-background-color: #E5E5FF;">
                                     <children>
+                                        <ButtonBar layoutX="14.0" layoutY="192.0" prefHeight="58.0" prefWidth="200.0">
+                                            <buttons>
+                                                <Button fx:id="btnRelatorios" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
+                                            </buttons>
+                                        </ButtonBar>
+                                        <ButtonBar layoutX="14.0" layoutY="125.0" prefHeight="58.0" prefWidth="200.0">
+                                            <buttons>
+
+                                                <Button fx:id="btnGrupos" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Grupos" />
+                                            </buttons>
+                                        </ButtonBar>
                                         <Label layoutX="14.0" layoutY="32.0" prefHeight="35.0" prefWidth="200.0" text="Menu" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="32.0">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
                                         </Label>
-                                          <Button fx:id="btnRelatorios" layoutX="30.0" layoutY="89.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="89.0" />
-                              <Label layoutX="90.0" layoutY="149.0" text="Grupos">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <TableView fx:id="tableGrupos" layoutX="14.0" layoutY="180.0" prefHeight="384.0" prefWidth="200.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="180.0">
-                                <columns>
-                                  <TableColumn fx:id="cNome" editable="false" prefWidth="102.0" text="Nome" />
-                                  <TableColumn fx:id="cTipo" prefWidth="97.0" text="Tipo" />
-                                </columns>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </TableView>
-                              <Button fx:id="btnAcessar" layoutX="15.0" layoutY="564.0" mnemonicParsing="false" onAction="#visualizarGrupo" prefHeight="25.0" prefWidth="197.0" text="Acessar" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #E5E5FF;">
@@ -93,14 +87,14 @@
                                                     </font>
                                                 </Label>
 
-                                                <Label fx:id="spanLucroTotal" layoutX="178.0" layoutY="21.0" prefHeight="35.0" prefWidth="136.0">
+                                                <Label fx:id="spanLucroTotal" layoutX="178.0" layoutY="21.0" prefHeight="35.0" prefWidth="136.0" text="3500,00">
                                               
                                                     <font>
                                                         <Font size="24.0" />
                                                     </font>
                                                 </Label>
 
-                                                <Label fx:id="spanTotalInvestido" layoutX="551.0" layoutY="21.0" prefHeight="35.0" prefWidth="91.0">
+                                                <Label fx:id="spanTotalInvestido" layoutX="551.0" layoutY="21.0" prefHeight="35.0" prefWidth="91.0" text="1750,00">
                                               
                                                     <font>
                                                         <Font size="24.0" />
@@ -112,7 +106,7 @@
                                                     </font>
                                                 </Label>
 
-                                                <Label fx:id="spanData" layoutX="81.0" layoutY="55.0" prefHeight="35.0" prefWidth="136.0">
+                                                <Label fx:id="spanData" layoutX="81.0" layoutY="55.0" prefHeight="35.0" prefWidth="136.0" text="23/01/2021">
                                                     <font>
                                                         <Font size="24.0" />
                                                     </font>
