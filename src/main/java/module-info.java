@@ -6,5 +6,5 @@ module br.edu.ifsp {
     opens br.edu.ifsp to javafx.fxml;
     exports br.edu.ifsp;
     exports br.edu.ifsp.domain.ui;
-    exports br.edu.ifsp.application.main.controller;
+    exports br.edu.ifsp.domain.controller;
 }

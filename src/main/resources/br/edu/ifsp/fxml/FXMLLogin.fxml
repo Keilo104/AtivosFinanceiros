@@ -5,6 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="970.0" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="550.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.main.controller.CtrlJanelaLogin">
@@ -32,6 +33,7 @@
                         <Font size="16.0"/>
                     </font>
                 </Label>
+
                 <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="198.0"
                         text="Cadastrar" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="14.0">
                     <font>
@@ -76,6 +78,7 @@
                                 <Font size="18.0"/>
                             </font>
                         </Label>
+
                         <PasswordField id="txtFieldSenha" fx:id="inputSenha" layoutX="25.0" layoutY="297.0"
                                        prefHeight="40.0" prefWidth="247.0" promptText="Senha"
                                        AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="25.0"

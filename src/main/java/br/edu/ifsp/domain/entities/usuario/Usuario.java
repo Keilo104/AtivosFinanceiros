@@ -1,6 +1,8 @@
 package br.edu.ifsp.domain.entities.usuario;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.log.Log;
+import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
@@ -12,6 +14,7 @@ public class Usuario implements Observer {
     private String cpf;
     private String email;
     private String senha;
+    private String nome;
 
     private float totalLucrado;
     private float totalInvestido;
@@ -21,22 +24,21 @@ public class Usuario implements Observer {
     private float investimentoAtual;
 
     private List<Grupo> carteira = new ArrayList<>();
+    private List<LogGrupo> historico = new ArrayList<>();
 
     public Usuario() {
     }
 
-    public Usuario(String cpf, String email, String senha) {
+    public Usuario(String cpf, String nome, String email, String senha) {
         this.cpf = cpf;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Usuario(String email, String senha) {
-        this("", email, senha, 0, 0);
-    }
-
-    public Usuario(String cpf, String email, String senha, float totalLucrado, float totalInvestido) {
+    public Usuario(String cpf, String nome, String email, String senha, float totalLucrado, float totalInvestido) {
         this.cpf = cpf;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.totalLucrado = totalLucrado;
@@ -53,6 +55,14 @@ public class Usuario implements Observer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSenha() {
@@ -100,6 +110,14 @@ public class Usuario implements Observer {
         return this.carteira.iterator();
     }
 
+    public void addLog(LogGrupo logGrupo) {
+        this.historico.add(logGrupo);
+    }
+
+    public Iterator<LogGrupo> getIteratorHistorico() {
+        return this.historico.iterator();
+    }
+
     private void updateLucroTotalHistorico() {
         this.totalLucrado = 0;
 
@@ -142,11 +160,14 @@ public class Usuario implements Observer {
                 "cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
                 ", totalLucrado=" + totalLucrado +
                 ", totalInvestido=" + totalInvestido +
                 ", lucroPotencial=" + lucroPotencial +
                 ", valorAtual=" + valorAtual +
                 ", investimentoAtual=" + investimentoAtual +
+                ", carteira=" + carteira +
+                ", historico=" + historico +
                 '}';
     }
 

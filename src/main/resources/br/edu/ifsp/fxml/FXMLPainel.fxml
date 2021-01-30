@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0"
             prefWidth="916.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="br.edu.ifsp.application.main.controller.CtrlJanelaPainel">
@@ -27,6 +28,7 @@
                                         <Font size="24.0"/>
                                     </font>
                                 </Label>
+
                                 <Label alignment="CENTER_RIGHT" layoutX="719.0" layoutY="14.0" prefHeight="35.0"
                                        prefWidth="108.0" text="Log Out" AnchorPane.rightAnchor="87.0"
                                        AnchorPane.topAnchor="14.0">
@@ -34,6 +36,7 @@
                                         <Font size="20.0"/>
                                     </font>
                                 </Label>
+
                                 <Label alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0"
                                        prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0"
                                        AnchorPane.topAnchor="14.0">
@@ -63,6 +66,7 @@
                                         </ButtonBar>
                                         <ButtonBar layoutX="14.0" layoutY="125.0" prefHeight="58.0" prefWidth="200.0">
                                             <buttons>
+
                                                 <Button fx:id="btnGrupos" mnemonicParsing="false" prefHeight="46.0"
                                                         prefWidth="168.0" text="Grupos"/>
                                             </buttons>
@@ -110,14 +114,18 @@
                                                         <Font size="24.0"/>
                                                     </font>
                                                 </Label>
+
                                                 <Label fx:id="spanLucroTotal" layoutX="178.0" layoutY="21.0"
                                                        prefHeight="35.0" prefWidth="136.0" text="3500,00">
+                                              
                                                     <font>
                                                         <Font size="24.0"/>
                                                     </font>
                                                 </Label>
+
                                                 <Label fx:id="spanTotalInvestido" layoutX="551.0" layoutY="21.0"
                                                        prefHeight="35.0" prefWidth="91.0" text="1750,00">
+                                              
                                                     <font>
                                                         <Font size="24.0"/>
                                                     </font>
@@ -128,6 +136,7 @@
                                                         <Font size="24.0"/>
                                                     </font>
                                                 </Label>
+
                                                 <Label fx:id="spanData" layoutX="81.0" layoutY="55.0" prefHeight="35.0"
                                                        prefWidth="136.0" text="23/01/2021">
                                                     <font>

@@ -19,8 +19,8 @@ public abstract class Ativo extends Subject {
         this.dataComprado = LocalDate.now();
     }
 
-    public Ativo(float valor, int quantidade) {
-        this(0, valor, valor, 0, LocalDate.now(), quantidade);
+    public Ativo(float valorUnitarioAtual, int quantidade) {
+        this(0, valorUnitarioAtual, valorUnitarioAtual, 0, LocalDate.now(), quantidade);
     }
 
     public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade) {
@@ -73,9 +73,17 @@ public abstract class Ativo extends Subject {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-        notifyObservers();
+    public void vender(int quantidade) {
+        if(quantidade > 0 && quantidade <= this.quantidade) {
+            this.quantidade -= quantidade;
+            notifyObservers();
+        } else {
+            if(quantidade < 0) {
+                throw new InvalidQuantityToVenderException("Cannot vender 0 or less ativos");
+            } else {
+                throw new InvalidQuantityToVenderException("Cannot vender more ativos than you have");
+            }
+        }
     }
 
     @Override
