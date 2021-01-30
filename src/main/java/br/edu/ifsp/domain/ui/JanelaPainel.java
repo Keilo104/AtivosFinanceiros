@@ -20,7 +20,7 @@ public class JanelaPainel {
 
             Stage stage = new Stage();
             stage.setTitle("Painel Dashboard");
-            stage.setScene(new Scene(sceneGraph, 800, 700));
+            stage.setScene(new Scene(sceneGraph, 915, 705));
             stage.setMinWidth(800);
             stage.setMinHeight(400);
 

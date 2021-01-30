@@ -25,9 +25,9 @@ public class JanelaGrupo {
 
             Stage stage = new Stage();
             stage.setTitle("Painel de Grupos");
-            stage.setScene(new Scene(sceneGraph, 800, 700));
-            stage.setMinWidth(800);
-            stage.setMinHeight(400);
+            stage.setScene(new Scene(sceneGraph, 615, 975));
+            stage.setMinWidth(615);
+            stage.setMinHeight(975);
 
             GrupoController grupoController = (GrupoController) loader.getController();
             grupoController.init(user);
