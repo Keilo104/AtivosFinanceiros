@@ -1,36 +1,35 @@
 package br.edu.ifsp.domain.ui;
 
-import br.edu.ifsp.App;
-import javafx.application.Application;
+import br.edu.ifsp.domain.controller.PainelController;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class JanelaPainel extends Application {
+public class JanelaPainel {
+    public void show(Usuario user) {
+        Pane sceneGraph = null;
 
-    private static Scene scene;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            sceneGraph = loader.load(getClass().getResource("fxml/FXMLPainel.fxml").openStream());
 
-    public static void main( String[] args ) {
-        launch( args );
-    }
+            Stage stage = new Stage();
+            stage.setTitle("Painel Dashboard");
+            stage.setScene(new Scene(sceneGraph, 800, 700));
+            stage.setMinWidth(800);
+            stage.setMinHeight(400);
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+            PainelController painelController = new PainelController();
+            painelController.init(user);
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+            stage.show();
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("fxml/FXMLPainel"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

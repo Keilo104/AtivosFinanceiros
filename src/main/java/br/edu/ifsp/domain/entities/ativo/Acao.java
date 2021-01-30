@@ -9,8 +9,8 @@ public class Acao extends Ativo {
     public Acao() {
     }
 
-    public Acao(float valor, int quantidade, String codigo, String pais) {
-        super(valor, quantidade);
+    public Acao(float valorUnitarioAtual, int quantidade, String codigo, String pais) {
+        super(valorUnitarioAtual, quantidade);
         this.codigo = codigo;
         this.pais = pais;
     }
@@ -22,6 +22,7 @@ public class Acao extends Ativo {
     }
 
     public void updateAPI() {
+
 
         notifyObservers();
     }
@@ -46,7 +47,7 @@ public class Acao extends Ativo {
     public String toString() {
         return "Acao{" +
                 "pais='" + pais + '\'' +
-                ", categoria='" + codigo + '\'' +
+                ", codigo='" + codigo + '\'' +
                 "} " + super.toString();
     }
 }

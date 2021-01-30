@@ -1,19 +1,31 @@
 package br.edu.ifsp.domain.ui;
 
+import br.edu.ifsp.domain.controller.PainelController;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class JanelaLogin {
-    public void showAndWait( Usuario usuario ) {
-        FXMLLoader loader = new FXMLLoader();
+    public void show() {
+        Pane sceneGraph = null;
+
         try {
-            Pane graph = loader.load( getClass().getResource( "./FXMLLogin.fxml" ).openStream() );
-            Scene scene = new Scene( graph, 520, 250 );
-        } catch ( IOException e ) {
+            FXMLLoader loader = new FXMLLoader();
+            sceneGraph = loader.load(getClass().getResource("").openStream());
+
+            Stage stage = new Stage();
+            stage.setTitle("Login");
+            stage.setScene(new Scene(sceneGraph, 800, 700));
+            stage.setMinWidth(800);
+            stage.setMinHeight(400);
+
+            stage.show();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

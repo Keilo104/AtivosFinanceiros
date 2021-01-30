@@ -94,6 +94,7 @@ public class Main {
     }
 
     private static void configureInjection() {
+        /*
         //DAOs
         ativoDB = new LinkedHashMap<>();
 
@@ -146,9 +147,11 @@ public class Main {
         cadastroUseCase = new CadastroUseCase( usuarioDAO );
         loginUseCase = new LoginUseCase( usuarioDAO );
         recuperarSenhaUseCase = new RecuperarSenhaUseCase( usuarioDAO, tokenDAO );
+         */
     }
 
     public static void main( String[] args ) {
+        /*
         configureInjection();
 
         Usuario user = new Usuario( "154.796.276-35", "email.muitolegal@gmail.com", "12345" );
@@ -238,5 +241,6 @@ public class Main {
         } else {
             System.out.println( "Login falhou :(" );
         }
+        */
     }
 }
