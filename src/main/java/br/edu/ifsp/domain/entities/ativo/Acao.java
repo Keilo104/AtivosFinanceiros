@@ -1,5 +1,7 @@
 package br.edu.ifsp.domain.entities.ativo;
 
+import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
+
 import java.time.LocalDate;
 
 public class Acao extends Ativo {
@@ -21,9 +23,19 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public void updateAPI() {
+    public Acao(String codigo, String pais) {
+        this.codigo = codigo;
+        this.pais = pais;
+    }
 
-
+    public void updateFromAPI() {
+        APIDAO apidao = new APIDAO();
+        float newPrice = apidao.getNewPrice(codigo);
+        if (newPrice > -1) {
+            this.setValorUnitarioAtual(newPrice);
+        } else {
+            throw new InvalidPriceToUpdateException("Cannot update price");
+        }
         notifyObservers();
     }
 
@@ -46,8 +58,15 @@ public class Acao extends Ativo {
     @Override
     public String toString() {
         return "Acao{" +
-                "pais='" + pais + '\'' +
-                ", codigo='" + codigo + '\'' +
-                "} " + super.toString();
+                "codigo='" + codigo + '\'' +
+                ", pais='" + pais + '\'' +
+                '}';
+    }
+
+    public String toStringCompleto() {
+        return "Acao{" +
+                "codigo='" + codigo + '\'' +
+                ", pais='" + pais + '\'' +
+                '}'+ super.toString();
     }
 }

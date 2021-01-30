@@ -1,7 +1,6 @@
-package br.edu.ifsp.application.main.repository;
+package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
 
