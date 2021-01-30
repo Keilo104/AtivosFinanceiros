@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="970.0" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="550.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.main.controller.CtrlJanelaLogin">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.LoginController">
     <left>
         <AnchorPane prefHeight="551.0" prefWidth="476.0" BorderPane.alignment="CENTER">
             <children>

@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0"
             prefWidth="916.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.edu.ifsp.application.main.controller.CtrlJanelaPainel">
+            fx:controller="br.edu.ifsp.domain.controller.PainelController">
     <children>
         <BorderPane prefHeight="708.0" prefWidth="916.0"/>
         <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL"
