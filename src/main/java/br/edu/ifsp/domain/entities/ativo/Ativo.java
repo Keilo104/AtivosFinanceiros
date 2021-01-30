@@ -5,7 +5,7 @@ import br.edu.ifsp.domain.usecases.utils.Subject;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class Ativo extends Subject {
+public class Ativo extends Subject {
     private int id;
 
     private float valorUnitarioAtual;
@@ -106,7 +106,9 @@ public abstract class Ativo extends Subject {
         }
     }
 
-    public abstract String getNome();
+    public String getNome() {
+        return null;
+    }
 
     @Override
     public boolean equals(Object o) {

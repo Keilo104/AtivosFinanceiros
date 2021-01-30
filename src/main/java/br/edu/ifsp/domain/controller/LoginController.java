@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
@@ -56,7 +57,7 @@ public class LoginController {
     }
 
     public void login() {
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
+        UsuarioDAO usuarioDAO = new sqliteUsuarioDAO();
 
         String email = inputEmail.getText();
         String senha = inputSenha.getText();
