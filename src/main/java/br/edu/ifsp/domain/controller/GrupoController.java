@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
 
@@ -34,14 +35,43 @@ public class GrupoController {
             ativo = iterator.next();
             ButtonBar bar = new ButtonBar();
 
+            Label nome = new Label(ativo.getNome());
+            bar.getButtons().add(nome);
+
             if(ativo instanceof Acao) {
-                bar.getButtons().add(new Button("Update"));
+                Button update = new Button("Update");
+                Ativo finalAtivo = ativo;
+                update.setOnAction(e -> updateAPIButton(finalAtivo));
+
+                bar.getButtons().add(update);
             } else {
-                bar.getButtons().add(new Button("Alterar"));
+                Button alterar = new Button("Alterar");
+                Ativo finalAtivo = ativo;
+                alterar.setOnAction(e -> updateButton(finalAtivo));
+
+                bar.getButtons().add(alterar);
             }
-            bar.getButtons().add(new Button("Vender"));
+
+            Button sell = new Button("Vender");
+            Ativo finalAtivo = ativo;
+            sell.setOnAction(e -> sellButton(finalAtivo));
+
+            bar.getButtons().add(sell);
 
             vBox.getChildren().add(bar);
         }
+    }
+
+    private void updateAPIButton(Ativo ativo) {
+        System.out.println("Updatando API para " + ativo.toString());
+    }
+
+    private void updateButton(Ativo ativo) {
+        System.out.println("Updatando sem API para " + ativo.toString());
+
+    }
+
+    private void sellButton(Ativo ativo) {
+        System.out.println("Vendendo " + ativo.toString());
     }
 }

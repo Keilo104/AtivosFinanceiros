@@ -35,6 +35,11 @@ public class RendaFixa extends Ativo{
     }
 
     @Override
+    public String getNome() {
+        return this.rendimento;
+    }
+
+    @Override
     public String toString() {
         return "RendaFixa{" +
                 "rendimento='" + rendimento + '\'' +

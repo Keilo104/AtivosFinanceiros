@@ -26,7 +26,7 @@
                                     </font>
                                 </Label>
 
-                                <Label alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                <Label fx:id="spanNome" alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
