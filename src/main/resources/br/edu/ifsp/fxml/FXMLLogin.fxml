@@ -1,62 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="826.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.LoginController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="970.0" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="550.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.application.main.controller.CtrlJanelaLogin">
     <left>
         <AnchorPane prefHeight="551.0" prefWidth="476.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="547.0" fitWidth="501.0" layoutX="-2.0" layoutY="-2.0" opacity="0.43" pickOnBounds="true">
+                <ImageView fitHeight="550.0" fitWidth="500.0" layoutX="-2.0" layoutY="-2.0" opacity="0.0"
+                           pickOnBounds="true" smooth="false" visible="false" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <image>
-                        <Image url="@../img/background-stock.jpg" />
+                        <Image url="@../img/background-stock.jpg"/>
                     </image>
                 </ImageView>
-                <Label layoutX="14.0" layoutY="213.0" text="BEM VINDO A TELA DE ENTRAR">
+                <Label layoutX="13.0" layoutY="209.0" text="BEM VINDO A TELA DE ENTRAR" AnchorPane.bottomAnchor="275.0"
+                       AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="209.0">
                     <font>
-                        <Font size="25.0" />
+                        <Font size="25.0"/>
                     </font>
                 </Label>
-                <Label layoutX="14.0" layoutY="259.0" prefHeight="30.0" prefWidth="481.0" text="Insira seus dados cadastrais, ou crie uma conta para começar">
+                <Label layoutX="13.0" layoutY="266.0" prefHeight="30.0" prefWidth="481.0"
+                       text="Insira seus dados cadastrais, ou crie uma conta para começar"
+                       AnchorPane.bottomAnchor="254.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="7.0"
+                       AnchorPane.topAnchor="266.0">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="16.0"/>
                     </font>
                 </Label>
-                <Button id="btnCriarConta" fx:id="btnCriarConta" layoutX="14.0" layoutY="304.0" mnemonicParsing="false" onAction="#criarConta" prefHeight="25.0" prefWidth="204.0" style="-fx-background-color: #2a3542; -fx-font-weight: bold;" text="Criar conta" textFill="WHITE">
+
+                <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="198.0"
+                        text="Cadastrar" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="14.0">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Button>
             </children>
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="400.0" prefWidth="167.0" style="-fx-background-color: #2a3542;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="167.0" style="-fx-background-color: #2a3542;"
+                    BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane layoutX="16.0" layoutY="28.0" prefHeight="493.0" prefWidth="295.0" style="-fx-border-color: #5cc7b2; -fx-border-radius: 15px; -fx-border-image-width: 5px;">
+                <AnchorPane layoutX="15.0" layoutY="17.0" prefHeight="512.0" prefWidth="299.0"
+                            style="-fx-border-color: #5cc7b2; -fx-border-radius: 15px; -fx-border-image-width: 5px;"
+                            AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+                            AnchorPane.topAnchor="20.0">
                     <children>
-                        <Label layoutX="83.0" layoutY="57.0" text="Entrar" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="67.0"
+                               prefHeight="73.0" prefWidth="164.0" text="Entrar" textFill="WHITE"
+                               AnchorPane.bottomAnchor="379.0" AnchorPane.leftAnchor="69.0"
+                               AnchorPane.rightAnchor="68.0">
                             <font>
-                                <Font size="49.0" />
+                                <Font size="49.0"/>
                             </font>
                         </Label>
-                        <TextField id="txtFieldEmail" fx:id="inputEmail" layoutX="26.0" layoutY="190.0" prefHeight="35.0" prefWidth="245.0" promptText="Email" />
-                        <Label layoutX="26.0" layoutY="158.0" text="Entre com seu email" textFill="#f5f5f5">
+                        <TextField id="txtFieldEmail" fx:id="inputEmail" layoutX="26.0" layoutY="191.0"
+                                   prefHeight="35.0" prefWidth="245.0" promptText="Email"
+                                   AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="26.0"
+                                   AnchorPane.rightAnchor="27.0"/>
+                        <Label layoutX="26.0" layoutY="164.0" prefHeight="30.0" prefWidth="245.0"
+                               text="Entre com seu email" textFill="#f5f5f5" AnchorPane.bottomAnchor="328.0"
+                               AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="30.0">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="240.0" text="Entre com sua senha" textFill="#f5f5f5">
+                        <Label layoutX="26.0" layoutY="270.0" maxWidth="247.0" prefHeight="30.0" prefWidth="247.0"
+                               text="Entre com sua senha" textFill="#f5f5f5" AnchorPane.bottomAnchor="223.0"
+                               AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="29.0">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <PasswordField id="txtFieldSenha" fx:id="inputSenha" layoutX="26.0" layoutY="280.0" prefHeight="35.0" prefWidth="245.0" promptText="Senha" />
-                        <Button id="btnEntrar" fx:id="btnEntrar" layoutX="70.0" layoutY="345.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0" prefWidth="158.0" style="-fx-background-color: #5cc7b2; -fx-font-weight: bold;" text="Entrar" textFill="#fcfcfc">
+
+                        <PasswordField id="txtFieldSenha" fx:id="inputSenha" layoutX="25.0" layoutY="297.0"
+                                       prefHeight="40.0" prefWidth="247.0" promptText="Senha"
+                                       AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="25.0"
+                                       AnchorPane.rightAnchor="28.0"/>
+                        <Button layoutX="46.0" layoutY="427.0" mnemonicParsing="false" prefHeight="45.0"
+                                prefWidth="199.0" text="Entrar" AnchorPane.bottomAnchor="50.0"
+                                AnchorPane.rightAnchor="54.0">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Button>
                     </children>
