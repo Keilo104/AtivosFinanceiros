@@ -7,6 +7,7 @@ import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -96,6 +97,15 @@ public class Usuario implements Observer {
     public void addGrupo(Grupo grupo) {
         grupo.addObserver(this);
         this.carteira.add(grupo);
+        update();
+    }
+
+    public void addAllGrupo(Grupo ...grupos) {
+        for (Grupo g : grupos) {
+            g.addObserver(this);
+            this.carteira.add(g);
+            update();
+        }
     }
 
     public void removeGrupo(Grupo grupo) {
@@ -112,6 +122,10 @@ public class Usuario implements Observer {
 
     public void addLog(LogGrupo logGrupo) {
         this.historico.add(logGrupo);
+    }
+
+    public void addAllLog(LogGrupo ...logGrupos) {
+        this.historico.addAll(Arrays.asList(logGrupos));
     }
 
     public Iterator<LogGrupo> getIteratorHistorico() {
@@ -171,13 +185,17 @@ public class Usuario implements Observer {
                 '}';
     }
 
-    @Override
-    public void update(Subject o) {
+    public void update() {
         this.updateInvestimentoAtual();
         this.updateValorAtual();
         this.updateLucroPotencial();
 
         this.updateInvestimentoTotalHistorico();
         this.updateLucroTotalHistorico();
+    }
+
+    @Override
+    public void update(Subject o) {
+        update();
     }
 }

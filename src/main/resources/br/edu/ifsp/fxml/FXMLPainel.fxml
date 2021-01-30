@@ -55,14 +55,14 @@
                               </Label>
                               <TableView fx:id="tableGrupos" layoutX="14.0" layoutY="180.0" prefHeight="384.0" prefWidth="200.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="180.0">
                                 <columns>
-                                  <TableColumn editable="false" prefWidth="102.0" text="Nome" />
-                                  <TableColumn prefWidth="97.0" text="Tipo" />
+                                  <TableColumn fx:id="cNome" editable="false" prefWidth="102.0" text="Nome" />
+                                  <TableColumn fx:id="cTipo" prefWidth="97.0" text="Tipo" />
                                 </columns>
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
                               </TableView>
-                              <Button fx:id="btnAcessar" layoutX="15.0" layoutY="564.0" mnemonicParsing="false" onAction="#VisualizarGrupo" prefHeight="25.0" prefWidth="197.0" text="Acessar" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                              <Button fx:id="btnAcessar" layoutX="15.0" layoutY="564.0" mnemonicParsing="false" onAction="#visualizarGrupo" prefHeight="25.0" prefWidth="197.0" text="Acessar" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #E5E5FF;">

@@ -45,6 +45,17 @@ public class Grupo extends Subject implements Observer {
         this.tipoGrupo = tipoGrupo;
     }
 
+    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, String tipoGrupo) {
+        this.id = id;
+        this.nome = nome;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+        this.tipoGrupo = GrupoEnum.getValueByString(tipoGrupo);
+    }
+
     public int getId() {
         return id;
     }
@@ -83,6 +94,10 @@ public class Grupo extends Subject implements Observer {
 
     public GrupoEnum getTipoGrupo() {
         return tipoGrupo;
+    }
+
+    public String getTipoString() {
+        return tipoGrupo.getString();
     }
 
     public void deleteFromObservers() {
