@@ -5,7 +5,7 @@ import br.edu.ifsp.domain.usecases.utils.Subject;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class Ativo extends Subject {
+public class Ativo extends Subject {
     private int id;
 
     private float valorUnitarioAtual;
@@ -14,6 +14,8 @@ public abstract class Ativo extends Subject {
 
     private LocalDate dataComprado;
     private int quantidade;
+
+    public int IDGrupo;
 
     public Ativo() {
         this.dataComprado = LocalDate.now();
@@ -30,6 +32,16 @@ public abstract class Ativo extends Subject {
         this.valorTotalVendido = valorTotalVendido;
         this.dataComprado = dataComprado;
         this.quantidade = quantidade;
+    }
+
+    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, int grupoId) {
+        this.id = id;
+        this.valorUnitarioAtual = valorUnitarioAtual;
+        this.valorUnitarioComprado = valorUnitarioComprado;
+        this.valorTotalVendido = valorTotalVendido;
+        this.dataComprado = dataComprado;
+        this.quantidade = quantidade;
+        this.IDGrupo = grupoId;
     }
 
     public int getId() {
@@ -71,6 +83,14 @@ public abstract class Ativo extends Subject {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public int getIDGrupo() {
+        return IDGrupo;
+    }
+
+    public void setIDGrupo(int IDGrupo) {
+        this.IDGrupo = IDGrupo;
     }
 
     public void vender(int quantidade) {
