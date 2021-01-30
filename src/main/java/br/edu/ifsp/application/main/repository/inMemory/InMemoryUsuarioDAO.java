@@ -20,8 +20,12 @@ public class InMemoryUsuarioDAO implements UsuarioDAO{
 
     @Override
     public String create(Usuario usuario){
-        db.put(usuario.getCpf(), usuario);
-        return usuario.getCpf();
+        if(db.get(usuario.getCpf()) == null) {
+            db.put(usuario.getCpf(), usuario);
+            return usuario.getCpf();
+        } else {
+            return null;
+        }
     }
 
     @Override

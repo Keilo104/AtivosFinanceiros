@@ -1,48 +1,26 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.main.repository.*;
-import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.entities.grupo.GrupoEnum;
-import br.edu.ifsp.domain.entities.relatorio.CategoriaEnum;
-import br.edu.ifsp.domain.entities.relatorio.Relatorio;
-import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
-import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
 import br.edu.ifsp.domain.usecases.ativo.acao.AlterarAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.ExcluirFundoDeInvestimentoUseCase;
-import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.FundoDeInvestimentoDAO;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.IncluirFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.ExcluirRendaFixaUseCase;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.IncluirRendaFixaUseCase;
-import br.edu.ifsp.domain.usecases.ativo.rendafixa.RendaFixaDAO;
 import br.edu.ifsp.domain.usecases.grupo.AtualizarGrupoUseCase;
 import br.edu.ifsp.domain.usecases.grupo.CriarGrupoUseCase;
 import br.edu.ifsp.domain.usecases.grupo.ExcluirGrupoUseCase;
-import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
-import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
-import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
-import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Main {
