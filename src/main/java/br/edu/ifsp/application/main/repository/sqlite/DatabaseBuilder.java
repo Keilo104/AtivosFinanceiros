@@ -47,6 +47,8 @@ public class DatabaseBuilder {
         builder.append("valorTotalVendido REAL,\n");
         builder.append("dataComprado TEXT,\n");
         builder.append("quantidade INTEGER,\n");
+        builder.append("grupoId INTEGER,\n");
+        builder.append("FOREIGN KEY (grupoId) REFERENCES GRUPO(id)");
         builder.append("); \n");
         return builder.toString();
     }

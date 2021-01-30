@@ -152,7 +152,7 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
     @Override
     public boolean delete(Usuario usuario) {
         if(usuario == null || usuario.getCpf()==null)
-            throw new IllegalArgumentException("Usuario and Usuario vpf canoot be null");
+            throw new IllegalArgumentException("Usuario and Usuario cpf cannot be null");
         return deleteByKey(usuario.getCpf());
     }
 }
