@@ -33,7 +33,6 @@ public class InMemoryGrupoDAO implements GrupoDAO {
         return Optional.empty();
     }
 
-    @Override
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
         for (Grupo g : db.values()) {
             Iterator<Ativo> ativoIterator = g.getIteratorAtivos();

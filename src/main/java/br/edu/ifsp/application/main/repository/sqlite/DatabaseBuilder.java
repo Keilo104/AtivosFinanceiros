@@ -101,7 +101,7 @@ public class DatabaseBuilder {
         builder.append("valorAtual REAL,\n");
         builder.append("investimentoAtual REAL,\n");
         builder.append("tipoGrupo TEXT,\n");
-        builder.append("cpfUsuario TEXT,\n");
+        builder.append("cpfUsuario TEXT NOT NULL,\n");
         builder.append("FOREIGN KEY (cpfUsuario) REFERENCES USUARIO(cpf)");
         builder.append("); \n");
 

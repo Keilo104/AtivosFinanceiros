@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public class sqliteAcaoDAO implements AcaoDAO {
     @Override
-    public Integer create(Acao type) {
+    public Integer create(Acao acao) {
         return null;
     }
 
     @Override
-    public Optional<Acao> findOne(Integer key) {
+    public Optional<Acao> findOne(Integer idAtivo) {
         return Optional.empty();
     }
 
