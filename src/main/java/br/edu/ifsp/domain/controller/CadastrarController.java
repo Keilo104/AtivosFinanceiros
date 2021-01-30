@@ -1,6 +1,6 @@
 package br.edu.ifsp.domain.controller;
 
-import br.edu.ifsp.application.main.repository.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
