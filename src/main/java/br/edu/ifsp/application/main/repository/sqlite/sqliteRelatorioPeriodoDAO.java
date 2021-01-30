@@ -1,7 +1,6 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
-import br.edu.ifsp.domain.entities.relatorio.Relatorio;
 import br.edu.ifsp.domain.entities.relatorio.RelatorioPeriodo;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioPeriodoDAO;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteRelatorioPeriodoDAO implements RelatorioPeriodoDAO {//TODO
+public class sqliteRelatorioPeriodoDAO implements RelatorioPeriodoDAO {
 
     @Override
     public Integer create(RelatorioPeriodo relatorioPeriodo) {

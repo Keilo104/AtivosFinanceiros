@@ -2,7 +2,6 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 
 import java.sql.PreparedStatement;
@@ -66,6 +65,24 @@ public class sqliteAtivosDAO implements AtivosDAO {
         }
 
         return Optional.ofNullable(ativo);
+    }
+
+    public Ativo findOneAtivo(Integer id) {
+        String sql = "SELECT * FROM ATIVO WHERE id = ?";
+        Ativo ativo = null;
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, id);
+            ResultSet rs = stat.executeQuery();
+
+            if(rs.next()) {
+                ativo = resultSetToEntity(rs);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return ativo;
     }
 
     @Override

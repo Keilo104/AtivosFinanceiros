@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteRelatorioDAO implements RelatorioDAO {//TODO
+public class sqliteRelatorioDAO implements RelatorioDAO {
     @Override
     public Integer create(Relatorio relatorio) {
         String sql = "INSERT INTO RELATORIO(dataImpressao, categoria) VALUES(?,?);";

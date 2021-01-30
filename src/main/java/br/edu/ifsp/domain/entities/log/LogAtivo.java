@@ -4,6 +4,7 @@ import br.edu.ifsp.domain.entities.ativo.Ativo;
 import javafx.util.Pair;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class LogAtivo extends Log{
     private Ativo ativo;

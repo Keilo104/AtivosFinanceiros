@@ -74,6 +74,24 @@ public class sqliteGrupoDAO implements GrupoDAO {
         return Optional.ofNullable(grupo);
     }
 
+    public Grupo findOneGrupo(Integer id) {
+        String sql = "SELECT * FROM GRUPO WHERE id = ?";
+        Grupo grupo = null;
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, id);
+            ResultSet rs = stat.executeQuery();
+
+            if(rs.next()) {
+                grupo = resultSetToEntity(rs);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return grupo;
+    }
+
     @Override
     public Optional<Grupo> findOneByNome(String nome) {
         String sql = "SELECT * FROM GRUPO WHERE nome = ?";

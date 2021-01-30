@@ -1,13 +1,11 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
-import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

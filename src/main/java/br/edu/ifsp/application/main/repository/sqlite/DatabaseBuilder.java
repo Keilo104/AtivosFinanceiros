@@ -170,7 +170,7 @@ public class DatabaseBuilder {
         builder.append("data TEXT,\n");
         builder.append("tipo TEXT,\n");
         builder.append("valor REAL,\n");
-        builder.append("quantidade REAL,\n");
+        builder.append("quantidade INTEGER,\n");
         builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id),");
         builder.append("PRIMARY KEY(idAtivo, data)\n");
         builder.append("); \n");
