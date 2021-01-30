@@ -27,6 +27,9 @@ public class DatabaseBuilder {
             statement.addBatch(createLogAtivoTable());
             statement.addBatch(createLogTransacaoAtivoTable());
             statement.addBatch(createLogGrupoTable());
+            statement.addBatch(createTokenTable());
+            statement.addBatch(createRelatorioTable());
+            statement.addBatch(createRelatorioPeriodoTable());
             statement.executeBatch();
 
             System.out.println("Base de dados criada com sucesso");
@@ -157,6 +160,43 @@ public class DatabaseBuilder {
         builder.append("quantidade REAL,\n");
         builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id),");
         builder.append("PRIMARY KEY(idAtivo, data)\n");
+        builder.append("); \n");
+
+        return builder.toString();
+    }
+
+    private String createTokenTable(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE TOKEN(");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("data TEXT,\n");
+        builder.append("cpfUsuario TEXT,\n");
+        builder.append("token TEXT,\n");
+        builder.append("FOREIGN KEY (cpfUsuario) REFERENCES USUARIO(cpf),");
+        builder.append("); \n");
+
+        return builder.toString();
+    }
+
+    private String createRelatorioTable(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE RELATORIO(");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("dataImpressao TEXT,\n");
+        builder.append("categoria TEXT,\n");
+        builder.append("); \n");
+
+        return builder.toString();
+    }
+
+    private String createRelatorioPeriodoTable(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE RELATORIO(");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("categoria TEXT,\n");
+        builder.append("dataImpressao TEXT,\n");
+        builder.append("dataInicial TEXT,\n");
+        builder.append("dataFinal TEXT,\n");
         builder.append("); \n");
 
         return builder.toString();
