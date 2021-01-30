@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.InMemoryUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
 import br.edu.ifsp.domain.ui.JanelaPainel;
 import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
@@ -26,11 +27,8 @@ public class LoginController {
     }
 
     public void criarConta() {
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
-        Usuario usuario = new Usuario("1234", "pedro", "email_legal", "123");
-
-        CadastroUseCase cadastroUseCase = new CadastroUseCase(usuarioDAO);
-        cadastroUseCase.cadastrar(usuario);
+        JanelaCadastrar janelaCadastrar = new JanelaCadastrar();
+        janelaCadastrar.showAndWait();
     }
 
     private void alertFailLogin() {
