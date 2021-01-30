@@ -113,7 +113,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
     @Override
     public boolean delete(RendaFixa rendaFixa) {
         if(rendaFixa == null)
-            throw new IllegalArgumentException("Acao cannot be null");
+            throw new IllegalArgumentException("Renda fixa cannot be null");
         return deleteByKey(rendaFixa.getId());
     }
 

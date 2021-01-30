@@ -117,7 +117,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     @Override
     public boolean delete(FundoDeInvestimento fundoDeInvestimento) {
         if(fundoDeInvestimento == null)
-            throw new IllegalArgumentException("Acao cannot be null");
+            throw new IllegalArgumentException("Fundo de investimento cannot be null");
         return deleteByKey(fundoDeInvestimento.getId());
     }
 
