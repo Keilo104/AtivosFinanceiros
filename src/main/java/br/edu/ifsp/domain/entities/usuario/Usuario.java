@@ -45,6 +45,18 @@ public class Usuario implements Observer {
         this.totalInvestido = totalInvestido;
     }
 
+    public Usuario(String cpf, String nome, String email, String senha, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.totalLucrado = totalLucrado;
+        this.totalInvestido = totalInvestido;
+        this.lucroPotencial = lucroPotencial;
+        this.valorAtual = valorAtual;
+        this.investimentoAtual = investimentoAtual;
+    }
+
     public String getCpf() {
         return cpf;
     }
