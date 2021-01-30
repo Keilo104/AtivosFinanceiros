@@ -1,14 +1,9 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.main.repository.*;
+import br.edu.ifsp.application.main.repository.inMemory.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.entities.grupo.GrupoEnum;
-import br.edu.ifsp.domain.entities.relatorio.CategoriaEnum;
-import br.edu.ifsp.domain.entities.relatorio.Relatorio;
-import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
@@ -35,12 +30,6 @@ import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
 import br.edu.ifsp.domain.usecases.usuario.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
