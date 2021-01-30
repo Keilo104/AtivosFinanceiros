@@ -1,6 +1,6 @@
 package br.edu.ifsp.domain.entities.grupo;
 
-public enum GrupoEnum {
+public enum TipoGrupoEnum {
     ACAO ("br.edu.ifsp.domain.entities.ativo.Acao", "Ação"),
     FUNDO_DE_INVESTIMENTO("br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento", "Fundo de Investimento"),
     RENDA_FIXA("br.edu.ifsp.domain.entities.ativo.RendaFixa", "Renda Fixa");
@@ -8,7 +8,7 @@ public enum GrupoEnum {
     private String nomeClasse;
     private String string;
 
-    GrupoEnum(String nomeClasse, String string) {
+    TipoGrupoEnum(String nomeClasse, String string) {
         this.nomeClasse = nomeClasse;
         this.string = string;
     }
@@ -21,7 +21,7 @@ public enum GrupoEnum {
         return this.string;
     }
 
-    public static GrupoEnum getValueByString(String string) {
+    public static TipoGrupoEnum getValueByString(String string) {
         switch(string) {
             case "Ação":
                 return ACAO;
