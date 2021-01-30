@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="615.0" style="-fx-background-color: #5cc7b2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="615.0" style="-fx-background-color: #5cc7b2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.GrupoController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="972.0" prefWidth="598.0" style="-fx-background-color: #5cc7b2;">
          <children>

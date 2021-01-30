@@ -1,35 +1,42 @@
 package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
+import br.edu.ifsp.domain.controller.GrupoController;
+import br.edu.ifsp.domain.controller.PainelController;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class JanelaGrupo extends Application {
+public class JanelaGrupo {
+    public void showAndWait(Usuario user) {
+        ScrollPane sceneGraph = null;
 
-    private static Scene scene;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLGrupo.fxml"));
+            sceneGraph = loader.load();
 
-    public static void main( String[] args ) {
-        launch( args );
-    }
+            Stage stage = new Stage();
+            stage.setTitle("Painel de Grupos");
+            stage.setScene(new Scene(sceneGraph, 800, 700));
+            stage.setMinWidth(800);
+            stage.setMinHeight(400);
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+            GrupoController grupoController = (GrupoController) loader.getController();
+            grupoController.init(user);
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("fxml/FXMLGrupo"), 615, 565);
-        stage.setScene(scene);
-        stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
