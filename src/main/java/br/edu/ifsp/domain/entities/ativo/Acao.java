@@ -11,8 +11,8 @@ public class Acao extends Ativo {
     public Acao() {
     }
 
-    public Acao(float valor, int quantidade, String codigo, String pais) {
-        super(valor, quantidade);
+    public Acao(float valorUnitarioAtual, int quantidade, String codigo, String pais) {
+        super(valorUnitarioAtual, quantidade);
         this.codigo = codigo;
         this.pais = pais;
     }
@@ -58,8 +58,15 @@ public class Acao extends Ativo {
     @Override
     public String toString() {
         return "Acao{" +
-                "pais='" + pais + '\'' +
-                ", categoria='" + codigo + '\'' +
-                "} " + super.toString();
+                "codigo='" + codigo + '\'' +
+                ", pais='" + pais + '\'' +
+                '}';
+    }
+
+    public String toStringCompleto() {
+        return "Acao{" +
+                "codigo='" + codigo + '\'' +
+                ", pais='" + pais + '\'' +
+                '}'+ super.toString();
     }
 }
