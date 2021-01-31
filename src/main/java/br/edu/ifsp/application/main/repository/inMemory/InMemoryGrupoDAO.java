@@ -47,6 +47,23 @@ public class InMemoryGrupoDAO implements GrupoDAO {
     }
 
     @Override
+    public Integer createComCPF(Grupo grupo, String cpf) {
+        if(findOneByNome(grupo.getNome()).isEmpty()) {
+            idCounter++;
+            grupo.setId(idCounter);
+            db.put(idCounter, grupo);
+            return idCounter;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public List<Grupo> findAllByCpf(String cpf) {
+        return null;
+    }
+
+    @Override
     public Optional<Grupo> findOne(Integer key) {
         if(db.containsKey(key)){
             return Optional.of(db.get(key));

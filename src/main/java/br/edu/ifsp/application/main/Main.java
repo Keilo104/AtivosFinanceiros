@@ -129,7 +129,7 @@ public class Main {
         if ( logado != null ) {
             //System.out.println(logado);
             System.out.println( "Logado!" );
-            Grupo grupo = new Grupo( "grupo muito legal", GrupoEnum.ACAO );
+            Grupo grupo = new Grupo( "grupo muito legal", TipoGrupoEnum.ACAO );
             //Grupo grupo2 = new Grupo("grupo ainda mais legal");
             criarGrupoUseCase.include( logado, grupo );
             //criarGrupoUseCase.include(logado, grupo2);

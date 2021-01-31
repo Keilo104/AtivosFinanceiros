@@ -26,12 +26,24 @@ public class RendaFixa extends Ativo{
         this.dataVencimento = dataVencimento;
     }
 
+    public RendaFixa(int idAtivo, String rendimento, String dataVencimento) {
+        super(idAtivo);
+        this.rendimento = rendimento;
+        this.dataVencimento = LocalDateTime.parse(dataVencimento);
+
+    }
+
     public String getRendimento() {
         return rendimento;
     }
 
     public LocalDateTime getDataVencimento() {
         return dataVencimento;
+    }
+
+    @Override
+    public String getNome() {
+        return this.rendimento;
     }
 
     @Override

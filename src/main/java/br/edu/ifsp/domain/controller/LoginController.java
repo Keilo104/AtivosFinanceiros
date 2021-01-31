@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
@@ -21,9 +22,11 @@ public class LoginController {
     @FXML public Button btnEntrar;
 
     private JanelaLogin janelaLogin;
+    private UsuarioDAO usuarioDAO;
 
     public void init(JanelaLogin janelaLogin) {
         this.janelaLogin = janelaLogin;
+        this.usuarioDAO = new sqliteUsuarioDAO();
     }
 
     public void criarConta() {
@@ -56,12 +59,10 @@ public class LoginController {
     }
 
     public void login() {
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
-
         String email = inputEmail.getText();
         String senha = inputSenha.getText();
 
-        LoginUseCase loginUseCase = new LoginUseCase(usuarioDAO);
+        LoginUseCase loginUseCase = new LoginUseCase(this.usuarioDAO);
 
         try {
             Usuario logado = loginUseCase.login(email, senha);

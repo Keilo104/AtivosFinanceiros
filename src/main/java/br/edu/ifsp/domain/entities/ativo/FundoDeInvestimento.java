@@ -28,6 +28,14 @@ public class FundoDeInvestimento extends Ativo{
         this.taxaAdministrativa = taxaAdministrativa;
     }
 
+    public FundoDeInvestimento(int idAtivo, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
+        super(idAtivo);
+        this.nome = nome;
+        this.rentabilidade = rentabilidade;
+        this.liquidez = liquidez;
+        this.taxaAdministrativa = taxaAdministrativa;
+    }
+
     public String getRentabilidade() {
         return rentabilidade;
     }

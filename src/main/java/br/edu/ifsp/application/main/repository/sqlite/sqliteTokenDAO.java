@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.LocalDateTimeTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +18,7 @@ public class sqliteTokenDAO implements TokenDAO {
         String sql = "INSERT INTO token ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
 
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
-            String tokenHash = String.valueOf( MessageDigest.getInstance( "AtivosFinanceiros" + LocalDateTimeTime.now() + token.getUsuario().getCpf() ) );
+            String tokenHash = String.valueOf( MessageDigest.getInstance( "AtivosFinanceiros" + LocalDateTime.now() + token.getUsuario().getCpf() ) );
 
             stat.setString( 1, token.getDateTime().toString() );
             stat.setString( 2, token.getUsuario().getCpf() );

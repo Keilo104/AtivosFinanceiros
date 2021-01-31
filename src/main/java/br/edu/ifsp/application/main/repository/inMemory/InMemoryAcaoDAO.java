@@ -66,4 +66,9 @@ public class InMemoryAcaoDAO implements AcaoDAO {
     public boolean delete(Acao acao) {
         return deleteByKey(acao.getId());
     }
+
+    @Override
+    public Integer create(Acao acao, Integer idAtivo) {
+        return null;
+    }
 }

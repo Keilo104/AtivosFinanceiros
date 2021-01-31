@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class sqliteGrupoDAO implements GrupoDAO {
 
-
+    @Override
     public Integer createComCPF(Grupo grupo, String cpf) {
         String sql = "INSERT INTO GRUPO(nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario)"+
                 "VALUES(?,?,?,?,?,?,?,?);";
@@ -24,7 +24,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             stat.setFloat(4, 0);
             stat.setFloat(5, 0);
             stat.setFloat(6, 0);
-            stat.setString(7, grupo.getTipoGrupo().getNomeClasse());
+            stat.setString(7, grupo.getTipoString());
             stat.setString(8, cpf);
 
             stat.execute();
@@ -42,6 +42,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
     public Integer create(Grupo type) {
         return null;
     }
+
     private Grupo resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
@@ -74,6 +75,24 @@ public class sqliteGrupoDAO implements GrupoDAO {
         return Optional.ofNullable(grupo);
     }
 
+    public Grupo findOneGrupo(Integer id) {
+        String sql = "SELECT * FROM GRUPO WHERE id = ?";
+        Grupo grupo = null;
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, id);
+            ResultSet rs = stat.executeQuery();
+
+            if(rs.next()) {
+                grupo = resultSetToEntity(rs);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return grupo;
+    }
+
     @Override
     public Optional<Grupo> findOneByNome(String nome) {
         String sql = "SELECT * FROM GRUPO WHERE nome = ?";
@@ -93,12 +112,29 @@ public class sqliteGrupoDAO implements GrupoDAO {
         return Optional.ofNullable(grupo);
     }
 
+    @Override
+    public List<Grupo> findAllByCpf(String cpf) {
+        String sql = "SELECT * FROM GRUPO WHERE cpfUsuario = ?;";
+        List<Grupo> grupos = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setString(1, cpf);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                Grupo grupo = resultSetToEntity(rs);
+                grupos.add(grupo);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return grupos;
+    }
+
+
     @Override //TODO
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
         return Optional.empty();
     }
-
-
 
     @Override
     public List<Grupo> findAll() {
@@ -119,8 +155,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
     @Override
     public boolean update(Grupo grupo) {
-        String sql = "UPDATE GRUPO SET nome = ?, totalLucrado =?, totalInvestido=?, lucroPotencial=?, valorAtual=?, investimentoAtual=?, tipoGrupo=?, cpfUsuario=? WHERE id=?"+
-                "VALUES(?,?,?,?,?,?,?,?,?);";
+        String sql = "UPDATE GRUPO SET nome = ?, totalLucrado =?, totalInvestido=?, lucroPotencial=?, valorAtual=?, investimentoAtual=?, tipoGrupo=?, cpfUsuario=? WHERE id=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, grupo.getNome());
             stat.setFloat(2, grupo.getTotalLucrado());

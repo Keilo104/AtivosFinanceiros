@@ -48,6 +48,10 @@ public class Ativo extends Subject {
         this.valorUnitarioAtual = valorUnitarioAtual;
     }
 
+    public Ativo(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -85,8 +89,6 @@ public class Ativo extends Subject {
         return dataComprado;
     }
 
-
-
     public int getQuantidade() {
         return quantidade;
     }
@@ -114,6 +116,10 @@ public class Ativo extends Subject {
                 throw new InvalidQuantityToVenderException("Cannot vender more ativos than you have");
             }
         }
+    }
+
+    public String getNome() {
+        return null;
     }
 
     @Override

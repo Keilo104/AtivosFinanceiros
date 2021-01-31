@@ -1,22 +1,33 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseBuilder {
-    public void buildDatabaseIfMissing(){
+    public static void buildDatabaseIfMissing(){
         if(isDatabaseMissing()){
             buildTables();
         }
     }
 
-    private boolean isDatabaseMissing(){
-        return !Files.exists(Paths.get("databse.db"));
+    public static void dropAll() {
+        try {
+            Files.delete(Paths.get("database.db"));
+
+            System.out.println("Base de dados genocidada com sucesso");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    private void buildTables(){
+    private static boolean isDatabaseMissing(){
+        return Files.notExists(Paths.get("database.db"));
+    }
+
+    private static void buildTables(){
         try(Statement statement = ConnectionFactory.createStatement()) {
             statement.addBatch(createUsuarioTable());
             statement.addBatch(createGrupoTable());
@@ -38,7 +49,7 @@ public class DatabaseBuilder {
         }
     }
 
-    private String createAtivoTable(){
+    private static String createAtivoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE ATIVO(\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -53,7 +64,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createAcaoTable(){
+    private static String createAcaoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE ACAO(");
         builder.append("idAtivo INTEGER PRIMARY KEY,\n");
@@ -66,7 +77,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createFundoDeInvestimentoTable(){
+    private static String createFundoDeInvestimentoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE FUNDO_DE_INVESTIMENTO(");
         builder.append("idAtivo INTEGER PRIMARY KEY,\n");
@@ -79,7 +90,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createRendaFixaTable(){
+    private static String createRendaFixaTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE RENDA_FIXA(");
         builder.append("idAtivo INTEGER PRIMARY KEY,\n");
@@ -91,7 +102,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createGrupoTable(){
+    private static String createGrupoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE GRUPO(");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT,\n");
@@ -109,7 +120,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createUsuarioTable(){
+    private static String createUsuarioTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE USUARIO(");
         builder.append("cpf TEXT PRIMARY KEY,\n");
@@ -120,13 +131,13 @@ public class DatabaseBuilder {
         builder.append("totalInvestido REAL,\n");
         builder.append("lucroPotencial REAL,\n");
         builder.append("valorAtual REAL,\n");
-        builder.append("investimentoAtual REAL,\n");
+        builder.append("investimentoAtual REAL\n");
         builder.append("); \n");
 
         return builder.toString();
     }
 
-    private String createLogAtivoTable(){
+    private static String createLogAtivoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_ATIVO(");
         builder.append("idAtivo INTEGER, \n");
@@ -139,7 +150,7 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createLogGrupoTable(){
+    private static String createLogGrupoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_GRUPO(");
         builder.append("idGrupo INTEGER, \n");
@@ -153,14 +164,14 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createLogTransacaoAtivoTable(){
+    private static String createLogTransacaoAtivoTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE LOG_TRANSACAO_ATIVO(");
         builder.append("idAtivo INTEGER, \n");
         builder.append("data TEXT,\n");
         builder.append("tipo TEXT,\n");
         builder.append("valor REAL,\n");
-        builder.append("quantidade REAL,\n");
+        builder.append("quantidade INTEGER,\n");
         builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id),");
         builder.append("PRIMARY KEY(idAtivo, data)\n");
         builder.append("); \n");
@@ -168,38 +179,38 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createTokenTable(){
+    private static String createTokenTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE TOKEN(");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("data TEXT,\n");
         builder.append("cpfUsuario TEXT,\n");
         builder.append("token TEXT,\n");
-        builder.append("FOREIGN KEY (cpfUsuario) REFERENCES USUARIO(cpf),");
+        builder.append("FOREIGN KEY (cpfUsuario) REFERENCES USUARIO(cpf)");
         builder.append("); \n");
 
         return builder.toString();
     }
 
-    private String createRelatorioTable(){
+    private static String createRelatorioTable(){
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE RELATORIO(");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("dataImpressao TEXT,\n");
-        builder.append("categoria TEXT,\n");
+        builder.append("categoria TEXT\n");
         builder.append("); \n");
 
         return builder.toString();
     }
 
-    private String createRelatorioPeriodoTable(){
+    private static String createRelatorioPeriodoTable(){
         StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE RELATORIO(");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENTS, \n");
+        builder.append("CREATE TABLE RELATORIO_PERIODO(");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("categoria TEXT,\n");
         builder.append("dataImpressao TEXT,\n");
         builder.append("dataInicial TEXT,\n");
-        builder.append("dataFinal TEXT,\n");
+        builder.append("dataFinal TEXT\n");
         builder.append("); \n");
 
         return builder.toString();

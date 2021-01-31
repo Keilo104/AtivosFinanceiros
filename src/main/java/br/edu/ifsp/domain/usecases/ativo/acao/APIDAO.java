@@ -1,11 +1,8 @@
 package br.edu.ifsp.domain.usecases.ativo.acao;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
-import br.edu.ifsp.domain.usecases.utils.DAO;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class APIDAO {
 
     public Acao getOne(String codigo) {
         try {
-            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+codigo+"&apikey=" + API_KEY;
+            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + codigo + "&apikey=" + API_KEY;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -80,7 +77,7 @@ public class APIDAO {
     public List<Acao> search(String keyword) {
         List<Acao> acoes = new ArrayList<>();
         try {
-            String link = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+keyword+"&apikey=" + API_KEY;
+            String link = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keyword + "&apikey=" + API_KEY;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");

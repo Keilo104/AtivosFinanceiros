@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
@@ -20,8 +21,11 @@ public class CadastrarController {
 
     JanelaCadastrar janelaCadastrar;
 
+    private UsuarioDAO usuarioDAO;
+
     public void init(JanelaCadastrar janelaCadastrar) {
         this.janelaCadastrar = janelaCadastrar;
+        usuarioDAO = new sqliteUsuarioDAO();
     }
 
     public void cadastrar() {
@@ -30,8 +34,7 @@ public class CadastrarController {
         String login = textFieldLogin.getText();
         String senha = passwordFieldSenha.getText();
 
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
-        CadastroUseCase cadastroUseCase = new CadastroUseCase(usuarioDAO);
+        CadastroUseCase cadastroUseCase = new CadastroUseCase(this.usuarioDAO);
 
         Usuario user = new Usuario(cpf, nome, login, senha);
 

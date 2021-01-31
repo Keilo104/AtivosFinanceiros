@@ -34,9 +34,15 @@ public class Acao extends Ativo {
         super( valorUnitarioAtual );
     }
 
+    public Acao(int idAtivo, String codigo, String pais) {
+        super(idAtivo);
+        this.codigo = codigo;
+        this.pais = pais;
+    }
+
     public void updateFromAPI() {
         APIDAO apidao = new APIDAO();
-        float newPrice = apidao.getNewPrice(codigo);
+        float newPrice = apidao.getNewPrice(this.codigo);
         if (newPrice > -1) {
             this.setValorUnitarioAtual(newPrice);
         } else {
@@ -53,10 +59,6 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
     public void setNome( String nome ) {
         this.nome = nome;
     }
@@ -67,6 +69,11 @@ public class Acao extends Ativo {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public String getNome() {
+        return this.codigo;
     }
 
     @Override

@@ -17,9 +17,6 @@ public class CriarGrupoUseCase {
         this.logGrupoDAO = logGrupoDAO;
     }
 
-    public CriarGrupoUseCase() {
-    }
-
     public int include(Usuario usuario, Grupo grupo){
         Validator<Grupo> validator = new GrupoInputValidator();
         Notification notif = validator.validate(grupo);
@@ -28,9 +25,10 @@ public class CriarGrupoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        int id = this.grupoDAO.create(grupo);
+        int id = this.grupoDAO.createComCPF(grupo, usuario.getCpf());
 
         if(id != 0) {
+            grupo.setId(id);
             usuario.addGrupo(grupo);
 
             SalvarHistoricoGrupoUseCase salvarHistoricoGrupoUseCase = new SalvarHistoricoGrupoUseCase(logGrupoDAO);
