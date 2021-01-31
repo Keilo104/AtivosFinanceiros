@@ -54,7 +54,7 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
 
     @Override
     public Optional<Usuario> findOne(String cpf) {
-        String sql = "SELECT * FROM USUARIO WHERE cpfUsuario = ?";
+        String sql = "SELECT * FROM USUARIO WHERE cpf= ?";
         Usuario usuario = null;
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, cpf);

@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlToken">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlToken">
     <children>
-        <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="222.0" layoutY="105.0" pickOnBounds="true"
-                   preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        <Label alignment="CENTER" layoutX="185.0" layoutY="27.0" prefHeight="17.0" prefWidth="199.0"
-               text="Resetar a senha">
+      <AnchorPane fx:id="tokenPane" layoutX="-11.0" layoutY="99.0" prefHeight="82.0" prefWidth="611.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="99.0">
+         <children>
+            <Button fx:id="btnCheckToken" layoutX="400.0" layoutY="29.0" mnemonicParsing="false" onAction="#checkToken" text="Verificar Token" AnchorPane.rightAnchor="105.0" />
+              <Label fx:id="labelToken" alignment="BOTTOM_LEFT" layoutX="100.0" layoutY="-1.0" prefHeight="30.0" prefWidth="347.0" text="Enviamos um token ao seu email. Insira-o abaixo">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <Label fx:id="labelTokenInvalido" layoutX="107.0" layoutY="58.0" prefHeight="21.0" prefWidth="211.0" text="Token inválido" textFill="RED">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <TextField fx:id="txtFieldToken" layoutX="100.0" layoutY="29.0" prefHeight="25.0" prefWidth="257.0" promptText="Insira o token aqui" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="passwordPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+              <Label fx:id="labelConfirmar" alignment="BOTTOM_LEFT" disable="true" layoutX="107.0" layoutY="58.0" prefHeight="21.0" prefWidth="347.0" text="Confirmar senha">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <PasswordField fx:id="txtFieldSenha" disable="true" layoutX="98.0" layoutY="21.0" prefHeight="25.0" prefWidth="380.0" promptText="Nova Senha" />
+              <Button fx:id="btnContinuar" disable="true" layoutX="215.0" layoutY="156.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="25.0" prefWidth="163.0" text="Continuar" AnchorPane.bottomAnchor="19.0" />
+              <Label fx:id="labelSenhaInvalida" disable="true" layoutX="98.0" layoutY="121.0" prefHeight="21.0" prefWidth="211.0" text="As senhas não correspondem." textFill="RED">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <Label fx:id="labelSenha" alignment="BOTTOM_LEFT" disable="true" layoutX="98.0" prefHeight="21.0" prefWidth="347.0" text="Insira abaixo a nova senha.">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <PasswordField fx:id="txtFieldConfirmarSenha" disable="true" layoutX="98.0" layoutY="88.0" prefHeight="25.0" prefWidth="380.0" promptText="Confirmar senha" />
+            <Label fx:id="labelSenhaIgual" disable="true" layoutX="98.0" layoutY="121.0" prefHeight="21.0" prefWidth="318.0" text="A senha nova não pode ser igual à atual" textFill="RED">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+        <Label alignment="CENTER" layoutX="201.0" layoutY="14.0" prefHeight="17.0" prefWidth="199.0" text="Resetar a senha">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Button layoutX="203.0" layoutY="352.0" mnemonicParsing="false" onAction="#btnContinuar" prefHeight="25.0"
-                prefWidth="163.0" text="Continuar"/>
-        <TextField fx:id="txtFieldToken" layoutX="110.0" layoutY="109.0" prefHeight="25.0" prefWidth="380.0"
-                   promptText="Insira o token aqui"/>
-        <Label fx:id="labelSenhaInvalida" disable="true" layoutX="107.0" layoutY="283.0" prefHeight="21.0"
-               prefWidth="211.0" text="As senhas não correspondem." textFill="RED">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Label>
-        <Label alignment="BOTTOM_LEFT" layoutX="112.0" layoutY="79.0" prefHeight="30.0" prefWidth="347.0"
-               text="Enviamos um token ao seu email. Insira-o abaixo">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Label>
-        <Label alignment="BOTTOM_LEFT" layoutX="111.0" layoutY="179.0" prefHeight="21.0" prefWidth="347.0"
-               text="Insira abaixo a nova senha.">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Label>
-        <PasswordField fx:id="txtFieldSenha" layoutX="110.0" layoutY="200.0" prefHeight="25.0" prefWidth="380.0"
-                       promptText="Nova Senha"/>
-        <PasswordField fx:id="txtFieldConfirmarSenha" layoutX="107.0" layoutY="258.0" prefHeight="25.0"
-                       prefWidth="380.0" promptText="Confirmar senha"/>
-        <Label alignment="BOTTOM_LEFT" layoutX="111.0" layoutY="237.0" prefHeight="21.0" prefWidth="347.0"
-               text="Confirmar senha">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Label>
-        <Label fx:id="labelTokenInvalido" disable="true" layoutX="107.0" layoutY="134.0" prefHeight="21.0"
-               prefWidth="211.0" text="Token inválido" textFill="RED">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Label>
+      <TextField fx:id="txtFieldCpf" layoutX="100.0" layoutY="57.0" prefHeight="25.0" prefWidth="273.0" promptText="Insira seu cpf" />
+      <Button fx:id="btnEnviar" layoutX="403.0" layoutY="57.0" mnemonicParsing="false" onAction="#enviarToken" prefHeight="25.0" prefWidth="87.0" text="Enviar Token" />
+      <Label fx:id="labelCpfInvalido" layoutX="100.0" layoutY="89.0" prefHeight="21.0" prefWidth="211.0" text="CPF não encontrado" textFill="RED">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
