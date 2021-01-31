@@ -82,6 +82,22 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
         return logsGrupo;
     }
 
+    public List<LogGrupo> findAllOrderByData() {
+        String sql = "SELECT * FROM LOG_ATIVO ORDER BY data;";
+        List<LogGrupo> logsGrupo = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                LogGrupo logGrupo = resultSetToEntity(rs);
+                logsGrupo.add(logGrupo);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return logsGrupo;
+    }
+
     @Override
     public boolean update(LogGrupo type) {
         return false;

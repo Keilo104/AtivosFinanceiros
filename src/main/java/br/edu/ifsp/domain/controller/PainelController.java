@@ -7,7 +7,10 @@ import br.edu.ifsp.domain.ui.JanelaGrupo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -22,7 +25,9 @@ public class PainelController {
     @FXML public Button btnRelatorios;
     @FXML public Button btnGrupos;
     @FXML public Button btnAtivos;
-    @FXML public LineChart graphAtivos;
+    @FXML public CategoryAxis xAxis;
+    @FXML public NumberAxis yAxis;
+    @FXML public LineChart<String,Number> graphAtivos;
     @FXML public Label spanNome;
     @FXML public Label spanLogOut;
     @FXML public Label spanLucroTotal;
@@ -39,6 +44,7 @@ public class PainelController {
 
         grupos = FXCollections.observableArrayList();
 
+        initGrafico();
         updateTable();
         bindTable();
     }
@@ -91,5 +97,12 @@ public class PainelController {
         janelaCriarGrupo.showAndWait(usuario);
 
         updateTable();
+    }
+
+    private void initGrafico(){
+        GraficoCreator gc = new GraficoCreator();
+        XYChart.Series<String,Number> series = gc.setDataPainel();
+
+        graphAtivos.getData().add(series);
     }
 }

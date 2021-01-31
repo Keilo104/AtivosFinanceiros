@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class sqliteTokenDAO implements TokenDAO {//TODO
+public class sqliteTokenDAO implements TokenDAO {
     @Override
     public Integer create( Token token ) {
         String sql = "INSERT INTO token ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
