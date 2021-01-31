@@ -8,7 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class createPDF {
+public class CreatePDF {
     public static void main(String[] argv) {
         Document document = new Document();
         try {
