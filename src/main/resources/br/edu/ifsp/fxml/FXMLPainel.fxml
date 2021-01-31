@@ -64,7 +64,7 @@
                               </Label>
                               <Button fx:id="btnAcessar" layoutX="14.0" layoutY="523.0" mnemonicParsing="false" onAction="#visualizarGrupo" prefHeight="25.0" prefWidth="200.0" text="Acessar" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                               <Button layoutX="14.0" layoutY="570.0" mnemonicParsing="false" onAction="#criarGrupo" prefHeight="25.0" prefWidth="200.0" text="Criar novo grupo" />
-                                          <Button fx:id="btnRelatorios" layoutX="45.0" layoutY="49.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
+                                          <Button fx:id="btnRelatorios" layoutX="45.0" layoutY="49.0" mnemonicParsing="false" onAction="#criarRelatorio" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #E5E5FF;">
