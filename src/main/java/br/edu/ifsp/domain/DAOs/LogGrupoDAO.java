@@ -1,8 +1,7 @@
-package br.edu.ifsp.domain.usecases.log.loggrupo;
+package br.edu.ifsp.domain.DAOs;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
-import br.edu.ifsp.domain.usecases.utils.DAO;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;

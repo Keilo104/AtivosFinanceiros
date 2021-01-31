@@ -1,8 +1,14 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
+import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
+import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class sqliteGrupoDAO implements GrupoDAO {
-
     @Override
     public Integer createComCPF(Grupo grupo, String cpf) {
         String sql = "INSERT INTO GRUPO(nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario)"+
@@ -53,7 +58,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
         Float investimentoAtual = rs.getFloat("investimentoAtual");
         String tipoGrupo = rs.getString("tipoGrupo");
         String cpfUsuario = rs.getString("cpfUsuario");
-        return new Grupo(id, nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual,tipoGrupo,  cpfUsuario );
+        return new Grupo(id, nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario );
     }
 
     @Override
@@ -66,6 +71,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -84,6 +90,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -103,6 +110,8 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -110,6 +119,30 @@ public class sqliteGrupoDAO implements GrupoDAO {
         }
 
         return Optional.ofNullable(grupo);
+    }
+
+    private void populateGrupo(Grupo grupo) {
+        switch(grupo.getTipoGrupo()) {
+            case ACAO:
+                AcaoDAO acaoDAO = new sqliteAcaoDAO();
+                List<Ativo> acoes = acaoDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(acoes);
+                break;
+            case FUNDO_DE_INVESTIMENTO:
+                FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new sqliteFundoDeInvestimentoDAO();
+                List<Ativo> fundosDeInvestimento = fundoDeInvestimentoDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(fundosDeInvestimento);
+
+                break;
+            default:
+                RendaFixaDAO rendaFixaDAO = new sqliteRendaFixaDAO();
+                List<Ativo> rendasFixas = rendaFixaDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(rendasFixas);
+                break;
+        }
     }
 
     @Override
@@ -121,6 +154,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 Grupo grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
                 grupos.add(grupo);
             }
 
@@ -129,7 +163,6 @@ public class sqliteGrupoDAO implements GrupoDAO {
         }
         return grupos;
     }
-
 
     @Override //TODO
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
@@ -144,6 +177,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 Grupo grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
                 grupos.add(grupo);
             }
 

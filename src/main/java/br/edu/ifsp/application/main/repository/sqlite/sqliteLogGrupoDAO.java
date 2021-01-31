@@ -2,13 +2,12 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
-import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
+import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
 import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,7 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
 
     @Override
     public List<LogGrupo> findAll() {
-        String sql = "SELECT * FROM LOG_ATIVO;";
+        String sql = "SELECT * FROM LOG_GRUPO;";
         List<LogGrupo> logsGrupo = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
@@ -91,7 +90,23 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
             while(rs.next()) {
                 LogGrupo logGrupo = resultSetToEntity(rs);
                 logsGrupo.add(logGrupo);
-                System.out.println(logGrupo);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return logsGrupo;
+    }
+
+    public List<LogGrupo> findOneGrupoOrderByData(int idGrupo) {
+        String sql = "SELECT * FROM LOG_GRUPO WHERE idGrupo=? ORDER BY data;";
+        List<LogGrupo> logsGrupo = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, idGrupo);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                LogGrupo logGrupo = resultSetToEntity(rs);
+                logsGrupo.add(logGrupo);
             }
 
         } catch (SQLException throwables) {

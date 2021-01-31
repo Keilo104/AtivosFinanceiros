@@ -1,4 +1,4 @@
-package br.edu.ifsp.domain.usecases.utils;
+package br.edu.ifsp.domain.DAOs;
 
 import java.util.List;
 import java.util.Optional;

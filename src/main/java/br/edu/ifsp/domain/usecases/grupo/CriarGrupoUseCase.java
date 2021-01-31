@@ -1,9 +1,10 @@
 package br.edu.ifsp.domain.usecases.grupo;
 
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
+import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
 import br.edu.ifsp.domain.usecases.log.loggrupo.SalvarHistoricoGrupoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;

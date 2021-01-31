@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.usuario.Token;
-import br.edu.ifsp.domain.usecases.usuario.TokenDAO;
+import br.edu.ifsp.domain.DAOs.TokenDAO;
 
 import java.util.*;
 

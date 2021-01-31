@@ -4,7 +4,7 @@ import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
-import br.edu.ifsp.domain.usecases.ativo.acao.AlterarAcaoUseCase;
+import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInvestimentoUseCase;
@@ -29,7 +29,7 @@ public class Main {
     private static VendaAtivosUseCase vendaAtivosUseCase;
 
     // acao
-    private static AlterarAcaoUseCase alterarAcaoUseCase;
+    private static UpdateAPIAcaoUseCase updateAPIAcaoUseCase;
     private static ExcluirAcaoUseCase excluirAcaoUseCase;
     private static IncluirAcaoUseCase incluirAcaoUseCase;
 
@@ -89,7 +89,7 @@ public class Main {
         compraAtivosUseCase = new CompraAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
         vendaAtivosUseCase = new VendaAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
         //acao
-        alterarAcaoUseCase = new AlterarAcaoUseCase( acaoDAO, logAtivoDAO );
+        updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase( acaoDAO, logAtivoDAO );
         excluirAcaoUseCase = new ExcluirAcaoUseCase( acaoDAO, logAtivoDAO, grupoDAO );
         incluirAcaoUseCase = new IncluirAcaoUseCase( acaoDAO, logAtivoDAO );
         //fundo de investimento
@@ -145,7 +145,7 @@ public class Main {
             compraAtivosUseCase.compraAtivo(user, grupo, ativoLegal);
             compraAtivosUseCase.compraAtivo(user, grupo, ativoIlegal);
             ativoLegal.setValorUnitarioAtual( 20 );
-            alterarAcaoUseCase.update( ( Acao ) ativoLegal );
+            updateAPIAcaoUseCase.update( ( Acao ) ativoLegal );
             //printCarteira(logado.getIteratorCarteira());
             // System.out.println(excluirGrupoUseCase.delete(grupo));
             //printCarteira(logado.getIteratorCarteira());

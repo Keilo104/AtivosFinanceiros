@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.usecases.log.loggrupo;
 
+import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;

@@ -1,14 +1,12 @@
 package br.edu.ifsp.domain.controller;
 
-import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
 import br.edu.ifsp.domain.ui.JanelaPainel;
-import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
 import br.edu.ifsp.domain.usecases.usuario.LoginUseCase;
-import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

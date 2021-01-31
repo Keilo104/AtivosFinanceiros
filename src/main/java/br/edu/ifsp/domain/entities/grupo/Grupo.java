@@ -115,7 +115,7 @@ public class Grupo extends Subject implements Observer {
             ativo.addObserver(this);
 
             this.listaAtivos.add(ativo);
-            this.updateValorAtual();
+            this.updateAll();
         } else {
             throw new InvalidTipoAtivoException("Cannot add ativo from different type of grupo.");
         }
@@ -140,6 +140,10 @@ public class Grupo extends Subject implements Observer {
         return this.listaAtivos.iterator();
     }
 
+    public void setAtivos(List<Ativo> ativos) {
+        this.listaAtivos = ativos;
+    }
+
     private void updateLucroPotencial() {
         this.lucroPotencial = this.valorAtual - this.investimentoAtual;
     }
@@ -150,9 +154,6 @@ public class Grupo extends Subject implements Observer {
         for (Ativo a : listaAtivos) {
             this.valorAtual += a.getValorTotalAtual();
         }
-
-        updateLucroPotencial();
-        notifyObservers();
     }
 
     private void addLucroTotalHistorico(float lucro) {
@@ -162,6 +163,13 @@ public class Grupo extends Subject implements Observer {
     private void addInvestimento(float investimento) {
         this.investimentoAtual += investimento;
         this.totalInvestido += investimento;
+        this.totalLucrado -= investimento;
+    }
+
+    private void updateAll() {
+        updateValorAtual();
+        updateLucroPotencial();
+        notifyObservers();
     }
 
     private void removeInvestimentoAtual(float investimento) {
@@ -187,7 +195,7 @@ public class Grupo extends Subject implements Observer {
 
     @Override
     public void update(Subject o) {
-        this.updateValorAtual();
+        this.updateAll();
 
         if(((Ativo) o).getQuantidade() == 0) {
             this.removeAtivo((Ativo) o);

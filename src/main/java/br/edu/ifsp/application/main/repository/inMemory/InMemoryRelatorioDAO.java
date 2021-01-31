@@ -1,8 +1,7 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
-import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.relatorio.Relatorio;
-import br.edu.ifsp.domain.usecases.relatorio.RelatorioDAO;
+import br.edu.ifsp.domain.DAOs.RelatorioDAO;
 
 import java.util.*;
 

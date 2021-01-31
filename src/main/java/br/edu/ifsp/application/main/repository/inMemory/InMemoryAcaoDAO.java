@@ -2,7 +2,7 @@ package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
 
 import java.util.*;
 
@@ -68,7 +68,7 @@ public class InMemoryAcaoDAO implements AcaoDAO {
     }
 
     @Override
-    public Integer create(Acao acao, Integer idAtivo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         return null;
     }
 }

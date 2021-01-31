@@ -69,6 +69,7 @@ public class DatabaseBuilder {
         builder.append("CREATE TABLE ACAO(");
         builder.append("idAtivo INTEGER PRIMARY KEY,\n");
         builder.append("codigo TEXT,\n");
+        builder.append("nome TEXT, \n");
         builder.append("pais INTEGER,\n");
         builder.append("FOREIGN KEY (idAtivo) REFERENCES ATIVO(id)");
         builder.append("); \n");
