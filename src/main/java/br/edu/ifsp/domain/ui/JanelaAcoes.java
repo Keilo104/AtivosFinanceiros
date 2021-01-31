@@ -22,9 +22,9 @@ public class JanelaAcoes {
             sceneGraph = loader.load();
 
             stage.setTitle( "Visualizar Ações" );
-            stage.setScene( new Scene( sceneGraph, 750, 750 ) );
+            stage.setScene( new Scene( sceneGraph, 750, 450 ) );
             stage.setMinWidth( 755 );
-            stage.setMinHeight( 755 );
+            stage.setMinHeight( 450 );
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 1080 );
 
