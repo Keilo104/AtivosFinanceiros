@@ -1,6 +1,6 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
-
+import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
 
@@ -14,6 +14,10 @@ import java.util.Optional;
 public class sqliteRendaFixaDAO implements RendaFixaDAO {
     @Override
     public Integer create(RendaFixa rendaFixa) {
+        AtivosDAO ativosDAO = new sqliteAtivosDAO();
+        int id = ativosDAO.create(rendaFixa);
+        rendaFixa.setId(id);
+
         String sql = "INSERT INTO RENDA_FIXA VALUES(?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, rendaFixa.getId());
@@ -23,24 +27,6 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             stat.execute();
 
             return rendaFixa.getId();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Integer create(RendaFixa rendaFixa, Integer idAtivo) {
-        String sql = "INSERT INTO RENDA_FIXA VALUES(?,?,?);";
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setInt(1, idAtivo);
-            stat.setString(2, rendaFixa.getRendimento());
-            stat.setString(3, rendaFixa.getDataVencimento().toString());
-
-            stat.execute();
-
-            return idAtivo;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

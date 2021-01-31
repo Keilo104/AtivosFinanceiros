@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
 
@@ -13,6 +14,10 @@ import java.util.Optional;
 public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     @Override
     public Integer create(FundoDeInvestimento fundoDeInvestimento) {
+        AtivosDAO ativosDAO = new sqliteAtivosDAO();
+        int id = ativosDAO.create(fundoDeInvestimento);
+        fundoDeInvestimento.setId(id);
+
         String sql = "INSERT INTO FUNDO_-DE_INVESTIMENTO VALUES(?,?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, fundoDeInvestimento.getId());
@@ -24,26 +29,6 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             stat.execute();
 
             return fundoDeInvestimento.getId();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Integer create(FundoDeInvestimento fundoDeInvestimento, Integer idAtivo) {
-        String sql = "INSERT INTO FUNDO_-DE_INVESTIMENTO VALUES(?,?,?,?,?);";
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setInt(1, idAtivo);
-            stat.setString(2, fundoDeInvestimento.getNome());
-            stat.setString(3, fundoDeInvestimento.getRentabilidade());
-            stat.setString(4, fundoDeInvestimento.getLiquidez());
-            stat.setFloat(5, fundoDeInvestimento.getTaxaAdministrativa());
-
-            stat.execute();
-
-            return idAtivo;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -29,9 +29,7 @@ public class IncluirRendaFixaUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        int id = this.ativosDAO.create(rendaFixa);
-        rendaFixa.setId(id);
-        id = this.rendaFixaDAO.create(rendaFixa);
+        int id = this.rendaFixaDAO.create(rendaFixa);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
         LogAtivo logAtivo = new LogAtivo(rendaFixa, LogAtivoEnum.INCLUSAO);

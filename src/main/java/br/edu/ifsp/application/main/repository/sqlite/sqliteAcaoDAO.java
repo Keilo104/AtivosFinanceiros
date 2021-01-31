@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
 
@@ -13,6 +14,10 @@ import java.util.Optional;
 public class sqliteAcaoDAO implements AcaoDAO {
     @Override
     public Integer create(Acao acao) {
+        AtivosDAO ativosDAO = new sqliteAtivosDAO();
+        int id = ativosDAO.create(acao);
+        acao.setId(id);
+
         String sql = "INSERT INTO ACAO VALUES(?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, acao.getId());
@@ -22,23 +27,6 @@ public class sqliteAcaoDAO implements AcaoDAO {
             stat.execute();
 
             return acao.getId();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-    @Override
-    public Integer create(Acao acao, Integer idAtivo) {
-        String sql = "INSERT INTO ACAO VALUES(?,?,?);";
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setInt(1, idAtivo);
-            stat.setString(2, acao.getCodigo());
-            stat.setString(3, acao.getPais());
-
-            stat.execute();
-
-            return idAtivo;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class sqliteGrupoDAO implements GrupoDAO {
-
     @Override
     public Integer createComCPF(Grupo grupo, String cpf) {
         String sql = "INSERT INTO GRUPO(nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario)"+
@@ -53,7 +52,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
         Float investimentoAtual = rs.getFloat("investimentoAtual");
         String tipoGrupo = rs.getString("tipoGrupo");
         String cpfUsuario = rs.getString("cpfUsuario");
-        return new Grupo(id, nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual,tipoGrupo,  cpfUsuario );
+        return new Grupo(id, nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario );
     }
 
     @Override
@@ -129,7 +128,6 @@ public class sqliteGrupoDAO implements GrupoDAO {
         }
         return grupos;
     }
-
 
     @Override //TODO
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
