@@ -13,8 +13,13 @@ public class Acao extends Ativo {
     public Acao() {
     }
 
-    public Acao(float valorUnitarioAtual, int quantidade, String codigo, String pais) {
+    public Acao(Ativo ativo) {
+        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade(), ativo.getIDGrupo());
+    }
+
+    public Acao(float valorUnitarioAtual, int quantidade, String nome, String codigo, String pais) {
         super(valorUnitarioAtual, quantidade);
+        this.nome = nome;
         this.codigo = codigo;
         this.pais = pais;
     }
@@ -41,14 +46,8 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public void updateFromAPI() {
-        APIDAO apidao = new AlphaAdvantageAPIDAO();
-        float newPrice = apidao.getNewPrice(this.codigo);
-        if (newPrice > -1) {
-            this.setValorUnitarioAtual(newPrice);
-        } else {
-            throw new InvalidPriceToUpdateException("Cannot update price");
-        }
+    public void updateFromAPI(float novoValor) {
+        this.setValorUnitarioAtual(novoValor);
         notifyObservers();
     }
 
@@ -74,18 +73,11 @@ public class Acao extends Ativo {
 
     @Override
     public String getNome() {
-        return this.codigo;
+        return this.nome;
     }
 
     @Override
     public String toString() {
-        return "Acao{" +
-                "codigo='" + codigo + '\'' +
-                ", pais='" + pais + '\'' +
-                '}';
-    }
-
-    public String toStringCompleto() {
         return "Acao{" +
                 "codigo='" + codigo + '\'' +
                 ", pais='" + pais + '\'' +

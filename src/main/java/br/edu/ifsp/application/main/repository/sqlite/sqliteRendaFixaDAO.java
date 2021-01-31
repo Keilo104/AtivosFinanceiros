@@ -1,12 +1,15 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
+import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,12 +37,12 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         return null;
     }
 
-    private RendaFixa resultSetToEntity(ResultSet rs) throws SQLException {
-        int idAtivo = rs.getInt("idAtivo");
+    private void resultSetToEntity(ResultSet rs, RendaFixa rendaFixa) throws SQLException {
         String rendimento = rs.getString("rendimento");
         String dataVencimento = rs.getString("dataVencimento");
 
-        return new RendaFixa(idAtivo, rendimento, dataVencimento);
+        rendaFixa.setRendimento(rendimento);
+        rendaFixa.setDataVencimento(LocalDateTime.parse(dataVencimento));
     }
 
     @Override
@@ -51,7 +54,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             ResultSet rs = stat.executeQuery();
 
             if(rs.next()) {
-                rendaFixa = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, renda);
             }
 
         } catch (SQLException throwables) {
@@ -68,7 +75,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
-                RendaFixa renda = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, renda);
                 rendas.add(renda);
             }
 
@@ -87,7 +98,9 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             stat.setInt(3, rendaFixa.getId());
 
             stat.execute();
-            return true;
+            AtivosDAO ativosDAO = new sqliteAtivosDAO();
+
+            return ativosDAO.update(rendaFixa);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -116,5 +129,29 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         return deleteByKey(rendaFixa.getId());
     }
 
+    @Override
+    public List<Ativo> findAllByGrupo(int idGrupo) {
+        String sql = "SELECT * FROM RENDA_FIXA r\n" +
+                "JOIN ATIVO a\n" +
+                "ON r.idAtivo = a.id\n" +
+                "WHERE a.grupoId = ?;";
+        List<Ativo> rendas = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stat.executeQuery();
 
+            stat.setInt(1, idGrupo);
+            while(rs.next()) {
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
+
+                resultSetToEntity(rs, renda);
+                rendas.add(renda);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rendas;
+    }
 }

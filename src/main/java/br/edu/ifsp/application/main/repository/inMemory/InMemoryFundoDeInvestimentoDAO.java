@@ -66,4 +66,9 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     public boolean delete(FundoDeInvestimento fundoDeInvestimento) {
         return deleteByKey(fundoDeInvestimento.getId());
     }
+
+    @Override
+    public List<Ativo> findAllByGrupo(int idGrupo) {
+        return null;
+    }
 }

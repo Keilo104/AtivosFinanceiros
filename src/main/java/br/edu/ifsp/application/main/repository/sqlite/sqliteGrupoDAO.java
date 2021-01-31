@@ -1,6 +1,12 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
+import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
+import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.DAOs.GrupoDAO;
 
@@ -65,6 +71,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -83,6 +90,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -102,6 +110,8 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
             if(rs.next()) {
                 grupo = resultSetToEntity(rs);
+
+                populateGrupo(grupo);
             }
 
         } catch (SQLException throwables) {
@@ -109,6 +119,30 @@ public class sqliteGrupoDAO implements GrupoDAO {
         }
 
         return Optional.ofNullable(grupo);
+    }
+
+    private void populateGrupo(Grupo grupo) {
+        switch(grupo.getTipoGrupo()) {
+            case ACAO:
+                AcaoDAO acaoDAO = new sqliteAcaoDAO();
+                List<Ativo> acoes = acaoDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(acoes);
+                break;
+            case FUNDO_DE_INVESTIMENTO:
+                FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new sqliteFundoDeInvestimentoDAO();
+                List<Ativo> fundosDeInvestimento = fundoDeInvestimentoDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(fundosDeInvestimento);
+
+                break;
+            default:
+                RendaFixaDAO rendaFixaDAO = new sqliteRendaFixaDAO();
+                List<Ativo> rendasFixas = rendaFixaDAO.findAllByGrupo(grupo.getId());
+
+                grupo.setAtivos(rendasFixas);
+                break;
+        }
     }
 
     @Override
@@ -120,6 +154,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 Grupo grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
                 grupos.add(grupo);
             }
 
@@ -142,6 +177,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 Grupo grupo = resultSetToEntity(rs);
+                populateGrupo(grupo);
                 grupos.add(grupo);
             }
 

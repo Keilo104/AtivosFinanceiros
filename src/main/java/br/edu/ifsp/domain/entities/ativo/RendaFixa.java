@@ -9,6 +9,10 @@ public class RendaFixa extends Ativo{
     public RendaFixa() {
     }
 
+    public RendaFixa(Ativo ativo) {
+        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade(), ativo.getIDGrupo());
+    }
+
     public RendaFixa(float valor, int quantidade, String rendimento) {
         super(valor, quantidade);
         this.rendimento = rendimento;
@@ -35,6 +39,14 @@ public class RendaFixa extends Ativo{
 
     public String getRendimento() {
         return rendimento;
+    }
+
+    public void setRendimento(String rendimento) {
+        this.rendimento = rendimento;
+    }
+
+    public void setDataVencimento(LocalDateTime dataVencimento) {
+        this.dataVencimento = dataVencimento;
     }
 
     public LocalDateTime getDataVencimento() {

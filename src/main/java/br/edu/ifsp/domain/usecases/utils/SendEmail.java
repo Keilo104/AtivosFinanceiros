@@ -5,7 +5,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class sendEmail {
+public class SendEmail {
     public static void main(String argv[]){
         //permitir a acesso a aplicativos na conta do google
         //desativar antivirus?

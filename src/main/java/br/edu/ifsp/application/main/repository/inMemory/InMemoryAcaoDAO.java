@@ -66,4 +66,9 @@ public class InMemoryAcaoDAO implements AcaoDAO {
     public boolean delete(Acao acao) {
         return deleteByKey(acao.getId());
     }
+
+    @Override
+    public List<Ativo> findAllByGrupo(int idGrupo) {
+        return null;
+    }
 }
