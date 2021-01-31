@@ -27,7 +27,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="txtQuantia" layoutX="382.0" layoutY="649.0" prefHeight="25.0" prefWidth="77.0" promptText="Quantia" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="382.0" />
+        <TextField fx:id="txtQuantia" layoutX="382.0" layoutY="649.0" onKeyReleased="#updateTotal" prefHeight="25.0" prefWidth="77.0" promptText="Quantia" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="382.0" />
         <Label layoutX="480.0" layoutY="648.0" prefHeight="27.0" prefWidth="92.0" text="Valor total:" AnchorPane.bottomAnchor="64.0" AnchorPane.rightAnchor="178.0">
             <font>
                 <Font size="18.0" />
@@ -44,7 +44,7 @@
                 <Font size="21.0" />
             </font>
         </Label>
-      <Label layoutX="306.0" layoutY="647.0" prefHeight="27.0" prefWidth="77.0" text="Posições" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="306.0">
+      <Label layoutX="306.0" layoutY="647.0" prefHeight="27.0" prefWidth="77.0" text="Posições:" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="306.0">
          <font>
             <Font size="18.0" />
          </font>

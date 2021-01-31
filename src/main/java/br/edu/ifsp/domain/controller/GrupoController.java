@@ -103,7 +103,6 @@ public class GrupoController {
 
     private void updateButton(Ativo ativo) {
         System.out.println("Updatando sem API para " + ativo.toString());
-
     }
 
     private void sellButton(Ativo ativo) {
@@ -114,20 +113,20 @@ public class GrupoController {
         switch(grupo.getTipoGrupo()) {
             case ACAO:
                 JanelaAcoes janelaAcoes = new JanelaAcoes();
-                janelaAcoes.showAndWait( grupo );
+                janelaAcoes.showAndWait( usuario, grupo );
                 break;
 
             case RENDA_FIXA:
                 JanelaRendaFixa janelaRendaFixa = new JanelaRendaFixa();
-                janelaRendaFixa.showAndWait( grupo );
+                janelaRendaFixa.showAndWait( usuario, grupo );
                 break;
 
             default:
                 JanelaFundos janelaFundos = new JanelaFundos();
-                janelaFundos.showAndWait( grupo );
+                //janelaFundos.showAndWait( usuario, grupo );
                 break;
         }
-
+        updateAtivos();
     }
 
     public void excluirGrupo() {

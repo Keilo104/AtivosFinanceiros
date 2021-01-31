@@ -28,8 +28,8 @@ public class JanelaFundos {
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 1080 );
 
-            CtrlAcoes ctrlAcoes = new CtrlAcoes();
-            ctrlAcoes.init( grupo );
+            //CtrlAcoes ctrlAcoes = new CtrlAcoes();
+            //ctrlAcoes.init( usuario, grupo );
 
             stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();
