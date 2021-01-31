@@ -107,7 +107,7 @@ public class GrupoController {
         GrupoDAO grupoDAO = new sqliteGrupoDAO();
         LogTransacaoDAO logTransacaoDAO = new sqliteLogTransacaoDAO();
         LogGrupoDAO logGrupoDAO = new sqliteLogGrupoDAO();
-        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(ativosDAO, acaoDAO, logAtivoDAO);
+        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
 
         Acao nova = new Acao(12, 5, "GME", "USA");
         incluirAcaoUseCase.include(nova);
