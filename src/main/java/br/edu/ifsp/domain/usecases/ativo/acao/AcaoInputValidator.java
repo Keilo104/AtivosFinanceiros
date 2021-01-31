@@ -14,12 +14,6 @@ public class AcaoInputValidator extends Validator<Acao> {
             return notification;
         }
 
-        if (acao.getValorUnitarioAtual() <= 0) {
-            notification.addError("Valor Unitario Atual cannot be 0 or negative");
-        }
-        if (acao.getValorUnitarioComprado() <= 0) {
-            notification.addError("Valor Unitario Comprado cannot be 0 or negative");
-        }
         if (acao.getDataComprado() == null) {
             notification.addError("Data cannot be null");
         }

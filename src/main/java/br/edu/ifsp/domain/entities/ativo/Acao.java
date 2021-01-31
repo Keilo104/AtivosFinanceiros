@@ -40,7 +40,7 @@ public class Acao extends Ativo {
         super( valorUnitarioAtual );
     }
 
-    public Acao(int idAtivo, String codigo, String pais) {
+    public Acao(int idAtivo, String codigo, String pais, String nome) {
         super(idAtivo);
         this.codigo = codigo;
         this.pais = pais;

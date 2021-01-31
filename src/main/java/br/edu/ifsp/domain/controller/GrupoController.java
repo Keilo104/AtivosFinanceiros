@@ -1,14 +1,16 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
-import br.edu.ifsp.application.main.repository.sqlite.*;
-import br.edu.ifsp.domain.DAOs.*;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
+import br.edu.ifsp.domain.DAOs.APIDAO;
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
-import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
+import br.edu.ifsp.domain.ui.JanelaAcoes;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -109,18 +111,9 @@ public class GrupoController {
     }
 
     public void adicionarAtivo() {
-        AtivosDAO ativosDAO = new sqliteAtivosDAO();
-        GrupoDAO grupoDAO = new sqliteGrupoDAO();
-        LogTransacaoDAO logTransacaoDAO = new sqliteLogTransacaoDAO();
-        LogGrupoDAO logGrupoDAO = new sqliteLogGrupoDAO();
-        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        JanelaAcoes janelaAcoes = new JanelaAcoes();
+        janelaAcoes.showAndWait( grupo );
 
-        Acao nova = new Acao(12, 5, "BOM DIA GRUPO", "GME", "USA");
-        incluirAcaoUseCase.include(nova);
-
-        CompraAtivosUseCase compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO, logGrupoDAO);
-        compraAtivosUseCase.compraAtivo(usuario, grupo, nova);
-        updateAtivos();
     }
 
     public void excluirGrupo() {

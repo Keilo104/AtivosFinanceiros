@@ -9,6 +9,7 @@ import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String dataVencimento = rs.getString("dataVencimento");
 
         rendaFixa.setRendimento(rendimento);
-        rendaFixa.setDataVencimento(LocalDateTime.parse(dataVencimento));
+        rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             if(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, renda);
             }
@@ -77,7 +78,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, renda);
                 rendas.add(renda);

@@ -7,6 +7,7 @@ import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,13 @@ public class sqliteAtivosDAO implements AtivosDAO {
         float valorUnitarioAtual = rs.getFloat("valorUnitarioAtual");
         float valorUnitarioComprado = rs.getFloat("valorUnitarioComprado");
         float valorTotalVendido = rs.getFloat("valorTotalVendido");
-        LocalDateTime dataComprado = LocalDateTime.parse(rs.getString("dataComprado"));
+        LocalDateTime dataComprado;
+        if (rs.getString("dataComprado") != null) {
+            dataComprado = LocalDateTime.parse(rs.getString("dataComprado"));
+        }
+        else {
+            dataComprado = null;
+        }
         int quantidade = rs.getInt("quantidade");
         int grupoId = rs.getInt("grupoId");
 

@@ -56,7 +56,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             if(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+                fundoDeInvestimento = new FundoDeInvestimento(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, fundoDeInvestimento);
             }
@@ -77,7 +77,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                FundoDeInvestimento fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+                FundoDeInvestimento fundoDeInvestimento = new FundoDeInvestimento(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, fundoDeInvestimento);
                 fundos.add(fundoDeInvestimento);
@@ -135,7 +135,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     public List<Ativo> findAllByGrupo(int idGrupo) {
         String sql = "SELECT * FROM FUNDO_DE_INVESTIMENTO f\n" +
                 "JOIN ATIVO a\n" +
-                "ON ac.idAtivo = f.id\n" +
+                "ON f.idAtivo = a.id\n" +
                 "WHERE a.grupoId = ?;";
 
         List<Ativo> fundos = new ArrayList<>();

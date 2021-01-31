@@ -39,6 +39,7 @@ public class sqliteAcaoDAO implements AcaoDAO {
     private void resultSetToEntity(ResultSet rs, Acao acao) throws SQLException {
         acao.setCodigo(rs.getString("codigo"));
         acao.setPais(rs.getString("pais"));
+        acao.setNome( rs.getString( "nome" ) );
     }
 
     @Override
@@ -73,7 +74,7 @@ public class sqliteAcaoDAO implements AcaoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                Acao acao = (Acao) ativosDAO.findOne(id).get();
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, acao);
 
