@@ -30,6 +30,10 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
+    public Acao( float valorUnitarioAtual) {
+        super( valorUnitarioAtual );
+    }
+
     public Acao(int idAtivo, String codigo, String pais) {
         super(idAtivo);
         this.codigo = codigo;

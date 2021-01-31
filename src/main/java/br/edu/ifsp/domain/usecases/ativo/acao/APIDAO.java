@@ -45,7 +45,7 @@ public class APIDAO {
         return price;
     }
 
-    public void getOne(String codigo) {
+    public Acao getOne(String codigo) {
         try {
             String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + codigo + "&apikey=" + API_KEY;
             URL url = new URL(link);
@@ -54,7 +54,7 @@ public class APIDAO {
             con.setRequestProperty("Content-Type", "application/json; utf-8");
             con.setRequestProperty("Accept", "application/json");
 
-
+            Acao acao = new Acao();
             try (Scanner scanner = new Scanner(url.openStream())) {
                 String inline = "";
                 while (scanner.hasNext()) {
@@ -64,9 +64,13 @@ public class APIDAO {
                 JSONParser parser = new JSONParser();
                 JSONObject data_obj = (JSONObject) parser.parse(inline);
                 JSONObject obj = (JSONObject) data_obj.get("Global Quote");
+
+                acao = new Acao( Float.parseFloat( obj.get( "05. price" ).toString() ) );
             }
+            return acao;
         } catch (IOException | ParseException e) {
             System.out.println(e);
+            return null;
         }
     }
 
