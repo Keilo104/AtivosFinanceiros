@@ -1,19 +1,19 @@
 package br.edu.ifsp.domain.entities.log;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Log {
-    private LocalDate data;
+    private LocalDateTime data;
 
     public Log() {
-        this.data = LocalDate.now();
+        this.data = LocalDateTime.now();
     }
 
-    public Log(LocalDate data) {
+    public Log(LocalDateTime data) {
         this.data = data;
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
