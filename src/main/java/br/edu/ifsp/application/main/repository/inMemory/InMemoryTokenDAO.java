@@ -9,15 +9,19 @@ public class InMemoryTokenDAO implements TokenDAO {
     private static final Map<Integer, Token> db = new LinkedHashMap<>();
     private static int idCounter;
 
-    @Override
-    public Integer create( Token token ) {
+    public String create(Token token ) {
         idCounter++;
         token.setId( idCounter );
         db.put( idCounter, token );
-        return idCounter;
+        return String.valueOf(idCounter);
     }
 
     @Override
+    public Optional<Token> findOne(String key) {
+        return Optional.empty();
+    }
+
+
     public Optional<Token> findOne( Integer key ) {
         if ( db.containsKey( key ) )
             return Optional.of( db.get( key ) );
@@ -40,6 +44,11 @@ public class InMemoryTokenDAO implements TokenDAO {
     }
 
     @Override
+    public boolean deleteByKey(String key) {
+        return false;
+    }
+
+
     public boolean deleteByKey( Integer key ) {
         if ( db.containsKey( key ) ) {
             db.remove( key );
@@ -51,5 +60,10 @@ public class InMemoryTokenDAO implements TokenDAO {
     @Override
     public boolean delete( Token token ) {
         return deleteByKey( token.getId() );
+    }
+
+    @Override
+    public boolean findIfExists(String token) {
+        return false;
     }
 }
