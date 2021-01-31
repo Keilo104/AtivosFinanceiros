@@ -74,7 +74,7 @@ public class sqliteAcaoDAO implements AcaoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                Acao acao = (Acao) ativosDAO.findOne(id).get();
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, acao);
 
