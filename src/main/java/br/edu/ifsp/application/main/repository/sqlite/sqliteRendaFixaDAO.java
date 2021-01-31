@@ -9,6 +9,7 @@ import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String dataVencimento = rs.getString("dataVencimento");
 
         rendaFixa.setRendimento(rendimento);
-        rendaFixa.setDataVencimento(LocalDateTime.parse(dataVencimento));
+        rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
     }
 
     @Override
