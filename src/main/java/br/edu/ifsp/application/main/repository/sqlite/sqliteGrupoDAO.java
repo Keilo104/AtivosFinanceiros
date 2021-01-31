@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class sqliteGrupoDAO implements GrupoDAO {
 
-
+    @Override
     public Integer createComCPF(Grupo grupo, String cpf) {
         String sql = "INSERT INTO GRUPO(nome, totalLucrado, totalInvestido, lucroPotencial, valorAtual, investimentoAtual, tipoGrupo, cpfUsuario)"+
                 "VALUES(?,?,?,?,?,?,?,?);";
@@ -24,7 +24,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             stat.setFloat(4, 0);
             stat.setFloat(5, 0);
             stat.setFloat(6, 0);
-            stat.setString(7, grupo.getTipoGrupo().getNomeClasse());
+            stat.setString(7, grupo.getTipoGrupo().getString());
             stat.setString(8, cpf);
 
             stat.execute();
@@ -42,6 +42,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
     public Integer create(Grupo type) {
         return null;
     }
+
     private Grupo resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
@@ -111,8 +112,9 @@ public class sqliteGrupoDAO implements GrupoDAO {
         return Optional.ofNullable(grupo);
     }
 
-    public List<Grupo> findAllByCPF(String cpf) {
-        String sql = "SELECT * FROM GRUPO WHERE cpfUsuario=?;";
+    @Override
+    public List<Grupo> findAllByCpf(String cpf) {
+        String sql = "SELECT * FROM GRUPO WHERE cpfUsuario = ?;";
         List<Grupo> grupos = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, cpf);
@@ -133,8 +135,6 @@ public class sqliteGrupoDAO implements GrupoDAO {
     public Optional<Grupo> findOneByAtivo(Ativo ativo) {
         return Optional.empty();
     }
-
-
 
     @Override
     public List<Grupo> findAll() {

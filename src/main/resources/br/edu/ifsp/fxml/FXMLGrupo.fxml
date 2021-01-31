@@ -16,7 +16,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Label layoutX="110.0" layoutY="60.0" prefHeight="27.0" prefWidth="281.0" text="Ações">
+                        <Label fx:id="labelTipo" layoutX="110.0" layoutY="60.0" prefHeight="27.0" prefWidth="281.0" text="Ações">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -27,7 +27,7 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Label layoutX="85.0" layoutY="12.0" prefHeight="30.0" prefWidth="315.0" text="Investindo ações">
+                        <Label fx:id="labelNome" layoutX="85.0" layoutY="12.0" prefHeight="30.0" prefWidth="315.0" text="Investindo ações">
                             <font>
                                 <Font size="20.0" />
                             </font>
@@ -53,7 +53,7 @@
                 </Pane>
                 <Pane layoutX="13.0" layoutY="567.0" prefHeight="325.0" prefWidth="573.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="567.0">
                     <children>
-                        <VBox layoutX="6.0" layoutY="55.0" prefHeight="185.0" prefWidth="561.0">
+                        <VBox fx:id="vBox" layoutX="6.0" layoutY="55.0" prefHeight="185.0" prefWidth="561.0">
                             <children>
                                 <ButtonBar buttonOrder="" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="561.0" style="-fx-border-color: blue; -fx-border-radius: 10px;">
                                     <buttons>

@@ -1,6 +1,8 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
 
 import java.sql.PreparedStatement;
@@ -52,7 +54,7 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
 
     @Override
     public Optional<Usuario> findOne(String cpf) {
-        String sql = "SELECT * FROM USUARIO WHERE cpf = ?";
+        String sql = "SELECT * FROM USUARIO WHERE cpfUsuario = ?";
         Usuario usuario = null;
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, cpf);
@@ -60,6 +62,12 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
 
             if(rs.next()) {
                 usuario = resultSetToEntity(rs);
+
+                GrupoDAO grupoDAO = new sqliteGrupoDAO();
+                List<Grupo> grupos = grupoDAO.findAllByCpf(usuario.getCpf());
+                for (Grupo g : grupos) {
+                    usuario.addGrupo(g);
+                }
             }
 
         } catch (SQLException throwables) {
@@ -78,6 +86,12 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
 
             if(rs.next()) {
                 usuario = resultSetToEntity(rs);
+
+                GrupoDAO grupoDAO = new sqliteGrupoDAO();
+                List<Grupo> grupos = grupoDAO.findAllByCpf(usuario.getCpf());
+                for (Grupo g : grupos) {
+                    usuario.addGrupo(g);
+                }
             }
 
         } catch (SQLException throwables) {
@@ -105,6 +119,12 @@ public class sqliteUsuarioDAO implements UsuarioDAO{
             while(rs.next()) {
                Usuario usuario = resultSetToEntity(rs);
                usuarios.add(usuario);
+
+                GrupoDAO grupoDAO = new sqliteGrupoDAO();
+                List<Grupo> grupos = grupoDAO.findAllByCpf(usuario.getCpf());
+                for (Grupo g : grupos) {
+                    usuario.addGrupo(g);
+                }
             }
 
         } catch (SQLException throwables) {

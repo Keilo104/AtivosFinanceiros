@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.ui.JanelaCriarGrupo;
 import br.edu.ifsp.domain.ui.JanelaGrupo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,12 +38,18 @@ public class PainelController {
         updateLabels();
 
         grupos = FXCollections.observableArrayList();
+
+        updateTable();
+        bindTable();
+    }
+
+    private void updateTable() {
+        grupos.clear();
+
         Iterator<Grupo> iterator = usuario.getIteratorCarteira();
         while(iterator.hasNext()) {
             grupos.add(iterator.next());
         }
-
-        bindTable();
     }
 
     private void bindTable() {
@@ -77,5 +84,12 @@ public class PainelController {
         } else {
             alertNotSelected();
         }
+    }
+
+    public void criarGrupo() {
+        JanelaCriarGrupo janelaCriarGrupo = new JanelaCriarGrupo();
+        janelaCriarGrupo.showAndWait(usuario);
+
+        updateTable();
     }
 }
