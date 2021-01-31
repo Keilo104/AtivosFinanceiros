@@ -9,8 +9,11 @@ import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaAcoes;
+import br.edu.ifsp.domain.ui.JanelaFundos;
+import br.edu.ifsp.domain.ui.JanelaRendaFixa;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -69,7 +72,7 @@ public class GrupoController {
             Label nome = new Label(ativo.getNome());
             bar.getButtons().add(nome);
 
-            if(ativo instanceof Acao) {
+            if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
                 Button update = new Button("Update");
                 Ativo finalAtivo = ativo;
                 update.setOnAction(e -> updateAPIButton(finalAtivo));
@@ -94,16 +97,12 @@ public class GrupoController {
     }
 
     private void updateAPIButton(Ativo ativo) {
-        System.out.println("Updatando API para " + ativo.toString());
         UpdateAPIAcaoUseCase updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase(acaoDAO, logAtivoDAO, apidao);
         updateAPIAcaoUseCase.update((Acao) ativo);
-
-        System.out.println("Updatando API para " + ativo.toString());
     }
 
     private void updateButton(Ativo ativo) {
         System.out.println("Updatando sem API para " + ativo.toString());
-
     }
 
     private void sellButton(Ativo ativo) {
@@ -111,9 +110,23 @@ public class GrupoController {
     }
 
     public void adicionarAtivo() {
-        JanelaAcoes janelaAcoes = new JanelaAcoes();
-        janelaAcoes.showAndWait( grupo );
+        switch(grupo.getTipoGrupo()) {
+            case ACAO:
+                JanelaAcoes janelaAcoes = new JanelaAcoes();
+                janelaAcoes.showAndWait( usuario, grupo );
+                break;
 
+            case RENDA_FIXA:
+                JanelaRendaFixa janelaRendaFixa = new JanelaRendaFixa();
+                janelaRendaFixa.showAndWait( usuario, grupo );
+                break;
+
+            default:
+                JanelaFundos janelaFundos = new JanelaFundos();
+                //janelaFundos.showAndWait( usuario, grupo );
+                break;
+        }
+        updateAtivos();
     }
 
     public void excluirGrupo() {
