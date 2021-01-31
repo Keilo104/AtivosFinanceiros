@@ -1,9 +1,13 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
+import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,10 +33,16 @@ public class CtrlAcompanharAcao {
 
     private Usuario usuario;
 
+    private AcaoDAO acaoDAO;
+    private LogAtivoDAO logAtivoDAO;
+
     public static ObservableList<Acao> acoesAPI;
 
     @FXML
     public void initialize() {
+        this.acaoDAO = new sqliteAcaoDAO();
+        this.logAtivoDAO = new sqliteLogAtivoDAO();
+
         configurarCelulasDaTabela();
         inserirDadosAFonte();
     }
@@ -68,7 +78,7 @@ public class CtrlAcompanharAcao {
 
     public void btnAcompanhar( ActionEvent actionEvent ) {
         Acao acao = tableView.getSelectionModel().getSelectedItem();
-        sqliteAcaoDAO sqliteAcaoDao = new sqliteAcaoDAO();
-        sqliteAcaoDao.create( acao );
+        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        incluirAcaoUseCase.include(acao);
     }
 }

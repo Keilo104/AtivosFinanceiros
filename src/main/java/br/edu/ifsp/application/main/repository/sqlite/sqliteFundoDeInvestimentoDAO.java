@@ -135,7 +135,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     public List<Ativo> findAllByGrupo(int idGrupo) {
         String sql = "SELECT * FROM FUNDO_DE_INVESTIMENTO f\n" +
                 "JOIN ATIVO a\n" +
-                "ON ac.idAtivo = f.id\n" +
+                "ON f.idAtivo = a.id\n" +
                 "WHERE a.grupoId = ?;";
 
         List<Ativo> fundos = new ArrayList<>();

@@ -86,6 +86,7 @@ public class CtrlAcoes {
     public void btnComprar( ActionEvent actionEvent ) {
         Acao acaoTabela = tableView.getSelectionModel().getSelectedItem();
 
+        System.out.println(acaoTabela);
 //        adicionarAcao.setNome( adicionarAcao.getNome() );
 //        adicionarAcao.setCodigo( adicionarAcao.getCodigo() );
 //        adicionarAcao.setPais( adicionarAcao.getPais() );
