@@ -3,10 +3,12 @@ package br.edu.ifsp.domain.controller;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -17,17 +19,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CtrlAcoes {
-    @FXML TableView<Acao> tableView;
-    @FXML TableColumn<Acao, String> colCodigo;
-    @FXML TableColumn<Acao, String> colPais;
-    @FXML TableColumn<Acao, String> colNome;
-    @FXML TableColumn<Acao, Float> colPreco;
-    @FXML TextField txtCodigo;
-    @FXML TextField txtNome;
-    @FXML TextField txtPais;
-    @FXML TextField txtValor;
-    @FXML TextField txtQuantia;
-    @FXML TextField txtValorTotal;
+    public Label grupoNome;
+    @FXML
+    TableView<Acao> tableView;
+    @FXML
+    TableColumn<Acao, String> colCodigo;
+    @FXML
+    TableColumn<Acao, String> colPais;
+    @FXML
+    TableColumn<Acao, String> colNome;
+    @FXML
+    TableColumn<Acao, Float> colPreco;
+    @FXML
+    TextField txtCodigo;
+    @FXML
+    TextField txtNome;
+    @FXML
+    TextField txtPais;
+    @FXML
+    TextField txtValor;
+    @FXML
+    TextField txtQuantia;
+    @FXML
+    TextField txtValorTotal;
+
+    private Grupo grupo;
 
     public static ObservableList<Acao> acoes;
 
@@ -36,6 +52,11 @@ public class CtrlAcoes {
         configurarCelulasDaTabela();
         inserirDadosAFonte();
         carregarDadosNaTabela();
+    }
+
+    public void init( Grupo grupo ) {
+        this.grupo = grupo;
+        grupoNome.setText( grupo.getNome() );
     }
 
     private void configurarCelulasDaTabela() {
@@ -71,7 +92,14 @@ public class CtrlAcoes {
     }
 
     public void btnComprar( ActionEvent actionEvent ) {
-        Acao acao = tableView.getSelectionModel().getSelectedItem();
-        Grupo grupo = new Grupo();
+        Acao acaoTabela = tableView.getSelectionModel().getSelectedItem();
+        APIDAO apiDao = new APIDAO();
+
+        Acao adicionarAcao = apiDao.getOne( acaoTabela.getCodigo() );
+        adicionarAcao.setNome( adicionarAcao.getNome() );
+        adicionarAcao.setCodigo( adicionarAcao.getCodigo() );
+        adicionarAcao.setPais( adicionarAcao.getPais() );
+        adicionarAcao.setQuantidade( Integer.parseInt( txtQuantia.getText() ) );
+        // TODO
     }
 }

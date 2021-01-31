@@ -44,6 +44,10 @@ public class Ativo extends Subject {
         this.IDGrupo = grupoId;
     }
 
+    public Ativo( float valorUnitarioAtual ) {
+        this.valorUnitarioAtual = valorUnitarioAtual;
+    }
+
     public int getId() {
         return id;
     }
@@ -81,8 +85,14 @@ public class Ativo extends Subject {
         return dataComprado;
     }
 
+
+
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public int getIDGrupo() {

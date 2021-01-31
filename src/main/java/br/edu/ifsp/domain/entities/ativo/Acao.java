@@ -30,6 +30,10 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
+    public Acao( float valorUnitarioAtual) {
+        super( valorUnitarioAtual );
+    }
+
     public void updateFromAPI() {
         APIDAO apidao = new APIDAO();
         float newPrice = apidao.getNewPrice(codigo);
