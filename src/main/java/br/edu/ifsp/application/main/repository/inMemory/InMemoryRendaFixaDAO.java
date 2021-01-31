@@ -65,4 +65,9 @@ public class InMemoryRendaFixaDAO implements RendaFixaDAO {
     public boolean delete(RendaFixa rendaFixa) {
         return deleteByKey(rendaFixa.getId());
     }
+
+    @Override
+    public List<RendaFixa> findAllByGrupo() {
+        return null;
+    }
 }

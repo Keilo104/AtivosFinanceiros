@@ -122,4 +122,8 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     }
 
 
+    @Override
+    public List<FundoDeInvestimento> findAllByGrupo() {
+
+    }
 }

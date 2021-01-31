@@ -34,12 +34,9 @@ public class sqliteAcaoDAO implements AcaoDAO {
         return null;
     }
 
-    private Acao resultSetToEntity(ResultSet rs) throws SQLException {
-        int idAtivo = rs.getInt("idAtivo");
-        String codigo = rs.getString("codigo");
-        String pais = rs.getString("pais");
-
-        return new Acao(idAtivo, codigo, pais);
+    private Acao resultSetToEntity(ResultSet rs, Acao acao) throws SQLException {
+        acao.setCodigo(rs.getString("codigo"));
+        acao.setPais(rs.getString("pais"));
     }
 
     @Override
@@ -68,7 +65,11 @@ public class sqliteAcaoDAO implements AcaoDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
-                Acao acao = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                Acao acao = ativosDAO.findOne(rs.getInt("idAtivo"));
+
+                resultSetToEntity(rs, acao);
+
                 acoes.add(acao);
             }
 
@@ -76,6 +77,11 @@ public class sqliteAcaoDAO implements AcaoDAO {
             throwables.printStackTrace();
         }
         return acoes;
+    }
+
+    @Override
+    public List<Acao> findAllByGrupo() {
+
     }
 
     @Override

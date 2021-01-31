@@ -117,4 +117,8 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
     }
 
 
+    @Override
+    public List<RendaFixa> findAllByGrupo() {
+
+    }
 }
