@@ -18,7 +18,7 @@ public class sqliteTokenDAO implements TokenDAO {
 
 
     public String create( Token token ) {
-        String sql = "INSERT INTO token ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO TOKEN ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
             MessageDigest md = MessageDigest.getInstance("MD5");
             String t = "AtivosFinanceiros" + LocalDateTime.now().toString() + token.getUsuario().getCpf() ;
@@ -49,8 +49,8 @@ public class sqliteTokenDAO implements TokenDAO {
     }
 
     public boolean findIfExists(String token ) {
-        String sql = "SELECT * FROM token WHERE token = ?";
-        Token t = null;
+        String sql = "SELECT * FROM TOKEN WHERE token = ?";
+
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
             stat.setString( 1, token );
             ResultSet rs = stat.executeQuery();
@@ -107,20 +107,20 @@ public class sqliteTokenDAO implements TokenDAO {
     }
 
     @Override
-    public boolean deleteByKey(String key) {
-        return false;
-    }
-
-    @Override
-    public boolean delete( Token token ) {
-        String sql = "DELETE FROM usuario WHERE token = ?;";
+    public boolean deleteByKey( String token ) {
+        String sql = "DELETE FROM TOKEN WHERE token = ?;";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setString(1, token.getToken());
+            stat.setString(1, token);
             stat.execute();
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
+
+    @Override
+    public boolean delete(Token type) {
         return false;
     }
 }

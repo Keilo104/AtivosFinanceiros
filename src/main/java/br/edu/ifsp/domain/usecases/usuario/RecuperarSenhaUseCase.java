@@ -36,6 +36,7 @@ public class RecuperarSenhaUseCase {
     public boolean verificarToken(String token){
         if(tokenDAO.findIfExists(token)){
             tokenDAO.deleteByKey(token);
+            System.out.println(token);
             return true;
         }
         return false;

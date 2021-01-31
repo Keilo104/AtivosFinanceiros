@@ -45,8 +45,8 @@ public class CtrlToken {
 
     public void init(JanelaRecuperar janelaRecuperar) {
         this.janelaRecuperar = janelaRecuperar;
-        usuarioDAO = new sqliteUsuarioDAO();
-        tokenDAO = new sqliteTokenDAO();
+        this.usuarioDAO = new sqliteUsuarioDAO();
+        this.tokenDAO = new sqliteTokenDAO();
         recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO, tokenDAO);
         tokenPane.setVisible(false);
         passwordPane.setVisible(false);
@@ -56,6 +56,7 @@ public class CtrlToken {
     public void enviarToken(){
         String cpf = txtFieldCpf.getText();
         if(!cpf.isEmpty()) {
+            btnEnviar.setDisable(true);
             if(recuperarSenhaUseCase.enviarToken(cpf)) {
                 tokenPane.setVisible(true);
                 labelTokenInvalido.setVisible(false);
@@ -67,6 +68,7 @@ public class CtrlToken {
             }
             else{
                 labelCpfInvalido.setVisible(true);
+                btnEnviar.setDisable(false);
             }
         }
     }
