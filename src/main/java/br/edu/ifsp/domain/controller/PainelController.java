@@ -80,7 +80,7 @@ public class PainelController {
 
         if (grupo != null) {
             JanelaGrupo janelaGrupo = new JanelaGrupo();
-            janelaGrupo.showAndWait(grupo);
+            janelaGrupo.showAndWait(usuario, grupo);
         } else {
             alertNotSelected();
         }

@@ -24,7 +24,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
             stat.setFloat(4, 0);
             stat.setFloat(5, 0);
             stat.setFloat(6, 0);
-            stat.setString(7, grupo.getTipoGrupo().getString());
+            stat.setString(7, grupo.getTipoString());
             stat.setString(8, cpf);
 
             stat.execute();
@@ -155,8 +155,7 @@ public class sqliteGrupoDAO implements GrupoDAO {
 
     @Override
     public boolean update(Grupo grupo) {
-        String sql = "UPDATE GRUPO SET nome = ?, totalLucrado =?, totalInvestido=?, lucroPotencial=?, valorAtual=?, investimentoAtual=?, tipoGrupo=?, cpfUsuario=? WHERE id=?"+
-                "VALUES(?,?,?,?,?,?,?,?,?);";
+        String sql = "UPDATE GRUPO SET nome = ?, totalLucrado =?, totalInvestido=?, lucroPotencial=?, valorAtual=?, investimentoAtual=?, tipoGrupo=?, cpfUsuario=? WHERE id=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, grupo.getNome());
             stat.setFloat(2, grupo.getTotalLucrado());

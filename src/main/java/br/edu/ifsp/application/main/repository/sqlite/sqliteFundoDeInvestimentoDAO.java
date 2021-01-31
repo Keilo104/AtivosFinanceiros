@@ -13,6 +13,21 @@ import java.util.Optional;
 public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     @Override
     public Integer create(FundoDeInvestimento fundoDeInvestimento) {
+        String sql = "INSERT INTO FUNDO_-DE_INVESTIMENTO VALUES(?,?,?,?,?);";
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, fundoDeInvestimento.getId());
+            stat.setString(2, fundoDeInvestimento.getNome());
+            stat.setString(3, fundoDeInvestimento.getRentabilidade());
+            stat.setString(4, fundoDeInvestimento.getLiquidez());
+            stat.setFloat(5, fundoDeInvestimento.getTaxaAdministrativa());
+
+            stat.execute();
+
+            return fundoDeInvestimento.getId();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 

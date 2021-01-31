@@ -3,6 +3,7 @@ package br.edu.ifsp.domain.usecases.ativo.acao;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.entities.log.LogAtivoEnum;
+import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
 import br.edu.ifsp.domain.usecases.log.logativo.SalvarHistoricoAtivoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
@@ -10,10 +11,12 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class IncluirAcaoUseCase {
     private AcaoDAO acaoDAO;
+    private AtivosDAO ativosDAO;
     private LogAtivoDAO logAtivoDAO;
 
-    public IncluirAcaoUseCase(AcaoDAO acaoDAO, LogAtivoDAO logAtivoDAO) {
+    public IncluirAcaoUseCase(AtivosDAO ativosDAO, AcaoDAO acaoDAO, LogAtivoDAO logAtivoDAO) {
         this.acaoDAO = acaoDAO;
+        this.ativosDAO = ativosDAO;
         this.logAtivoDAO = logAtivoDAO;
     }
 
@@ -25,7 +28,10 @@ public class IncluirAcaoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        int id = this.acaoDAO.create(acao);
+        int id = this.ativosDAO.create(acao);
+        acao.setId(id);
+        System.out.println(id);
+        id = this.acaoDAO.create(acao);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
         LogAtivo logAtivo = new LogAtivo(acao, LogAtivoEnum.INCLUSAO);

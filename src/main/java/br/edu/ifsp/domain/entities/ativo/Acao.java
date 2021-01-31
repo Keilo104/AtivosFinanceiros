@@ -36,7 +36,7 @@ public class Acao extends Ativo {
 
     public void updateFromAPI() {
         APIDAO apidao = new APIDAO();
-        float newPrice = apidao.getNewPrice(codigo);
+        float newPrice = apidao.getNewPrice(this.codigo);
         if (newPrice > -1) {
             this.setValorUnitarioAtual(newPrice);
         } else {

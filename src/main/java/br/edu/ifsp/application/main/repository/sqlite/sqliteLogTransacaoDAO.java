@@ -17,7 +17,7 @@ import java.util.Optional;
 public class sqliteLogTransacaoDAO implements LogTransacaoDAO {
     @Override
     public Pair<LocalDate, Ativo> create(LogTransacaoAtivo logTransacaoAtivo) {
-        String sql = "INSERT INTO LOG_ATIVO(idAtivo, data,tipo) VALUES(?,?,?,?,?);";
+        String sql = "INSERT INTO LOG_TRANSACAO_ATIVO(idAtivo,data,tipo,valor,quantidade) VALUES(?,?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             LocalDate data =  LocalDate.now();
             stat.setInt(1, logTransacaoAtivo.getAtivo().getId());
@@ -70,7 +70,7 @@ public class sqliteLogTransacaoDAO implements LogTransacaoDAO {
 
     @Override
     public List<LogTransacaoAtivo> findAll() {
-        String sql = "SELECT * FROM LOG_ATIVO;";
+        String sql = "SELECT * FROM LOG_TRANSACAO_ATIVO;";
         List<LogTransacaoAtivo> logsTransacaoAtivo = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();

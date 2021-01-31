@@ -28,9 +28,6 @@ public class CompraAtivosUseCase {
         this.logGrupoDAO = logGrupoDAO;
     }
 
-    public CompraAtivosUseCase() {
-    }
-
     public boolean compraAtivo(Usuario usuario, Grupo grupo, Ativo ativo) {
         Validator<Ativo> validatorAtivo = new AtivosValidator();
         Validator<Grupo> validatorGrupo = new GrupoInputValidator();

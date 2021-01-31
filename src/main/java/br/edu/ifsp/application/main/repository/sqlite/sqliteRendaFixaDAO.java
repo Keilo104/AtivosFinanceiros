@@ -14,6 +14,19 @@ import java.util.Optional;
 public class sqliteRendaFixaDAO implements RendaFixaDAO {
     @Override
     public Integer create(RendaFixa rendaFixa) {
+        String sql = "INSERT INTO RENDA_FIXA VALUES(?,?,?);";
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, rendaFixa.getId());
+            stat.setString(2, rendaFixa.getRendimento());
+            stat.setString(3, rendaFixa.getDataVencimento().toString());
+
+            stat.execute();
+
+            return rendaFixa.getId();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
