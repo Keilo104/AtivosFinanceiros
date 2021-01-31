@@ -29,7 +29,7 @@ public class RendaFixa extends Ativo{
     public RendaFixa(int idAtivo, String rendimento, String dataVencimento) {
         super(idAtivo);
         this.rendimento = rendimento;
-        this.dataVencimento = LocalDate.parse(dataVencimento);
+        this.dataVencimento = LocalDateTime.parse(dataVencimento);
 
     }
 

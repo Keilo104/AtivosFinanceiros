@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.entities.relatorio;
 
+import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Relatorio {
     private int id;
     private LocalDateTime dataImpressao;
-    private CategoriaEnum categoria;
+    private TipoGrupoEnum categoria;
 
     private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
@@ -17,12 +18,12 @@ public class Relatorio {
         this.dataImpressao = LocalDateTime.now();
     }
 
-    public Relatorio(CategoriaEnum categoria) {
+    public Relatorio(TipoGrupoEnum categoria) {
         this.dataImpressao = LocalDateTime.now();
         this.categoria = categoria;
     }
 
-    public Relatorio(int id, LocalDateTime dataImpressao, CategoriaEnum categoria) {
+    public Relatorio(int id, LocalDateTime dataImpressao, TipoGrupoEnum categoria) {
         this.id = id;
         this.dataImpressao = dataImpressao;
         this.categoria = categoria;
@@ -40,7 +41,7 @@ public class Relatorio {
         return dataImpressao;
     }
 
-    public CategoriaEnum getCategoria() {
+    public TipoGrupoEnum getCategoria() {
         return categoria;
     }
 

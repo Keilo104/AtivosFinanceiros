@@ -1,5 +1,7 @@
 package br.edu.ifsp.domain.entities.relatorio;
 
+import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
+
 import java.time.LocalDateTime;
 
 public class RelatorioPeriodo extends Relatorio{
@@ -9,19 +11,19 @@ public class RelatorioPeriodo extends Relatorio{
     public RelatorioPeriodo() {
     }
 
-    public RelatorioPeriodo(CategoriaEnum categoria) {
+    public RelatorioPeriodo(TipoGrupoEnum categoria) {
         super(categoria);
         this.dataInicial = LocalDateTime.now().minusMonths(1);
         this.dataFinal = LocalDateTime.now();
     }
 
-    public RelatorioPeriodo(CategoriaEnum categoria, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+    public RelatorioPeriodo(TipoGrupoEnum categoria, LocalDateTime dataInicial, LocalDateTime dataFinal) {
         super(categoria);
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
     }
 
-    public RelatorioPeriodo(int id, LocalDateTime dataImpressao, CategoriaEnum categoria, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+    public RelatorioPeriodo(int id, LocalDateTime dataImpressao, TipoGrupoEnum categoria, LocalDateTime dataInicial, LocalDateTime dataFinal) {
         super(id, dataImpressao, categoria);
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
