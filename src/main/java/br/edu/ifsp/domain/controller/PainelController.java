@@ -2,10 +2,9 @@ package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.ui.JanelaAcompanharAcao;
 import br.edu.ifsp.domain.ui.JanelaCriarGrupo;
 import br.edu.ifsp.domain.ui.JanelaGrupo;
-import br.edu.ifsp.domain.ui.JanelaLogin;
+import br.edu.ifsp.domain.ui.JanelaRelatorio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +15,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class PainelController {
@@ -27,14 +25,16 @@ public class PainelController {
     @FXML public TableColumn<Grupo, String> cTipo;
 
     @FXML public Button btnRelatorios;
+    @FXML public Button btnGrupos;
+    @FXML public Button btnAtivos;
     @FXML public CategoryAxis xAxis;
     @FXML public NumberAxis yAxis;
     @FXML public LineChart<String,Number> graphAtivos;
     @FXML public Label spanNome;
+    @FXML public Label spanLogOut;
     @FXML public Label spanLucroTotal;
     @FXML public Label spanTotalInvestido;
     @FXML public Label spanData;
-    @FXML Button btnSair;
 
     private Usuario usuario;
 
@@ -71,7 +71,7 @@ public class PainelController {
         spanNome.setText(usuario.getNome());
         spanLucroTotal.setText(Float.toString(usuario.getTotalLucrado()));
         spanTotalInvestido.setText(Float.toString(usuario.getTotalInvestido()));
-        spanData.setText( LocalDate.now().toString());
+        spanData.setText(LocalDateTime.now().toString());
     }
 
     private void alertNotSelected() {
@@ -108,16 +108,8 @@ public class PainelController {
         graphAtivos.getData().add(series);
     }
 
-    public void abrirJanelaTracking( ActionEvent actionEvent ) {
-        JanelaAcompanharAcao janelaAcompanharAcao = new JanelaAcompanharAcao();
-        janelaAcompanharAcao.show( usuario );
-    }
-
-    public void btnSair( ActionEvent actionEvent ) {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
-
-        JanelaLogin janelaLogin = new JanelaLogin();
-        janelaLogin.show();
+    public void criarRelatorio(ActionEvent actionEvent) {
+        JanelaRelatorio janelaRelatorio = new JanelaRelatorio();
+        janelaRelatorio.showAndWait(usuario,grupos);
     }
 }
