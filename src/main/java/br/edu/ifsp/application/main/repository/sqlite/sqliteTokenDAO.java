@@ -3,6 +3,8 @@ package br.edu.ifsp.application.main.repository.sqlite;
 import br.edu.ifsp.domain.entities.usuario.Token;
 import br.edu.ifsp.domain.DAOs.TokenDAO;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,38 +15,54 @@ import java.util.List;
 import java.util.Optional;
 
 public class sqliteTokenDAO implements TokenDAO {
-    @Override
-    public Integer create( Token token ) {
-        String sql = "INSERT INTO token ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
 
+
+    public String create( Token token ) {
+        String sql = "INSERT INTO token ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
-            String tokenHash = String.valueOf( MessageDigest.getInstance( "AtivosFinanceiros" + LocalDateTime.now() + token.getUsuario().getCpf() ) );
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            String t = "AtivosFinanceiros" + LocalDateTime.now().toString() + token.getUsuario().getCpf() ;
+            byte[] m = md.digest(t.getBytes(StandardCharsets.UTF_8));
+            BigInteger no = new BigInteger(1, m);
+
+            String tokenHash = no.toString(16);
+            while (tokenHash.length() < 32) {
+                tokenHash = "0" + tokenHash;
+            }
 
             stat.setString( 1, token.getDateTime().toString() );
             stat.setString( 2, token.getUsuario().getCpf() );
             stat.setString( 3, tokenHash );
-            return 1;
+
+            stat.execute();
+            return tokenHash;
+
         } catch ( Exception e ) {
             e.printStackTrace();
-            return 0;
+            return null;
         }
     }
 
     @Override
-    public Optional<Token> findOne( Integer key ) {
+    public Optional<Token> findOne(String key) {
         return Optional.empty();
     }
 
-    public boolean findOne( String token ) {
+    public boolean findIfExists(String token ) {
         String sql = "SELECT * FROM token WHERE token = ?";
-
+        Token t = null;
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
             stat.setString( 1, token );
-            return true;
+            ResultSet rs = stat.executeQuery();
+            if(rs.next()) {
+                return true;
+            }
+
         } catch ( Exception e ) {
             e.printStackTrace();
-            return false;
+
         }
+        return false;
     }
 
     private Token resultSetToEntity( ResultSet rs ) throws SQLException {
@@ -89,7 +107,7 @@ public class sqliteTokenDAO implements TokenDAO {
     }
 
     @Override
-    public boolean deleteByKey( Integer key ) {
+    public boolean deleteByKey(String key) {
         return false;
     }
 

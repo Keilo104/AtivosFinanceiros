@@ -6,12 +6,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class SendEmail {
-    public static void main(String argv[]){
+    public void send(String email, String token){
         //permitir a acesso a aplicativos na conta do google
         //desativar antivirus?
-        String emailFrom = "";
-        String password = "";
-        String emailTo = ""; //pode ser mais de 1
+        String emailFrom = "ativosfinanceiros23@gmail.com";
+        String password = "A1234567B";
+        String emailTo = email;
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -31,8 +31,6 @@ public class SendEmail {
                     }
                 });
 
-        session.setDebug(true);
-
         try {
 
             Message message = new MimeMessage(session);
@@ -43,12 +41,11 @@ public class SendEmail {
                     .parse(emailTo);
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Enviando email com JavaMail");
-            message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+            message.setSubject("Recuperação de senha");
+            message.setText("Você solicitou a recuperação de sua senha no sistema de Ativos Financeiros.\nEste é o seu token:\n"+token+"\nCaso você não tenha solicitado a recuperação de senha, favor ignorar este email :)");
 
             Transport.send(message);
 
-            System.out.println("Feito!!!");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

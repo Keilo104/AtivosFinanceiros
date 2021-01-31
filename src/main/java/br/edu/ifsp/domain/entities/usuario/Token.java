@@ -13,6 +13,11 @@ public class Token {
         this.dateTime = dateTime;
     }
 
+    public Token(Usuario usuario, LocalDateTime dateTime) {
+        this.usuario = usuario;
+        this.dateTime = dateTime;
+    }
+
     public int getId() {
         return id;
     }
@@ -43,5 +48,15 @@ public class Token {
 
     public void setDateTime( LocalDateTime dateTime ) {
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", token='" + token + '\'' +
+                ", dateTime=" + dateTime +
+                '}';
     }
 }

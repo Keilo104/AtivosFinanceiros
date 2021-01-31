@@ -1,17 +1,106 @@
 package br.edu.ifsp.domain.controller;
 
+import br.edu.ifsp.application.main.repository.sqlite.sqliteTokenDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
+import br.edu.ifsp.domain.DAOs.TokenDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.ui.JanelaLogin;
+import br.edu.ifsp.domain.ui.JanelaRecuperar;
+import br.edu.ifsp.domain.usecases.usuario.RecuperarSenhaUseCase;
+import com.sun.javafx.binding.StringFormatter;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
+import java.util.Optional;
 
 public class CtrlToken {
-    public TextField txtFieldToken;
-    public Label labelSenhaInvalida;
-    public PasswordField txtFieldSenha;
-    public PasswordField txtFieldConfirmarSenha;
-    public Label labelTokenInvalido;
+    @FXML public AnchorPane tokenPane;
+    @FXML public AnchorPane passwordPane;
+    @FXML public TextField txtFieldToken;
+    @FXML public Label labelSenhaInvalida;
+    @FXML public Label labelSenhaIgual;
+    @FXML public Label labelSenha;
+    @FXML public Label labelConfirmar;
+    @FXML public Label labelToken;
+    @FXML public Label labelCpfInvalido;
+    @FXML public PasswordField txtFieldSenha;
+    @FXML public PasswordField txtFieldConfirmarSenha;
+    @FXML public Label labelTokenInvalido;
 
-    public void btnContinuar( ActionEvent actionEvent ) {
+    @FXML public Button btnEnviar;
+    @FXML public TextField txtFieldCpf;
+    @FXML public Button btnCheckToken;
+    @FXML public Button btnContinuar;
+
+    private JanelaRecuperar janelaRecuperar;
+    private static UsuarioDAO usuarioDAO;
+    private static TokenDAO tokenDAO;
+    private static RecuperarSenhaUseCase recuperarSenhaUseCase;
+
+    public void init(JanelaRecuperar janelaRecuperar) {
+        this.janelaRecuperar = janelaRecuperar;
+        usuarioDAO = new sqliteUsuarioDAO();
+        tokenDAO = new sqliteTokenDAO();
+        recuperarSenhaUseCase = new RecuperarSenhaUseCase(usuarioDAO, tokenDAO);
+        tokenPane.setVisible(false);
+        passwordPane.setVisible(false);
+        labelCpfInvalido.setVisible(false);
+    }
+
+    public void enviarToken(){
+        String cpf = txtFieldCpf.getText();
+        if(!cpf.isEmpty()) {
+            if(recuperarSenhaUseCase.enviarToken(cpf)) {
+                tokenPane.setVisible(true);
+                labelTokenInvalido.setVisible(false);
+                labelSenhaInvalida.setVisible(false);
+                labelSenhaIgual.setVisible(false);
+                txtFieldCpf.setDisable(true);
+                btnEnviar.setDisable(true);
+                labelCpfInvalido.setVisible(false);
+            }
+            else{
+                labelCpfInvalido.setVisible(true);
+            }
+        }
+    }
+
+    public void checkToken(){
+        String token = txtFieldToken.getText();
+        if(recuperarSenhaUseCase.verificarToken(token)){
+            passwordPane.setVisible(true);
+        }
+        else{
+            labelTokenInvalido.setVisible(true);
+        }
+    }
+
+    public void changePassword( ActionEvent actionEvent ) {
+        String senha = txtFieldSenha.getText();
+        String confirma = txtFieldConfirmarSenha.getText();
+
+        if(!senha.isEmpty() && !confirma.isEmpty() && senha.equals(confirma)){
+            String cpf = txtFieldCpf.getText();
+            Optional<Usuario> u = usuarioDAO.findOne(cpf);
+            if(!u.isEmpty()) {
+                Usuario usuario = u.get();
+                String senhaAntiga = usuario.getSenha();
+                if (!senha.equals(senhaAntiga)) {
+                    usuario.setSenha(senha);
+                    usuarioDAO.update(usuario);
+                    janelaRecuperar.close();
+                }else{
+                    labelSenhaIgual.setVisible(true);
+                }
+            }
+        }else{
+            labelSenhaInvalida.setVisible(true);
+        }
     }
 }
