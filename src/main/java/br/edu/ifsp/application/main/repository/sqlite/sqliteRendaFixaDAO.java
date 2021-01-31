@@ -98,7 +98,9 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             stat.setInt(3, rendaFixa.getId());
 
             stat.execute();
-            return true;
+            AtivosDAO ativosDAO = new sqliteAtivosDAO();
+
+            return ativosDAO.update(rendaFixa);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

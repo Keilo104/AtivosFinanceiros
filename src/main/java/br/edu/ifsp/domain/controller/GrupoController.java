@@ -1,18 +1,15 @@
 package br.edu.ifsp.domain.controller;
 
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import br.edu.ifsp.application.main.repository.sqlite.*;
+import br.edu.ifsp.domain.DAOs.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
-import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
-import br.edu.ifsp.domain.DAOs.GrupoDAO;
-import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
-import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
-import br.edu.ifsp.domain.DAOs.LogTransacaoDAO;
+import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -36,9 +33,17 @@ public class GrupoController {
     private Usuario usuario;
     private Grupo grupo;
 
+    private AcaoDAO acaoDAO;
+    private LogAtivoDAO logAtivoDAO;
+    private APIDAO apidao;
+
     public void init(Usuario user, Grupo group) {
         this.usuario = user;
         this.grupo = group;
+
+        this.acaoDAO = new sqliteAcaoDAO();
+        this.logAtivoDAO = new sqliteLogAtivoDAO();
+        this.apidao = new AlphaAdvantageAPIDAO();
 
         initGrafico();
         updateAtivos();
@@ -87,7 +92,10 @@ public class GrupoController {
     }
 
     private void updateAPIButton(Ativo ativo) {
-        ((Acao) ativo).updateFromAPI();
+        System.out.println("Updatando API para " + ativo.toString());
+        UpdateAPIAcaoUseCase updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase(acaoDAO, logAtivoDAO, apidao);
+        updateAPIAcaoUseCase.update((Acao) ativo);
+
         System.out.println("Updatando API para " + ativo.toString());
     }
 
@@ -102,14 +110,12 @@ public class GrupoController {
 
     public void adicionarAtivo() {
         AtivosDAO ativosDAO = new sqliteAtivosDAO();
-        AcaoDAO acaoDAO = new sqliteAcaoDAO();
-        LogAtivoDAO logAtivoDAO = new sqliteLogAtivoDAO();
         GrupoDAO grupoDAO = new sqliteGrupoDAO();
         LogTransacaoDAO logTransacaoDAO = new sqliteLogTransacaoDAO();
         LogGrupoDAO logGrupoDAO = new sqliteLogGrupoDAO();
         IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
 
-        Acao nova = new Acao(12, 5, "GME", "USA");
+        Acao nova = new Acao(12, 5, "BOM DIA GRUPO", "GME", "USA");
         incluirAcaoUseCase.include(nova);
 
         CompraAtivosUseCase compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO, logGrupoDAO);

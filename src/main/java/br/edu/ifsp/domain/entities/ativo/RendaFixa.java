@@ -10,7 +10,7 @@ public class RendaFixa extends Ativo{
     }
 
     public RendaFixa(Ativo ativo) {
-        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade());
+        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade(), ativo.getIDGrupo());
     }
 
     public RendaFixa(float valor, int quantidade, String rendimento) {

@@ -19,11 +19,12 @@ public class sqliteAcaoDAO implements AcaoDAO {
         int id = ativosDAO.create(acao);
         acao.setId(id);
 
-        String sql = "INSERT INTO ACAO VALUES(?,?,?);";
+        String sql = "INSERT INTO ACAO VALUES(?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, acao.getId());
             stat.setString(2, acao.getCodigo());
-            stat.setString(3, acao.getPais());
+            stat.setString(3, acao.getNome());
+            stat.setString(4, acao.getPais());
 
             stat.execute();
 
@@ -114,14 +115,18 @@ public class sqliteAcaoDAO implements AcaoDAO {
 
     @Override
     public boolean update(Acao acao) {
-        String sql = "UPDATE ACAO SET codigo=?, pais=? WHERE idAtivo=?";
+        String sql = "UPDATE ACAO SET codigo=?, pais=?, nome=? WHERE idAtivo=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, acao.getCodigo());
             stat.setString(2, acao.getPais());
-            stat.setInt(3, acao.getId());
+            stat.setString(3, acao.getNome());
+            stat.setInt(4, acao.getId());
 
             stat.execute();
-            return true;
+
+            AtivosDAO ativosDAO = new sqliteAtivosDAO();
+
+            return ativosDAO.update(acao);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

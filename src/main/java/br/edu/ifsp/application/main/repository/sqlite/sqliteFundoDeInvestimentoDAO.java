@@ -100,7 +100,9 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             stat.setInt(5, fundoDeInvestimento.getId());
 
             stat.execute();
-            return true;
+            AtivosDAO ativosDAO = new sqliteAtivosDAO();
+
+            return ativosDAO.update(fundoDeInvestimento);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

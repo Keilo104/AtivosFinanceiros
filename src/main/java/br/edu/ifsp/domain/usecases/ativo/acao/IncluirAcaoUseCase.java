@@ -27,7 +27,7 @@ public class IncluirAcaoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        //System.out.println(id);
+        System.out.println(acao);
         int id = this.acaoDAO.create(acao);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
