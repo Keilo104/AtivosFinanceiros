@@ -28,6 +28,7 @@ public class CriarGrupoUseCase {
         int id = this.grupoDAO.createComCPF(grupo, usuario.getCpf());
 
         if(id != 0) {
+            grupo.setId(id);
             usuario.addGrupo(grupo);
 
             SalvarHistoricoGrupoUseCase salvarHistoricoGrupoUseCase = new SalvarHistoricoGrupoUseCase(logGrupoDAO);

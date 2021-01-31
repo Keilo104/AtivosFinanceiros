@@ -2,10 +2,11 @@ package br.edu.ifsp.domain.entities.ativo;
 
 import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Acao extends Ativo {
     private String codigo;
+    private String nome;
     private String pais;
 
     public Acao() {
@@ -17,14 +18,15 @@ public class Acao extends Ativo {
         this.pais = pais;
     }
 
-    public Acao(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String codigo, String pais) {
+    public Acao(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade, String codigo, String pais) {
         super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
         this.codigo = codigo;
         this.pais = pais;
     }
 
-    public Acao(String codigo, String pais) {
+    public Acao(String codigo, String pais, String nome) {
         this.codigo = codigo;
+        this.nome = nome;
         this.pais = pais;
     }
 
@@ -36,7 +38,7 @@ public class Acao extends Ativo {
 
     public void updateFromAPI() {
         APIDAO apidao = new APIDAO();
-        float newPrice = apidao.getNewPrice(codigo);
+        float newPrice = apidao.getNewPrice(this.codigo);
         if (newPrice > -1) {
             this.setValorUnitarioAtual(newPrice);
         } else {
@@ -51,6 +53,10 @@ public class Acao extends Ativo {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public void setNome( String nome ) {
+        this.nome = nome;
     }
 
     public String getCodigo() {

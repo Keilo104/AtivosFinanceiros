@@ -5,7 +5,7 @@ import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.usecases.utils.DAO;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public interface LogTransacaoDAO extends DAO<LogTransacaoAtivo, Pair<LocalDate, Ativo>> {
+public interface LogTransacaoDAO extends DAO<LogTransacaoAtivo, Pair<LocalDateTime, Ativo>> {
 }

@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Grupo extends Subject implements Observer {
-    private String cpfUsuario;
     private int id;
     private String nome;
+    private String cpfUsuario;
 
     private float totalLucrado;
     private float totalInvestido;
@@ -30,31 +30,10 @@ public class Grupo extends Subject implements Observer {
     public Grupo() {
     }
 
-    public Grupo(String nome, TipoGrupoEnum tipoGrupo) {
+    public Grupo(String nome, TipoGrupoEnum tipoGrupo, String cpfUsuario) {
         this.nome = nome;
         this.tipoGrupo = tipoGrupo;
-    }
-
-    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, TipoGrupoEnum tipoGrupo) {
-        this.id = id;
-        this.nome = nome;
-        this.totalLucrado = totalLucrado;
-        this.totalInvestido = totalInvestido;
-        this.lucroPotencial = lucroPotencial;
-        this.valorAtual = valorAtual;
-        this.investimentoAtual = investimentoAtual;
-        this.tipoGrupo = tipoGrupo;
-    }
-
-    public Grupo(int id, String nome, float totalLucrado, float totalInvestido, float lucroPotencial, float valorAtual, float investimentoAtual, String tipoGrupo) {
-        this.id = id;
-        this.nome = nome;
-        this.totalLucrado = totalLucrado;
-        this.totalInvestido = totalInvestido;
-        this.lucroPotencial = lucroPotencial;
-        this.valorAtual = valorAtual;
-        this.investimentoAtual = investimentoAtual;
-        this.tipoGrupo = TipoGrupoEnum.getValueByString(tipoGrupo);
+        this.cpfUsuario = cpfUsuario;
     }
 
     public Grupo(int id, String nome, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual, String tipoGrupo, String cpfUsuario) {

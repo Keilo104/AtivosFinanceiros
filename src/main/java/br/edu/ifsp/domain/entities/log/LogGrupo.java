@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities.log;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class LogGrupo extends Log {
     private Grupo grupo;
@@ -18,7 +18,7 @@ public class LogGrupo extends Log {
         this.mudanca = mudanca;
     }
 
-    public LogGrupo(LocalDate data, Grupo grupo, float valorTotal, float mudanca) {
+    public LogGrupo(LocalDateTime data, Grupo grupo, float valorTotal, float mudanca) {
         super(data);
         this.grupo = grupo;
         this.valorTotal = valorTotal;

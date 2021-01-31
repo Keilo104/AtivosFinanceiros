@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +37,10 @@ public class sqliteRelatorioPeriodoDAO implements RelatorioPeriodoDAO {
 
     private RelatorioPeriodo resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
-        LocalDate dataImpressao = LocalDate.parse(rs.getString("dataImpressao"));
+        LocalDateTime dataImpressao = LocalDateTime.parse(rs.getString("dataImpressao"));
         String categoria = rs.getString("categoria");
-        LocalDate dataInicial = LocalDate.parse(rs.getString("dataInicial"));
-        LocalDate dataFinal = LocalDate.parse(rs.getString("dataFinal"));
+        LocalDateTime dataInicial = LocalDateTime.parse(rs.getString("dataInicial"));
+        LocalDateTime dataFinal = LocalDateTime.parse(rs.getString("dataFinal"));
 
         return new RelatorioPeriodo(id, dataImpressao, TipoGrupoEnum.getValueByString(categoria), dataInicial, dataFinal);
     }

@@ -13,6 +13,19 @@ import java.util.Optional;
 public class sqliteAcaoDAO implements AcaoDAO {
     @Override
     public Integer create(Acao acao) {
+        String sql = "INSERT INTO ACAO VALUES(?,?,?);";
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, acao.getId());
+            stat.setString(2, acao.getCodigo());
+            stat.setString(3, acao.getPais());
+
+            stat.execute();
+
+            return acao.getId();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
     @Override

@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities.ativo;
 
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Ativo extends Subject {
@@ -12,20 +12,20 @@ public class Ativo extends Subject {
     private float valorUnitarioComprado;
     private float valorTotalVendido;
 
-    private LocalDate dataComprado;
+    private LocalDateTime dataComprado;
     private int quantidade;
 
     public int IDGrupo;
 
     public Ativo() {
-        this.dataComprado = LocalDate.now();
+        this.dataComprado = LocalDateTime.now();
     }
 
     public Ativo(float valorUnitarioAtual, int quantidade) {
-        this(0, valorUnitarioAtual, valorUnitarioAtual, 0, LocalDate.now(), quantidade);
+        this(0, valorUnitarioAtual, valorUnitarioAtual, 0, LocalDateTime.now(), quantidade);
     }
 
-    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade) {
+    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade) {
         this.id = id;
         this.valorUnitarioAtual = valorUnitarioAtual;
         this.valorUnitarioComprado = valorUnitarioComprado;
@@ -34,7 +34,7 @@ public class Ativo extends Subject {
         this.quantidade = quantidade;
     }
 
-    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, int grupoId) {
+    public Ativo(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade, int grupoId) {
         this.id = id;
         this.valorUnitarioAtual = valorUnitarioAtual;
         this.valorUnitarioComprado = valorUnitarioComprado;
@@ -81,7 +81,7 @@ public class Ativo extends Subject {
         notifyObservers();
     }
 
-    public LocalDate getDataComprado() {
+    public LocalDateTime getDataComprado() {
         return dataComprado;
     }
 

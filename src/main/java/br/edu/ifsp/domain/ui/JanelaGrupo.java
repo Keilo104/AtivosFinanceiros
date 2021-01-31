@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class JanelaGrupo {
-    public void showAndWait(Grupo grupo) {
+    public void showAndWait(Usuario usuario, Grupo grupo) {
         ScrollPane sceneGraph = null;
 
         try {
@@ -31,7 +31,7 @@ public class JanelaGrupo {
             stage.setMinHeight(975);
 
             GrupoController grupoController = (GrupoController) loader.getController();
-            grupoController.init(grupo);
+            grupoController.init(usuario, grupo);
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();

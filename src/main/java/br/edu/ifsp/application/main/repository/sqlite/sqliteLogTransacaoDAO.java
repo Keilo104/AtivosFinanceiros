@@ -2,87 +2,27 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
-import br.edu.ifsp.domain.entities.log.LogTransacaoAtivoEnum;
 import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
 import javafx.util.Pair;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class sqliteLogTransacaoDAO implements LogTransacaoDAO {
     @Override
-    public Pair<LocalDate, Ativo> create(LogTransacaoAtivo logTransacaoAtivo) {
-        String sql = "INSERT INTO LOG_ATIVO(idAtivo, data,tipo) VALUES(?,?,?,?,?);";
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            LocalDate data =  LocalDate.now();
-            stat.setInt(1, logTransacaoAtivo.getAtivo().getId());
-            stat.setString(2, data.toString());
-            stat.setString(3, logTransacaoAtivo.getTipo().getString());
-            stat.setFloat(4, logTransacaoAtivo.getValor());
-            stat.setInt(5, logTransacaoAtivo.getQuantidade());
-
-            stat.execute();
-            Ativo ativo = logTransacaoAtivo.getAtivo();
-            return new Pair<>(data, ativo);
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public Pair<LocalDateTime, Ativo> create(LogTransacaoAtivo type) {
         return null;
     }
 
-    private LogTransacaoAtivo resultSetToEntity(ResultSet rs) throws SQLException {
-        int id = rs.getInt("idAtivo");
-        LocalDate data = LocalDate.parse(rs.getString("data"));
-        String tipo = rs.getString("tipo");
-        float valor = rs.getFloat("valor");
-        int quantidade = rs.getInt("quantidade");
-
-        Ativo ativo = new sqliteAtivosDAO().findOneAtivo(id);
-
-        return new LogTransacaoAtivo(data, LogTransacaoAtivoEnum.getValueByString(tipo), ativo,valor, quantidade);
-    }
-
     @Override
-    public Optional<LogTransacaoAtivo> findOne(Pair<LocalDate, Ativo> key) {
-        String sql = "SELECT * FROM LOG_GRUPO WHERE data = ? AND idAtivo = ?";
-        LogTransacaoAtivo logTransacaoAtivo = null;
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setString(1, key.getKey().toString());
-            stat.setInt(2, key.getValue().getId());
-            ResultSet rs = stat.executeQuery();
-
-            if(rs.next()) {
-                logTransacaoAtivo = resultSetToEntity(rs);
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return Optional.ofNullable(logTransacaoAtivo);
+    public Optional<LogTransacaoAtivo> findOne(Pair<LocalDateTime, Ativo> key) {
+        return Optional.empty();
     }
 
     @Override
     public List<LogTransacaoAtivo> findAll() {
-        String sql = "SELECT * FROM LOG_ATIVO;";
-        List<LogTransacaoAtivo> logsTransacaoAtivo = new ArrayList<>();
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            ResultSet rs = stat.executeQuery();
-            while(rs.next()) {
-                LogTransacaoAtivo logTransacaoAtivo = resultSetToEntity(rs);
-                logsTransacaoAtivo.add(logTransacaoAtivo);
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return logsTransacaoAtivo;
+        return null;
     }
 
     @Override
@@ -91,7 +31,7 @@ public class sqliteLogTransacaoDAO implements LogTransacaoDAO {
     }
 
     @Override
-    public boolean deleteByKey(Pair<LocalDate, Ativo> key) {
+    public boolean deleteByKey(Pair<LocalDateTime, Ativo> key) {
         return false;
     }
 

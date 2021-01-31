@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class sqliteRelatorioDAO implements RelatorioDAO {
 
     private Relatorio resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
-        LocalDate dataImpressao = LocalDate.parse(rs.getString("dataImpressao"));
+        LocalDateTime dataImpressao = LocalDateTime.parse(rs.getString("dataImpressao"));
         String categoria = rs.getString("categoria");
 
         return new Relatorio(id, dataImpressao, TipoGrupoEnum.getValueByString(categoria));

@@ -21,11 +21,16 @@ public class CriarGrupoController {
     @FXML public ChoiceBox<String> choiceBoxCategoria;
 
     private JanelaCriarGrupo janelaCriarGrupo;
-    public Usuario user;
+    private Usuario user;
+    private GrupoDAO grupoDAO;
+    private LogGrupoDAO logGrupoDAO;
 
     public void init(JanelaCriarGrupo janelaCriarGrupo, Usuario user) {
         this.janelaCriarGrupo = janelaCriarGrupo;
         this.user = user;
+
+        this.grupoDAO = new sqliteGrupoDAO();
+        this.logGrupoDAO = new sqliteLogGrupoDAO();
 
         loadComboBox();
     }
@@ -44,12 +49,10 @@ public class CriarGrupoController {
         String tipoSelecionado = choiceBoxCategoria.getValue();
         TipoGrupoEnum tipo = TipoGrupoEnum.getValueByString(tipoSelecionado);
 
-        Grupo grupo = new Grupo(txtFieldGrupo.getText(), tipo);
+        Grupo grupo = new Grupo(txtFieldGrupo.getText(), tipo, user.getCpf());
 
-        GrupoDAO grupoDAO = new sqliteGrupoDAO();
-        LogGrupoDAO logGrupoDAO = new sqliteLogGrupoDAO();
 
-        CriarGrupoUseCase criarGrupoUseCase = new CriarGrupoUseCase(grupoDAO, logGrupoDAO);
+        CriarGrupoUseCase criarGrupoUseCase = new CriarGrupoUseCase(this.grupoDAO, this.logGrupoDAO);
         criarGrupoUseCase.include(user, grupo);
 
         janelaCriarGrupo.close();

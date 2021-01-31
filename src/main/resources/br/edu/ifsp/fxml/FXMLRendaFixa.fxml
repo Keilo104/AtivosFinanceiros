@@ -3,110 +3,147 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.fxml.FXMLRendaFixa">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlRendaFixa">
     <children>
-        <BorderPane prefHeight="708.0" prefWidth="916.0" />
-        <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL" prefHeight="708.0" prefWidth="916.0">
+        <BorderPane prefHeight="708.0" prefWidth="916.0"/>
+        <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL"
+                   prefHeight="708.0" prefWidth="916.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="58.0" prefWidth="916.0">
                             <children>
-                                <Label layoutX="14.0" layoutY="9.0" prefHeight="35.0" prefWidth="225.0" text="My Wallet">
+                                <Label layoutX="14.0" layoutY="9.0" prefHeight="35.0" prefWidth="225.0"
+                                       text="My Wallet">
                                     <font>
-                                        <Font size="24.0" />
+                                        <Font size="24.0"/>
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER_RIGHT" layoutX="697.0" layoutY="14.0" prefHeight="35.0" prefWidth="108.0" text="Log Out">
+                                <Label alignment="CENTER_RIGHT" layoutX="697.0" layoutY="14.0" prefHeight="35.0"
+                                       prefWidth="108.0" text="Log Out">
                                     <font>
-                                        <Font size="20.0" />
+                                        <Font size="20.0"/>
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER_RIGHT" layoutX="805.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel">
+                                <Label alignment="CENTER_RIGHT" layoutX="805.0" layoutY="14.0" prefHeight="35.0"
+                                       prefWidth="97.0" text="Miguel">
                                     <font>
-                                        <Font size="20.0" />
+                                        <Font size="20.0"/>
                                     </font>
                                 </Label>
                             </children>
                         </AnchorPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #E5E5FF;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
+                            style="-fx-background-color: #E5E5FF;">
                     <children>
-                        <SplitPane dividerPositions="0.25164113785557984" layoutX="-2.0" prefHeight="648.0" prefWidth="916.0">
+                        <SplitPane dividerPositions="0.25164113785557984" layoutX="-2.0" prefHeight="648.0"
+                                   prefWidth="916.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0" style="-fx-background-color: #E5E5FF;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0"
+                                            style="-fx-background-color: #E5E5FF;">
                                     <children>
                                         <ButtonBar layoutX="14.0" layoutY="192.0" prefHeight="58.0" prefWidth="200.0">
                                             <buttons>
-                                                <Button fx:id="btnRelatorios" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
+                                                <Button fx:id="btnRelatorios" mnemonicParsing="false" prefHeight="46.0"
+                                                        prefWidth="168.0" text="Relatorios"/>
                                             </buttons>
                                         </ButtonBar>
                                         <ButtonBar layoutX="14.0" layoutY="125.0" prefHeight="58.0" prefWidth="200.0">
                                             <buttons>
-                                                <Button fx:id="btnGrupos" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Grupos" />
+                                                <Button fx:id="btnGrupos" mnemonicParsing="false" prefHeight="46.0"
+                                                        prefWidth="168.0" text="Grupos"/>
                                             </buttons>
                                         </ButtonBar>
-                                        <Label layoutX="14.0" layoutY="32.0" prefHeight="35.0" prefWidth="200.0" text="Menu">
+                                        <Label layoutX="14.0" layoutY="32.0" prefHeight="35.0" prefWidth="200.0"
+                                               text="Menu">
                                             <font>
-                                                <Font size="24.0" />
+                                                <Font size="24.0"/>
                                             </font>
                                         </Label>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="658.0" prefWidth="681.0" style="-fx-background-color:grey: #E5E5FF;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="658.0" prefWidth="681.0"
+                                            style="-fx-background-color:grey: #E5E5FF;">
                                     <children>
-                                        <Pane layoutX="20.0" layoutY="20.0" prefHeight="52.0" prefWidth="650.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="584.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                                        <Pane layoutX="20.0" layoutY="20.0" prefHeight="52.0" prefWidth="650.0"
+                                              style="-fx-background-color: white;" AnchorPane.bottomAnchor="584.0"
+                                              AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+                                              AnchorPane.topAnchor="10.0">
                                             <children>
-                                                <Label fx:id="ativo" layoutX="14.0" layoutY="8.0" prefHeight="23.0" prefWidth="383.0" text="Renda fixa">
+                                                <Label fx:id="ativo" layoutX="14.0" layoutY="8.0" prefHeight="23.0"
+                                                       prefWidth="383.0" text="Renda fixa">
                                                     <font>
-                                                        <Font size="25.0" />
+                                                        <Font size="25.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                         </Pane>
-                                        <Pane layoutX="8.0" layoutY="74.0" prefHeight="560.0" prefWidth="662.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="74.0">
+                                        <Pane layoutX="8.0" layoutY="74.0" prefHeight="560.0" prefWidth="662.0"
+                                              AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="8.0"
+                                              AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="74.0">
                                             <children>
-                                                <TableView fx:id="tableRendaFixa" layoutX="7.0" layoutY="1.0" prefHeight="473.0" prefWidth="651.0">
+                                                <TableView fx:id="tableRendaFixa" layoutX="7.0" layoutY="1.0"
+                                                           prefHeight="473.0" prefWidth="651.0">
                                                     <columns>
-                                                        <TableColumn fx:id="cCodigo" prefWidth="149.0" text="Nome" />
-                                                        <TableColumn fx:id="cRendimento" prefWidth="125.0" text="Rendimento" />
-                                                        <TableColumn fx:id="cDataVencimento" prefWidth="121.0" text="Data Vencimento" />
-                                                        <TableColumn fx:id="cQuantidade" prefWidth="107.0" text="Quantidade" />
-                                                        <TableColumn fx:id="cValor" prefWidth="148.0" text="Valor" />
+                                                        <TableColumn fx:id="cCodigo" prefWidth="149.0" text="Nome"/>
+                                                        <TableColumn fx:id="cRendimento" prefWidth="125.0"
+                                                                     text="Rendimento"/>
+                                                        <TableColumn fx:id="cDataVencimento" prefWidth="121.0"
+                                                                     text="Data Vencimento"/>
+                                                        <TableColumn fx:id="cQuantidade" prefWidth="107.0"
+                                                                     text="Quantidade"/>
+                                                        <TableColumn fx:id="cValor" prefWidth="148.0" text="Valor"/>
                                                     </columns>
                                                 </TableView>
-                                                <TextField fx:id="inputNome" disable="true" editable="false" layoutX="29.0" layoutY="486.0" prefHeight="31.0" prefWidth="250.0" promptText="Nome">
+                                                <TextField fx:id="inputNome" disable="true" editable="false"
+                                                           layoutX="29.0" layoutY="486.0" prefHeight="31.0"
+                                                           prefWidth="250.0" promptText="Nome">
                                                     <font>
-                                                        <Font size="15.0" />
-                                                    </font></TextField>
-                                                <TextField fx:id="inputQuantidade" editable="false" layoutX="262.0" layoutY="522.0" prefHeight="25.0" prefWidth="34.0" promptText="02" />
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </TextField>
+                                                <TextField fx:id="inputQuantidade" editable="false" layoutX="262.0"
+                                                           layoutY="522.0" prefHeight="25.0" prefWidth="34.0"
+                                                           promptText="02"/>
                                                 <Label layoutX="177.0" layoutY="525.0" text="Quantidade:">
                                                     <font>
-                                                        <Font size="15.0" />
-                                                    </font></Label>
-                                                <TextField fx:id="inputTotal" disable="true" editable="false" layoutX="372.0" layoutY="523.0" prefHeight="25.0" prefWidth="51.0" promptText="1000" />
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
+                                                <TextField fx:id="inputTotal" disable="true" editable="false"
+                                                           layoutX="372.0" layoutY="523.0" prefHeight="25.0"
+                                                           prefWidth="51.0" promptText="1000"/>
                                                 <Label layoutX="331.0" layoutY="524.0" text="Total:">
                                                     <font>
-                                                        <Font size="15.0" />
-                                                    </font></Label>
-                                                <Button fx:id="btnConfirmar" layoutX="461.0" layoutY="522.0" mnemonicParsing="false" onAction="#adicionar" prefHeight="31.0" prefWidth="97.0" text="Confirmar">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font></Button>
-                                    <TextField fx:id="inputQuantidade1" disable="true" editable="false" layoutX="124.0" layoutY="522.0" prefHeight="25.0" prefWidth="36.0" promptText="10%" />
-                                    <Label layoutX="29.0" layoutY="525.0" text="Rendimento:">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="inputQuantidade11" disable="true" editable="false" layoutX="461.0" layoutY="489.0" prefHeight="25.0" prefWidth="84.0" promptText="05/12/2021" />
-                                    <Label layoutX="311.0" layoutY="491.0" text="Data de vencimento:">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Button fx:id="btnConfirmar" layoutX="461.0" layoutY="522.0"
+                                                        mnemonicParsing="false" onAction="#adicionar" prefHeight="31.0"
+                                                        prefWidth="97.0" text="Confirmar">
+                                                    <font>
+                                                        <Font size="13.0"/>
+                                                    </font>
+                                                </Button>
+                                                <TextField fx:id="inputQuantidade1" disable="true" editable="false"
+                                                           layoutX="124.0" layoutY="522.0" prefHeight="25.0"
+                                                           prefWidth="36.0" promptText="10%"/>
+                                                <Label layoutX="29.0" layoutY="525.0" text="Rendimento:">
+                                                    <font>
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
+                                                <TextField fx:id="inputQuantidade11" disable="true" editable="false"
+                                                           layoutX="461.0" layoutY="489.0" prefHeight="25.0"
+                                                           prefWidth="84.0" promptText="05/12/2021"/>
+                                                <Label layoutX="311.0" layoutY="491.0" text="Data de vencimento:">
+                                                    <font>
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
                                             </children>
                                         </Pane>
                                     </children>
@@ -117,6 +154,6 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-        <Pane prefHeight="200.0" prefWidth="200.0" />
+        <Pane prefHeight="200.0" prefWidth="200.0"/>
     </children>
 </AnchorPane>

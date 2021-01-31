@@ -22,9 +22,11 @@ public class LoginController {
     @FXML public Button btnEntrar;
 
     private JanelaLogin janelaLogin;
+    private UsuarioDAO usuarioDAO;
 
     public void init(JanelaLogin janelaLogin) {
         this.janelaLogin = janelaLogin;
+        this.usuarioDAO = new sqliteUsuarioDAO();
     }
 
     public void criarConta() {
@@ -57,12 +59,10 @@ public class LoginController {
     }
 
     public void login() {
-        UsuarioDAO usuarioDAO = new sqliteUsuarioDAO();
-
         String email = inputEmail.getText();
         String senha = inputSenha.getText();
 
-        LoginUseCase loginUseCase = new LoginUseCase(usuarioDAO);
+        LoginUseCase loginUseCase = new LoginUseCase(this.usuarioDAO);
 
         try {
             Usuario logado = loginUseCase.login(email, senha);
