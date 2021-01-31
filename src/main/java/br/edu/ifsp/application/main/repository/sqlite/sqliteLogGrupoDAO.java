@@ -5,18 +5,18 @@ import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class sqliteLogGrupoDAO implements LogGrupoDAO {
     @Override
-    public Pair<LocalDate, Grupo> create(LogGrupo type) {
+    public Pair<LocalDateTime, Grupo> create(LogGrupo type) {
         return null;
     }
 
     @Override
-    public Optional<LogGrupo> findOne(Pair<LocalDate, Grupo> key) {
+    public Optional<LogGrupo> findOne(Pair<LocalDateTime, Grupo> key) {
         return Optional.empty();
     }
 
@@ -31,7 +31,7 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
     }
 
     @Override
-    public boolean deleteByKey(Pair<LocalDate, Grupo> key) {
+    public boolean deleteByKey(Pair<LocalDateTime, Grupo> key) {
         return false;
     }
 

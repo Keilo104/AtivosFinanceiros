@@ -1,116 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.fxml.FXMLAcoes">
-
+<AnchorPane prefHeight="670.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlAcoes">
     <children>
-        <BorderPane prefHeight="708.0" prefWidth="916.0" />
-        <SplitPane dividerPositions="0.07790368271954674" layoutX="-1.0" layoutY="1.0" orientation="VERTICAL" prefHeight="708.0" prefWidth="916.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="58.0" prefWidth="916.0">
-                            <children>
-                                <Label layoutX="14.0" layoutY="9.0" prefHeight="35.0" prefWidth="225.0" text="My Wallet">
-                                    <font>
-                                        <Font size="24.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" layoutX="697.0" layoutY="14.0" prefHeight="35.0" prefWidth="108.0" text="Log Out">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" layoutX="805.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #E5E5FF;">
-                    <children>
-                        <SplitPane dividerPositions="0.25164113785557984" layoutX="-2.0" prefHeight="648.0" prefWidth="916.0">
-                            <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0" style="-fx-background-color: #E5E5FF;">
-                                    <children>
-                                        <ButtonBar layoutX="14.0" layoutY="192.0" prefHeight="58.0" prefWidth="200.0">
-                                            <buttons>
-                                                <Button fx:id="btnRelatorios" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
-                                            </buttons>
-                                        </ButtonBar>
-                                        <ButtonBar layoutX="14.0" layoutY="125.0" prefHeight="58.0" prefWidth="200.0">
-                                            <buttons>
-                                                <Button fx:id="btnGrupos" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Grupos" />
-                                            </buttons>
-                                        </ButtonBar>
-                                        <Label layoutX="14.0" layoutY="32.0" prefHeight="35.0" prefWidth="200.0" text="Menu">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="681.0" style="-fx-background-color:grey: #E5E5FF;">
-                                    <children>
-                                        <Pane layoutX="20.0" layoutY="20.0" prefHeight="52.0" prefWidth="650.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="584.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
-                                            <children>
-                                    <Label fx:id="ativo" layoutY="8.0" prefHeight="23.0" prefWidth="383.0" text="      Ações">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
-                                            </children>
-                                        </Pane>
-                              <Pane layoutX="8.0" layoutY="74.0" prefHeight="562.0" prefWidth="662.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="74.0">
-                                 <children>
-                                    <TableView fx:id="tableAcoes" layoutX="7.0" layoutY="1.0" prefHeight="499.0" prefWidth="651.0">
-                                      <columns>
-                                        <TableColumn fx:id="cCodigo" prefWidth="142.0" text="Código" />
-                                        <TableColumn fx:id="cPais" prefWidth="161.0" text="Pais" />
-                                          <TableColumn fx:id="cQuantidade" prefWidth="188.0" text="Quantidade" />
-                                          <TableColumn fx:id="cValorU" prefWidth="159.0" text="Valor " />
-                                      </columns>
-                                    </TableView>
-                                    <TextField fx:id="inputCodigo" disable="true" editable="false" layoutX="7.0" layoutY="515.0" prefHeight="31.0" prefWidth="144.0" promptText="Código">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font></TextField>
-                                    <TextField fx:id="inputQuantidade" editable="false" layoutX="395.0" layoutY="518.0" prefHeight="25.0" prefWidth="34.0" promptText="04" />
-                                    <Label layoutX="307.0" layoutY="520.0" text="Quantidade:">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font></Label>
-                                    <TextField fx:id="inputTotal" disable="true" editable="false" layoutX="488.0" layoutY="518.0" prefHeight="25.0" prefWidth="51.0" promptText="1000" />
-                                    <Label layoutX="438.0" layoutY="520.0" text="Total:">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font></Label>
-                                    <Button fx:id="btnConfirmar" layoutX="551.0" layoutY="513.0" mnemonicParsing="false" onAction="#adicionar" prefHeight="35.0" prefWidth="97.0" text="Confirmar">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font></Button>
-                                    <TextField fx:id="inputPais" disable="true" editable="false" layoutX="158.0" layoutY="515.0" prefHeight="31.0" prefWidth="138.0" promptText="Pais">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </Pane>
-                                    </children>
-                                </AnchorPane>
-                            </items>
-                        </SplitPane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-      <Pane prefHeight="200.0" prefWidth="200.0" />
+        <TableView fx:id="tableView" layoutX="62.0" layoutY="20.0" onMouseClicked="#mostrarDadosAcaoNoTextField" prefHeight="500.0" prefWidth="650.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+            <columns>
+                <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="colPais" prefWidth="90.0" text="Pais" />
+                <TableColumn fx:id="colNome" prefWidth="361.0" text="Nome" />
+                <TableColumn fx:id="colPreco" prefWidth="123.0" text="Preço" />
+            </columns>
+            <padding>
+                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+            </padding>
+        </TableView>
+        <TextField fx:id="txtCodigo" editable="false" layoutX="614.0" layoutY="575.0" prefHeight="25.0" prefWidth="92.0" promptText="Código" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="615.0" />
+        <TextField fx:id="txtNome" editable="false" layoutX="152.0" layoutY="575.0" prefHeight="25.0" prefWidth="436.0" promptText="Nome" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" />
+        <TextField fx:id="txtPais" editable="false" layoutX="615.0" layoutY="575.0" prefHeight="25.0" prefWidth="85.0" promptText="País" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="615.0" />
+        <Button layoutX="343.0" layoutY="532.0" mnemonicParsing="false" onAction="#btnComprar" prefHeight="25.0" prefWidth="85.0" text="Comprar" />
+        <TextField fx:id="txtValor" editable="false" layoutX="43.0" layoutY="618.0" prefHeight="25.0" prefWidth="92.0" promptText="Valor" />
+        <Label layoutX="150.0" layoutY="617.0" prefHeight="27.0" prefWidth="85.0" text="Posições">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtQuantia" layoutX="235.0" layoutY="618.0" prefHeight="25.0" prefWidth="115.0" promptText="Quantia" />
+        <Label layoutX="360.0" layoutY="617.0" prefHeight="27.0" prefWidth="105.0" text="Valor total:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtValorTotal" editable="false" layoutX="451.0" layoutY="618.0" promptText="Total" />
+        <Label layoutX="51.0" layoutY="530.0" text="Detalhes">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+      <TextField fx:id="txtNome1" editable="false" layoutX="446.0" layoutY="532.0" prefHeight="25.0" prefWidth="254.0" promptText="Nome" />
     </children>
 
 

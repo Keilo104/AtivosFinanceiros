@@ -18,10 +18,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class APIDAO {
+    private final String API_KEY = "VPG6K3O2QHXZEWPG";
+
     public float getNewPrice(String codigo) {
         float price = -1;
         try {
-            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+codigo+"&apikey=VPG6K3O2QHXZEWPG";
+            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + codigo + "&apikey=" + API_KEY;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -48,7 +50,7 @@ public class APIDAO {
 
     public void getOne(String codigo) {
         try {
-            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+codigo+"&apikey=VPG6K3O2QHXZEWPG";
+            String link = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+codigo+"&apikey=" + API_KEY;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -74,7 +76,7 @@ public class APIDAO {
     public List<Acao> search(String keyword) {
         List<Acao> acoes = new ArrayList<>();
         try {
-            String link = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+keyword+"&apikey=VPG6K3O2QHXZEWPG";
+            String link = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+keyword+"&apikey=" + API_KEY;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -94,12 +96,14 @@ public class APIDAO {
                 for (Object o : arr) {
                     JSONObject new_obj = (JSONObject) o;
                     String codigo = (String) new_obj.get("1. symbol");
+                    String nome = (String) new_obj.get("2. name");
                     String pais = (String) new_obj.get("4. region");
-                    Acao acao = new Acao(codigo, pais);
+                    Acao acao = new Acao(codigo, pais, nome);
 
                     acoes.add(acao);
                 }
             }
+            return acoes;
         } catch (IOException | ParseException e) {
             System.out.println(e);
         }

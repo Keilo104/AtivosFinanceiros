@@ -7,21 +7,21 @@ import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryLogAtivoDAO implements LogAtivoDAO {
-    private static final Map<Pair<LocalDate, Ativo>, LogAtivo> db = new LinkedHashMap<>();
+    private static final Map<Pair<LocalDateTime, Ativo>, LogAtivo> db = new LinkedHashMap<>();
 
     @Override
-    public Pair<LocalDate, Ativo> create(LogAtivo logAtivo) {
+    public Pair<LocalDateTime, Ativo> create(LogAtivo logAtivo) {
         db.put(logAtivo.generateKey(), logAtivo);
 
         return logAtivo.generateKey();
     }
 
     @Override
-    public Optional<LogAtivo> findOne(Pair<LocalDate, Ativo> key) {
+    public Optional<LogAtivo> findOne(Pair<LocalDateTime, Ativo> key) {
         if(db.containsKey(key)){
             return Optional.of(db.get(key));
         }
@@ -35,7 +35,7 @@ public class InMemoryLogAtivoDAO implements LogAtivoDAO {
 
     @Override
     public boolean update(LogAtivo logAtivo) {
-        Pair<LocalDate, Ativo> pair = logAtivo.generateKey();
+        Pair<LocalDateTime, Ativo> pair = logAtivo.generateKey();
         if(db.containsKey(pair)) {
             db.replace(pair, logAtivo);
             return true;
@@ -44,7 +44,7 @@ public class InMemoryLogAtivoDAO implements LogAtivoDAO {
     }
 
     @Override
-    public boolean deleteByKey(Pair<LocalDate, Ativo> key) {
+    public boolean deleteByKey(Pair<LocalDateTime, Ativo> key) {
         if(db.containsKey(key)) {
             db.remove(key);
             return true;

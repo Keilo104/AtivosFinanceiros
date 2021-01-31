@@ -6,20 +6,20 @@ import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryLogTransacaoDAO implements LogTransacaoDAO {
-    private static final Map<Pair<LocalDate, Ativo>, LogTransacaoAtivo> db = new LinkedHashMap<>();
+    private static final Map<Pair<LocalDateTime, Ativo>, LogTransacaoAtivo> db = new LinkedHashMap<>();
 
     @Override
-    public Pair<LocalDate, Ativo> create(LogTransacaoAtivo logTransacaoAtivo) {
+    public Pair<LocalDateTime, Ativo> create(LogTransacaoAtivo logTransacaoAtivo) {
         db.put(logTransacaoAtivo.generateKey(), logTransacaoAtivo);
         return logTransacaoAtivo.generateKey();
     }
 
     @Override
-    public Optional<LogTransacaoAtivo> findOne(Pair<LocalDate, Ativo> key) {
+    public Optional<LogTransacaoAtivo> findOne(Pair<LocalDateTime, Ativo> key) {
         if(db.containsKey(key)){
             return Optional.of(db.get(key));
         }
@@ -33,7 +33,7 @@ public class InMemoryLogTransacaoDAO implements LogTransacaoDAO {
 
     @Override
     public boolean update(LogTransacaoAtivo logTransacaoAtivo) {
-        Pair<LocalDate, Ativo> pair = logTransacaoAtivo.generateKey();
+        Pair<LocalDateTime, Ativo> pair = logTransacaoAtivo.generateKey();
         if(db.containsKey(pair)) {
             db.replace(pair, logTransacaoAtivo);
             return true;
@@ -42,7 +42,7 @@ public class InMemoryLogTransacaoDAO implements LogTransacaoDAO {
     }
 
     @Override
-    public boolean deleteByKey(Pair<LocalDate, Ativo> key) {
+    public boolean deleteByKey(Pair<LocalDateTime, Ativo> key) {
         if(db.containsKey(key)) {
             db.remove(key);
             return true;

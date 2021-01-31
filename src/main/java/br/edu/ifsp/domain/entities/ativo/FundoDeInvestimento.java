@@ -1,6 +1,6 @@
 package br.edu.ifsp.domain.entities.ativo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FundoDeInvestimento extends Ativo{
     private String nome;
@@ -20,7 +20,7 @@ public class FundoDeInvestimento extends Ativo{
         this.taxaAdministrativa = taxaAdministrativa;
     }
 
-    public FundoDeInvestimento(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDate dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
+    public FundoDeInvestimento(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
         super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
         this.nome = nome;
         this.rentabilidade = rentabilidade;

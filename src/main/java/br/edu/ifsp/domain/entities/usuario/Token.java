@@ -1,14 +1,14 @@
 package br.edu.ifsp.domain.entities.usuario;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Token {
     private int id;
     private Usuario usuario;
     private String token;
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
 
-    public Token( String token, LocalDate dateTime ) {
+    public Token( String token, LocalDateTime dateTime ) {
         this.token = token;
         this.dateTime = dateTime;
     }
@@ -37,11 +37,11 @@ public class Token {
         this.token = token;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime( LocalDate dateTime ) {
+    public void setDateTime( LocalDateTime dateTime ) {
         this.dateTime = dateTime;
     }
 }

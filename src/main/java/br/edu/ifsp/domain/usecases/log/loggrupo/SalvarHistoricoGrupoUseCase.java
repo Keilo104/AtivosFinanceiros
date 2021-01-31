@@ -7,7 +7,7 @@ import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class SalvarHistoricoGrupoUseCase {
     private LogGrupoDAO logGrupoDAO;
@@ -16,7 +16,7 @@ public class SalvarHistoricoGrupoUseCase {
         this.logGrupoDAO = logGrupoDAO;
     }
 
-    public Pair<LocalDate, Grupo> salvarHistorico(Usuario usuario, LogGrupo logGrupo) {
+    public Pair<LocalDateTime, Grupo> salvarHistorico(Usuario usuario, LogGrupo logGrupo) {
         Validator<LogGrupo> validator = new LogGrupoInputValidator();
         Notification notif = validator.validate(logGrupo);
 
@@ -24,7 +24,7 @@ public class SalvarHistoricoGrupoUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
-        Pair<LocalDate, Grupo> pair = this.logGrupoDAO.create(logGrupo);
+        Pair<LocalDateTime, Grupo> pair = this.logGrupoDAO.create(logGrupo);
 
         usuario.addLog(logGrupo);
 

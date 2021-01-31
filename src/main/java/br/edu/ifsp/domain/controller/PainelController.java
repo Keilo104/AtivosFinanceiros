@@ -11,7 +11,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class PainelController {
@@ -65,7 +65,7 @@ public class PainelController {
         spanNome.setText(usuario.getNome());
         spanLucroTotal.setText(Float.toString(usuario.getTotalLucrado()));
         spanTotalInvestido.setText(Float.toString(usuario.getTotalInvestido()));
-        spanData.setText(LocalDate.now().toString());
+        spanData.setText(LocalDateTime.now().toString());
     }
 
     private void alertNotSelected() {

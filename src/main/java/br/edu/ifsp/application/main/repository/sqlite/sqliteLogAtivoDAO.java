@@ -5,18 +5,18 @@ import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class sqliteLogAtivoDAO implements LogAtivoDAO {
     @Override
-    public Pair<LocalDate, Ativo> create(LogAtivo type) {
+    public Pair<LocalDateTime, Ativo> create(LogAtivo type) {
         return null;
     }
 
     @Override
-    public Optional<LogAtivo> findOne(Pair<LocalDate, Ativo> key) {
+    public Optional<LogAtivo> findOne(Pair<LocalDateTime, Ativo> key) {
         return Optional.empty();
     }
 
@@ -31,7 +31,7 @@ public class sqliteLogAtivoDAO implements LogAtivoDAO {
     }
 
     @Override
-    public boolean deleteByKey(Pair<LocalDate, Ativo> key) {
+    public boolean deleteByKey(Pair<LocalDateTime, Ativo> key) {
         return false;
     }
 

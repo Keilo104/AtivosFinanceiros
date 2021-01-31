@@ -6,7 +6,7 @@ import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 import javafx.util.Pair;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class SalvarHistoricoAtivoUseCase {
     private LogAtivoDAO logAtivoDAO;
@@ -15,7 +15,7 @@ public class SalvarHistoricoAtivoUseCase {
         this.logAtivoDAO = logAtivoDAO;
     }
 
-    public Pair<LocalDate, Ativo> salvarHistorico(LogAtivo logAtivo) {
+    public Pair<LocalDateTime, Ativo> salvarHistorico(LogAtivo logAtivo) {
         Validator<LogAtivo> validator = new LogAtivoInputValidator();
         Notification notif = validator.validate(logAtivo);
 
