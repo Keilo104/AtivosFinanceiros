@@ -2,6 +2,7 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
 
@@ -127,12 +128,12 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
     }
 
     @Override
-    public List<RendaFixa> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         String sql = "SELECT * FROM RENDA_FIXA r\n" +
                 "JOIN ATIVO a\n" +
                 "ON r.idAtivo = a.id\n" +
                 "WHERE a.grupoId = ?;";
-        List<RendaFixa> rendas = new ArrayList<>();
+        List<Ativo> rendas = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
 
@@ -140,7 +141,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, renda);
                 rendas.add(renda);

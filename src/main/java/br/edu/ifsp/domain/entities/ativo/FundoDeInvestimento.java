@@ -12,6 +12,10 @@ public class FundoDeInvestimento extends Ativo{
         super();
     }
 
+    public FundoDeInvestimento(Ativo ativo) {
+        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade());
+    }
+
     public FundoDeInvestimento(float valor, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
         super(valor, quantidade);
         this.nome = nome;

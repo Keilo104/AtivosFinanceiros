@@ -68,7 +68,7 @@ public class InMemoryAcaoDAO implements AcaoDAO {
     }
 
     @Override
-    public List<Acao> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         return null;
     }
 }

@@ -68,7 +68,7 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     }
 
     @Override
-    public List<FundoDeInvestimento> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         return null;
     }
 }

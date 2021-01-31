@@ -13,6 +13,10 @@ public class Acao extends Ativo {
     public Acao() {
     }
 
+    public Acao(Ativo ativo) {
+        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade());
+    }
+
     public Acao(float valorUnitarioAtual, int quantidade, String codigo, String pais) {
         super(valorUnitarioAtual, quantidade);
         this.codigo = codigo;

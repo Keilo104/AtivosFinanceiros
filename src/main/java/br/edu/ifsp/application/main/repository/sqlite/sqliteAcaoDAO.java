@@ -86,12 +86,12 @@ public class sqliteAcaoDAO implements AcaoDAO {
     }
 
     @Override
-    public List<Acao> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         String sql = "SELECT * FROM ACAO ac\n" +
                 "JOIN ATIVO at\n" +
                 "ON ac.idAtivo = at.id\n" +
                 "WHERE at.grupoId = ?;";
-        List<Acao> acoes = new ArrayList<>();
+        List<Ativo> acoes = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, idGrupo);
 
@@ -99,7 +99,7 @@ public class sqliteAcaoDAO implements AcaoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                Acao acao = (Acao) ativosDAO.findOne(id).get();
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, acao);
 

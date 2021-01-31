@@ -2,6 +2,7 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
 
@@ -129,13 +130,13 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
 
 
     @Override
-    public List<FundoDeInvestimento> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(int idGrupo) {
         String sql = "SELECT * FROM FUNDO_DE_INVESTIMENTO f\n" +
                 "JOIN ATIVO a\n" +
                 "ON ac.idAtivo = f.id\n" +
                 "WHERE a.grupoId = ?;";
 
-        List<FundoDeInvestimento> fundos = new ArrayList<>();
+        List<Ativo> fundos = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, idGrupo);
 
@@ -143,7 +144,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                FundoDeInvestimento fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+                FundoDeInvestimento fundoDeInvestimento = new FundoDeInvestimento(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, fundoDeInvestimento);
                 fundos.add(fundoDeInvestimento);
