@@ -6,6 +6,7 @@ import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
+import br.edu.ifsp.domain.ui.JanelaAcoes;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
@@ -101,20 +102,9 @@ public class GrupoController {
     }
 
     public void adicionarAtivo() {
-        AtivosDAO ativosDAO = new sqliteAtivosDAO();
-        AcaoDAO acaoDAO = new sqliteAcaoDAO();
-        LogAtivoDAO logAtivoDAO = new sqliteLogAtivoDAO();
-        GrupoDAO grupoDAO = new sqliteGrupoDAO();
-        LogTransacaoDAO logTransacaoDAO = new sqliteLogTransacaoDAO();
-        LogGrupoDAO logGrupoDAO = new sqliteLogGrupoDAO();
-        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        JanelaAcoes janelaAcoes = new JanelaAcoes();
+        janelaAcoes.showAndWait( grupo );
 
-        Acao nova = new Acao(12, 5, "GME", "USA");
-        incluirAcaoUseCase.include(nova);
-
-        CompraAtivosUseCase compraAtivosUseCase = new CompraAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO, logGrupoDAO);
-        compraAtivosUseCase.compraAtivo(usuario, grupo, nova);
-        updateAtivos();
     }
 
     public void excluirGrupo() {

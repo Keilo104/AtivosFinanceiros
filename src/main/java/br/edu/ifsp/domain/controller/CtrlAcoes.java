@@ -19,29 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CtrlAcoes {
-    public Label grupoNome;
-    @FXML
-    TableView<Acao> tableView;
-    @FXML
-    TableColumn<Acao, String> colCodigo;
-    @FXML
-    TableColumn<Acao, String> colPais;
-    @FXML
-    TableColumn<Acao, String> colNome;
-    @FXML
-    TableColumn<Acao, Float> colPreco;
-    @FXML
-    TextField txtCodigo;
-    @FXML
-    TextField txtNome;
-    @FXML
-    TextField txtPais;
-    @FXML
-    TextField txtValor;
-    @FXML
-    TextField txtQuantia;
-    @FXML
-    TextField txtValorTotal;
+    @FXML Label grupoNome;
+    @FXML TableView<Acao> tableView;
+    @FXML TableColumn<Acao, String> colCodigo;
+    @FXML TableColumn<Acao, String> colPais;
+    @FXML TableColumn<Acao, String> colNome;
+    @FXML TableColumn<Acao, Float> colPreco;
+    @FXML TextField txtCodigo;
+    @FXML TextField txtNome;
+    @FXML TextField txtPais;
+    @FXML TextField txtValor;
+    @FXML TextField txtQuantia;
+    @FXML TextField txtValorTotal;
 
     private Grupo grupo;
 
@@ -56,14 +45,13 @@ public class CtrlAcoes {
 
     public void init( Grupo grupo ) {
         this.grupo = grupo;
-        grupoNome.setText( grupo.getNome() );
+
     }
 
     private void configurarCelulasDaTabela() {
         colCodigo.setCellValueFactory( new PropertyValueFactory<>( "codigo" ) );
         colPais.setCellValueFactory( new PropertyValueFactory<>( "pais" ) );
         colNome.setCellValueFactory( new PropertyValueFactory<>( "nome" ) );
-        colPreco.setCellValueFactory( new PropertyValueFactory<>( "valorUnitarioAtual" ) );
     }
 
     private void inserirDadosAFonte() {
@@ -88,18 +76,20 @@ public class CtrlAcoes {
         Acao acao = tableView.getSelectionModel().getSelectedItem();
         txtCodigo.setText( acao.getCodigo() );
         txtNome.setText( acao.getNome() );
-        txtValor.setText( String.valueOf( acao.getValorUnitarioAtual() ) );
+        txtPais.setText( acao.getPais() );
+
+        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
+        Acao valorAcao = apiDao.getOne( acao.getCodigo() );
+        txtValor.setText( String.valueOf( valorAcao.getValorUnitarioAtual() ) );
     }
 
     public void btnComprar( ActionEvent actionEvent ) {
         Acao acaoTabela = tableView.getSelectionModel().getSelectedItem();
-        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
 
-        Acao adicionarAcao = apiDao.getOne( acaoTabela.getCodigo() );
-        adicionarAcao.setNome( adicionarAcao.getNome() );
-        adicionarAcao.setCodigo( adicionarAcao.getCodigo() );
-        adicionarAcao.setPais( adicionarAcao.getPais() );
-        adicionarAcao.setQuantidade( Integer.parseInt( txtQuantia.getText() ) );
-        // TODO
+//        adicionarAcao.setNome( adicionarAcao.getNome() );
+//        adicionarAcao.setCodigo( adicionarAcao.getCodigo() );
+//        adicionarAcao.setPais( adicionarAcao.getPais() );
+//        adicionarAcao.setQuantidade( Integer.parseInt( txtQuantia.getText() ) );
+//        // TODO
     }
 }

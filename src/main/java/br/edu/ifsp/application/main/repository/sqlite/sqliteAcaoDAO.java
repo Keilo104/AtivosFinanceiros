@@ -18,11 +18,12 @@ public class sqliteAcaoDAO implements AcaoDAO {
         int id = ativosDAO.create(acao);
         acao.setId(id);
 
-        String sql = "INSERT INTO ACAO VALUES(?,?,?);";
+        String sql = "INSERT INTO ACAO VALUES( ?, ?, ?, ? );";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, acao.getId());
             stat.setString(2, acao.getCodigo());
-            stat.setString(3, acao.getPais());
+            stat.setString( 3, acao.getNome() );
+            stat.setString(4, acao.getPais());
 
             stat.execute();
 
@@ -37,9 +38,10 @@ public class sqliteAcaoDAO implements AcaoDAO {
     private Acao resultSetToEntity(ResultSet rs) throws SQLException {
         int idAtivo = rs.getInt("idAtivo");
         String codigo = rs.getString("codigo");
+        String nome = rs.getString( "nome" );
         String pais = rs.getString("pais");
 
-        return new Acao(idAtivo, codigo, pais);
+        return new Acao(idAtivo, codigo, pais, nome);
     }
 
     @Override

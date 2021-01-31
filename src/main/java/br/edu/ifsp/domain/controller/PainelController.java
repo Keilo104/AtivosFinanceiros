@@ -2,10 +2,12 @@ package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.domain.ui.JanelaAcompanharAcao;
 import br.edu.ifsp.domain.ui.JanelaCriarGrupo;
 import br.edu.ifsp.domain.ui.JanelaGrupo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -104,5 +106,10 @@ public class PainelController {
         XYChart.Series<String,Number> series = gc.setDataPainel();
 
         graphAtivos.getData().add(series);
+    }
+
+    public void abrirJanelaTracking( ActionEvent actionEvent ) {
+        JanelaAcompanharAcao janelaAcompanharAcao = new JanelaAcompanharAcao();
+        janelaAcompanharAcao.show( usuario );
     }
 }
