@@ -56,7 +56,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             if(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+                fundoDeInvestimento = new FundoDeInvestimento(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, fundoDeInvestimento);
             }
@@ -77,7 +77,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                FundoDeInvestimento fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+                FundoDeInvestimento fundoDeInvestimento = new FundoDeInvestimento(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, fundoDeInvestimento);
                 fundos.add(fundoDeInvestimento);

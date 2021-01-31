@@ -56,7 +56,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             if(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, renda);
             }
@@ -77,7 +77,7 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
-                RendaFixa renda = (RendaFixa) ativosDAO.findOne(id).get();
+                RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
 
                 resultSetToEntity(rs, renda);
                 rendas.add(renda);
