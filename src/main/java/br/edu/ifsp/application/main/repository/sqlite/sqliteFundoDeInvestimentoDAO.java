@@ -20,7 +20,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
         int id = ativosDAO.create(fundoDeInvestimento);
         fundoDeInvestimento.setId(id);
 
-        String sql = "INSERT INTO FUNDO_-DE_INVESTIMENTO VALUES(?,?,?,?,?);";
+        String sql = "INSERT INTO FUNDO_DE_INVESTIMENTO VALUES(?,?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, fundoDeInvestimento.getId());
             stat.setString(2, fundoDeInvestimento.getNome());

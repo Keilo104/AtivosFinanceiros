@@ -123,10 +123,11 @@ public class GrupoController {
 
             default:
                 JanelaFundos janelaFundos = new JanelaFundos();
-                //janelaFundos.showAndWait( usuario, grupo );
+                janelaFundos.showAndWait( usuario, grupo );
                 break;
         }
         updateAtivos();
+        initGrafico();
     }
 
     public void excluirGrupo() {
@@ -135,6 +136,8 @@ public class GrupoController {
 
     private void initGrafico(){
         GraficoCreator gc = new GraficoCreator();
+
+        graphGrupo.getData().clear();
         XYChart.Series<String,Number> series = gc.setDataGrupo(grupo.getId());
 
         graphGrupo.getData().add(series);

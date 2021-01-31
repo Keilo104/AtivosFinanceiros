@@ -2,7 +2,9 @@ package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
 import br.edu.ifsp.domain.controller.CtrlAcoes;
+import br.edu.ifsp.domain.controller.CtrlFundos;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -14,7 +16,7 @@ import java.io.IOException;
 public class JanelaFundos {
     private Stage stage = new Stage();
 
-    public void showAndWait( Grupo grupo ) {
+    public void showAndWait( Usuario usuario, Grupo grupo ) {
         Pane sceneGraph = null;
 
         try {
@@ -28,8 +30,8 @@ public class JanelaFundos {
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 1080 );
 
-            //CtrlAcoes ctrlAcoes = new CtrlAcoes();
-            //ctrlAcoes.init( usuario, grupo );
+            CtrlFundos ctrlFundos = (CtrlFundos) loader.getController();
+            ctrlFundos.init( usuario, grupo, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();

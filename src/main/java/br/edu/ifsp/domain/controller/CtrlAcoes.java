@@ -61,6 +61,8 @@ public class CtrlAcoes {
         this.grupo = grupo;
         this.usuario = usuario;
         this.janela = janela;
+
+        grupoNome.setText(grupo.getNome());
     }
 
     private void configurarCelulasDaTabela() {
@@ -114,9 +116,9 @@ public class CtrlAcoes {
 
     private void alertSucesso() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Você comprou o ativo com sucesso! :)");
-        alert.setHeaderText("Você comprou o ativo com sucesso! :)");
-        alert.setContentText("Você comprou o ativo com sucesso! :)");
+        alert.setTitle("Você comprou a ação com sucesso! :)");
+        alert.setHeaderText("Você comprou a ação ativo com sucesso! :)");
+        alert.setContentText("Você comprou a ação ativo com sucesso! :)");
 
         alert.showAndWait();
     }
