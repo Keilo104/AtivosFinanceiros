@@ -4,7 +4,6 @@ import br.edu.ifsp.application.main.repository.sqlite.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
@@ -14,13 +13,14 @@ import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
 import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
 import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
 import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
 
 import java.util.Iterator;
@@ -29,6 +29,9 @@ public class GrupoController {
     @FXML public VBox vBox;
     @FXML public Label labelNome;
     @FXML public Label labelTipo;
+    @FXML public CategoryAxis xAxis;
+    @FXML public NumberAxis yAxis;
+    @FXML public LineChart<String,Number> graphGrupo;
 
     private Usuario usuario;
     private Grupo grupo;
@@ -36,6 +39,8 @@ public class GrupoController {
     public void init(Usuario user, Grupo group) {
         this.usuario = user;
         this.grupo = group;
+
+        initGrafico();
         updateAtivos();
         updateLabels();
     }
@@ -114,5 +119,12 @@ public class GrupoController {
 
     public void excluirGrupo() {
 
+    }
+
+    private void initGrafico(){
+        GraficoCreator gc = new GraficoCreator();
+        XYChart.Series<String,Number> series = gc.setDataGrupo(grupo.getId());
+
+        graphGrupo.getData().add(series);
     }
 }
