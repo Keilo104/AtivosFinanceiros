@@ -1,5 +1,11 @@
 package br.edu.ifsp.application.main;
 
+import br.edu.ifsp.application.main.repository.inMemory.InMemoryTokenDAO;
+import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteTokenDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
+import br.edu.ifsp.domain.DAOs.TokenDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
@@ -72,6 +78,8 @@ public class Main {
     }
 
     private static void configureInjection() {
+        TokenDAO tokenDAO = new sqliteTokenDAO();
+        UsuarioDAO usuarioDAO = new sqliteUsuarioDAO();
         /*
         //DAOs
         ativoDB = new LinkedHashMap<>();
@@ -83,8 +91,7 @@ public class Main {
         LogAtivoDAO logAtivoDAO = new InMemoryLogAtivoDAO();
         LogTransacaoDAO logTransacaoDAO = new InMemoryLogTransacaoDAO();
         RelatorioDAO relatorioDAO = new InMemoryRelatorioDAO();
-        TokenDAO tokenDAO = new InMemoryTokenDAO();
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
+
         //ativo
         compraAtivosUseCase = new CompraAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
         vendaAtivosUseCase = new VendaAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
@@ -113,14 +120,14 @@ public class Main {
         gerarRelatorioPeriodoUseCase = new GerarRelatorioPeriodoUseCase( relatorioDAO );
         //usuario
         cadastroUseCase = new CadastroUseCase( usuarioDAO );
-        loginUseCase = new LoginUseCase( usuarioDAO );
+        loginUseCase = new LoginUseCase( usuarioDAO );*/
         recuperarSenhaUseCase = new RecuperarSenhaUseCase( usuarioDAO, tokenDAO );
-         */
+
     }
 
     public static void main( String[] args ) {
-        /*
-        configureInjection();
+
+        configureInjection();/*
         Usuario user = new Usuario( "154.796.276-35", "email.muitolegal@gmail.com", "12345" );
         String cpf = cadastroUseCase.cadastrar( user );
         System.out.printf( "Usuário de cpf %s cadastrado com sucesso!\n\n", cpf );
@@ -184,5 +191,6 @@ public class Main {
             System.out.println( "Login falhou :(" );
         }
         */
+        recuperarSenhaUseCase.enviarToken("123");
     }
 }
