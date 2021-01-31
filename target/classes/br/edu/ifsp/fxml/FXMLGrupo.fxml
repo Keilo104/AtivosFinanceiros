@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -55,12 +56,15 @@
                     <children>
                         <VBox fx:id="vBox" layoutX="6.0" layoutY="55.0" prefHeight="185.0" prefWidth="561.0">
                             <children>
-                                <ButtonBar buttonOrder="" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="561.0" style="-fx-border-color: blue; -fx-border-radius: 10px;">
+                                <ButtonBar buttonOrder="" layoutX="10.0" layoutY="50.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="561.0" style="-fx-border-color: blue; -fx-border-radius: 10px;">
                                     <buttons>
-                                        <Button mnemonicParsing="false" text="Alterar" />
-                                        <Button mnemonicParsing="false" text="Vender" />
+                                        <Button contentDisplay="TEXT_ONLY" mnemonicParsing="false" text="Alterar" />
+                                        <Button contentDisplay="TOP" mnemonicParsing="false" text="Vender" />
                                         <Button layoutX="436.0" layoutY="18.0" mnemonicParsing="false" text="Update" />
                                     </buttons>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ButtonBar>
                             </children>
                         </VBox>

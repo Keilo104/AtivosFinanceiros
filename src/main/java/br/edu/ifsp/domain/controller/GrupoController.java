@@ -16,6 +16,7 @@ import br.edu.ifsp.domain.ui.JanelaFundos;
 import br.edu.ifsp.domain.ui.JanelaRendaFixa;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -68,18 +69,21 @@ public class GrupoController {
         while(iterator.hasNext()) {
             ativo = iterator.next();
             ButtonBar bar = new ButtonBar();
+            bar.setPadding(new Insets(10));
 
             Label nome = new Label(ativo.getNome());
             bar.getButtons().add(nome);
 
             if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
                 Button update = new Button("Update");
+                this.inserirEstiloBotao( update );
                 Ativo finalAtivo = ativo;
                 update.setOnAction(e -> updateAPIButton(finalAtivo));
 
                 bar.getButtons().add(update);
             } else {
                 Button alterar = new Button("Alterar");
+                this.inserirEstiloBotao( alterar );
                 Ativo finalAtivo = ativo;
                 alterar.setOnAction(e -> updateButton(finalAtivo));
 
@@ -87,6 +91,8 @@ public class GrupoController {
             }
 
             Button sell = new Button("Vender");
+            sell.setStyle("-fx-cursor: hand");
+            sell.setStyle("-fx-background-color: #804a28;");
             Ativo finalAtivo = ativo;
             sell.setOnAction(e -> sellButton(finalAtivo));
 
@@ -95,6 +101,13 @@ public class GrupoController {
             vBox.getChildren().add(bar);
         }
     }
+
+    private void inserirEstiloBotao(Button botao) {
+        botao.setStyle("-fx-cursor: hand");
+        botao.setStyle( "-fx-text-fill: #ffffff");
+        botao.setStyle("-fx-background-color: #5d915d;");
+    }
+
 
     private void updateAPIButton(Ativo ativo) {
         UpdateAPIAcaoUseCase updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase(acaoDAO, logAtivoDAO, apidao);

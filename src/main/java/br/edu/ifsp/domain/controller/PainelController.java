@@ -112,5 +112,9 @@ public class PainelController {
         JanelaAcompanharAcao janelaAcompanharAcao = new JanelaAcompanharAcao();
         janelaAcompanharAcao.show( usuario );
     }
-    
+
+    public void btnSair( ActionEvent actionEvent ) {
+        Stage stage = ( Stage ) btnSair.getScene().getWindow();
+        stage.close();
+    }
 }

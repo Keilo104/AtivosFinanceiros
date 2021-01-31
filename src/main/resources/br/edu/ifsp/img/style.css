@@ -7,3 +7,11 @@
     -fx-cursor: hand;
     -fx-background-color: #6fd9c4;
 }
+
+#btnUpdateGrupo:hover, #btnAlterarGrupo:hover {
+    -fx-cursor: hand;
+}
+
+#btnUpdateGrupo, #btnAlterarGrupo {
+    -fx-background-color: green;
+}
