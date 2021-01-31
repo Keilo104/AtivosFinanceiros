@@ -91,7 +91,7 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
             while(rs.next()) {
                 LogGrupo logGrupo = resultSetToEntity(rs);
                 logsGrupo.add(logGrupo);
-                System.out.println(logGrupo);
+                //System.out.println(logGrupo);
             }
 
         } catch (SQLException throwables) {

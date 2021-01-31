@@ -39,9 +39,12 @@ public class CompraAtivosUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
+        ativo.setIDGrupo(grupo.getId());
+
         if(ativosDAO.update(ativo)) {
             float lucroAnterior = grupo.getTotalLucrado();
             grupo.addAtivo(ativo);
+            //System.out.println(grupo);
             boolean flag = grupoDAO.update(grupo);
             float lucroAtual = grupo.getTotalLucrado();
 

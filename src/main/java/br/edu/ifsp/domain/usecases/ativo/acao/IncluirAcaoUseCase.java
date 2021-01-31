@@ -30,7 +30,7 @@ public class IncluirAcaoUseCase {
 
         int id = this.ativosDAO.create(acao);
         acao.setId(id);
-        System.out.println(id);
+        //System.out.println(id);
         id = this.acaoDAO.create(acao);
 
         SalvarHistoricoAtivoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoAtivoUseCase(logAtivoDAO);
