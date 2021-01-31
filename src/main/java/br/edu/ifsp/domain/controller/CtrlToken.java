@@ -11,10 +11,7 @@ import br.edu.ifsp.domain.usecases.usuario.RecuperarSenhaUseCase;
 import com.sun.javafx.binding.StringFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Optional;
@@ -96,6 +93,7 @@ public class CtrlToken {
                 if (!senha.equals(senhaAntiga)) {
                     usuario.setSenha(senha);
                     usuarioDAO.update(usuario);
+                    passwordChangeSuccess();
                     janelaRecuperar.close();
                 }else{
                     labelSenhaIgual.setVisible(true);
@@ -104,5 +102,13 @@ public class CtrlToken {
         }else{
             labelSenhaInvalida.setVisible(true);
         }
+    }
+    private void passwordChangeSuccess() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Senha trocada com sucesso");
+        alert.setHeaderText("Senha trocada com sucesso.");
+        alert.setContentText("Senha trocada com sucesso.");
+
+        alert.showAndWait();
     }
 }

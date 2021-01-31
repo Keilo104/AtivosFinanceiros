@@ -6,14 +6,14 @@ import br.edu.ifsp.domain.entities.ativo.Acao;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import javax.mail.Flags;
 
 public class AlphaAdvantageAPIDAO implements APIDAO {
     private final String API_KEY = "VPG6K3O2QHXZEWPG";
@@ -110,5 +110,41 @@ public class AlphaAdvantageAPIDAO implements APIDAO {
             System.out.println(e);
         }
         return acoes;
+    }
+
+    public  Map<String, Float> getHistoryOfOne(String keyword) {
+        Map<String, Float> historico = new LinkedHashMap<>();
+        try {
+            String link = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + keyword + "&apikey=" + API_KEY;
+            URL url = new URL(link);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+
+
+            try (Scanner scanner = new Scanner(url.openStream())) {
+                String inline = "";
+                while (scanner.hasNext()) {
+                    inline += scanner.nextLine();
+                }
+                JSONParser parser = new JSONParser();
+                JSONObject data_obj = (JSONObject) parser.parse(inline);
+                JSONObject arr = (JSONObject) data_obj.get("Time Series (Daily)");
+                Set keys = arr.keySet();
+
+                for (Object k : keys) {
+                    JSONObject new_obj = (JSONObject) arr.get(k);
+                    String data = k.toString();
+                    System.out.println();
+                    Float preco = Float.parseFloat((String) new_obj.get("4. close"));
+                    historico.put(data, preco);
+                }
+                System.out.println(historico);
+            }
+        } catch (IOException | ParseException e) {
+            System.out.println(e);
+        }
+        return historico;
     }
 }
