@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.usecases.grupo;
 
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;

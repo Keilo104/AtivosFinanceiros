@@ -1,5 +1,6 @@
-package br.edu.ifsp.domain.usecases.ativo.acao;
+package br.edu.ifsp.application.main.repository;
 
+import br.edu.ifsp.domain.DAOs.APIDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class APIDAO {
+public class AlphaAdvantageAPIDAO implements APIDAO {
     private final String API_KEY = "VPG6K3O2QHXZEWPG";
 
     public float getNewPrice(String codigo) {

@@ -1,7 +1,6 @@
-package br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento;
+package br.edu.ifsp.domain.DAOs;
 
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
-import br.edu.ifsp.domain.usecases.utils.DAO;
 
 public interface FundoDeInvestimentoDAO extends DAO<FundoDeInvestimento, Integer> {
     Integer create(FundoDeInvestimento fundoDeInvestimento, Integer idAtivo);

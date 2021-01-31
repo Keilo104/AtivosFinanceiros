@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.usecases.ativo.AtivosDAO;
+import br.edu.ifsp.domain.DAOs.AtivosDAO;
 
 import java.util.*;
 

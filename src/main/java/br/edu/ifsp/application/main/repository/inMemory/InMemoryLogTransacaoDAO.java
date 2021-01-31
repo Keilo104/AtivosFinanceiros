@@ -1,9 +1,8 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
-import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
-import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
+import br.edu.ifsp.domain.DAOs.LogTransacaoDAO;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;

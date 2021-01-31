@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.entities.ativo;
 
-import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
+import br.edu.ifsp.domain.DAOs.APIDAO;
 
 import java.time.LocalDateTime;
 
@@ -41,7 +42,7 @@ public class Acao extends Ativo {
     }
 
     public void updateFromAPI() {
-        APIDAO apidao = new APIDAO();
+        APIDAO apidao = new AlphaAdvantageAPIDAO();
         float newPrice = apidao.getNewPrice(this.codigo);
         if (newPrice > -1) {
             this.setValorUnitarioAtual(newPrice);

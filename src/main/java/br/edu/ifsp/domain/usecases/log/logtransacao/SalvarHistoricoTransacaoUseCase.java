@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.usecases.log.logtransacao;
 
+import br.edu.ifsp.domain.DAOs.LogTransacaoDAO;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;

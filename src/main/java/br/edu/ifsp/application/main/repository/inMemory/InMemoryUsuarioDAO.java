@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 
 import java.util.*;
 

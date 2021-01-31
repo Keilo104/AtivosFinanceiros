@@ -3,7 +3,7 @@ package br.edu.ifsp.domain.controller;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,7 +43,7 @@ public class CtrlAcompanharAcao {
 
     public void btnPesquisar( MouseEvent mouseEvent ) {
         String codigo = txtSigla.getText();
-        APIDAO apiDao = new APIDAO();
+        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
         acoesAPI.addAll( apiDao.search( codigo ) );
         carregarDadosNaTabela();
     }

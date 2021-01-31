@@ -2,13 +2,12 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
-import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
+import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
 import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

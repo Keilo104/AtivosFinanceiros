@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.usecases.usuario;
 
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;

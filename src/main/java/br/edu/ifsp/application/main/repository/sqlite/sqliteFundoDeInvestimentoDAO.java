@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
-import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.FundoDeInvestimentoDAO;
+import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

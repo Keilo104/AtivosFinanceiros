@@ -2,7 +2,7 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

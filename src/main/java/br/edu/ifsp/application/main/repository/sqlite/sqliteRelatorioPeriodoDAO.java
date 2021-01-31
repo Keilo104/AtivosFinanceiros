@@ -2,12 +2,11 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.relatorio.RelatorioPeriodo;
-import br.edu.ifsp.domain.usecases.relatorio.RelatorioPeriodoDAO;
+import br.edu.ifsp.domain.DAOs.RelatorioPeriodoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

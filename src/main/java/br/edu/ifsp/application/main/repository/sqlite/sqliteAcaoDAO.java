@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.ativo.Acao;
-import br.edu.ifsp.domain.usecases.ativo.acao.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

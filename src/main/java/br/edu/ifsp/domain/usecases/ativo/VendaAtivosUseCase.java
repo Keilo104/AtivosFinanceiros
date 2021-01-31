@@ -1,16 +1,17 @@
 package br.edu.ifsp.domain.usecases.ativo;
 
+import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivoEnum;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
 import br.edu.ifsp.domain.usecases.grupo.GrupoInputValidator;
-import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
+import br.edu.ifsp.domain.DAOs.LogGrupoDAO;
 import br.edu.ifsp.domain.usecases.log.loggrupo.SalvarHistoricoGrupoUseCase;
-import br.edu.ifsp.domain.usecases.log.logtransacao.LogTransacaoDAO;
+import br.edu.ifsp.domain.DAOs.LogTransacaoDAO;
 import br.edu.ifsp.domain.usecases.log.logtransacao.SalvarHistoricoTransacaoUseCase;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;

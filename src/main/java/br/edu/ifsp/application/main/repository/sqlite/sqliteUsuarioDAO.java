@@ -2,8 +2,8 @@ package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.grupo.GrupoDAO;
-import br.edu.ifsp.domain.usecases.usuario.UsuarioDAO;
+import br.edu.ifsp.domain.DAOs.GrupoDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

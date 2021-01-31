@@ -1,8 +1,7 @@
-package br.edu.ifsp.domain.usecases.grupo;
+package br.edu.ifsp.domain.DAOs;
 
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.usecases.utils.DAO;
 
 import java.util.List;
 import java.util.Optional;

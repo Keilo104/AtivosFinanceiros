@@ -3,13 +3,12 @@ package br.edu.ifsp.application.main.repository.sqlite;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.log.LogAtivo;
 import br.edu.ifsp.domain.entities.log.LogAtivoEnum;
-import br.edu.ifsp.domain.usecases.log.logativo.LogAtivoDAO;
+import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

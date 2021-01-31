@@ -3,7 +3,7 @@ package br.edu.ifsp.domain.controller;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.usecases.ativo.acao.APIDAO;
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,7 +93,7 @@ public class CtrlAcoes {
 
     public void btnComprar( ActionEvent actionEvent ) {
         Acao acaoTabela = tableView.getSelectionModel().getSelectedItem();
-        APIDAO apiDao = new APIDAO();
+        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
 
         Acao adicionarAcao = apiDao.getOne( acaoTabela.getCodigo() );
         adicionarAcao.setNome( adicionarAcao.getNome() );
