@@ -5,6 +5,7 @@ import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
 import br.edu.ifsp.domain.ui.JanelaPainel;
+import br.edu.ifsp.domain.ui.JanelaRecuperar;
 import br.edu.ifsp.domain.usecases.usuario.LoginUseCase;
 import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ public class LoginController {
     @FXML public TextField inputEmail;
     @FXML public PasswordField inputSenha;
     @FXML public Button btnEntrar;
+    @FXML public Button btnRecuperar;
 
     private JanelaLogin janelaLogin;
     private UsuarioDAO usuarioDAO;
@@ -74,5 +76,10 @@ public class LoginController {
         } catch(IllegalArgumentException e) {
             alertExceptionLogin(e);
         }
+    }
+
+    public void recuperar(){
+        JanelaRecuperar janelaRecuperar = new JanelaRecuperar();
+        janelaRecuperar.showAndWait();
     }
 }
