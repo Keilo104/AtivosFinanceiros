@@ -1,5 +1,6 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.usecases.log.loggrupo.LogGrupoDAO;
@@ -9,13 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class sqliteLogGrupoDAO implements LogGrupoDAO {
     @Override
-    public Pair<LocalDate, Grupo> create(LogGrupo logGrupo) {
+    public Pair<LocalDateTime, Ativo> create(LogGrupo logGrupo) {
         String sql = "INSERT INTO LOG_GRUPO(idGrupo, data,valorTotal, mudanca) VALUES(?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             LocalDate data =  LocalDate.now();
@@ -36,7 +38,7 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
 
     private LogGrupo resultSetToEntity(ResultSet rs) throws SQLException {
         int id = rs.getInt("idGrupo");
-        LocalDate data = LocalDate.parse(rs.getString("data"));
+        LocalDateTime data = LocalDateTime.parse(rs.getString("data"));
         Float valorTotal = rs.getFloat("valorTotal");
         Float mudanca = rs.getFloat("mudanca");
 
@@ -83,13 +85,14 @@ public class sqliteLogGrupoDAO implements LogGrupoDAO {
     }
 
     public List<LogGrupo> findAllOrderByData() {
-        String sql = "SELECT * FROM LOG_ATIVO ORDER BY data;";
+        String sql = "SELECT * FROM LOG_GRUPO ORDER BY data;";
         List<LogGrupo> logsGrupo = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 LogGrupo logGrupo = resultSetToEntity(rs);
                 logsGrupo.add(logGrupo);
+                System.out.println(logGrupo);
             }
 
         } catch (SQLException throwables) {

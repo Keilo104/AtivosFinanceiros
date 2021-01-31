@@ -20,6 +20,7 @@ public class GraficoCreator {
             String data = log.getData().toString();
             float valor = ini+log.getMudanca();
             series.getData().add(new XYChart.Data(data ,valor));
+            System.out.println(series.getData());
             ini = valor;
         }
     return series;
