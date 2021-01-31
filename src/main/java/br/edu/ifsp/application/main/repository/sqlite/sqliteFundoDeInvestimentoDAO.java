@@ -1,6 +1,7 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
+import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
 
@@ -36,14 +37,11 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
         return null;
     }
 
-    private FundoDeInvestimento resultSetToEntity(ResultSet rs) throws SQLException {
-        int idAtivo = rs.getInt("idAtivo");
-        String nome = rs.getString("nome");
-        String rentabilidade = rs.getString("rentabilidade");
-        String liquidez = rs.getString("liquidez");
-        float taxaAdministrativa = rs.getFloat("taxaAdministrativa");
-
-        return new FundoDeInvestimento(idAtivo, nome, rentabilidade, liquidez, taxaAdministrativa);
+    private void resultSetToEntity(ResultSet rs, FundoDeInvestimento fundoDeInvestimento) throws SQLException {
+        fundoDeInvestimento.setNome(rs.getString("nome"));
+        fundoDeInvestimento.setRentabilidade(rs.getString("rentabilidade"));
+        fundoDeInvestimento.setLiquidez(rs.getString("liquidez"));
+        fundoDeInvestimento.setTaxaAdministrativa(rs.getFloat("taxaAdministrativa"));
     }
 
     @Override
@@ -55,7 +53,11 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             ResultSet rs = stat.executeQuery();
 
             if(rs.next()) {
-                fundoDeInvestimento = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, fundoDeInvestimento);
             }
 
         } catch (SQLException throwables) {
@@ -72,7 +74,11 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
-                FundoDeInvestimento fundoDeInvestimento = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                FundoDeInvestimento fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, fundoDeInvestimento);
                 fundos.add(fundoDeInvestimento);
             }
 
@@ -123,7 +129,29 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
 
 
     @Override
-    public List<FundoDeInvestimento> findAllByGrupo() {
+    public List<FundoDeInvestimento> findAllByGrupo(int idGrupo) {
+        String sql = "SELECT * FROM FUNDO_DE_INVESTIMENTO f\n" +
+                "JOIN ATIVO a\n" +
+                "ON ac.idAtivo = f.id\n" +
+                "WHERE a.grupoId = ?;";
 
+        List<FundoDeInvestimento> fundos = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, idGrupo);
+
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                FundoDeInvestimento fundoDeInvestimento = (FundoDeInvestimento) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, fundoDeInvestimento);
+                fundos.add(fundoDeInvestimento);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return fundos;
     }
 }

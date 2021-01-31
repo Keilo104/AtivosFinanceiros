@@ -6,5 +6,5 @@ import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import java.util.List;
 
 public interface RendaFixaDAO extends DAO<RendaFixa, Integer> {
-    List<RendaFixa> findAllByGrupo();
+    List<RendaFixa> findAllByGrupo(int idGrupo);
 }

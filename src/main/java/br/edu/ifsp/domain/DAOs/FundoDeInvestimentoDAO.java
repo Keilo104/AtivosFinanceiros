@@ -6,5 +6,5 @@ import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import java.util.List;
 
 public interface FundoDeInvestimentoDAO extends DAO<FundoDeInvestimento, Integer> {
-    List<FundoDeInvestimento> findAllByGrupo();
+    List<FundoDeInvestimento> findAllByGrupo(int idGrupo);
 }

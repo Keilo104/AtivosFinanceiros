@@ -3,6 +3,7 @@ package br.edu.ifsp.application.main.repository.sqlite;
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class sqliteAcaoDAO implements AcaoDAO {
         return null;
     }
 
-    private Acao resultSetToEntity(ResultSet rs, Acao acao) throws SQLException {
+    private void resultSetToEntity(ResultSet rs, Acao acao) throws SQLException {
         acao.setCodigo(rs.getString("codigo"));
         acao.setPais(rs.getString("pais"));
     }
@@ -48,7 +49,11 @@ public class sqliteAcaoDAO implements AcaoDAO {
             ResultSet rs = stat.executeQuery();
 
             if(rs.next()) {
-                acao = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                acao = (Acao) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, acao);
             }
 
         } catch (SQLException throwables) {
@@ -66,7 +71,8 @@ public class sqliteAcaoDAO implements AcaoDAO {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
-                Acao acao = ativosDAO.findOne(rs.getInt("idAtivo"));
+                int id = rs.getInt("idAtivo");
+                Acao acao = (Acao) ativosDAO.findOne(id).get();
 
                 resultSetToEntity(rs, acao);
 
@@ -80,8 +86,30 @@ public class sqliteAcaoDAO implements AcaoDAO {
     }
 
     @Override
-    public List<Acao> findAllByGrupo() {
+    public List<Acao> findAllByGrupo(int idGrupo) {
+        String sql = "SELECT * FROM ACAO ac\n" +
+                "JOIN ATIVO at\n" +
+                "ON ac.idAtivo = at.id\n" +
+                "WHERE at.grupoId = ?;";
+        List<Acao> acoes = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, idGrupo);
 
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                Acao acao = (Acao) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, acao);
+
+                acoes.add(acao);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return acoes;
     }
 
     @Override

@@ -37,6 +37,14 @@ public class RendaFixa extends Ativo{
         return rendimento;
     }
 
+    public void setRendimento(String rendimento) {
+        this.rendimento = rendimento;
+    }
+
+    public void setDataVencimento(LocalDateTime dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
+
     public LocalDateTime getDataVencimento() {
         return dataVencimento;
     }

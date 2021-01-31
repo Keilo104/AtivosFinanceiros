@@ -67,7 +67,7 @@ public class InMemoryRendaFixaDAO implements RendaFixaDAO {
     }
 
     @Override
-    public List<RendaFixa> findAllByGrupo() {
+    public List<RendaFixa> findAllByGrupo(int idGrupo) {
         return null;
     }
 }
