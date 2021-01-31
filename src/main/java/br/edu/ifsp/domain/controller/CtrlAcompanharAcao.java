@@ -1,10 +1,16 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
+import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
+import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -12,6 +18,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CtrlAcompanharAcao {
 
@@ -24,11 +33,18 @@ public class CtrlAcompanharAcao {
 
     private Usuario usuario;
 
+    private AcaoDAO acaoDAO;
+    private LogAtivoDAO logAtivoDAO;
+
     public static ObservableList<Acao> acoesAPI;
 
     @FXML
     public void initialize() {
+        this.acaoDAO = new sqliteAcaoDAO();
+        this.logAtivoDAO = new sqliteLogAtivoDAO();
+
         configurarCelulasDaTabela();
+        inserirDadosAFonte();
     }
 
     public void init(Usuario usuario) {
@@ -41,22 +57,28 @@ public class CtrlAcompanharAcao {
         colNome.setCellValueFactory( new PropertyValueFactory<>( "nome" ) );
     }
 
-    public void btnPesquisar( MouseEvent mouseEvent ) {
-        String codigo = txtSigla.getText();
-        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
-        acoesAPI.addAll( apiDao.search( codigo ) );
-        carregarDadosNaTabela();
+    private void inserirDadosAFonte() {
+        acoesAPI = FXCollections.observableArrayList();
+        tableView.setItems( acoesAPI );
     }
 
-    private void carregarDadosNaTabela() {
+    private void carregarDadosNaTabela(List<Acao> acoes) {
         acoesAPI.clear();
-        acoesAPI.addAll( acoesAPI );
+        acoesAPI.addAll( acoes );
         tableView.refresh();
     }
 
-    public void btnAcompanhar( MouseEvent mouseEvent ) {
+    public void btnPesquisar( ActionEvent actionEvent ) {
+        String codigo = txtSigla.getText().toUpperCase().trim();
+        List<Acao> acao = new ArrayList<>();
+        AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
+        acao =  apiDao.search( codigo );
+        carregarDadosNaTabela(acao);
+    }
+
+    public void btnAcompanhar( ActionEvent actionEvent ) {
         Acao acao = tableView.getSelectionModel().getSelectedItem();
-        sqliteAcaoDAO sqliteAcaoDao = new sqliteAcaoDAO();
-        sqliteAcaoDao.create( acao );
+        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
+        incluirAcaoUseCase.include(acao);
     }
 }

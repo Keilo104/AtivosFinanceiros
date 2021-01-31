@@ -4,7 +4,7 @@ import br.edu.ifsp.domain.DAOs.TokenDAO;
 import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Token;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.usecases.utils.sendEmail;
+import br.edu.ifsp.domain.usecases.utils.SendEmail;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -25,7 +25,7 @@ public class RecuperarSenhaUseCase {
             Token token = new Token(usuario, LocalDateTime.now());
             String check = String.valueOf(tokenDAO.create(token));
             if (!check.isEmpty()){
-                sendEmail se = new sendEmail();
+                SendEmail se = new SendEmail();
                 se.send(usuario.getEmail(), check);
                 return true;
             }

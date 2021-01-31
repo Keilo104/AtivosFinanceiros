@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
 import br.edu.ifsp.domain.controller.CtrlAcoes;
+import br.edu.ifsp.domain.controller.CtrlRendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
@@ -12,25 +13,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class JanelaAcoes {
+public class JanelaRendaFixa {
     private Stage stage = new Stage();
 
-    public void showAndWait( Usuario usuario, Grupo grupo ) {
+    public void showAndWait(Usuario usuario, Grupo grupo ) {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLAcoes.fxml" ) );
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLRendaFixa.fxml" ) );
             sceneGraph = loader.load();
 
-            stage.setTitle( "Visualizar Ações" );
+            stage.setTitle( "Adicionar Renda Fixa" );
             stage.setScene( new Scene( sceneGraph, 750, 450 ) );
             stage.setMinWidth( 755 );
             stage.setMinHeight( 450 );
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 1080 );
 
-            CtrlAcoes ctrlAcoes = (CtrlAcoes) loader.getController();
-            ctrlAcoes.init( usuario, grupo, this );
+            CtrlRendaFixa ctrlRendaFixa = (CtrlRendaFixa) loader.getController();
+            ctrlRendaFixa.init( usuario, grupo, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();

@@ -1,10 +1,16 @@
 package br.edu.ifsp.application.main;
 
+import br.edu.ifsp.application.main.repository.inMemory.InMemoryTokenDAO;
+import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteTokenDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
+import br.edu.ifsp.domain.DAOs.TokenDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
-import br.edu.ifsp.domain.usecases.ativo.acao.AlterarAcaoUseCase;
+import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInvestimentoUseCase;
@@ -29,7 +35,7 @@ public class Main {
     private static VendaAtivosUseCase vendaAtivosUseCase;
 
     // acao
-    private static AlterarAcaoUseCase alterarAcaoUseCase;
+    private static UpdateAPIAcaoUseCase updateAPIAcaoUseCase;
     private static ExcluirAcaoUseCase excluirAcaoUseCase;
     private static IncluirAcaoUseCase incluirAcaoUseCase;
 
@@ -72,6 +78,8 @@ public class Main {
     }
 
     private static void configureInjection() {
+        TokenDAO tokenDAO = new sqliteTokenDAO();
+        UsuarioDAO usuarioDAO = new sqliteUsuarioDAO();
         /*
         //DAOs
         ativoDB = new LinkedHashMap<>();
@@ -83,13 +91,12 @@ public class Main {
         LogAtivoDAO logAtivoDAO = new InMemoryLogAtivoDAO();
         LogTransacaoDAO logTransacaoDAO = new InMemoryLogTransacaoDAO();
         RelatorioDAO relatorioDAO = new InMemoryRelatorioDAO();
-        TokenDAO tokenDAO = new InMemoryTokenDAO();
-        UsuarioDAO usuarioDAO = new InMemoryUsuarioDAO();
+
         //ativo
         compraAtivosUseCase = new CompraAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
         vendaAtivosUseCase = new VendaAtivosUseCase( ativosDAO, grupoDAO, logTransacaoDAO );
         //acao
-        alterarAcaoUseCase = new AlterarAcaoUseCase( acaoDAO, logAtivoDAO );
+        updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase( acaoDAO, logAtivoDAO );
         excluirAcaoUseCase = new ExcluirAcaoUseCase( acaoDAO, logAtivoDAO, grupoDAO );
         incluirAcaoUseCase = new IncluirAcaoUseCase( acaoDAO, logAtivoDAO );
         //fundo de investimento
@@ -113,14 +120,14 @@ public class Main {
         gerarRelatorioPeriodoUseCase = new GerarRelatorioPeriodoUseCase( relatorioDAO );
         //usuario
         cadastroUseCase = new CadastroUseCase( usuarioDAO );
-        loginUseCase = new LoginUseCase( usuarioDAO );
+        loginUseCase = new LoginUseCase( usuarioDAO );*/
         recuperarSenhaUseCase = new RecuperarSenhaUseCase( usuarioDAO, tokenDAO );
-         */
+
     }
 
     public static void main( String[] args ) {
-        /*
-        configureInjection();
+
+        configureInjection();/*
         Usuario user = new Usuario( "154.796.276-35", "email.muitolegal@gmail.com", "12345" );
         String cpf = cadastroUseCase.cadastrar( user );
         System.out.printf( "Usuário de cpf %s cadastrado com sucesso!\n\n", cpf );
@@ -145,7 +152,7 @@ public class Main {
             compraAtivosUseCase.compraAtivo(user, grupo, ativoLegal);
             compraAtivosUseCase.compraAtivo(user, grupo, ativoIlegal);
             ativoLegal.setValorUnitarioAtual( 20 );
-            alterarAcaoUseCase.update( ( Acao ) ativoLegal );
+            updateAPIAcaoUseCase.update( ( Acao ) ativoLegal );
             //printCarteira(logado.getIteratorCarteira());
             // System.out.println(excluirGrupoUseCase.delete(grupo));
             //printCarteira(logado.getIteratorCarteira());
@@ -184,5 +191,6 @@ public class Main {
             System.out.println( "Login falhou :(" );
         }
         */
+        recuperarSenhaUseCase.enviarToken("123");
     }
 }

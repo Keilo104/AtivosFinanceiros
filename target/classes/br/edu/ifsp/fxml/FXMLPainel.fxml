@@ -14,23 +14,18 @@
                     <children>
                         <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="58.0" prefWidth="916.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Label layoutX="14.0" layoutY="9.0" prefHeight="35.0" prefWidth="225.0" text="My Wallet" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="14.0">
+                                <Label layoutX="14.0" layoutY="9.0" prefHeight="35.0" prefWidth="225.0" text="My Wallet" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="10.0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
 
-                                <Label alignment="CENTER_RIGHT" layoutX="719.0" layoutY="14.0" prefHeight="35.0" prefWidth="108.0" text="Log Out" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="14.0">
+                                <Label fx:id="spanNome" alignment="CENTER_RIGHT" layoutX="670.0" layoutY="12.0" prefHeight="35.0" prefWidth="111.0" text="Miguel" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="10.0">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-
-                                <Label fx:id="spanNome" alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
+                        <Button fx:id="btnSair" layoutX="802.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnSair" prefHeight="25.0" prefWidth="91.0" text="Sair" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="17.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -42,8 +37,11 @@
                                 <AnchorPane fx:id="sideBarPainel" minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="232.0" style="-fx-background-color: #E5E5FF;">
                                     <children>
                                         <ButtonBar layoutX="14.0" layoutY="192.0" prefHeight="58.0" prefWidth="200.0" />
-                                        <ButtonBar layoutX="14.0" layoutY="125.0" prefHeight="58.0" prefWidth="200.0" />
-                                        <Label layoutX="17.0" layoutY="25.0" prefHeight="35.0" prefWidth="200.0" text="Menu" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="25.0">
+                                        <ButtonBar layoutX="14.0" layoutY="107.0" prefHeight="58.0" prefWidth="200.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="107.0">
+                                 <buttons>
+                                    <Button fx:id="btnTracking" mnemonicParsing="false" onAction="#abrirJanelaTracking" prefHeight="46.0" prefWidth="168.0" text="Tracking" />
+                                 </buttons></ButtonBar>
+                                        <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="200.0" text="Menu" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
@@ -61,7 +59,7 @@
                               </Label>
                               <Button fx:id="btnAcessar" layoutX="14.0" layoutY="523.0" mnemonicParsing="false" onAction="#visualizarGrupo" prefHeight="25.0" prefWidth="200.0" text="Acessar" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                               <Button layoutX="14.0" layoutY="570.0" mnemonicParsing="false" onAction="#criarGrupo" prefHeight="25.0" prefWidth="200.0" text="Criar novo grupo" />
-                                          <Button fx:id="btnRelatorios" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" />
+                                          <Button fx:id="btnRelatorios" layoutX="45.0" layoutY="49.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Relatorios" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="49.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #E5E5FF;">
@@ -70,7 +68,7 @@
                                             <children>
                                                 <LineChart fx:id="graphAtivos" layoutX="11.0" layoutY="142.0" prefHeight="400.0" prefWidth="650.0">
                                                     <xAxis>
-                                                        <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+                                                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                                                     </xAxis>
                                                     <yAxis>
                                                         <NumberAxis fx:id="yAxis" side="LEFT" />
@@ -111,7 +109,7 @@
                                                     </font>
                                                 </Label>
 
-                                                <Label fx:id="spanData" layoutX="81.0" layoutY="55.0" prefHeight="35.0" prefWidth="136.0" text="23/01/2021">
+                                                <Label fx:id="spanData" layoutX="81.0" layoutY="55.0" prefHeight="35.0" prefWidth="261.0">
                                                     <font>
                                                         <Font size="24.0" />
                                                     </font>

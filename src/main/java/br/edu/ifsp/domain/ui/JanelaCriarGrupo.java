@@ -22,9 +22,8 @@ public class JanelaCriarGrupo {
             sceneGraph = loader.load();
 
             stage.setTitle("Cadastro de novo usuário");
-            stage.setScene(new Scene(sceneGraph, 800, 700));
-            stage.setMinWidth(800);
-            stage.setMinHeight(400);
+            stage.setScene(new Scene(sceneGraph, 600, 400));
+            stage.setResizable( false );
 
             CriarGrupoController criarGrupoController = (CriarGrupoController) loader.getController();
             criarGrupoController.init(this, user);

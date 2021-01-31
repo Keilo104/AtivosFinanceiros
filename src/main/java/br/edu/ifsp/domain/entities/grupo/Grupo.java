@@ -140,6 +140,10 @@ public class Grupo extends Subject implements Observer {
         return this.listaAtivos.iterator();
     }
 
+    public void setAtivos(List<Ativo> ativos) {
+        this.listaAtivos = ativos;
+    }
+
     private void updateLucroPotencial() {
         this.lucroPotencial = this.valorAtual - this.investimentoAtual;
     }

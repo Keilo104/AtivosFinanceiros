@@ -122,6 +122,14 @@ public class Ativo extends Subject {
         return null;
     }
 
+    public void setValorUnitarioComprado(float valorUnitarioComprado) {
+        this.valorUnitarioComprado = valorUnitarioComprado;
+    }
+
+    public void setDataComprado(LocalDateTime dataComprado) {
+        this.dataComprado = dataComprado;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

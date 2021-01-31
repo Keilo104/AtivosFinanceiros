@@ -55,7 +55,7 @@ public class AlphaAdvantageAPIDAO implements APIDAO {
             con.setRequestProperty("Content-Type", "application/json; utf-8");
             con.setRequestProperty("Accept", "application/json");
 
-            Acao acao = new Acao();
+            Acao acao;
             try (Scanner scanner = new Scanner(url.openStream())) {
                 String inline = "";
                 while (scanner.hasNext()) {

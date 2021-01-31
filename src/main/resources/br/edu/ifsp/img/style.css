@@ -3,6 +3,7 @@
     -fx-font-weight: bold;
 }
 
-#sideBarPainel {
-    -fx-background-image: "..\img\img.jpg";
+#btnEntrar:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #6fd9c4;
 }

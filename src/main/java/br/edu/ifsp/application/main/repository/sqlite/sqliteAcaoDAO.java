@@ -3,6 +3,7 @@ package br.edu.ifsp.application.main.repository.sqlite;
 import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
+import br.edu.ifsp.domain.entities.ativo.Ativo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +19,12 @@ public class sqliteAcaoDAO implements AcaoDAO {
         int id = ativosDAO.create(acao);
         acao.setId(id);
 
-        String sql = "INSERT INTO ACAO VALUES(?,?,?);";
+        String sql = "INSERT INTO ACAO VALUES(?,?,?,?);";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, acao.getId());
             stat.setString(2, acao.getCodigo());
-            stat.setString(3, acao.getPais());
+            stat.setString(3, acao.getNome());
+            stat.setString(4, acao.getPais());
 
             stat.execute();
 
@@ -34,12 +36,10 @@ public class sqliteAcaoDAO implements AcaoDAO {
         return null;
     }
 
-    private Acao resultSetToEntity(ResultSet rs) throws SQLException {
-        int idAtivo = rs.getInt("idAtivo");
-        String codigo = rs.getString("codigo");
-        String pais = rs.getString("pais");
-
-        return new Acao(idAtivo, codigo, pais);
+    private void resultSetToEntity(ResultSet rs, Acao acao) throws SQLException {
+        acao.setCodigo(rs.getString("codigo"));
+        acao.setPais(rs.getString("pais"));
+        acao.setNome( rs.getString( "nome" ) );
     }
 
     @Override
@@ -51,7 +51,11 @@ public class sqliteAcaoDAO implements AcaoDAO {
             ResultSet rs = stat.executeQuery();
 
             if(rs.next()) {
-                acao = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                acao = (Acao) ativosDAO.findOne(id).get();
+
+                resultSetToEntity(rs, acao);
             }
 
         } catch (SQLException throwables) {
@@ -68,7 +72,39 @@ public class sqliteAcaoDAO implements AcaoDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
-                Acao acao = resultSetToEntity(rs);
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
+
+                resultSetToEntity(rs, acao);
+
+                acoes.add(acao);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return acoes;
+    }
+
+    @Override
+    public List<Ativo> findAllByGrupo(int idGrupo) {
+        String sql = "SELECT * FROM ACAO ac\n" +
+                "JOIN ATIVO at\n" +
+                "ON ac.idAtivo = at.id\n" +
+                "WHERE at.grupoId = ?;";
+        List<Ativo> acoes = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setInt(1, idGrupo);
+
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
+
+                resultSetToEntity(rs, acao);
+
                 acoes.add(acao);
             }
 
@@ -80,14 +116,18 @@ public class sqliteAcaoDAO implements AcaoDAO {
 
     @Override
     public boolean update(Acao acao) {
-        String sql = "UPDATE ACAO SET codigo=?, pais=? WHERE idAtivo=?";
+        String sql = "UPDATE ACAO SET codigo=?, pais=?, nome=? WHERE idAtivo=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, acao.getCodigo());
             stat.setString(2, acao.getPais());
-            stat.setInt(3, acao.getId());
+            stat.setString(3, acao.getNome());
+            stat.setInt(4, acao.getId());
 
             stat.execute();
-            return true;
+
+            AtivosDAO ativosDAO = new sqliteAtivosDAO();
+
+            return ativosDAO.update(acao);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
