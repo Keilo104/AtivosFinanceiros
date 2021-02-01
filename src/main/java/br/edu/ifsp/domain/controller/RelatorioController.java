@@ -1,64 +1,36 @@
 package br.edu.ifsp.domain.controller;
 
-import br.edu.ifsp.application.main.repository.sqlite.sqliteRelatorioDAO;
-import br.edu.ifsp.application.main.repository.sqlite.sqliteRelatorioPeriodoDAO;
-import br.edu.ifsp.domain.DAOs.GrupoDAO;
-import br.edu.ifsp.domain.DAOs.RelatorioDAO;
-import br.edu.ifsp.domain.DAOs.RelatorioPeriodoDAO;
-import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.relatorio.Relatorio;
-import br.edu.ifsp.domain.entities.relatorio.RelatorioPeriodo;
-import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.ui.JanelaCriarGrupo;
-import br.edu.ifsp.domain.ui.JanelaGrupo;
-import br.edu.ifsp.domain.ui.JanelaRelatorio;
-import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
-import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
-import br.edu.ifsp.domain.usecases.utils.CreatePDF;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class RelatorioController {
-    @FXML
-    public TableView<Grupo> tableRelatorioGrupo;
-    @FXML public TableColumn<Grupo, String> cGrupo;
-    @FXML public TableColumn<Grupo, String> cTipo;
-    @FXML public CheckBox radioRelatorio;
-    @FXML public DatePicker dataInicial;
-    @FXML public DatePicker dataFinal;
-    @FXML public Button btnGerar;
+    @FXML ComboBox<String> choiceBoxAtivos;
+    @FXML CheckBox radioRelatorio;
+    @FXML DatePicker dataInicial;
+    @FXML DatePicker dataFinal;
+    @FXML Button btnGerar;
 
-    private JanelaRelatorio janelaRelatorio;
-    private Usuario usuario;
-    private ObservableList<Grupo> grupos;
-    private RelatorioDAO relatorioDAO;
-    private RelatorioPeriodoDAO relatorioPeriodoDAO;
-
-    @FXML
-    public void init(JanelaRelatorio janelaRelatorio, Usuario user,ObservableList<Grupo> grupos) {
-        this.grupos = grupos;
-        this.janelaRelatorio = janelaRelatorio;
-        usuario = user;
-        configurarCelulasDaTabela();
-
-        this.relatorioDAO = new sqliteRelatorioDAO();
-        this.relatorioPeriodoDAO = new sqliteRelatorioPeriodoDAO();
+    public void init() {
+        loadComboBox();
     }
 
-    private void configurarCelulasDaTabela() {
-        cGrupo.setCellValueFactory( new PropertyValueFactory<>( "nome" ) );
-        cTipo.setCellValueFactory( new PropertyValueFactory<>( "tipoString" ) );
-        tableRelatorioGrupo.setItems(grupos);
+    private void loadComboBox() {
+        ObservableList<String> options = FXCollections.observableArrayList();
+
+        for(TipoGrupoEnum tipo : TipoGrupoEnum.values()) {
+            options.add(tipo.getString());
+        }
+
+        choiceBoxAtivos.setItems(options);
     }
 
     public void ativarPeriodico(ActionEvent actionEvent) {
@@ -71,35 +43,31 @@ public class RelatorioController {
         }
     }
 
-    public void ativarCampos(MouseEvent mouseEvent) {
-        Grupo grupo = tableRelatorioGrupo.getSelectionModel().getSelectedItem();
-        if (grupo != null) {
-            btnGerar.setDisable(false);
-        } else {
-            btnGerar.setDisable(true);
-        }
-    }
-
     public void gerarRelatorio(ActionEvent actionEvent) {
-        Grupo grupo = tableRelatorioGrupo.getSelectionModel().getSelectedItem();
+        String tipoSelecionado = choiceBoxAtivos.getValue();
         if(radioRelatorio.isSelected()){
-            Relatorio relatorio = new Relatorio(TipoGrupoEnum.valueOf(cTipo.getText()));
-
-            //GerarRelatorioCategoriaUseCase gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase(relatorioDAO);
-            //gerarRelatorioCategoriaUseCase.gerar(relatorio);
-        } else{
-            RelatorioPeriodo relatorioPeriodo = new
-                RelatorioPeriodo(TipoGrupoEnum.valueOf(cTipo.getText()),dataInicial.getValue(),dataFinal.getValue());
-
+            Relatorio relatorio = new Relatorio(TipoGrupoEnum.valueOf(tipoSelecionado.replace( " ", "_" ).toUpperCase()));
+            LocalDate inicio = dataInicial.getValue();
+            LocalDate fim = dataFinal.getValue();
+            if (checarData(inicio, fim)) {
+                //GerarRelatorioCategoriaUseCase gerarRelatorioCategoriaUseCase = new GerarRelatorioCategoriaUseCase(relatorioDAO);
+                //gerarRelatorioCategoriaUseCase.gerar(relatorio);
+            }
+        } else {
+//            RelatorioPeriodo relatorioPeriodo = new
+//                RelatorioPeriodo(TipoGrupoEnum.valueOf(cTipo.getText()),dataInicial.getValue(),dataFinal.getValue());
 
             //GerarRelatorioPeriodoUseCase gerarRelatorioPeriodoUseCase = new GerarRelatorioPeriodoUseCase(relatorioDAO);
             //gerarRelatorioPeriodoUseCase.gerarRelatorioPeriodo(relatorioPeriodo);
         }
-
         //CreatePDF createPDF = new CreatePDF();
         //createPDF.create();
+    }
 
-
-
+    private boolean checarData( LocalDate inicio, LocalDate fim ) {
+        if ( inicio.isAfter( fim )) {
+            return true;
+        }
+        return false;
     }
 }

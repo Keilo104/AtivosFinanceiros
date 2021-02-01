@@ -24,12 +24,12 @@ public class JanelaRelatorio {
             sceneGraph = loader.load();
 
             stage.setTitle("Gerar relatório");
-            stage.setScene(new Scene(sceneGraph, 500, 500));
+            stage.setScene(new Scene(sceneGraph, 800, 370));
             stage.setMinWidth(800);
             stage.setMinHeight(400);
 
             RelatorioController relatorioController = (RelatorioController) loader.getController();
-            relatorioController.init(this,user,grupos);
+            relatorioController.init();
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
