@@ -8,6 +8,7 @@ import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.ui.JanelaAlterarRendaFixa;
 import br.edu.ifsp.domain.usecases.ativo.rendafixa.AlterarRendaFixaUseCase;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
@@ -40,14 +41,38 @@ public class AlterarRendaFixaController {
         dataVencimento.setValue(rendaFixa.getDataVencimento());
     }
 
-    public void btnAlterar() {
-        rendaFixa.setRendimento(txtRendimento.getText());
-        rendaFixa.setDataVencimento(rendaFixa.getDataVencimento());
-        rendaFixa.setValorUnitarioAtual(Float.parseFloat(txtValor.getText()));
+    private void alertSucesso() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Você alterou a renda fixa com sucesso! :)");
+        alert.setHeaderText("Você alterou a renda fixa com sucesso! :)");
+        alert.setContentText("Você alterou a renda fixa com sucesso! :)");
 
-        AlterarRendaFixaUseCase alterarRendaFixaUseCase = new AlterarRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
-        alterarRendaFixaUseCase.update(rendaFixa);
+        alert.showAndWait();
+    }
+
+    public void btnAlterar() {
+        try {
+            rendaFixa.setRendimento(txtRendimento.getText());
+            rendaFixa.setDataVencimento(rendaFixa.getDataVencimento());
+            rendaFixa.setValorUnitarioAtual(Float.parseFloat(txtValor.getText()));
+
+            AlterarRendaFixaUseCase alterarRendaFixaUseCase = new AlterarRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
+            alterarRendaFixaUseCase.update(rendaFixa);
+
+            alertSucesso();
+        } catch(Exception e) {
+            alertException(e);
+        }
 
         janelaAlterarRendaFixa.close();
+    }
+
+    private void alertException(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro de alteração");
+        alert.setHeaderText("Não foi possível alterar a renda fixa.");
+        alert.setContentText(e.getMessage());
+
+        alert.showAndWait();
     }
 }
