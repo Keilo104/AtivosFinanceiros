@@ -89,12 +89,13 @@ public class GrupoController {
 
             Label nome = new Label(ativo.getNome());
             Label valorAtual = new Label("Valor: " + ativo.getValorUnitarioAtual() );
-            Label posicoes = new Label("Quantidade: " + ativo.getQuantidade() );
             bar.getButtons().add(nome);
             bar.getButtons().add(valorAtual);
-            bar.getButtons().add(posicoes);
 
             if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
+                Label posicoes = new Label("Quantidade: " + ativo.getQuantidade() );
+                bar.getButtons().add(posicoes);
+
                 Button update = new Button("Update");
                 this.inserirEstiloBotao( update );
                 Ativo finalAtivo = ativo;

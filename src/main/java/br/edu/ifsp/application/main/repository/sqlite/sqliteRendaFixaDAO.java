@@ -27,7 +27,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, rendaFixa.getId());
             stat.setString(2, rendaFixa.getRendimento());
-            stat.setString(3, rendaFixa.getDataVencimento().toString());
+            if(rendaFixa.getDataVencimento() != null) {
+                stat.setString(3, rendaFixa.getDataVencimento().toString());
+            } else {
+                stat.setString(3, null);
+            }
 
             stat.execute();
 
@@ -44,7 +48,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String dataVencimento = rs.getString("dataVencimento");
 
         rendaFixa.setRendimento(rendimento);
-        rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
+        if(dataVencimento != null) {
+            rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
+        } else {
+            rendaFixa.setDataVencimento(null);
+        }
     }
 
     @Override
@@ -96,7 +104,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String sql = "UPDATE RENDA_FIXA SET rendimento=?, dataVencimento=? WHERE idAtivo=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, rendaFixa.getRendimento());
-            stat.setString(2, rendaFixa.getDataVencimento().toString());
+            if(rendaFixa.getDataVencimento() != null) {
+                stat.setString(2, rendaFixa.getDataVencimento().toString());
+            } else {
+                stat.setString(2, null);
+            }
             stat.setInt(3, rendaFixa.getId());
 
             stat.execute();
