@@ -1,8 +1,11 @@
 package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
+import br.edu.ifsp.domain.controller.AlterarFundosController;
 import br.edu.ifsp.domain.controller.CtrlAcoes;
 import br.edu.ifsp.domain.controller.CtrlFundos;
+import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import javafx.fxml.FXMLLoader;
@@ -13,22 +16,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class JanelaFundos {
+public class JanelaAlterarFundos {
     private Stage stage = new Stage();
 
-    public void showAndWait( Usuario usuario, Grupo grupo ) {
+    public void showAndWait(FundoDeInvestimento fundoDeInvestimento) {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLFundos.fxml" ) );
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLAlterarFundos.fxml" ) );
             sceneGraph = loader.load();
 
-            stage.setTitle( "Adicionar Fundo de Investimento" );
+            stage.setTitle( "Alterar Fundo de Investimento" );
             stage.setScene( new Scene( sceneGraph, 560, 210 ) );
             stage.setResizable(false);
 
-            CtrlFundos ctrlFundos = (CtrlFundos) loader.getController();
-            ctrlFundos.init( usuario, grupo, this );
+            AlterarFundosController alterarFundosController = (AlterarFundosController) loader.getController();
+            alterarFundosController.init( fundoDeInvestimento, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();

@@ -11,12 +11,12 @@ import br.edu.ifsp.application.main.repository.sqlite.*;
 import br.edu.ifsp.domain.DAOs.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
+import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.domain.ui.JanelaAcoes;
-import br.edu.ifsp.domain.ui.JanelaFundos;
-import br.edu.ifsp.domain.ui.JanelaRendaFixa;
+import br.edu.ifsp.domain.ui.*;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
@@ -89,12 +89,13 @@ public class GrupoController {
 
             Label nome = new Label(ativo.getNome());
             Label valorAtual = new Label("Valor: " + ativo.getValorUnitarioAtual() );
-            Label posicoes = new Label("Quantidade: " + ativo.getQuantidade() );
             bar.getButtons().add(nome);
             bar.getButtons().add(valorAtual);
-            bar.getButtons().add(posicoes);
 
             if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
+                Label posicoes = new Label("Quantidade: " + ativo.getQuantidade() );
+                bar.getButtons().add(posicoes);
+
                 Button update = new Button("Update");
                 this.inserirEstiloBotao( update );
                 Ativo finalAtivo = ativo;
@@ -128,14 +129,21 @@ public class GrupoController {
         botao.setStyle("-fx-background-color: #5d915d;");
     }
 
-
     private void updateAPIButton(Ativo ativo) {
         UpdateAPIAcaoUseCase updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase(acaoDAO, logAtivoDAO, apidao);
         updateAPIAcaoUseCase.update((Acao) ativo);
     }
 
     private void updateButton(Ativo ativo) {
-        System.out.println("Updatando sem API para " + ativo.toString());
+        if(grupo.getTipoGrupo() == TipoGrupoEnum.RENDA_FIXA) {
+            JanelaAlterarRendaFixa janelaAlterarRendaFixa = new JanelaAlterarRendaFixa();
+            janelaAlterarRendaFixa.showAndWait((RendaFixa) ativo);
+        } else {
+            JanelaAlterarFundos janelaAlterarFundos = new JanelaAlterarFundos();
+            janelaAlterarFundos.showAndWait((FundoDeInvestimento) ativo);
+        }
+
+        updateAtivos();
     }
 
     private void sellButton(Ativo ativo) {

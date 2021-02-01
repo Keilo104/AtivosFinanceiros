@@ -27,7 +27,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setInt(1, rendaFixa.getId());
             stat.setString(2, rendaFixa.getRendimento());
-            stat.setString(3, rendaFixa.getDataVencimento().toString());
+            if(rendaFixa.getDataVencimento() != null) {
+                stat.setString(3, rendaFixa.getDataVencimento().toString());
+            } else {
+                stat.setString(3, null);
+            }
 
             stat.execute();
 
@@ -44,7 +48,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String dataVencimento = rs.getString("dataVencimento");
 
         rendaFixa.setRendimento(rendimento);
-        rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
+        if(dataVencimento != null) {
+            rendaFixa.setDataVencimento(LocalDate.parse(dataVencimento));
+        } else {
+            rendaFixa.setDataVencimento(null);
+        }
     }
 
     @Override
@@ -96,7 +104,11 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         String sql = "UPDATE RENDA_FIXA SET rendimento=?, dataVencimento=? WHERE idAtivo=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, rendaFixa.getRendimento());
-            stat.setString(2, rendaFixa.getDataVencimento().toString());
+            if(rendaFixa.getDataVencimento() != null) {
+                stat.setString(2, rendaFixa.getDataVencimento().toString());
+            } else {
+                stat.setString(2, null);
+            }
             stat.setInt(3, rendaFixa.getId());
 
             stat.execute();
@@ -156,5 +168,53 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
             throwables.printStackTrace();
         }
         return rendas;
+    }
+
+    public List<String> gerarRelatorio(){
+        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join RENDA_FIXA rf on rf.idAtivo = la.idAtivo UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join RENDA_FIXA rf on rf.idAtivo = l.idAtivo order by l.data;";
+        List<String> rel = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stat.executeQuery();
+            rel.add("Relatório de Renda Fixa:\n");
+            while(rs.next()) {
+                String linha = "";
+                linha+="\nId da ação:" +rs.getString("idAtivo");
+                linha+=" Data da acorrência: "+rs.getString("data");
+                linha+=" Tipo da ocorrência:"+rs.getString("tipo");
+                linha+=" Valor:"+rs.getFloat("valor");
+                linha+=" Quantidade: "+rs.getInt("quantidade");
+
+                rel.add(linha);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rel;
+    }
+
+    public List<String> gerarRelatorioPeriodo(LocalDate dataInicial, LocalDate dataFinal){
+        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join RENDA_FIXA rf on rf.idAtivo = la.idAtivo WHERE data BETWEEN ? and ? UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join RENDA_FIXA rf on rf.idAtivo = l.idAtivo WHERE data BETWEEN ? and ?  order by l.data;";
+        List<String> rel = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setString(1, dataInicial.toString());
+            stat.setString(2, dataFinal.toString());
+            ResultSet rs = stat.executeQuery();
+            rel.add("Relatório de Renda Fixa do período:\n");
+            rel.add(dataInicial.toString()+ " a ");
+            rel.add(dataFinal.toString()+"\n");
+            while(rs.next()) {
+                String linha = "";
+                linha+="\nId da ação:" +rs.getString("idAtivo");
+                linha+=" Data da acorrência: "+rs.getString("data");
+                linha+=" Tipo da ocorrência:"+rs.getString("tipo");
+                linha+=" Valor:"+rs.getFloat("valor");
+                linha+=" Quantidade: "+rs.getInt("quantidade");
+
+                rel.add(linha);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rel;
     }
 }
