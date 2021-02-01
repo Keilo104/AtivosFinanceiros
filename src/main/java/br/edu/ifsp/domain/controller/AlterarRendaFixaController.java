@@ -14,9 +14,12 @@ import javafx.scene.control.TextField;
 
 public class AlterarRendaFixaController {
 
-    @FXML TextField txtRendimento;
-    @FXML DatePicker dataVencimento;
-    @FXML TextField txtValor;
+    @FXML
+    TextField txtRendimento;
+    @FXML
+    DatePicker dataVencimento;
+    @FXML
+    TextField txtValor;
 
     private RendaFixa rendaFixa;
 
@@ -25,7 +28,7 @@ public class AlterarRendaFixaController {
 
     private JanelaAlterarRendaFixa janelaAlterarRendaFixa;
 
-    public void init(RendaFixa rendaFixa, JanelaAlterarRendaFixa janelaAlterarRendaFixa) {
+    public void init( RendaFixa rendaFixa, JanelaAlterarRendaFixa janelaAlterarRendaFixa ) {
         this.rendaFixa = rendaFixa;
         this.janelaAlterarRendaFixa = janelaAlterarRendaFixa;
 
@@ -36,42 +39,42 @@ public class AlterarRendaFixaController {
     }
 
     private void loadLabels() {
-        txtRendimento.setText(rendaFixa.getRendimento());
-        txtValor.setText(Float.toString(rendaFixa.getValorTotalAtual()));
-        dataVencimento.setValue(rendaFixa.getDataVencimento());
+        txtRendimento.setText( rendaFixa.getRendimento() );
+        txtValor.setText( Float.toString( rendaFixa.getValorTotalAtual() ) );
+        dataVencimento.setValue( rendaFixa.getDataVencimento() );
     }
 
     private void alertSucesso() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Você alterou a renda fixa com sucesso! :)");
-        alert.setHeaderText("Você alterou a renda fixa com sucesso! :)");
-        alert.setContentText("Você alterou a renda fixa com sucesso! :)");
+        Alert alert = new Alert( Alert.AlertType.INFORMATION );
+        alert.setTitle( "Você alterou a renda fixa com sucesso! :)" );
+        alert.setHeaderText( "Você alterou a renda fixa com sucesso! :)" );
+        alert.setContentText( "Você alterou a renda fixa com sucesso! :)" );
 
         alert.showAndWait();
     }
 
     public void btnAlterar() {
         try {
-            rendaFixa.setRendimento(txtRendimento.getText());
-            rendaFixa.setDataVencimento(rendaFixa.getDataVencimento());
-            rendaFixa.setValorUnitarioAtual(Float.parseFloat(txtValor.getText()));
+            rendaFixa.setRendimento( txtRendimento.getText() );
+            rendaFixa.setDataVencimento( rendaFixa.getDataVencimento() );
+            rendaFixa.setValorUnitarioAtual( Float.parseFloat( txtValor.getText() ) );
 
-            AlterarRendaFixaUseCase alterarRendaFixaUseCase = new AlterarRendaFixaUseCase(rendaFixaDAO, logAtivoDAO);
-            alterarRendaFixaUseCase.update(rendaFixa);
+            AlterarRendaFixaUseCase alterarRendaFixaUseCase = new AlterarRendaFixaUseCase( rendaFixaDAO, logAtivoDAO );
+            alterarRendaFixaUseCase.update( rendaFixa );
 
             alertSucesso();
-        } catch(Exception e) {
-            alertException(e);
+        } catch ( Exception e ) {
+            alertException( e );
         }
 
         janelaAlterarRendaFixa.close();
     }
 
-    private void alertException(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro de alteração");
-        alert.setHeaderText("Não foi possível alterar a renda fixa.");
-        alert.setContentText(e.getMessage());
+    private void alertException( Exception e ) {
+        Alert alert = new Alert( Alert.AlertType.ERROR );
+        alert.setTitle( "Erro de alteração" );
+        alert.setHeaderText( "Não foi possível alterar a renda fixa." );
+        alert.setContentText( e.getMessage() );
 
         alert.showAndWait();
     }

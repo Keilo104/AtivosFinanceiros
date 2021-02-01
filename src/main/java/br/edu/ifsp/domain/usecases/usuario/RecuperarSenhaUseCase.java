@@ -13,30 +13,30 @@ public class RecuperarSenhaUseCase {
     private UsuarioDAO usuarioDAO;
     private TokenDAO tokenDAO;
 
-    public RecuperarSenhaUseCase( UsuarioDAO usuarioDAO, TokenDAO tokenDAO) {
+    public RecuperarSenhaUseCase( UsuarioDAO usuarioDAO, TokenDAO tokenDAO ) {
         this.usuarioDAO = usuarioDAO;
         this.tokenDAO = tokenDAO;
     }
 
-    public boolean enviarToken(String cpf){
-        Optional<Usuario> us = usuarioDAO.findOne(cpf);
-        if (us.isPresent()){
+    public boolean enviarToken( String cpf ) {
+        Optional<Usuario> us = usuarioDAO.findOne( cpf );
+        if ( us.isPresent() ) {
             Usuario usuario = us.get();
-            Token token = new Token(usuario, LocalDateTime.now());
-            String check = String.valueOf(tokenDAO.create(token));
-            if (!check.isEmpty()){
+            Token token = new Token( usuario, LocalDateTime.now() );
+            String check = String.valueOf( tokenDAO.create( token ) );
+            if ( ! check.isEmpty() ) {
                 SendEmail se = new SendEmail();
-                se.send(usuario.getEmail(), check);
+                se.send( usuario.getEmail(), check );
                 return true;
             }
         }
         return false;
     }
 
-    public boolean verificarToken(String token){
-        if(tokenDAO.findIfExists(token)){
-            tokenDAO.deleteByKey(token);
-            System.out.println(token);
+    public boolean verificarToken( String token ) {
+        if ( tokenDAO.findIfExists( token ) ) {
+            tokenDAO.deleteByKey( token );
+            System.out.println( token );
             return true;
         }
         return false;

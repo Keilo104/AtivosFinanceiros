@@ -8,21 +8,19 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 public class GerarRelatorioPeriodoUseCase {
     private RelatorioDAO relatorioDAO;
 
-    public GerarRelatorioPeriodoUseCase(RelatorioDAO relatorioDAO) {
+    public GerarRelatorioPeriodoUseCase( RelatorioDAO relatorioDAO ) {
         this.relatorioDAO = relatorioDAO;
     }
 
-    public int gerarRelatorioPeriodo (RelatorioPeriodo relatorioPeriodo){
+    public int gerarRelatorioPeriodo( RelatorioPeriodo relatorioPeriodo ) {
         Validator<RelatorioPeriodo> validator = new RelatorioPeriodoValidator();
-        Notification notif = validator.validate(relatorioPeriodo);
+        Notification notif = validator.validate( relatorioPeriodo );
 
-        if(notif.hasErrors()) {
-            throw new IllegalArgumentException(notif.errorMessage());
+        if ( notif.hasErrors() ) {
+            throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        Integer id = this.relatorioDAO.create(relatorioPeriodo);
+        Integer id = this.relatorioDAO.create( relatorioPeriodo );
         return id;
     }
-
-
 }

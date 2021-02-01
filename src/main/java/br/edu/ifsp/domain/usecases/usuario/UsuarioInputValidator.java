@@ -15,18 +15,18 @@ public class UsuarioInputValidator extends Validator<Usuario> {
             return notification;
         }
 
-        if ( nullOrEmptyOrBlank(usuario.getCpf()) ) {
+        if ( nullOrEmptyOrBlank( usuario.getCpf() ) ) {
             notification.addError( "CPF cannot be null or empty" );
         }
 
-        if ( nullOrEmptyOrBlank(usuario.getNome()) ) {
+        if ( nullOrEmptyOrBlank( usuario.getNome() ) ) {
             notification.addError( "Nome cannot be null or empty" );
         }
 
-        if ( nullOrEmptyOrBlank(usuario.getEmail()) ) {
+        if ( nullOrEmptyOrBlank( usuario.getEmail() ) ) {
             notification.addError( "Email cannot be null or empty" );
         }
-        if ( nullOrEmptyOrBlank(usuario.getSenha()) ) {
+        if ( nullOrEmptyOrBlank( usuario.getSenha() ) ) {
             notification.addError( "Senha cannot be null or empty" );
         }
 
@@ -36,10 +36,10 @@ public class UsuarioInputValidator extends Validator<Usuario> {
     public Notification validateLogin( String email, String senha ) {
         Notification notification = new Notification();
 
-        if ( nullOrEmptyOrBlank(email) ) {
+        if ( nullOrEmptyOrBlank( email ) ) {
             notification.addError( "Email cannot be null or empty" );
         }
-        if ( nullOrEmptyOrBlank(senha) ) {
+        if ( nullOrEmptyOrBlank( senha ) ) {
             notification.addError( "Senha cannot be null or empty" );
         }
 

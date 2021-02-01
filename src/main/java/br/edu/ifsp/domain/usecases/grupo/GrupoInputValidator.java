@@ -6,30 +6,29 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class GrupoInputValidator extends Validator<Grupo> {
     @Override
-    public Notification validate(Grupo grupo) {
+    public Notification validate( Grupo grupo ) {
         Notification notification = new Notification();
 
-        if(grupo == null){
-            notification.addError("Grupo is null");
+        if ( grupo == null ) {
+            notification.addError( "Grupo is null" );
             return notification;
         }
 
-        if(nullOrEmptyOrBlank(grupo.getNome())) {
-            notification.addError("Nome cannot be null");
+        if ( nullOrEmptyOrBlank( grupo.getNome() ) ) {
+            notification.addError( "Nome cannot be null" );
         }
-        if(grupo.getTipoGrupo() == null) {
-            notification.addError("Grupo needs a tipo");
+        if ( grupo.getTipoGrupo() == null ) {
+            notification.addError( "Grupo needs a tipo" );
         }
 
         return notification;
     }
 
-    public Notification validateId(Integer id) {
+    public Notification validateId( Integer id ) {
         Notification notification = new Notification();
-        if(id<=0) {
-            notification.addError("Id cannot be <= 0");
+        if ( id <= 0 ) {
+            notification.addError( "Id cannot be <= 0" );
         }
         return notification;
     }
-
 }

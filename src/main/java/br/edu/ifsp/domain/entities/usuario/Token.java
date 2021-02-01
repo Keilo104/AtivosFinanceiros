@@ -13,7 +13,7 @@ public class Token {
         this.dateTime = dateTime;
     }
 
-    public Token(Usuario usuario, LocalDateTime dateTime) {
+    public Token( Usuario usuario, LocalDateTime dateTime ) {
         this.usuario = usuario;
         this.dateTime = dateTime;
     }

@@ -11,14 +11,13 @@ public class App extends Application {
 
     private static Scene scene;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        JanelaLogin janelaLogin = new JanelaLogin();
-        janelaLogin.show();
-    }
-
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         launch();
     }
 
+    @Override
+    public void start( Stage stage ) throws IOException {
+        JanelaLogin janelaLogin = new JanelaLogin();
+        janelaLogin.show();
+    }
 }

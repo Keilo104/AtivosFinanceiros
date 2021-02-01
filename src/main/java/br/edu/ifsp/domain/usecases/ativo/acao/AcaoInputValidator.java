@@ -6,25 +6,25 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 
 public class AcaoInputValidator extends Validator<Acao> {
     @Override
-    public Notification validate(Acao acao) {
+    public Notification validate( Acao acao ) {
         Notification notification = new Notification();
 
-        if (acao == null) {
-            notification.addError("Acao is null");
+        if ( acao == null ) {
+            notification.addError( "Acao is null" );
             return notification;
         }
 
-        if (acao.getDataComprado() == null) {
-            notification.addError("Data cannot be null");
+        if ( acao.getDataComprado() == null ) {
+            notification.addError( "Data cannot be null" );
         }
-        if (acao.getQuantidade() < 0) {
-            notification.addError("Quantidade cannot be less than 0");
+        if ( acao.getQuantidade() < 0 ) {
+            notification.addError( "Quantidade cannot be less than 0" );
         }
-        if (nullOrEmptyOrBlank(acao.getCodigo())) {
-            notification.addError("Codigo cannot be empty");
+        if ( nullOrEmptyOrBlank( acao.getCodigo() ) ) {
+            notification.addError( "Codigo cannot be empty" );
         }
-        if (nullOrEmptyOrBlank(acao.getPais())) {
-            notification.addError("Pais cannot be empty");
+        if ( nullOrEmptyOrBlank( acao.getPais() ) ) {
+            notification.addError( "Pais cannot be empty" );
         }
 
         return notification;

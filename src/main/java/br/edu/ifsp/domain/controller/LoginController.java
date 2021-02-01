@@ -1,13 +1,13 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
+import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaCadastrar;
 import br.edu.ifsp.domain.ui.JanelaLogin;
 import br.edu.ifsp.domain.ui.JanelaPainel;
 import br.edu.ifsp.domain.ui.JanelaRecuperar;
 import br.edu.ifsp.domain.usecases.usuario.LoginUseCase;
-import br.edu.ifsp.domain.DAOs.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,16 +15,21 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController {
-    @FXML public Button btnCriarConta;
-    @FXML public TextField inputEmail;
-    @FXML public PasswordField inputSenha;
-    @FXML public Button btnEntrar;
-    @FXML public Button btnRecuperar;
+    @FXML
+    public Button btnCriarConta;
+    @FXML
+    public TextField inputEmail;
+    @FXML
+    public PasswordField inputSenha;
+    @FXML
+    public Button btnEntrar;
+    @FXML
+    public Button btnRecuperar;
 
     private JanelaLogin janelaLogin;
     private UsuarioDAO usuarioDAO;
 
-    public void init(JanelaLogin janelaLogin) {
+    public void init( JanelaLogin janelaLogin ) {
         this.janelaLogin = janelaLogin;
         this.usuarioDAO = new sqliteUsuarioDAO();
     }
@@ -35,26 +40,26 @@ public class LoginController {
     }
 
     private void alertFailLogin() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro de login");
-        alert.setHeaderText("Não foi possível fazer login.");
-        alert.setContentText("Senha ou email não correspondem.");
+        Alert alert = new Alert( Alert.AlertType.ERROR );
+        alert.setTitle( "Erro de login" );
+        alert.setHeaderText( "Não foi possível fazer login." );
+        alert.setContentText( "Senha ou email não correspondem." );
 
         alert.showAndWait();
     }
 
-    private void alertExceptionLogin(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro de login");
-        alert.setHeaderText("Não foi possível fazer login.");
-        alert.setContentText(e.getMessage());
+    private void alertExceptionLogin( Exception e ) {
+        Alert alert = new Alert( Alert.AlertType.ERROR );
+        alert.setTitle( "Erro de login" );
+        alert.setHeaderText( "Não foi possível fazer login." );
+        alert.setContentText( e.getMessage() );
 
         alert.showAndWait();
     }
 
-    private void showPainel(Usuario user) {
+    private void showPainel( Usuario user ) {
         JanelaPainel janelaPainel = new JanelaPainel();
-        janelaPainel.show(user);
+        janelaPainel.show( user );
         janelaLogin.close();
     }
 
@@ -62,23 +67,22 @@ public class LoginController {
         String email = inputEmail.getText();
         String senha = inputSenha.getText();
 
-        LoginUseCase loginUseCase = new LoginUseCase(this.usuarioDAO);
+        LoginUseCase loginUseCase = new LoginUseCase( this.usuarioDAO );
 
         try {
-            Usuario logado = loginUseCase.login(email, senha);
+            Usuario logado = loginUseCase.login( email, senha );
 
-            if(logado != null) {
-                showPainel(logado);
+            if ( logado != null ) {
+                showPainel( logado );
             } else {
                 alertFailLogin();
             }
-
-        } catch(IllegalArgumentException e) {
-            alertExceptionLogin(e);
+        } catch ( IllegalArgumentException e ) {
+            alertExceptionLogin( e );
         }
     }
 
-    public void recuperar(){
+    public void recuperar() {
         JanelaRecuperar janelaRecuperar = new JanelaRecuperar();
         janelaRecuperar.showAndWait();
     }

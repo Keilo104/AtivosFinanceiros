@@ -13,21 +13,21 @@ import java.time.LocalDateTime;
 public class SalvarHistoricoTransacaoUseCase {
     private LogTransacaoDAO logTransacaoDAO;
 
-    public SalvarHistoricoTransacaoUseCase(LogTransacaoDAO logTransacaoDAO) {
+    public SalvarHistoricoTransacaoUseCase( LogTransacaoDAO logTransacaoDAO ) {
         this.logTransacaoDAO = logTransacaoDAO;
     }
 
-    public Pair<LocalDateTime, Ativo> salvarHistorico(Grupo grupo, LogTransacaoAtivo logTransacaoAtivo) {
+    public Pair<LocalDateTime, Ativo> salvarHistorico( Grupo grupo, LogTransacaoAtivo logTransacaoAtivo ) {
         Validator<LogTransacaoAtivo> validator = new LogTransacaoInputValidator();
-        Notification notif = validator.validate(logTransacaoAtivo);
+        Notification notif = validator.validate( logTransacaoAtivo );
 
-        if(notif.hasErrors()) {
-            throw new IllegalArgumentException(notif.errorMessage());
+        if ( notif.hasErrors() ) {
+            throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        Pair<LocalDateTime, Ativo> pair = this.logTransacaoDAO.create(logTransacaoAtivo);
+        Pair<LocalDateTime, Ativo> pair = this.logTransacaoDAO.create( logTransacaoAtivo );
 
-        grupo.addLog(logTransacaoAtivo);
+        grupo.addLog( logTransacaoAtivo );
 
         return pair;
     }

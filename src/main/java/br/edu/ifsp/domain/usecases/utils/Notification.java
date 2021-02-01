@@ -8,16 +8,16 @@ public class Notification {
 
     List<Error> errors = new ArrayList<>();
 
-    public void addError(String message) {
-        addError(message, null);
+    public void addError( String message ) {
+        addError( message, null );
     }
 
-    public void addError(String message, Exception e) {
-        errors.add(new Error(message, e));
+    public void addError( String message, Exception e ) {
+        errors.add( new Error( message, e ) );
     }
 
-    public void addErrors(Notification notification) {
-        this.errors.addAll(notification.errors);
+    public void addErrors( Notification notification ) {
+        this.errors.addAll( notification.errors );
     }
 
     public boolean isCorrect() {
@@ -28,19 +28,19 @@ public class Notification {
         return ! errors.isEmpty();
     }
 
+    public String errorMessage() {
+        return errors.stream()
+                .map( e -> e.message )
+                .collect( Collectors.joining( ", " ) );
+    }
+
     private static class Error {
         String message;
         Exception cause;
 
-        public Error(String message, Exception cause) {
+        public Error( String message, Exception cause ) {
             this.message = message;
             this.cause = cause;
         }
-    }
-
-    public String errorMessage() {
-        return errors.stream()
-                .map(e -> e.message)
-                .collect(Collectors.joining(", "));
     }
 }

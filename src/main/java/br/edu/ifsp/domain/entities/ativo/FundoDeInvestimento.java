@@ -2,7 +2,7 @@ package br.edu.ifsp.domain.entities.ativo;
 
 import java.time.LocalDateTime;
 
-public class FundoDeInvestimento extends Ativo{
+public class FundoDeInvestimento extends Ativo {
     private String nome;
     private String rentabilidade;
     private String liquidez;
@@ -12,28 +12,28 @@ public class FundoDeInvestimento extends Ativo{
         super();
     }
 
-    public FundoDeInvestimento(Ativo ativo) {
-        super(ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade(), ativo.getIDGrupo());
+    public FundoDeInvestimento( Ativo ativo ) {
+        super( ativo.getId(), ativo.getValorUnitarioAtual(), ativo.getValorTotalComprado(), ativo.getValorTotalVendido(), ativo.getDataComprado(), ativo.getQuantidade(), ativo.getIDGrupo() );
     }
 
-    public FundoDeInvestimento(float valor, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
-        super(valor, quantidade);
+    public FundoDeInvestimento( float valor, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa ) {
+        super( valor, quantidade );
         this.nome = nome;
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
         this.taxaAdministrativa = taxaAdministrativa;
     }
 
-    public FundoDeInvestimento(int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
-        super(id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade);
+    public FundoDeInvestimento( int id, float valorUnitarioAtual, float valorUnitarioComprado, float valorTotalVendido, LocalDateTime dataComprado, int quantidade, String nome, String rentabilidade, String liquidez, float taxaAdministrativa ) {
+        super( id, valorUnitarioAtual, valorUnitarioComprado, valorTotalVendido, dataComprado, quantidade );
         this.nome = nome;
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
         this.taxaAdministrativa = taxaAdministrativa;
     }
 
-    public FundoDeInvestimento(int idAtivo, String nome, String rentabilidade, String liquidez, float taxaAdministrativa) {
-        super(idAtivo);
+    public FundoDeInvestimento( int idAtivo, String nome, String rentabilidade, String liquidez, float taxaAdministrativa ) {
+        super( idAtivo );
         this.nome = nome;
         this.rentabilidade = rentabilidade;
         this.liquidez = liquidez;
@@ -44,7 +44,7 @@ public class FundoDeInvestimento extends Ativo{
         return rentabilidade;
     }
 
-    public void setRentabilidade(String rentabilidade) {
+    public void setRentabilidade( String rentabilidade ) {
         this.rentabilidade = rentabilidade;
     }
 
@@ -52,7 +52,7 @@ public class FundoDeInvestimento extends Ativo{
         return liquidez;
     }
 
-    public void setLiquidez(String liquidez) {
+    public void setLiquidez( String liquidez ) {
         this.liquidez = liquidez;
     }
 
@@ -60,7 +60,7 @@ public class FundoDeInvestimento extends Ativo{
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome( String nome ) {
         this.nome = nome;
     }
 
@@ -68,7 +68,7 @@ public class FundoDeInvestimento extends Ativo{
         return taxaAdministrativa;
     }
 
-    public void setTaxaAdministrativa(float taxaAdministrativa) {
+    public void setTaxaAdministrativa( float taxaAdministrativa ) {
         this.taxaAdministrativa = taxaAdministrativa;
         notifyObservers();
     }

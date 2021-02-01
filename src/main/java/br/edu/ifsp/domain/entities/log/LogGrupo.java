@@ -12,14 +12,14 @@ public class LogGrupo extends Log {
     public LogGrupo() {
     }
 
-    public LogGrupo(Grupo grupo, float valorTotal, float mudanca) {
+    public LogGrupo( Grupo grupo, float valorTotal, float mudanca ) {
         this.grupo = grupo;
         this.valorTotal = valorTotal;
         this.mudanca = mudanca;
     }
 
-    public LogGrupo(LocalDateTime data, Grupo grupo, float valorTotal, float mudanca) {
-        super(data);
+    public LogGrupo( LocalDateTime data, Grupo grupo, float valorTotal, float mudanca ) {
+        super( data );
         this.grupo = grupo;
         this.valorTotal = valorTotal;
         this.mudanca = mudanca;

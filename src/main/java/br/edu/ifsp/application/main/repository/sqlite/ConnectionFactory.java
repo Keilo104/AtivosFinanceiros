@@ -1,4 +1,5 @@
 package br.edu.ifsp.application.main.repository.sqlite;
+
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -6,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ConnectionFactory implements AutoCloseable{
+public class ConnectionFactory implements AutoCloseable {
 
     private static Connection connection;
     private static PreparedStatement preparedStatement;
@@ -15,7 +16,7 @@ public class ConnectionFactory implements AutoCloseable{
     public static Connection createConnection() {
         try {
             instatiateConnectionIfNull();
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
         }
         return connection;
@@ -23,26 +24,26 @@ public class ConnectionFactory implements AutoCloseable{
 
     private static void instatiateConnectionIfNull() throws SQLException {
         SQLiteDataSource ds = new SQLiteDataSource();
-        ds.setUrl("jdbc:sqlite:database.db");
+        ds.setUrl( "jdbc:sqlite:database.db" );
 
-        if (connection == null) {
+        if ( connection == null ) {
             connection = ds.getConnection();
         }
     }
 
-    public static PreparedStatement createPreparedStatement (String sql) {
-        try{
-            preparedStatement = createConnection().prepareStatement(sql);
-        } catch (SQLException e) {
+    public static PreparedStatement createPreparedStatement( String sql ) {
+        try {
+            preparedStatement = createConnection().prepareStatement( sql );
+        } catch ( SQLException e ) {
             e.printStackTrace();
         }
         return preparedStatement;
     }
 
     public static Statement createStatement() {
-        try{
+        try {
             statement = createConnection().createStatement();
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
         }
         return statement;
@@ -55,14 +56,14 @@ public class ConnectionFactory implements AutoCloseable{
     }
 
     private void closeConnectionIfNotNull() throws SQLException {
-        if (connection != null)
+        if ( connection != null )
             connection.close();
     }
 
     private void closeStatementsIfNotNull() throws SQLException {
-        if (preparedStatement != null)
+        if ( preparedStatement != null )
             preparedStatement.close();
-        if (statement != null)
-           statement.close();
+        if ( statement != null )
+            statement.close();
     }
 }

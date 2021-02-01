@@ -14,7 +14,7 @@ public class LoginUseCase {
 
     public Usuario login( String email, String senha ) {
         Validator<Usuario> validator = new UsuarioInputValidator();
-        Notification notif = ((UsuarioInputValidator) validator).validateLogin( email, senha );
+        Notification notif = ( ( UsuarioInputValidator ) validator ).validateLogin( email, senha );
 
         if ( notif.hasErrors() ) {
             throw new IllegalArgumentException( notif.errorMessage() );

@@ -1,7 +1,6 @@
 package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
-import br.edu.ifsp.domain.controller.CtrlAcoes;
 import br.edu.ifsp.domain.controller.CtrlRendaFixa;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class JanelaRendaFixa {
     private Stage stage = new Stage();
 
-    public void showAndWait(Usuario usuario, Grupo grupo ) {
+    public void showAndWait( Usuario usuario, Grupo grupo ) {
         Pane sceneGraph = null;
 
         try {
@@ -25,9 +24,9 @@ public class JanelaRendaFixa {
 
             stage.setTitle( "Adicionar Renda Fixa" );
             stage.setScene( new Scene( sceneGraph, 590, 160 ) );
-            stage.setResizable(false);
+            stage.setResizable( false );
 
-            CtrlRendaFixa ctrlRendaFixa = (CtrlRendaFixa) loader.getController();
+            CtrlRendaFixa ctrlRendaFixa = ( CtrlRendaFixa ) loader.getController();
             ctrlRendaFixa.init( usuario, grupo, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );

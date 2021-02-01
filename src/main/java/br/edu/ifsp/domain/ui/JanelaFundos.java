@@ -1,7 +1,6 @@
 package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
-import br.edu.ifsp.domain.controller.CtrlAcoes;
 import br.edu.ifsp.domain.controller.CtrlFundos;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
@@ -25,9 +24,9 @@ public class JanelaFundos {
 
             stage.setTitle( "Adicionar Fundo de Investimento" );
             stage.setScene( new Scene( sceneGraph, 560, 210 ) );
-            stage.setResizable(false);
+            stage.setResizable( false );
 
-            CtrlFundos ctrlFundos = (CtrlFundos) loader.getController();
+            CtrlFundos ctrlFundos = ( CtrlFundos ) loader.getController();
             ctrlFundos.init( usuario, grupo, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );

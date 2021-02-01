@@ -20,21 +20,20 @@ public class JanelaRecuperar {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLToken.fxml"));
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLToken.fxml" ) );
             sceneGraph = loader.load();
 
-            stage.setTitle("Recuperar a Senha");
-            stage.setScene(new Scene(sceneGraph, 600, 400));
-            stage.setMaxWidth(600);
-            stage.setMaxHeight(400);
-            stage.setResizable(false);
+            stage.setTitle( "Recuperar a Senha" );
+            stage.setScene( new Scene( sceneGraph, 600, 400 ) );
+            stage.setMaxWidth( 600 );
+            stage.setMaxHeight( 400 );
+            stage.setResizable( false );
 
-            CtrlToken ctrlTokentrlToken = (CtrlToken) loader.getController();
-            ctrlTokentrlToken.init(this);
+            CtrlToken ctrlTokentrlToken = ( CtrlToken ) loader.getController();
+            ctrlTokentrlToken.init( this );
 
             stage.show();
-
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }

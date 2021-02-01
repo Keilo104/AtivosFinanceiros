@@ -18,12 +18,12 @@ public class Relatorio {
         this.dataImpressao = LocalDate.now();
     }
 
-    public Relatorio(TipoGrupoEnum categoria) {
+    public Relatorio( TipoGrupoEnum categoria ) {
         this.dataImpressao = LocalDate.now();
         this.categoria = categoria;
     }
 
-    public Relatorio(int id, LocalDate dataImpressao, TipoGrupoEnum categoria) {
+    public Relatorio( int id, LocalDate dataImpressao, TipoGrupoEnum categoria ) {
         this.id = id;
         this.dataImpressao = dataImpressao;
         this.categoria = categoria;
@@ -33,7 +33,7 @@ public class Relatorio {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId( int id ) {
         this.id = id;
     }
 

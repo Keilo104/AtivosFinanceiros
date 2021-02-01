@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.inMemory;
 
-import br.edu.ifsp.domain.entities.usuario.Token;
 import br.edu.ifsp.domain.DAOs.TokenDAO;
+import br.edu.ifsp.domain.entities.usuario.Token;
 
 import java.util.*;
 
@@ -9,18 +9,17 @@ public class InMemoryTokenDAO implements TokenDAO {
     private static final Map<Integer, Token> db = new LinkedHashMap<>();
     private static int idCounter;
 
-    public String create(Token token ) {
+    public String create( Token token ) {
         idCounter++;
         token.setId( idCounter );
         db.put( idCounter, token );
-        return String.valueOf(idCounter);
+        return String.valueOf( idCounter );
     }
 
     @Override
-    public Optional<Token> findOne(String key) {
+    public Optional<Token> findOne( String key ) {
         return Optional.empty();
     }
-
 
     public Optional<Token> findOne( Integer key ) {
         if ( db.containsKey( key ) )
@@ -44,10 +43,9 @@ public class InMemoryTokenDAO implements TokenDAO {
     }
 
     @Override
-    public boolean deleteByKey(String key) {
+    public boolean deleteByKey( String key ) {
         return false;
     }
-
 
     public boolean deleteByKey( Integer key ) {
         if ( db.containsKey( key ) ) {
@@ -63,7 +61,7 @@ public class InMemoryTokenDAO implements TokenDAO {
     }
 
     @Override
-    public boolean findIfExists(String token) {
+    public boolean findIfExists( String token ) {
         return false;
     }
 }

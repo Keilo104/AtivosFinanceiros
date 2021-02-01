@@ -9,7 +9,7 @@ public class Log {
         this.data = LocalDateTime.now();
     }
 
-    public Log(LocalDateTime data) {
+    public Log( LocalDateTime data ) {
         this.data = data;
     }
 

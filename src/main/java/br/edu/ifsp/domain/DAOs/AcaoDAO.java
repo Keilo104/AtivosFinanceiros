@@ -7,7 +7,7 @@ import br.edu.ifsp.domain.entities.grupo.Grupo;
 import java.util.List;
 
 public interface AcaoDAO extends DAO<Acao, Integer> {
-    List<Ativo> findAllByGrupo(Grupo grupo);
+    List<Ativo> findAllByGrupo( Grupo grupo );
 
     List<Acao> findAllWithoutGroup();
 }

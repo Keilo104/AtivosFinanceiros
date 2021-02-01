@@ -30,13 +30,13 @@ public class Grupo extends Subject implements Observer {
     public Grupo() {
     }
 
-    public Grupo(String nome, TipoGrupoEnum tipoGrupo, String cpfUsuario) {
+    public Grupo( String nome, TipoGrupoEnum tipoGrupo, String cpfUsuario ) {
         this.nome = nome;
         this.tipoGrupo = tipoGrupo;
         this.cpfUsuario = cpfUsuario;
     }
 
-    public Grupo(int id, String nome, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual, String tipoGrupo, String cpfUsuario) {
+    public Grupo( int id, String nome, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual, String tipoGrupo, String cpfUsuario ) {
         this.id = id;
         this.nome = nome;
         this.totalLucrado = totalLucrado;
@@ -44,7 +44,7 @@ public class Grupo extends Subject implements Observer {
         this.lucroPotencial = lucroPotencial;
         this.valorAtual = valorAtual;
         this.investimentoAtual = investimentoAtual;
-        this.tipoGrupo = TipoGrupoEnum.getValueByString(tipoGrupo);
+        this.tipoGrupo = TipoGrupoEnum.getValueByString( tipoGrupo );
         this.cpfUsuario = cpfUsuario;
     }
 
@@ -52,7 +52,7 @@ public class Grupo extends Subject implements Observer {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId( int id ) {
         this.id = id;
     }
 
@@ -60,7 +60,7 @@ public class Grupo extends Subject implements Observer {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome( String nome ) {
         this.nome = nome;
     }
 
@@ -94,40 +94,40 @@ public class Grupo extends Subject implements Observer {
 
     public void deleteFromObservers() {
         Iterator<Observer> iterator = this.getObserverIterator();
-        while(iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             Observer u = iterator.next();
-            if( u instanceof Usuario)
-                ((Usuario) u).removeGrupo(this);
+            if ( u instanceof Usuario )
+                ( ( Usuario ) u ).removeGrupo( this );
         }
     }
 
-    public void addLog(LogTransacaoAtivo logTransacaoAtivo) {
-        this.historico.add(logTransacaoAtivo);
+    public void addLog( LogTransacaoAtivo logTransacaoAtivo ) {
+        this.historico.add( logTransacaoAtivo );
     }
 
     public Iterator<LogTransacaoAtivo> getHistoricIterator() {
         return this.historico.iterator();
     }
 
-    public void addAtivo(Ativo ativo) {
-        if(ativo.getClass().getName().equals(this.tipoGrupo.getNomeClasse())) {
-            addInvestimento(ativo.getValorTotalAtual());
-            ativo.addObserver(this);
+    public void addAtivo( Ativo ativo ) {
+        if ( ativo.getClass().getName().equals( this.tipoGrupo.getNomeClasse() ) ) {
+            addInvestimento( ativo.getValorTotalAtual() );
+            ativo.addObserver( this );
 
-            this.listaAtivos.add(ativo);
+            this.listaAtivos.add( ativo );
             this.updateAll();
         } else {
-            throw new InvalidTipoAtivoException("Cannot add ativo from different type of grupo.");
+            throw new InvalidTipoAtivoException( "Cannot add ativo from different type of grupo." );
         }
     }
 
-    public void removeAtivo(int idx) {
-        this.removeAtivo(listaAtivos.get(idx));
+    public void removeAtivo( int idx ) {
+        this.removeAtivo( listaAtivos.get( idx ) );
     }
 
-    public void removeAtivo(Ativo ativo) {
-        if(!this.listaAtivos.remove(ativo)) {
-            throw new IllegalArgumentException("Cannot sell ativo thats not added");
+    public void removeAtivo( Ativo ativo ) {
+        if ( ! this.listaAtivos.remove( ativo ) ) {
+            throw new IllegalArgumentException( "Cannot sell ativo thats not added" );
         }
     }
 
@@ -135,7 +135,7 @@ public class Grupo extends Subject implements Observer {
         return this.listaAtivos.iterator();
     }
 
-    public void setAtivos(List<Ativo> ativos) {
+    public void setAtivos( List<Ativo> ativos ) {
         this.listaAtivos = ativos;
     }
 
@@ -146,16 +146,16 @@ public class Grupo extends Subject implements Observer {
     private void updateValorAtual() {
         this.valorAtual = 0;
 
-        for (Ativo a : listaAtivos) {
+        for ( Ativo a : listaAtivos ) {
             this.valorAtual += a.getValorTotalAtual();
         }
     }
 
-    public void addLucroTotalHistorico(float lucro) {
+    public void addLucroTotalHistorico( float lucro ) {
         this.totalLucrado += lucro;
     }
 
-    private void addInvestimento(float investimento) {
+    private void addInvestimento( float investimento ) {
         this.investimentoAtual += investimento;
         this.totalInvestido += investimento;
         this.totalLucrado -= investimento;
@@ -163,7 +163,7 @@ public class Grupo extends Subject implements Observer {
 
     private void updateInvestimentoAtual() {
         investimentoAtual = 0;
-        for (Ativo a: listaAtivos) {
+        for ( Ativo a : listaAtivos ) {
             investimentoAtual += a.getValorTotalComprado() * a.getQuantidade();
         }
     }
@@ -175,7 +175,7 @@ public class Grupo extends Subject implements Observer {
         notifyObservers();
     }
 
-    private void removeInvestimentoAtual(float investimento) {
+    private void removeInvestimentoAtual( float investimento ) {
         this.investimentoAtual -= investimento;
     }
 
@@ -197,13 +197,13 @@ public class Grupo extends Subject implements Observer {
     }
 
     @Override
-    public void update(Subject o) {
-        Ativo ativo = (Ativo) o;
+    public void update( Subject o ) {
+        Ativo ativo = ( Ativo ) o;
 
         this.updateAll();
 
-        if(ativo.getQuantidade() == 0) {
-            this.removeAtivo(ativo);
+        if ( ativo.getQuantidade() == 0 ) {
+            this.removeAtivo( ativo );
         }
     }
 

@@ -11,25 +11,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class JanelaPainel {
-    public void show(Usuario user) {
+    public void show( Usuario user ) {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLPainel.fxml"));
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLPainel.fxml" ) );
             sceneGraph = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle("Painel Dashboard");
-            stage.setScene(new Scene(sceneGraph, 915, 705));
-            stage.setMinWidth(800);
-            stage.setMinHeight(400);
+            stage.setTitle( "Painel Dashboard" );
+            stage.setScene( new Scene( sceneGraph, 915, 705 ) );
+            stage.setMinWidth( 800 );
+            stage.setMinHeight( 400 );
 
-            PainelController painelController = (PainelController) loader.getController();
-            painelController.init(user);
+            PainelController painelController = ( PainelController ) loader.getController();
+            painelController.init( user );
 
             stage.show();
-
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }

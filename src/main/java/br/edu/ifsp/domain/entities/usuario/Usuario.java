@@ -1,7 +1,6 @@
 package br.edu.ifsp.domain.entities.usuario;
 
 import br.edu.ifsp.domain.entities.grupo.Grupo;
-import br.edu.ifsp.domain.entities.log.Log;
 import br.edu.ifsp.domain.entities.log.LogGrupo;
 import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
@@ -30,14 +29,14 @@ public class Usuario implements Observer {
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String email, String senha) {
+    public Usuario( String cpf, String nome, String email, String senha ) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Usuario(String cpf, String nome, String email, String senha, float totalLucrado, float totalInvestido) {
+    public Usuario( String cpf, String nome, String email, String senha, float totalLucrado, float totalInvestido ) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
@@ -46,7 +45,7 @@ public class Usuario implements Observer {
         this.totalInvestido = totalInvestido;
     }
 
-    public Usuario(String cpf, String nome, String email, String senha, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual) {
+    public Usuario( String cpf, String nome, String email, String senha, Float totalLucrado, Float totalInvestido, Float lucroPotencial, Float valorAtual, Float investimentoAtual ) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
@@ -66,7 +65,7 @@ public class Usuario implements Observer {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( String email ) {
         this.email = email;
     }
 
@@ -74,7 +73,7 @@ public class Usuario implements Observer {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome( String nome ) {
         this.nome = nome;
     }
 
@@ -82,7 +81,7 @@ public class Usuario implements Observer {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha( String senha ) {
         this.senha = senha;
     }
 
@@ -106,38 +105,38 @@ public class Usuario implements Observer {
         return investimentoAtual;
     }
 
-    public void addGrupo(Grupo grupo) {
-        grupo.addObserver(this);
-        this.carteira.add(grupo);
+    public void addGrupo( Grupo grupo ) {
+        grupo.addObserver( this );
+        this.carteira.add( grupo );
         update();
     }
 
-    public void addAllGrupo(Grupo ...grupos) {
-        for (Grupo g : grupos) {
-            g.addObserver(this);
-            this.carteira.add(g);
+    public void addAllGrupo( Grupo... grupos ) {
+        for ( Grupo g : grupos ) {
+            g.addObserver( this );
+            this.carteira.add( g );
             update();
         }
     }
 
-    public void removeGrupo(Grupo grupo) {
-        this.carteira.remove(grupo);
+    public void removeGrupo( Grupo grupo ) {
+        this.carteira.remove( grupo );
     }
 
-    public void removeGrupo(int idx) {
-        this.carteira.remove(idx);
+    public void removeGrupo( int idx ) {
+        this.carteira.remove( idx );
     }
 
     public Iterator<Grupo> getIteratorCarteira() {
         return this.carteira.iterator();
     }
 
-    public void addLog(LogGrupo logGrupo) {
-        this.historico.add(logGrupo);
+    public void addLog( LogGrupo logGrupo ) {
+        this.historico.add( logGrupo );
     }
 
-    public void addAllLog(LogGrupo ...logGrupos) {
-        this.historico.addAll(Arrays.asList(logGrupos));
+    public void addAllLog( LogGrupo... logGrupos ) {
+        this.historico.addAll( Arrays.asList( logGrupos ) );
     }
 
     public Iterator<LogGrupo> getIteratorHistorico() {
@@ -147,7 +146,7 @@ public class Usuario implements Observer {
     private void updateLucroTotalHistorico() {
         this.totalLucrado = 0;
 
-        for (Grupo g : carteira) {
+        for ( Grupo g : carteira ) {
             this.totalLucrado += g.getTotalLucrado();
         }
     }
@@ -155,7 +154,7 @@ public class Usuario implements Observer {
     private void updateInvestimentoTotalHistorico() {
         this.totalInvestido = 0;
 
-        for (Grupo g : carteira) {
+        for ( Grupo g : carteira ) {
             this.totalInvestido += g.getTotalInvestido();
         }
     }
@@ -167,7 +166,7 @@ public class Usuario implements Observer {
     private void updateValorAtual() {
         this.valorAtual = 0;
 
-        for (Grupo g : carteira) {
+        for ( Grupo g : carteira ) {
             this.valorAtual += g.getValorAtual();
         }
     }
@@ -175,7 +174,7 @@ public class Usuario implements Observer {
     private void updateInvestimentoAtual() {
         this.investimentoAtual = 0;
 
-        for (Grupo g : carteira) {
+        for ( Grupo g : carteira ) {
             this.investimentoAtual += g.getInvestimentoAtual();
         }
     }
@@ -207,7 +206,7 @@ public class Usuario implements Observer {
     }
 
     @Override
-    public void update(Subject o) {
+    public void update( Subject o ) {
         update();
     }
 }

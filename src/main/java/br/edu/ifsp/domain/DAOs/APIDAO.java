@@ -5,9 +5,9 @@ import br.edu.ifsp.domain.entities.ativo.Acao;
 import java.util.List;
 
 public interface APIDAO {
-    float getNewPrice(String codigo);
+    float getNewPrice( String codigo );
 
-    Acao getOne(String codigo);
+    Acao getOne( String codigo );
 
-    List<Acao> search(String keyword);
+    List<Acao> search( String keyword );
 }

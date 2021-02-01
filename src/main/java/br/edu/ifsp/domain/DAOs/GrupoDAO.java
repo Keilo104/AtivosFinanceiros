@@ -8,12 +8,11 @@ import java.util.Optional;
 
 public interface GrupoDAO extends DAO<Grupo, Integer> {
 
-    Optional<Grupo> findOneByNome(String nome);
+    Optional<Grupo> findOneByNome( String nome );
 
-    Optional<Grupo> findOneByAtivo(Ativo ativo);
+    Optional<Grupo> findOneByAtivo( Ativo ativo );
 
-    Integer createComCPF(Grupo grupo, String cpf);
+    Integer createComCPF( Grupo grupo, String cpf );
 
-    List<Grupo> findAllByCpf(String cpf);
-
+    List<Grupo> findAllByCpf( String cpf );
 }

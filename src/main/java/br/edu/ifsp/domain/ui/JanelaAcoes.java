@@ -29,7 +29,7 @@ public class JanelaAcoes {
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 1080 );
 
-            CtrlAcoes ctrlAcoes = (CtrlAcoes) loader.getController();
+            CtrlAcoes ctrlAcoes = ( CtrlAcoes ) loader.getController();
             ctrlAcoes.init( usuario, grupo, this );
 
             stage.initModality( Modality.APPLICATION_MODAL );

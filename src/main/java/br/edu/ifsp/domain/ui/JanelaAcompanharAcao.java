@@ -25,7 +25,7 @@ public class JanelaAcompanharAcao {
             stage.setMaxWidth( 1080 );
             stage.setMaxHeight( 720 );
 
-            CtrlAcompanharAcao ctrlAcompanharAcao = (CtrlAcompanharAcao) loader.getController();
+            CtrlAcompanharAcao ctrlAcompanharAcao = ( CtrlAcompanharAcao ) loader.getController();
             ctrlAcompanharAcao.init( usuario );
 
             stage.show();

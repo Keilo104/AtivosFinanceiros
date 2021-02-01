@@ -14,15 +14,15 @@ public class LogTransacaoAtivo extends Log {
     public LogTransacaoAtivo() {
     }
 
-    public LogTransacaoAtivo(Ativo ativo, LogTransacaoAtivoEnum tipo, float valor, int quantidade) {
+    public LogTransacaoAtivo( Ativo ativo, LogTransacaoAtivoEnum tipo, float valor, int quantidade ) {
         this.ativo = ativo;
         this.tipo = tipo;
         this.valor = valor;
         this.quantidade = quantidade;
     }
 
-    public LogTransacaoAtivo(LocalDateTime data, LogTransacaoAtivoEnum tipo, Ativo ativo, float valor, int quantidade) {
-        super(data);
+    public LogTransacaoAtivo( LocalDateTime data, LogTransacaoAtivoEnum tipo, Ativo ativo, float valor, int quantidade ) {
+        super( data );
         this.tipo = tipo;
         this.ativo = ativo;
         this.valor = valor;
@@ -30,7 +30,7 @@ public class LogTransacaoAtivo extends Log {
     }
 
     public Pair<LocalDateTime, Ativo> generateKey() {
-        return new Pair<>(this.getData(), this.getAtivo());
+        return new Pair<>( this.getData(), this.getAtivo() );
     }
 
     public LogTransacaoAtivoEnum getTipo() {

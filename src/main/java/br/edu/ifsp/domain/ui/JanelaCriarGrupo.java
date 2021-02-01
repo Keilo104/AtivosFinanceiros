@@ -14,24 +14,23 @@ import java.io.IOException;
 public class JanelaCriarGrupo {
     Stage stage = new Stage();
 
-    public void showAndWait(Usuario user) {
+    public void showAndWait( Usuario user ) {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLCriarGrupo.fxml"));
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLCriarGrupo.fxml" ) );
             sceneGraph = loader.load();
 
-            stage.setTitle("Cadastro de novo usuário");
-            stage.setScene(new Scene(sceneGraph, 600, 400));
+            stage.setTitle( "Cadastro de novo usuário" );
+            stage.setScene( new Scene( sceneGraph, 600, 400 ) );
             stage.setResizable( false );
 
-            CriarGrupoController criarGrupoController = (CriarGrupoController) loader.getController();
-            criarGrupoController.init(this, user);
+            CriarGrupoController criarGrupoController = ( CriarGrupoController ) loader.getController();
+            criarGrupoController.init( this, user );
 
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();
-
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }

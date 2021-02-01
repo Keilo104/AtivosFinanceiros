@@ -2,7 +2,6 @@ package br.edu.ifsp.domain.ui;
 
 import br.edu.ifsp.App;
 import br.edu.ifsp.domain.controller.CadastrarController;
-import br.edu.ifsp.domain.controller.GrupoController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -18,20 +17,19 @@ public class JanelaCadastrar {
         Pane sceneGraph = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/FXMLCadastrar.fxml"));
+            FXMLLoader loader = new FXMLLoader( App.class.getResource( "fxml/FXMLCadastrar.fxml" ) );
             sceneGraph = loader.load();
 
-            stage.setTitle("Cadastro de novo usuário");
-            stage.setScene(new Scene(sceneGraph, 750, 600));
+            stage.setTitle( "Cadastro de novo usuário" );
+            stage.setScene( new Scene( sceneGraph, 750, 600 ) );
             stage.setResizable( false );
 
-            CadastrarController cadastrarController = (CadastrarController) loader.getController();
-            cadastrarController.init(this);
+            CadastrarController cadastrarController = ( CadastrarController ) loader.getController();
+            cadastrarController.init( this );
 
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality( Modality.APPLICATION_MODAL );
             stage.showAndWait();
-
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }

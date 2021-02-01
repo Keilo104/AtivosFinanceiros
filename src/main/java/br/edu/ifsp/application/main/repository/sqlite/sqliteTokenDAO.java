@@ -1,7 +1,7 @@
 package br.edu.ifsp.application.main.repository.sqlite;
 
-import br.edu.ifsp.domain.entities.usuario.Token;
 import br.edu.ifsp.domain.DAOs.TokenDAO;
+import br.edu.ifsp.domain.entities.usuario.Token;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -16,17 +16,16 @@ import java.util.Optional;
 
 public class sqliteTokenDAO implements TokenDAO {
 
-
     public String create( Token token ) {
         String sql = "INSERT INTO TOKEN ( data, cpfUsuario, token ) VALUES (?, ?, ?)";
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            String t = "AtivosFinanceiros" + LocalDateTime.now().toString() + token.getUsuario().getCpf() ;
-            byte[] m = md.digest(t.getBytes(StandardCharsets.UTF_8));
-            BigInteger no = new BigInteger(1, m);
+            MessageDigest md = MessageDigest.getInstance( "MD5" );
+            String t = "AtivosFinanceiros" + LocalDateTime.now().toString() + token.getUsuario().getCpf();
+            byte[] m = md.digest( t.getBytes( StandardCharsets.UTF_8 ) );
+            BigInteger no = new BigInteger( 1, m );
 
-            String tokenHash = no.toString(16);
-            while (tokenHash.length() < 32) {
+            String tokenHash = no.toString( 16 );
+            while ( tokenHash.length() < 32 ) {
                 tokenHash = "0" + tokenHash;
             }
 
@@ -36,7 +35,6 @@ public class sqliteTokenDAO implements TokenDAO {
 
             stat.execute();
             return tokenHash;
-
         } catch ( Exception e ) {
             e.printStackTrace();
             return null;
@@ -44,23 +42,21 @@ public class sqliteTokenDAO implements TokenDAO {
     }
 
     @Override
-    public Optional<Token> findOne(String key) {
+    public Optional<Token> findOne( String key ) {
         return Optional.empty();
     }
 
-    public boolean findIfExists(String token ) {
+    public boolean findIfExists( String token ) {
         String sql = "SELECT * FROM TOKEN WHERE token = ?";
 
         try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
             stat.setString( 1, token );
             ResultSet rs = stat.executeQuery();
-            if(rs.next()) {
+            if ( rs.next() ) {
                 return true;
             }
-
         } catch ( Exception e ) {
             e.printStackTrace();
-
         }
         return false;
     }
@@ -109,18 +105,18 @@ public class sqliteTokenDAO implements TokenDAO {
     @Override
     public boolean deleteByKey( String token ) {
         String sql = "DELETE FROM TOKEN WHERE token = ?;";
-        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setString(1, token);
+        try ( PreparedStatement stat = ConnectionFactory.createPreparedStatement( sql ) ) {
+            stat.setString( 1, token );
             stat.execute();
             return true;
-        } catch (SQLException throwables) {
+        } catch ( SQLException throwables ) {
             throwables.printStackTrace();
         }
         return false;
     }
 
     @Override
-    public boolean delete(Token type) {
+    public boolean delete( Token type ) {
         return false;
     }
 }

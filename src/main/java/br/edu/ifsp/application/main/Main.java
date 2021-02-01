@@ -1,7 +1,5 @@
 package br.edu.ifsp.application.main;
 
-import br.edu.ifsp.application.main.repository.inMemory.InMemoryTokenDAO;
-import br.edu.ifsp.application.main.repository.inMemory.InMemoryUsuarioDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteTokenDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteUsuarioDAO;
 import br.edu.ifsp.domain.DAOs.TokenDAO;
@@ -10,9 +8,9 @@ import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
 import br.edu.ifsp.domain.usecases.ativo.CompraAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
-import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
+import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.AlterarFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.ExcluirFundoDeInvestimentoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.fundodeinvestimento.IncluirFundoDeInvestimentoUseCase;
@@ -24,7 +22,9 @@ import br.edu.ifsp.domain.usecases.grupo.CriarGrupoUseCase;
 import br.edu.ifsp.domain.usecases.grupo.ExcluirGrupoUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioCategoriaUseCase;
 import br.edu.ifsp.domain.usecases.relatorio.GerarRelatorioPeriodoUseCase;
-import br.edu.ifsp.domain.usecases.usuario.*;
+import br.edu.ifsp.domain.usecases.usuario.CadastroUseCase;
+import br.edu.ifsp.domain.usecases.usuario.LoginUseCase;
+import br.edu.ifsp.domain.usecases.usuario.RecuperarSenhaUseCase;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -122,7 +122,6 @@ public class Main {
         cadastroUseCase = new CadastroUseCase( usuarioDAO );
         loginUseCase = new LoginUseCase( usuarioDAO );*/
         recuperarSenhaUseCase = new RecuperarSenhaUseCase( usuarioDAO, tokenDAO );
-
     }
 
     public static void main( String[] args ) {
@@ -191,6 +190,6 @@ public class Main {
             System.out.println( "Login falhou :(" );
         }
         */
-        recuperarSenhaUseCase.enviarToken("123");
+        recuperarSenhaUseCase.enviarToken( "123" );
     }
 }

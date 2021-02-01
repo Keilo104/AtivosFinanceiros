@@ -8,36 +8,34 @@ import br.edu.ifsp.domain.usecases.utils.Validator;
 public class ExcluirGrupoUseCase {
     private GrupoDAO grupoDAO;
 
-    public ExcluirGrupoUseCase(GrupoDAO grupoDAO) {
+    public ExcluirGrupoUseCase( GrupoDAO grupoDAO ) {
         this.grupoDAO = grupoDAO;
     }
 
-    public boolean delete(Grupo grupo){
+    public boolean delete( Grupo grupo ) {
         Validator<Grupo> validator = new GrupoInputValidator();
-        Notification notif = validator.validate(grupo);
+        Notification notif = validator.validate( grupo );
 
-        if(notif.hasErrors()) {
-            throw new IllegalArgumentException(notif.errorMessage());
+        if ( notif.hasErrors() ) {
+            throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        if(grupo.isEmpty()) {
+        if ( grupo.isEmpty() ) {
             grupo.deleteFromObservers();
-            return this.grupoDAO.delete(grupo);
+            return this.grupoDAO.delete( grupo );
         } else {
-            throw new IllegalArgumentException("Grupo is not empty");
+            throw new IllegalArgumentException( "Grupo is not empty" );
         }
-
     }
 
-    public boolean deleteByKey(Integer id){
+    public boolean deleteByKey( Integer id ) {
         Validator<Grupo> validator = new GrupoInputValidator();
-        Notification notif = ((GrupoInputValidator) validator).validateId(id);
+        Notification notif = ( ( GrupoInputValidator ) validator ).validateId( id );
 
-        if(notif.hasErrors()) {
-            throw new IllegalArgumentException(notif.errorMessage());
+        if ( notif.hasErrors() ) {
+            throw new IllegalArgumentException( notif.errorMessage() );
         }
 
-        return this.grupoDAO.deleteByKey(id);
+        return this.grupoDAO.deleteByKey( id );
     }
-
 }

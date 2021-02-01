@@ -7,7 +7,6 @@ import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import br.edu.ifsp.domain.ui.JanelaHistoricoAcao;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import javafx.collections.FXCollections;
@@ -22,19 +21,21 @@ import java.util.List;
 
 public class CtrlAcompanharAcao {
 
+    public static ObservableList<Acao> acoesAPI;
     public Button btnAcompanhar;
-    @FXML TextField txtSigla;
-    @FXML TableView<Acao> tableView;
-    @FXML TableColumn<Acao, String> colCodigo;
-    @FXML TableColumn<Acao, String> colNome;
-    @FXML TableColumn<Acao, String> colPais;
-
+    @FXML
+    TextField txtSigla;
+    @FXML
+    TableView<Acao> tableView;
+    @FXML
+    TableColumn<Acao, String> colCodigo;
+    @FXML
+    TableColumn<Acao, String> colNome;
+    @FXML
+    TableColumn<Acao, String> colPais;
     private Usuario usuario;
-
     private AcaoDAO acaoDAO;
     private LogAtivoDAO logAtivoDAO;
-
-    public static ObservableList<Acao> acoesAPI;
 
     @FXML
     public void initialize() {
@@ -45,7 +46,7 @@ public class CtrlAcompanharAcao {
         inserirDadosAFonte();
     }
 
-    public void init(Usuario usuario) {
+    public void init( Usuario usuario ) {
         this.usuario = usuario;
     }
 
@@ -60,7 +61,7 @@ public class CtrlAcompanharAcao {
         tableView.setItems( acoesAPI );
     }
 
-    private void carregarDadosNaTabela(List<Acao> acoes) {
+    private void carregarDadosNaTabela( List<Acao> acoes ) {
         acoesAPI.clear();
         acoesAPI.addAll( acoes );
         tableView.refresh();
@@ -70,19 +71,19 @@ public class CtrlAcompanharAcao {
         String codigo = txtSigla.getText().toUpperCase().trim();
         List<Acao> acao = new ArrayList<>();
         AlphaAdvantageAPIDAO apiDao = new AlphaAdvantageAPIDAO();
-        acao =  apiDao.search( codigo );
-        carregarDadosNaTabela(acao);
+        acao = apiDao.search( codigo );
+        carregarDadosNaTabela( acao );
     }
 
     public void btnAcompanhar( ActionEvent actionEvent ) {
         Acao acao = tableView.getSelectionModel().getSelectedItem();
-        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
-        incluirAcaoUseCase.include(acao);
-        alertExcluirGrupo(acao);
+        IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase( acaoDAO, logAtivoDAO );
+        incluirAcaoUseCase.include( acao );
+        alertExcluirGrupo( acao );
     }
 
     private void alertExcluirGrupo( Acao acao ) {
-        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        Alert alert = new Alert( Alert.AlertType.INFORMATION );
         alert.setTitle( "Acompanhar ação" );
         alert.setHeaderText( "A ação " + acao.getNome() + " foi adicionada à sua lista de ações." );
         alert.setContentText( "Para comprá-la, abra as ações a partir de um grupo." );
@@ -92,6 +93,6 @@ public class CtrlAcompanharAcao {
     public void btnHistorico( ActionEvent actionEvent ) {
         String codigo = tableView.getSelectionModel().getSelectedItem().getCodigo();
         JanelaHistoricoAcao janelaHistoricoAcao = new JanelaHistoricoAcao();
-        janelaHistoricoAcao.showAndWait(codigo);
+        janelaHistoricoAcao.showAndWait( codigo );
     }
 }
