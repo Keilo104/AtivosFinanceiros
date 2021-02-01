@@ -3,6 +3,7 @@ package br.edu.ifsp.application.main.repository.inMemory;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 
 import java.util.*;
 
@@ -67,7 +68,7 @@ public class InMemoryRendaFixaDAO implements RendaFixaDAO {
     }
 
     @Override
-    public List<Ativo> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(Grupo grupo) {
         return null;
     }
 }

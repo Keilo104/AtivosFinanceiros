@@ -125,20 +125,20 @@ public class sqliteGrupoDAO implements GrupoDAO {
         switch(grupo.getTipoGrupo()) {
             case ACAO:
                 AcaoDAO acaoDAO = new sqliteAcaoDAO();
-                List<Ativo> acoes = acaoDAO.findAllByGrupo(grupo.getId());
+                List<Ativo> acoes = acaoDAO.findAllByGrupo(grupo);
 
                 grupo.setAtivos(acoes);
                 break;
             case FUNDO_DE_INVESTIMENTO:
                 FundoDeInvestimentoDAO fundoDeInvestimentoDAO = new sqliteFundoDeInvestimentoDAO();
-                List<Ativo> fundosDeInvestimento = fundoDeInvestimentoDAO.findAllByGrupo(grupo.getId());
+                List<Ativo> fundosDeInvestimento = fundoDeInvestimentoDAO.findAllByGrupo(grupo);
 
                 grupo.setAtivos(fundosDeInvestimento);
 
                 break;
             default:
                 RendaFixaDAO rendaFixaDAO = new sqliteRendaFixaDAO();
-                List<Ativo> rendasFixas = rendaFixaDAO.findAllByGrupo(grupo.getId());
+                List<Ativo> rendasFixas = rendaFixaDAO.findAllByGrupo(grupo);
 
                 grupo.setAtivos(rendasFixas);
                 break;

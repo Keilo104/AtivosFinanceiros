@@ -5,6 +5,7 @@ import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.RendaFixa;
 import br.edu.ifsp.domain.DAOs.RendaFixaDAO;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -131,20 +132,21 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
     }
 
     @Override
-    public List<Ativo> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(Grupo grupo) {
         String sql = "SELECT * FROM RENDA_FIXA r\n" +
                 "JOIN ATIVO a\n" +
                 "ON r.idAtivo = a.id\n" +
-                "WHERE a.grupoId = ?;";
+                "WHERE a.grupoId = ? AND a.quantidade != 0;";
         List<Ativo> rendas = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            ResultSet rs = stat.executeQuery();
+            stat.setInt(1, grupo.getId());
 
-            stat.setInt(1, idGrupo);
+            ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
                 RendaFixa renda = new RendaFixa(ativosDAO.findOne(id).get());
+                renda.addObserver(grupo);
 
                 resultSetToEntity(rs, renda);
                 rendas.add(renda);

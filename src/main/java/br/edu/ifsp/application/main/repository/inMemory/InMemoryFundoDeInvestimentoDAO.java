@@ -3,6 +3,7 @@ package br.edu.ifsp.application.main.repository.inMemory;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.ativo.FundoDeInvestimento;
 import br.edu.ifsp.domain.DAOs.FundoDeInvestimentoDAO;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 
 import java.util.*;
 
@@ -68,7 +69,7 @@ public class InMemoryFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
     }
 
     @Override
-    public List<Ativo> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(Grupo grupo) {
         return null;
     }
 }

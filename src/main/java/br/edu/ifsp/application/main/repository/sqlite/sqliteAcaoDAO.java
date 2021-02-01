@@ -4,6 +4,7 @@ import br.edu.ifsp.domain.DAOs.AtivosDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
+import br.edu.ifsp.domain.entities.grupo.Grupo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,20 +89,21 @@ public class sqliteAcaoDAO implements AcaoDAO {
     }
 
     @Override
-    public List<Ativo> findAllByGrupo(int idGrupo) {
+    public List<Ativo> findAllByGrupo(Grupo grupo) {
         String sql = "SELECT * FROM ACAO ac\n" +
                 "JOIN ATIVO at\n" +
                 "ON ac.idAtivo = at.id\n" +
-                "WHERE at.grupoId = ?;";
+                "WHERE at.grupoId = ? AND at.quantidade != 0;";
         List<Ativo> acoes = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
-            stat.setInt(1, idGrupo);
+            stat.setInt(1, grupo.getId());
 
             ResultSet rs = stat.executeQuery();
             while(rs.next()) {
                 AtivosDAO ativosDAO = new sqliteAtivosDAO();
                 int id = rs.getInt("idAtivo");
                 Acao acao = new Acao(ativosDAO.findOne(id).get());
+                acao.addObserver(grupo);
 
                 resultSetToEntity(rs, acao);
 
