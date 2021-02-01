@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.HistoricoAcaoController">
+   <children>
+      <LineChart fx:id="chartHistorico" layoutX="50.0" AnchorPane.bottomAnchor="0.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Label fx:id="labelCodigo" layoutX="245.0" layoutY="14.0" text="código">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

@@ -32,7 +32,7 @@ public class GraficoCreator {
         List<LogGrupo> logs = logGrupoDAO.findOneGrupoOrderByData(idGrupo);
 
         XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
-        series.setName("Minha Carteira");
+        series.setName("Grupo");
         float ini = 0;
         for (LogGrupo log : logs){
             String data = log.getData().toString();
@@ -49,7 +49,7 @@ public class GraficoCreator {
         TreeMap<String, Float> sorted = new TreeMap<>();
         sorted.putAll(historico);
         XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
-        series.setName("Minha Carteira");
+        series.setName("Ação");
         int flag = 0;
         for (Map.Entry<String, Float> e: sorted.entrySet()){
             if(flag>85){

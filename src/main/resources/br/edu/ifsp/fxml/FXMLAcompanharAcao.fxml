@@ -2,31 +2,27 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane onDragDetected="#btnAcompanhar" prefHeight="580.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlAcompanharAcao">
+<?import javafx.scene.text.*?>
+
+<AnchorPane onDragDetected="#btnAcompanhar" prefHeight="580.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlAcompanharAcao">
     <children>
-        <Label layoutX="40.0" layoutY="85.0" prefHeight="28.0" prefWidth="251.0" text="Sigla"
-               AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="85.0"/>
-        <TextField fx:id="txtSigla" layoutX="40.0" layoutY="113.0" prefHeight="25.0" prefWidth="432.0"
-                   promptText="Código" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="113.0"/>
-        <Label alignment="CENTER" layoutX="194.0" layoutY="44.0" prefHeight="17.0" prefWidth="160.0"/>
-        <Button layoutX="447.0" layoutY="523.0" mnemonicParsing="false" onAction="#btnAcompanhar" prefHeight="34.0"
-                prefWidth="141.0" text="Acompanhar" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="12.0"/>
-        <Label alignment="CENTER" layoutX="145.0" layoutY="35.0" prefHeight="36.0" prefWidth="311.0"
-               text="Adicionar Ação no tracking">
+        <Label layoutX="40.0" layoutY="85.0" prefHeight="28.0" prefWidth="251.0" text="Sigla" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="85.0" />
+        <TextField fx:id="txtSigla" layoutX="40.0" layoutY="113.0" prefHeight="25.0" prefWidth="432.0" promptText="Código" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="113.0" />
+        <Label alignment="CENTER" layoutX="194.0" layoutY="44.0" prefHeight="17.0" prefWidth="160.0" />
+        <Button layoutX="447.0" layoutY="523.0" mnemonicParsing="false" onAction="#btnAcompanhar" prefHeight="34.0" prefWidth="141.0" text="Acompanhar" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="12.0" />
+        <Label alignment="CENTER" layoutX="145.0" layoutY="35.0" prefHeight="36.0" prefWidth="311.0" text="Adicionar Ação no tracking">
             <font>
-                <Font size="25.0"/>
+                <Font size="25.0" />
             </font>
         </Label>
         <TableView fx:id="tableView" layoutX="18.0" layoutY="153.0" prefHeight="337.0" prefWidth="565.0">
             <columns>
-                <TableColumn fx:id="colCodigo" prefWidth="93.0" text="Código"/>
-                <TableColumn fx:id="colNome" prefWidth="383.0" text="Nome"/>
-                <TableColumn fx:id="colPais" prefWidth="88.0" text="País"/>
+                <TableColumn fx:id="colCodigo" prefWidth="93.0" text="Código" />
+                <TableColumn fx:id="colNome" prefWidth="383.0" text="Nome" />
+                <TableColumn fx:id="colPais" prefWidth="88.0" text="País" />
             </columns>
         </TableView>
-        <Button layoutX="486.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnPesquisar" prefHeight="25.0"
-                prefWidth="84.0" text="Pesquisar"/>
+        <Button layoutX="486.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnPesquisar" prefHeight="25.0" prefWidth="84.0" text="Pesquisar" />
+      <Button layoutX="274.0" layoutY="524.0" mnemonicParsing="false" onAction="#btnHistorico" prefHeight="34.0" prefWidth="141.0" text="Ver Histórico" />
     </children>
 </AnchorPane>
