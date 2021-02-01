@@ -2,6 +2,7 @@ package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
+import br.edu.ifsp.application.main.repository.sqlite.sqliteGrupoDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
 import br.edu.ifsp.domain.DAOs.APIDAO;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
@@ -14,17 +15,18 @@ import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaAcoes;
 import br.edu.ifsp.domain.ui.JanelaFundos;
 import br.edu.ifsp.domain.ui.JanelaRendaFixa;
+import br.edu.ifsp.domain.usecases.ativo.acao.ExcluirAcaoUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
+import br.edu.ifsp.domain.usecases.grupo.ExcluirGrupoUseCase;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Iterator;
 
@@ -72,7 +74,11 @@ public class GrupoController {
             bar.setPadding(new Insets(10));
 
             Label nome = new Label(ativo.getNome());
+            Label valorAtual = new Label("Valor: " + ativo.getValorUnitarioAtual() );
+            Label posicoes = new Label("Quantidade: " + ativo.getQuantidade() );
             bar.getButtons().add(nome);
+            bar.getButtons().add(valorAtual);
+            bar.getButtons().add(posicoes);
 
             if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
                 Button update = new Button("Update");
@@ -143,7 +149,35 @@ public class GrupoController {
     }
 
     public void excluirGrupo() {
+        if (!grupo.isEmpty()) {
+            alertGrupoNotEmpty();
+        }
+        else {
+            if (alertExcluirGrupo()) {
+                sqliteGrupoDAO sqliteGrupoDAO = new sqliteGrupoDAO();
+                ExcluirGrupoUseCase excluirGrupoUseCase = new ExcluirGrupoUseCase( sqliteGrupoDAO );
+                excluirGrupoUseCase.delete( grupo );
+                fecharJanela();
+            }
+        }
+    }
 
+    private boolean alertExcluirGrupo() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Atenção!");
+        alert.setHeaderText("Tem certeza que deseja excluir este grupo?");
+        alert.setContentText( "Esta ação não pode ser desfeita!" );
+        alert.showAndWait();
+
+        return alert.getResult() == ButtonType.OK;
+    }
+
+    private void alertGrupoNotEmpty() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText("Não foi possível excluir o Grupo. Venda seus investimentos e tente novamente.");
+
+        alert.showAndWait();
     }
 
     private void initGrafico(){
@@ -151,5 +185,10 @@ public class GrupoController {
         XYChart.Series<String,Number> series = gc.setDataGrupo(grupo.getId());
 
         graphGrupo.getData().add(series);
+    }
+
+    private void fecharJanela() {
+        Stage stage = ( Stage ) labelNome.getScene().getWindow();
+        stage.close();
     }
 }

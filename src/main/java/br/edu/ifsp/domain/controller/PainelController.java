@@ -89,6 +89,7 @@ public class PainelController {
         if (grupo != null) {
             JanelaGrupo janelaGrupo = new JanelaGrupo();
             janelaGrupo.showAndWait(usuario, grupo);
+            updateTable();
         } else {
             alertNotSelected();
         }
@@ -116,5 +117,8 @@ public class PainelController {
     public void btnSair( ActionEvent actionEvent ) {
         Stage stage = ( Stage ) btnSair.getScene().getWindow();
         stage.close();
+
+        JanelaLogin janelaLogin = new JanelaLogin();
+        janelaLogin.show();
     }
 }
