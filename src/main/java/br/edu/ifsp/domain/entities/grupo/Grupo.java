@@ -129,11 +129,6 @@ public class Grupo extends Subject implements Observer {
         if(!this.listaAtivos.remove(ativo)) {
             throw new IllegalArgumentException("Cannot sell ativo thats not added");
         }
-
-        removeInvestimentoAtual(ativo.getValorTotalComprado());
-        addLucroTotalHistorico(ativo.getValorTotalAtual() - ativo.getValorTotalComprado());
-
-        this.updateValorAtual();
     }
 
     public Iterator<Ativo> getIteratorAtivos() {
@@ -156,7 +151,7 @@ public class Grupo extends Subject implements Observer {
         }
     }
 
-    private void addLucroTotalHistorico(float lucro) {
+    public void addLucroTotalHistorico(float lucro) {
         this.totalLucrado += lucro;
     }
 
@@ -166,7 +161,15 @@ public class Grupo extends Subject implements Observer {
         this.totalLucrado -= investimento;
     }
 
+    private void updateInvestimentoAtual() {
+        investimentoAtual = 0;
+        for (Ativo a: listaAtivos) {
+            investimentoAtual += a.getValorTotalComprado() * a.getQuantidade();
+        }
+    }
+
     private void updateAll() {
+        updateInvestimentoAtual();
         updateValorAtual();
         updateLucroPotencial();
         notifyObservers();
@@ -195,10 +198,12 @@ public class Grupo extends Subject implements Observer {
 
     @Override
     public void update(Subject o) {
+        Ativo ativo = (Ativo) o;
+
         this.updateAll();
 
-        if(((Ativo) o).getQuantidade() == 0) {
-            this.removeAtivo((Ativo) o);
+        if(ativo.getQuantidade() == 0) {
+            this.removeAtivo(ativo);
         }
     }
 

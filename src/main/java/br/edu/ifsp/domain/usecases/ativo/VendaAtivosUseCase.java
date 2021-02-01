@@ -29,9 +29,6 @@ public class VendaAtivosUseCase {
         this.logGrupoDAO = logGrupoDAO;
     }
 
-    public VendaAtivosUseCase() {
-    }
-
     public boolean vendaAtivo(Usuario usuario, Grupo grupo, Ativo ativo, int quantidade) {
         Validator<Ativo> validatorAtivo = new AtivosValidator();
         Validator<Grupo> validatorGrupo = new GrupoInputValidator();
@@ -43,14 +40,15 @@ public class VendaAtivosUseCase {
             throw new IllegalArgumentException(notif.errorMessage());
         }
 
+        float lucroAnterior = grupo.getTotalLucrado();
+        ativo.vender(quantidade);
+
         if(ativosDAO.update(ativo)) {
-            float lucroAnterior = grupo.getTotalLucrado();
-            ativo.vender(quantidade);
             boolean flag = grupoDAO.update(grupo);
             float lucroAtual = grupo.getTotalLucrado();
 
             SalvarHistoricoTransacaoUseCase salvarHistoricoAtivoUseCase = new SalvarHistoricoTransacaoUseCase(logTransacaoDAO);
-            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.VENDA, ativo.getValorUnitarioAtual(), ativo.getQuantidade());
+            LogTransacaoAtivo logTransacaoAtivo = new LogTransacaoAtivo(ativo, LogTransacaoAtivoEnum.VENDA, ativo.getValorUnitarioAtual(), quantidade);
             salvarHistoricoAtivoUseCase.salvarHistorico(grupo, logTransacaoAtivo);
 
             SalvarHistoricoGrupoUseCase salvarHistoricoGrupoUseCase = new SalvarHistoricoGrupoUseCase(logGrupoDAO);

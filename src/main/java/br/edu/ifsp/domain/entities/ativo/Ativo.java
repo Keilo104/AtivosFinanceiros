@@ -1,8 +1,11 @@
 package br.edu.ifsp.domain.entities.ativo;
 
+import br.edu.ifsp.domain.entities.grupo.Grupo;
+import br.edu.ifsp.domain.usecases.utils.Observer;
 import br.edu.ifsp.domain.usecases.utils.Subject;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Ativo extends Subject {
@@ -108,6 +111,14 @@ public class Ativo extends Subject {
     public void vender(int quantidade) {
         if(quantidade > 0 && quantidade <= this.quantidade) {
             this.quantidade -= quantidade;
+            this.valorTotalVendido += this.valorUnitarioAtual * quantidade;
+
+            Iterator<Observer> iterator = getObserverIterator();
+            while (iterator.hasNext()) {
+                Grupo g = (Grupo) iterator.next();
+                g.addLucroTotalHistorico(this.valorUnitarioAtual * quantidade);
+            }
+
             notifyObservers();
         } else {
             if(quantidade < 0) {

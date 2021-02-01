@@ -1,11 +1,8 @@
 package br.edu.ifsp.domain.controller;
 
 import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
-import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
-import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
-import br.edu.ifsp.domain.DAOs.APIDAO;
-import br.edu.ifsp.domain.DAOs.AcaoDAO;
-import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
+import br.edu.ifsp.application.main.repository.sqlite.*;
+import br.edu.ifsp.domain.DAOs.*;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.ativo.Ativo;
 import br.edu.ifsp.domain.entities.grupo.Grupo;
@@ -14,18 +11,18 @@ import br.edu.ifsp.domain.entities.usuario.Usuario;
 import br.edu.ifsp.domain.ui.JanelaAcoes;
 import br.edu.ifsp.domain.ui.JanelaFundos;
 import br.edu.ifsp.domain.ui.JanelaRendaFixa;
+import br.edu.ifsp.domain.usecases.ativo.VendaAtivosUseCase;
 import br.edu.ifsp.domain.usecases.ativo.acao.UpdateAPIAcaoUseCase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 public class GrupoController {
     @FXML public VBox vBox;
@@ -42,6 +39,11 @@ public class GrupoController {
     private LogAtivoDAO logAtivoDAO;
     private APIDAO apidao;
 
+    private AtivosDAO ativosDAO;
+    private GrupoDAO grupoDAO;
+    private LogTransacaoDAO logTransacaoDAO;
+    private LogGrupoDAO logGrupoDAO;
+
     public void init(Usuario user, Grupo group) {
         this.usuario = user;
         this.grupo = group;
@@ -49,6 +51,11 @@ public class GrupoController {
         this.acaoDAO = new sqliteAcaoDAO();
         this.logAtivoDAO = new sqliteLogAtivoDAO();
         this.apidao = new AlphaAdvantageAPIDAO();
+
+        this.ativosDAO = new sqliteAtivosDAO();
+        this.grupoDAO = new sqliteGrupoDAO();
+        this.logTransacaoDAO = new sqliteLogTransacaoDAO();
+        this.logGrupoDAO = new sqliteLogGrupoDAO();
 
         initGrafico();
         updateAtivos();
@@ -106,7 +113,46 @@ public class GrupoController {
     }
 
     private void sellButton(Ativo ativo) {
-        System.out.println("Vendendo " + ativo.toString());
+        int qtd = 1;
+        boolean retorno;
+        if(grupo.getTipoGrupo() == TipoGrupoEnum.ACAO) {
+            qtd = alertQuantityToSell();
+            retorno = true;
+        } else {
+            retorno = alertConfirmacaoSell();
+        }
+
+        if(retorno && qtd > 0) {
+            VendaAtivosUseCase vendaAtivosUseCase = new VendaAtivosUseCase(ativosDAO, grupoDAO, logTransacaoDAO, logGrupoDAO);
+            vendaAtivosUseCase.vendaAtivo(usuario, grupo, ativo, qtd);
+            updateAtivos();
+            initGrafico();
+        }
+    }
+
+    private boolean alertConfirmacaoSell() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Tem cereza que deseja vender o ativo?");
+        alert.setHeaderText("Você está tentando vender um ativo");
+        alert.setContentText("Tem certeza que deseja vender o mesmo?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
+    }
+
+    private int alertQuantityToSell() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Quantidade para vender");
+        dialog.setHeaderText("Quantas ações você deseja vender?");
+        dialog.setContentText("Digite:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        if (result.isPresent()){
+            return Integer.parseInt(result.get());
+        }
+
+        return 0;
     }
 
     public void adicionarAtivo() {
