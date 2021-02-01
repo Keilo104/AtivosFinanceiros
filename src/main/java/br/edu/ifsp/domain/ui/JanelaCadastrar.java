@@ -22,9 +22,8 @@ public class JanelaCadastrar {
             sceneGraph = loader.load();
 
             stage.setTitle("Cadastro de novo usuário");
-            stage.setScene(new Scene(sceneGraph, 800, 700));
-            stage.setMinWidth(800);
-            stage.setMinHeight(400);
+            stage.setScene(new Scene(sceneGraph, 750, 600));
+            stage.setResizable( false );
 
             CadastrarController cadastrarController = (CadastrarController) loader.getController();
             cadastrarController.init(this);

@@ -1,23 +1,19 @@
 package br.edu.ifsp.domain.controller;
 
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteAcaoDAO;
 import br.edu.ifsp.application.main.repository.sqlite.sqliteLogAtivoDAO;
 import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
-import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +76,14 @@ public class CtrlAcompanharAcao {
         Acao acao = tableView.getSelectionModel().getSelectedItem();
         IncluirAcaoUseCase incluirAcaoUseCase = new IncluirAcaoUseCase(acaoDAO, logAtivoDAO);
         incluirAcaoUseCase.include(acao);
+        alertExcluirGrupo(acao);
+    }
+
+    private void alertExcluirGrupo( Acao acao ) {
+        Alert alert = new Alert( Alert.AlertType.INFORMATION);
+        alert.setTitle( "Acompanhar ação" );
+        alert.setHeaderText( "A ação " + acao.getNome() + " foi adicionada à sua lista de ações." );
+        alert.setContentText( "Para comprá-la, abra as ações a partir de um grupo." );
+        alert.showAndWait();
     }
 }
