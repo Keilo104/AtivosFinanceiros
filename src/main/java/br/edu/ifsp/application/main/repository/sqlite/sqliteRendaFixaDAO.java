@@ -198,13 +198,15 @@ public class sqliteRendaFixaDAO implements RendaFixaDAO {
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, dataInicial.toString());
             stat.setString(2, dataFinal.toString());
+            stat.setString(3, dataInicial.toString());
+            stat.setString(4, dataFinal.toString());
             ResultSet rs = stat.executeQuery();
             rel.add("Relatório de Renda Fixa do período:\n");
             rel.add(dataInicial.toString()+ " a ");
             rel.add(dataFinal.toString()+"\n");
             while(rs.next()) {
                 String linha = "";
-                linha+="\nId da ação:" +rs.getString("idAtivo");
+                linha+="\nId da renda Fixa:" +rs.getString("idAtivo");
                 linha+=" Data da acorrência: "+rs.getString("data");
                 linha+=" Tipo da ocorrência:"+rs.getString("tipo");
                 linha+=" Valor:"+rs.getFloat("valor");
