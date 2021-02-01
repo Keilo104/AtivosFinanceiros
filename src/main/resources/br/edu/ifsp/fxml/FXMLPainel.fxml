@@ -20,17 +20,12 @@
                                     </font>
                                 </Label>
 
-                                <Label alignment="CENTER_RIGHT" layoutX="719.0" layoutY="14.0" prefHeight="35.0" prefWidth="108.0" text="Log Out" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="14.0">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-
                                 <Label fx:id="spanNome" alignment="CENTER_RIGHT" layoutX="803.0" layoutY="14.0" prefHeight="35.0" prefWidth="97.0" text="Miguel" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
+                        <Button fx:id="btnSair" layoutX="750.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnSair" prefHeight="25.0" prefWidth="76.0" text="Sair" />
                             </children>
                         </AnchorPane>
                     </children>
