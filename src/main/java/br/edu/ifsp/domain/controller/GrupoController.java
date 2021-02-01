@@ -128,7 +128,6 @@ public class GrupoController {
         botao.setStyle("-fx-background-color: #5d915d;");
     }
 
-
     private void updateAPIButton(Ativo ativo) {
         UpdateAPIAcaoUseCase updateAPIAcaoUseCase = new UpdateAPIAcaoUseCase(acaoDAO, logAtivoDAO, apidao);
         updateAPIAcaoUseCase.update((Acao) ativo);
