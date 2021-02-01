@@ -10,6 +10,8 @@ import br.edu.ifsp.domain.entities.grupo.Grupo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -158,5 +160,53 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
             throwables.printStackTrace();
         }
         return fundos;
+    }
+
+    public List<String> gerarRelatorio(){
+        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join FUNDO_DE_INVESTIMENTO fi on fi.idAtivo = la.idAtivo UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join FUNDO_DE_INVESTIMENTO fi on fi.idAtivo = l.idAtivo order by l.data;";
+        List<String> rel = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stat.executeQuery();
+            rel.add("Relatório de Fundo de Investimento\n");
+            while(rs.next()) {
+                String linha = "";
+                linha+="\nId da ação:" +rs.getString("idAtivo");
+                linha+=" Data da acorrência: "+rs.getString("data");
+                linha+=" Tipo da ocorrência:"+rs.getString("tipo");
+                linha+=" Valor:"+rs.getFloat("valor");
+                linha+=" Quantidade: "+rs.getInt("quantidade");
+
+                rel.add(linha);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rel;
+    }
+
+    public List<String> gerarRelatorioPeriodo(LocalDate dataInicial, LocalDate dataFinal){
+        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join FUNDO_DE_INVESTIMENTO fi on fi.idAtivo = la.idAtivo WHERE data BETWEEN ? and ? UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join FUNDO_DE_INVESTIMENTO fi on fi.idAtivo = l.idAtivo WHERE data BETWEEN ? and ?  order by l.data;";
+        List<String> rel = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            stat.setString(1, dataInicial.toString());
+            stat.setString(2, dataFinal.toString());
+            ResultSet rs = stat.executeQuery();
+            rel.add("Relatório de Fundo de Investimento do período:\n");
+            rel.add(dataInicial.toString()+ " a ");
+            rel.add(dataFinal.toString()+"\n");
+            while(rs.next()) {
+                String linha = "";
+                linha+="\nId da ação:" +rs.getString("idAtivo");
+                linha+=" Data da acorrência: "+rs.getString("data");
+                linha+=" Tipo da ocorrência:"+rs.getString("tipo");
+                linha+=" Valor:"+rs.getFloat("valor");
+                linha+=" Quantidade: "+rs.getInt("quantidade");
+
+                rel.add(linha);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rel;
     }
 }

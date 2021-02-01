@@ -9,17 +9,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class CreatePDF {
-    public void create(){
+    public void create(List<String> relatorio, String nomeArquivo){
         Document document = new Document();
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("Grupo"));
+            PdfWriter.getInstance(document, new FileOutputStream(nomeArquivo+".pdf"));
             document.open();
-            // adicionando um parágrafo no documento
-            document.add(new Paragraph("Gerando PDF - Java"));
-            document.add(new Paragraph("teste324"));
-            document.add(new Paragraph("teste34324"));
+            for (String linha: relatorio){
+                document.add(new Paragraph(linha));
+
+            }
         }
         catch(DocumentException | IOException de) {
             System.err.println(de.getMessage());
