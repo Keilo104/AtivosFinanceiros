@@ -7,6 +7,8 @@ import br.edu.ifsp.domain.DAOs.AcaoDAO;
 import br.edu.ifsp.domain.DAOs.LogAtivoDAO;
 import br.edu.ifsp.domain.entities.ativo.Acao;
 import br.edu.ifsp.domain.entities.usuario.Usuario;
+import br.edu.ifsp.application.main.repository.AlphaAdvantageAPIDAO;
+import br.edu.ifsp.domain.ui.JanelaHistoricoAcao;
 import br.edu.ifsp.domain.usecases.ativo.acao.IncluirAcaoUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,5 +87,11 @@ public class CtrlAcompanharAcao {
         alert.setHeaderText( "A ação " + acao.getNome() + " foi adicionada à sua lista de ações." );
         alert.setContentText( "Para comprá-la, abra as ações a partir de um grupo." );
         alert.showAndWait();
+    }
+
+    public void btnHistorico( ActionEvent actionEvent ) {
+        String codigo = tableView.getSelectionModel().getSelectedItem().getCodigo();
+        JanelaHistoricoAcao janelaHistoricoAcao = new JanelaHistoricoAcao();
+        janelaHistoricoAcao.showAndWait(codigo);
     }
 }
