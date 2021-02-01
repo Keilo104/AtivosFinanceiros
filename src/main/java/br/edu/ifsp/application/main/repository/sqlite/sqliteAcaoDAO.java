@@ -206,13 +206,14 @@ public class sqliteAcaoDAO implements AcaoDAO {
         }
         return rel;
     }
-
     public List<String> gerarRelatorioPeriodo(LocalDate dataInicial, LocalDate dataFinal){
-        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join acao ac on ac.idAtivo = la.idAtivo WHERE data BETWEEN ? and ? UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join acao ac on ac.idAtivo = l.idAtivo WHERE data BETWEEN ? and ?  order by l.data;";
+        String sql = "select la.idAtivo , la.data, la.tipo, valor, quantidade from LOG_TRANSACAO_ATIVO la join acao ac on ac.idAtivo = la.idAtivo WHERE data BETWEEN ? and ? UNION select l.idAtivo , l.data, l.tipo, null as valor, null as quantidade from LOG_ATIVO l join acao ac on ac.idAtivo = l.idAtivo WHERE data BETWEEN ? and ? order by l.data;";
         List<String> rel = new ArrayList<>();
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, dataInicial.toString());
             stat.setString(2, dataFinal.toString());
+            stat.setString(3, dataInicial.toString());
+            stat.setString(4, dataFinal.toString());
             ResultSet rs = stat.executeQuery();
             rel.add("Relatório de Ação do período:\n");
             rel.add(dataInicial.toString()+ " a ");
