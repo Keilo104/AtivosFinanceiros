@@ -136,11 +136,9 @@ public class AlphaAdvantageAPIDAO implements APIDAO {
                 for (Object k : keys) {
                     JSONObject new_obj = (JSONObject) arr.get(k);
                     String data = k.toString();
-                    System.out.println();
                     Float preco = Float.parseFloat((String) new_obj.get("4. close"));
                     historico.put(data, preco);
                 }
-                System.out.println(historico);
             }
         } catch (IOException | ParseException e) {
             System.out.println(e);
