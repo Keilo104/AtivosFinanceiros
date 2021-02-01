@@ -3,27 +3,27 @@ package br.edu.ifsp.domain.entities.relatorio;
 import br.edu.ifsp.domain.entities.grupo.TipoGrupoEnum;
 import br.edu.ifsp.domain.entities.log.LogTransacaoAtivo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Relatorio {
     private int id;
-    private LocalDateTime dataImpressao;
+    private LocalDate dataImpressao;
     private TipoGrupoEnum categoria;
 
     private List<LogTransacaoAtivo> historico = new ArrayList<>();
 
     public Relatorio() {
-        this.dataImpressao = LocalDateTime.now();
+        this.dataImpressao = LocalDate.now();
     }
 
     public Relatorio(TipoGrupoEnum categoria) {
-        this.dataImpressao = LocalDateTime.now();
+        this.dataImpressao = LocalDate.now();
         this.categoria = categoria;
     }
 
-    public Relatorio(int id, LocalDateTime dataImpressao, TipoGrupoEnum categoria) {
+    public Relatorio(int id, LocalDate dataImpressao, TipoGrupoEnum categoria) {
         this.id = id;
         this.dataImpressao = dataImpressao;
         this.categoria = categoria;
@@ -37,7 +37,7 @@ public class Relatorio {
         this.id = id;
     }
 
-    public LocalDateTime getDataImpressao() {
+    public LocalDate getDataImpressao() {
         return dataImpressao;
     }
 

@@ -24,7 +24,7 @@ public class JanelaRelatorio {
             sceneGraph = loader.load();
 
             stage.setTitle("Gerar relatório");
-            stage.setScene(new Scene(sceneGraph, 800, 700));
+            stage.setScene(new Scene(sceneGraph, 500, 500));
             stage.setMinWidth(800);
             stage.setMinHeight(400);
 
