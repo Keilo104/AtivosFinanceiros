@@ -24,11 +24,8 @@ public class JanelaRendaFixa {
             sceneGraph = loader.load();
 
             stage.setTitle( "Adicionar Renda Fixa" );
-            stage.setScene( new Scene( sceneGraph, 750, 450 ) );
-            stage.setMinWidth( 755 );
-            stage.setMinHeight( 450 );
-            stage.setMaxWidth( 1080 );
-            stage.setMaxHeight( 1080 );
+            stage.setScene( new Scene( sceneGraph, 590, 160 ) );
+            stage.setResizable(false);
 
             CtrlRendaFixa ctrlRendaFixa = (CtrlRendaFixa) loader.getController();
             ctrlRendaFixa.init( usuario, grupo, this );

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="161.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlRendaFixa">
+<AnchorPane prefHeight="160.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlRendaFixa">
     <children>
         <TextField fx:id="txtValor" layoutX="102.0" layoutY="106.0" prefHeight="25.0" prefWidth="370.0" promptText="Valor" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="140.0" />
         <Button layoutX="467.0" layoutY="106.0" mnemonicParsing="false" onAction="#btnComprar" prefHeight="25.0" prefWidth="85.0" text="Comprar" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="37.0" />

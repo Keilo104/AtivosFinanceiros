@@ -86,6 +86,8 @@ public class PainelController {
         if (grupo != null) {
             JanelaGrupo janelaGrupo = new JanelaGrupo();
             janelaGrupo.showAndWait(usuario, grupo);
+            initGrafico();
+            updateLabels();
             updateTable();
         } else {
             alertNotSelected();
@@ -100,6 +102,7 @@ public class PainelController {
     }
 
     private void initGrafico(){
+        graphAtivos.getData().clear();
         GraficoCreator gc = new GraficoCreator();
         XYChart.Series<String,Number> series = gc.setDataPainel();
 
