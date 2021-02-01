@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="161.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlFundos">
+<AnchorPane prefHeight="204.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlFundos">
     <children>
-        <TextField fx:id="txtValor" editable="false" layoutX="413.0" layoutY="106.0" prefHeight="25.0" prefWidth="115.0" promptText="Valor" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="118.0" />
+        <TextField fx:id="txtValor" layoutX="413.0" layoutY="106.0" prefHeight="25.0" prefWidth="115.0" promptText="Valor" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="118.0" />
         <Button layoutX="547.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnComprar" prefHeight="25.0" prefWidth="85.0" text="Comprar" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="14.0" />
-        <TextField fx:id="txtRentabilidade" editable="false" layoutX="160.0" layoutY="68.0" prefHeight="25.0" prefWidth="149.0" promptText="Rentabilidade" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="160.0" />
-        <Label layoutX="45.0" layoutY="67.0" prefHeight="27.0" prefWidth="115.0" text="Rentabilidade:" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0">
+        <TextField fx:id="txtRentabilidade" layoutX="160.0" layoutY="67.0" prefHeight="25.0" prefWidth="142.0" promptText="Rentabilidade" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="160.0" />
+        <Label layoutX="40.0" layoutY="66.0" prefHeight="27.0" prefWidth="115.0" text="Rentabilidade:" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="40.0">
             <font>
                 <Font size="18.0" />
             </font>
@@ -19,7 +19,7 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Label layoutX="323.0" layoutY="67.0" prefHeight="27.0" prefWidth="167.0" text="Taxa Administrativa:" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="323.0">
+        <Label layoutX="312.0" layoutY="66.0" prefHeight="27.0" prefWidth="167.0" text="Taxa Administrativa:" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="312.0">
             <font>
                 <Font size="18.0" />
             </font>
@@ -29,13 +29,19 @@
                 <Font size="18.0" />
             </font>
         </Label>
-      <Label layoutX="45.0" layoutY="104.0" prefHeight="27.0" prefWidth="59.0" text="Nome:" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="45.0">
+      <Label layoutX="40.0" layoutY="148.0" prefHeight="27.0" prefWidth="59.0" text="Nome:" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNome" editable="false" layoutX="102.0" layoutY="106.0" prefHeight="25.0" prefWidth="254.0" promptText="Nome" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="290.0" />
-      <TextField fx:id="txtTaxa" editable="false" layoutX="483.0" layoutY="68.0" prefHeight="25.0" prefWidth="149.0" promptText="Taxa" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="483.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="txtNome" layoutX="102.0" layoutY="106.0" prefHeight="25.0" prefWidth="253.0" promptText="Nome" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="291.0" />
+      <TextField fx:id="txtTaxa" layoutX="483.0" layoutY="67.0" prefHeight="25.0" prefWidth="149.0" promptText="Taxa" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="483.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="txtLiquidez" layoutX="121.0" layoutY="76.0" prefHeight="25.0" prefWidth="511.0" promptText="Liquidez" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="14.0" />
+      <Label layoutX="40.0" layoutY="75.0" prefHeight="27.0" prefWidth="85.0" text="Liquidez:" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
     </children>
 
 

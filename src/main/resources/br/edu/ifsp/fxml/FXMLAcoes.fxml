@@ -39,7 +39,7 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="grupoNome" layoutX="299.0" layoutY="14.0" text="Nome do Grupo" AnchorPane.leftAnchor="299.0" AnchorPane.rightAnchor="299.0" AnchorPane.topAnchor="14.0">
+        <Label fx:id="grupoNome" alignment="CENTER" layoutX="245.0" layoutY="14.0" prefHeight="31.0" prefWidth="308.0" text="Nome do Grupo" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="21.0" />
             </font>

@@ -18,7 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class PainelController {
@@ -71,7 +71,7 @@ public class PainelController {
         spanNome.setText(usuario.getNome());
         spanLucroTotal.setText(Float.toString(usuario.getTotalLucrado()));
         spanTotalInvestido.setText(Float.toString(usuario.getTotalInvestido()));
-        spanData.setText( LocalDate.now().toString());
+        spanData.setText(LocalDateTime.now().toString());
     }
 
     private void alertNotSelected() {
@@ -107,6 +107,11 @@ public class PainelController {
         XYChart.Series<String,Number> series = gc.setDataPainel();
 
         graphAtivos.getData().add(series);
+    }
+
+    public void criarRelatorio(ActionEvent actionEvent) {
+        JanelaRelatorio janelaRelatorio = new JanelaRelatorio();
+        janelaRelatorio.showAndWait(usuario,grupos);
     }
 
     public void abrirJanelaTracking( ActionEvent actionEvent ) {
