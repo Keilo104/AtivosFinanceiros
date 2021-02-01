@@ -18,7 +18,7 @@ public class AlterarRendaFixaUseCase {
         this.logAtivoDAO = logAtivoDAO;
     }
 
-    public boolean include(RendaFixa rendaFixa) {
+    public boolean update(RendaFixa rendaFixa) {
         Validator<RendaFixa> validator = new RendaFixaInputValidator();
         Notification notif = validator.validate(rendaFixa);
 

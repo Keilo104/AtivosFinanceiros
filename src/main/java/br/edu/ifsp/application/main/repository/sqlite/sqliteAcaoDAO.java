@@ -90,6 +90,31 @@ public class sqliteAcaoDAO implements AcaoDAO {
     }
 
     @Override
+    public List<Acao> findAllWithoutGroup() {
+        String sql = "SELECT * FROM ACAO ac\n" +
+                "JOIN ATIVO at\n" +
+                "ON ac.idAtivo = at.id\n" +
+                "WHERE at.grupoId = -1;";
+        List<Acao> acoes = new ArrayList<>();
+        try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()) {
+                AtivosDAO ativosDAO = new sqliteAtivosDAO();
+                int id = rs.getInt("idAtivo");
+                Acao acao = new Acao(ativosDAO.findOne(id).get());
+
+                resultSetToEntity(rs, acao);
+
+                acoes.add(acao);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return acoes;
+    }
+
+    @Override
     public List<Ativo> findAllByGrupo(Grupo grupo) {
         String sql = "SELECT * FROM ACAO ac\n" +
                 "JOIN ATIVO at\n" +

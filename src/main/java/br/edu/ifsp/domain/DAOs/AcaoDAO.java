@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface AcaoDAO extends DAO<Acao, Integer> {
     List<Ativo> findAllByGrupo(Grupo grupo);
+
+    List<Acao> findAllWithoutGroup();
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="204.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlFundos">
+<AnchorPane prefHeight="210.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.domain.controller.CtrlFundos">
     <children>
         <TextField fx:id="txtValor" layoutX="413.0" layoutY="106.0" prefHeight="25.0" prefWidth="115.0" promptText="Valor" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="118.0" />
         <Button layoutX="547.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnComprar" prefHeight="25.0" prefWidth="85.0" text="Comprar" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="14.0" />
@@ -14,7 +14,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="grupoNome" layoutX="256.0" layoutY="14.0" prefHeight="31.0" prefWidth="157.0" text="Nome do Grupo" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="14.0">
+        <Label fx:id="grupoNome" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="14.0" prefHeight="31.0" prefWidth="245.0" text="Nome do Grupo" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="21.0" />
             </font>

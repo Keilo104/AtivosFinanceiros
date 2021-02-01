@@ -73,6 +73,7 @@ public class CtrlAcoes {
 
     private void inserirDadosAFonte() {
         acoes = FXCollections.observableArrayList();
+
         tableView.setItems( acoes );
     }
 
@@ -85,7 +86,7 @@ public class CtrlAcoes {
 
     private List<Acao> recuperarAcoesDB() {
         sqliteAcaoDAO acaoDAO = new sqliteAcaoDAO();
-        return acaoDAO.findAll();
+        return acaoDAO.findAllWithoutGroup();
     }
 
     public void mostrarDadosAcaoNoTextField() {

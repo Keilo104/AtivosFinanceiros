@@ -93,7 +93,7 @@ public class sqliteFundoDeInvestimentoDAO implements FundoDeInvestimentoDAO {
 
     @Override
     public boolean update(FundoDeInvestimento fundoDeInvestimento) {
-        String sql = "UPDATE ACAO SET nome=?, rentabilidade=?, liquidez=?, taxaAdministrativa=?  WHERE idAtivo=?";
+        String sql = "UPDATE FUNDO_DE_INVESTIMENTO SET nome=?, rentabilidade=?, liquidez=?, taxaAdministrativa=?  WHERE idAtivo=?";
         try (PreparedStatement stat = ConnectionFactory.createPreparedStatement(sql)) {
             stat.setString(1, fundoDeInvestimento.getNome());
             stat.setString(2, fundoDeInvestimento.getRentabilidade());
